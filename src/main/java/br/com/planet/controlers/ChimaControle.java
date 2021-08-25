@@ -10,7 +10,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class ChimaControle extends Controle {
 
     public ChimaControle(boolean condition) {
-        super(condition);
+        super(condition); 
         driver = new ChromeDriver(options);
         url = "http://192.168.250.1";
         login = "admin";
