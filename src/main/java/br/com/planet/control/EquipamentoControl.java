@@ -9,7 +9,7 @@ import br.com.planet.model.bean.Modelo;
 import br.com.planet.model.tablemodel.EquipamentoTableModel;
 import br.com.planet.util.GraficoEquipamentos;
 import br.com.planet.view.crud.EditarEquipamentoView;
-import br.com.planet.view.crud.ListarHistoricoView;
+import br.com.planet.view.crud.HistoricoView;
 import java.awt.Frame;
 import java.util.List;
 import org.jfree.data.general.DefaultPieDataset;
@@ -79,7 +79,7 @@ public class EquipamentoControl {
     }
 
     public void historico(Frame parent) {
-        new ListarHistoricoView(parent, true, equipamentoSelecionado.getModelo().getNome(),"", "", equipamentoSelecionado.getSn(), false).setVisible(true);
+        new HistoricoView(parent, true, equipamentoSelecionado.getModelo().getNome(),"", "", equipamentoSelecionado.getSn(), false).setVisible(true);
     }
 
     public boolean deletar() {

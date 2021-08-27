@@ -5,6 +5,8 @@ import br.com.planet.model.bean.Equipamento;
 import br.com.planet.model.bean.Firmware;
 import br.com.planet.model.bean.Manutencao;
 import br.com.planet.model.bean.Modelo;
+import java.io.IOException;
+import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -15,7 +17,7 @@ public class HibernateUtil {
 
     private static SessionFactory sessionFactory;
 
-    public static SessionFactory getSessionFactory() {
+    public static SessionFactory getSessionFactory() throws IOException {
         if (sessionFactory == null) {
             try {
                 HibernateProperties propriedades = HibernateProperties.getProperties();
@@ -43,8 +45,9 @@ public class HibernateUtil {
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
 
                 sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-            } catch (Exception e) {
+            } catch (IOException | HibernateException e) {
                 e.printStackTrace();
+                throw e;
             }
         }
         return sessionFactory;

@@ -8,7 +8,7 @@ import br.com.planet.exception.PatrimonioViolationException;
 import br.com.planet.model.tablemodel.RemoteAcessTableModel;
 import javax.swing.JPanel;
 import br.com.planet.src.PainelImagemFundo;
-import br.com.planet.view.crud.ListarHistoricoView;
+import br.com.planet.view.crud.HistoricoView;
 
 public class EquipamentoView extends javax.swing.JFrame {
 
@@ -517,7 +517,7 @@ public class EquipamentoView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnResetActionPerformed
 
     private void btnHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistoricoActionPerformed
-        new ListarHistoricoView(this, true, control.getM().getEquipamento().getModelo().getNome(), "", "", control.getM().getEquipamento().getSn(), false).setVisible(true);
+        new HistoricoView(this, true, control.getM().getEquipamento().getModelo().getNome(), "", "", control.getM().getEquipamento().getSn(), false).setVisible(true);
     }//GEN-LAST:event_btnHistoricoActionPerformed
 
     private void btnPpoeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPpoeActionPerformed

@@ -17,24 +17,24 @@ public class Modelo implements Serializable {
     }
 
     public static void salvar(Modelo modelo) throws Exception {
-        
+
         ModeloDAO dao = new ModeloDAO();
-        
-        
-        if (dao.buscar(modelo.getNome()) != null){
+
+        if (dao.buscar(modelo.getNome()) != null) {
+            System.out.println(dao.buscar(modelo.getNome()));
             throw new Exception("Equipamento já existe no sistema");
         }
-        
+
         dao.salvar(modelo);
     }
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
-    
+
     @Column(name = "nome", nullable = false, length = 50)
     private String nome;
-    
+
     public Integer getId() {
         return id;
     }
@@ -50,5 +50,5 @@ public class Modelo implements Serializable {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    
+
 }

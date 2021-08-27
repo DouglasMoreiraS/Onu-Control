@@ -2,19 +2,22 @@ package br.com.planet.view.crud;
 
 import br.com.planet.control.ModeloControl;
 import br.com.planet.util.Utils;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.awt.Frame;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-public class ModeloView extends javax.swing.JFrame {
+public class ModeloView extends javax.swing.JDialog {
 
     ModeloControl control;
+    Frame parent;
 
-    public ModeloView() {
+    public ModeloView(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        this.parent = parent;
         initComponents();
         control = new ModeloControl();
         this.tblModelos.setModel(control.getTableModel());
+        manipulaTela("iniciar");
     }
 
     @SuppressWarnings("unchecked")
@@ -26,6 +29,10 @@ public class ModeloView extends javax.swing.JFrame {
         lblModelo = new javax.swing.JLabel();
         txtModeloPesquisa = new javax.swing.JTextField();
         btnLimparFiltro = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        btnDeletar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnListarModelos = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblModelos = new javax.swing.JTable();
@@ -35,12 +42,8 @@ public class ModeloView extends javax.swing.JFrame {
         btnCancelar = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        btnDeletar = new javax.swing.JButton();
-        btnEditar = new javax.swing.JButton();
-        btnListarModelos = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         painelTopo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -102,6 +105,54 @@ public class ModeloView extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, painelTopoLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(painelImagemFundo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        btnDeletar.setText("Deletar");
+        btnDeletar.setMaximumSize(new java.awt.Dimension(77, 25));
+        btnDeletar.setMinimumSize(new java.awt.Dimension(77, 25));
+        btnDeletar.setPreferredSize(new java.awt.Dimension(77, 25));
+
+        btnEditar.setText("Editar");
+        btnEditar.setMaximumSize(new java.awt.Dimension(77, 25));
+        btnEditar.setMinimumSize(new java.awt.Dimension(77, 25));
+        btnEditar.setPreferredSize(new java.awt.Dimension(77, 25));
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+
+        btnListarModelos.setText("Listar Equipamentos");
+        btnListarModelos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListarModelosActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnListarModelos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnListarModelos))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -202,54 +253,6 @@ public class ModeloView extends javax.swing.JFrame {
                 .addComponent(jLabel2))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        btnDeletar.setText("Deletar");
-        btnDeletar.setMaximumSize(new java.awt.Dimension(77, 25));
-        btnDeletar.setMinimumSize(new java.awt.Dimension(77, 25));
-        btnDeletar.setPreferredSize(new java.awt.Dimension(77, 25));
-
-        btnEditar.setText("Editar");
-        btnEditar.setMaximumSize(new java.awt.Dimension(77, 25));
-        btnEditar.setMinimumSize(new java.awt.Dimension(77, 25));
-        btnEditar.setPreferredSize(new java.awt.Dimension(77, 25));
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
-            }
-        });
-
-        btnListarModelos.setText("Listar Equipamentos");
-        btnListarModelos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnListarModelosActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnListarModelos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnListarModelos))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -275,7 +278,24 @@ public class ModeloView extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtModeloPesquisaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtModeloPesquisaKeyReleased
+        atualizaTbl();
+    }//GEN-LAST:event_txtModeloPesquisaKeyReleased
+
+    private void btnLimparFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparFiltroActionPerformed
+        this.txtModeloPesquisa.setText("");
+    }//GEN-LAST:event_btnLimparFiltroActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        manipulaTela("editar");
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnListarModelosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarModelosActionPerformed
+        this.control.equipamentoList(parent);
+    }//GEN-LAST:event_btnListarModelosActionPerformed
 
     private void tblModelosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblModelosMouseClicked
         this.control.setModeloSelecionado(tblModelos.getSelectedRow());
@@ -284,50 +304,35 @@ public class ModeloView extends javax.swing.JFrame {
         this.painelImagemFundo1.repaint();
 
         this.txtModelo.setText(control.getModeloSelecionado().getNome());
-        
+
         this.manipulaTela("selecionar");
     }//GEN-LAST:event_tblModelosMouseClicked
-
-    private void btnListarModelosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarModelosActionPerformed
-        this.control.equipamentoList(this);
-    }//GEN-LAST:event_btnListarModelosActionPerformed
-
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        manipulaTela("editar");
-    }//GEN-LAST:event_btnEditarActionPerformed
-
-    private void btnLimparFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparFiltroActionPerformed
-        this.txtModeloPesquisa.setText("");
-    }//GEN-LAST:event_btnLimparFiltroActionPerformed
-
-    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        if (this.txtModelo.getText().equals(""))
-            JOptionPane.showMessageDialog(this, "O campo modelo não pode ser nulo", "Salvar", JOptionPane.WARNING_MESSAGE);
-        else if (this.txtModelo.getText().equals(control.getModeloSelecionado().getNome()))
-            JOptionPane.showMessageDialog(this, "O nome não pode ser igual ao anterior", "Salvar", JOptionPane.WARNING_MESSAGE);
-            
-            
-        try {
-            this.control.salvar();
-            this.manipulaTela("iniciar");
-            JOptionPane.showMessageDialog(this, "Salvo com sucesso", "Salvar", JOptionPane.INFORMATION_MESSAGE);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao salvar: " + ex.getMessage(), "Salvar", JOptionPane.WARNING_MESSAGE);
-        } finally{
-            manipulaTela("iniciar");
-        }
-    }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         manipulaTela("iniciar");
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void txtModeloPesquisaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtModeloPesquisaKeyReleased
-        atualizaTbl();
-    }//GEN-LAST:event_txtModeloPesquisaKeyReleased
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        if (this.txtModelo.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "O campo modelo não pode ser nulo", "Salvar", JOptionPane.WARNING_MESSAGE);
+        } else if (this.txtModelo.getText().equals(control.getModeloSelecionado().getNome())) {
+            JOptionPane.showMessageDialog(this, "O nome não pode ser igual ao anterior", "Salvar", JOptionPane.WARNING_MESSAGE);
+        } else {
+
+            try {
+                this.control.getModeloSelecionado().setNome(txtModelo.getText());
+                this.control.salvar();
+                JOptionPane.showMessageDialog(this, "Salvo com sucesso", "Salvar", JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Erro ao salvar: " + ex.getMessage(), "Salvar", JOptionPane.WARNING_MESSAGE);
+            } finally {
+                manipulaTela("iniciar");
+                atualizaTbl();
+            }
+        }
+    }//GEN-LAST:event_btnSalvarActionPerformed
 
     public static void main(String args[]) {
-
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -340,7 +345,14 @@ public class ModeloView extends javax.swing.JFrame {
         }
 
         java.awt.EventQueue.invokeLater(() -> {
-            new ModeloView().setVisible(true);
+            ModeloView dialog = new ModeloView(new javax.swing.JFrame(), true);
+            dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                @Override
+                public void windowClosing(java.awt.event.WindowEvent e) {
+                    System.exit(0);
+                }
+            });
+            dialog.setVisible(true);
         });
     }
 
@@ -419,10 +431,11 @@ public class ModeloView extends javax.swing.JFrame {
         }
 
     }
-    
-    void atualizaTbl(){
+
+    void atualizaTbl() {
         control.buscar(txtModelo.getText());
-        
+
         this.tblModelos.setModel(control.getTableModel());
     }
+
 }

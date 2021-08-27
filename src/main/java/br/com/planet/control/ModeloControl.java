@@ -3,7 +3,7 @@ package br.com.planet.control;
 import br.com.planet.dao.ModeloDAO;
 import br.com.planet.model.bean.Modelo;
 import br.com.planet.model.tablemodel.ModeloTableModel;
-import br.com.planet.view.crud.ListarEquipamentoView;
+import br.com.planet.view.crud.EquipamentoView;
 import java.awt.Frame;
 import java.util.List;
 
@@ -46,7 +46,7 @@ public class ModeloControl {
     }
     
     public void equipamentoList(Frame parent){
-        new ListarEquipamentoView (parent, true, modeloSelecionado.getNome());
+        new EquipamentoView (parent, true, modeloSelecionado.getNome());
     }
     
     public boolean deletar(){

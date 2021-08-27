@@ -4,19 +4,18 @@ import br.com.planet.view.equipamentos.*;
 import br.com.planet.control.*;
 import br.com.planet.dao.BackupAndRestore;
 import br.com.planet.model.bean.Equipamento;
-import java.awt.Frame;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import br.com.planet.view.crud.ListarEquipamentoView;
-import br.com.planet.view.crud.ListarHistoricoView;
+import br.com.planet.view.crud.EquipamentoView;
+import br.com.planet.view.crud.HistoricoView;
+import br.com.planet.view.crud.ModeloView;
 import java.io.IOException;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class View extends javax.swing.JFrame {
 
-    ListarEquipamentoView eqView;
-    ListarHistoricoView hisView;
+    EquipamentoView eqView;
+    HistoricoView hisView;
+    ModeloView modeloView;
 
     HuaweiEchoView huaweiView;
     ZyxelView zyxelView;
@@ -25,11 +24,14 @@ public class View extends javax.swing.JFrame {
     SumecView sumecView;
     TpLinkView tpLinkView;
     EasyLinkView easyLinkView;
-
+    DlinkView dlinkView;
+    MercusysRouterView mercusysView;
+    
     public View() {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
         painelImagemFundo2.setImg(new ImageIcon(getClass().getResource("/images/background.png")));
+        atualizaRodape();
     }
 
     @SuppressWarnings("unchecked")
@@ -37,6 +39,7 @@ public class View extends javax.swing.JFrame {
     private void initComponents() {
 
         painelImagemFundo2 = new br.com.planet.src.PainelImagemFundo();
+        jPanel1 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu5 = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
@@ -73,8 +76,9 @@ public class View extends javax.swing.JFrame {
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenuItem14 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
-        menuListarTabela = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem27 = new javax.swing.JMenuItem();
+        menuListarTabela = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
@@ -96,10 +100,23 @@ public class View extends javax.swing.JFrame {
         );
         painelImagemFundo2Layout.setVerticalGroup(
             painelImagemFundo2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 750, Short.MAX_VALUE)
+            .addGap(0, 720, Short.MAX_VALUE)
         );
 
-        getContentPane().add(painelImagemFundo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1410, 750));
+        getContentPane().add(painelImagemFundo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1410, 720));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1370, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 720, 1370, 30));
 
         jMenu5.setText("Equipamentos");
 
@@ -314,21 +331,29 @@ public class View extends javax.swing.JFrame {
 
         jMenu1.setText("Arquivo");
 
-        menuListarTabela.setText("Listar Histórico");
-        menuListarTabela.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuListarTabelaActionPerformed(evt);
-            }
-        });
-        jMenu1.add(menuListarTabela);
-
-        jMenuItem1.setText("Listar Equipamentos");
+        jMenuItem1.setText("Equipamentos");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
             }
         });
         jMenu1.add(jMenuItem1);
+
+        jMenuItem27.setText("Modelos");
+        jMenuItem27.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem27ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem27);
+
+        menuListarTabela.setText("Histórico");
+        menuListarTabela.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuListarTabelaActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menuListarTabela);
 
         jMenuItem5.setText("Backup");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
@@ -383,16 +408,18 @@ public class View extends javax.swing.JFrame {
 
     private void menuListarTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuListarTabelaActionPerformed
         if (hisView == null) {
-            hisView = new ListarHistoricoView(this, false);
-            hisView.setVisible(true);
-        } else if (!hisView.isVisible()) {
-            hisView.setVisible(true);
+            hisView = new HistoricoView(this, false);
         }
+        hisView.setVisible(false);
+        hisView.setVisible(true);
     }//GEN-LAST:event_menuListarTabelaActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        ListarEquipamentoView view = new ListarEquipamentoView(this, false);
-        view.setVisible(true);
+        if (eqView == null) {
+            eqView = new EquipamentoView(this, false);
+        }
+        eqView.setVisible(false);
+        eqView.setVisible(true);
 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
@@ -408,32 +435,18 @@ public class View extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        new DlinkView().setVisible(true);
-        /*
         if (dlinkView == null) {
-            new Thread(() -> {
-                dlinkView = new DlinkView();
-                dlinkView.setVisible(true);
-            }).start();
-
-            return;
+            dlinkView = new DlinkView();
         }
-
+        dlinkView.setVisible(false);
         dlinkView.setVisible(true);
-        dlinkView.setState(Frame.NORMAL);
-        dlinkView.toFront();
-         */
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-        if (huaweiView != null) {
-            huaweiView.setVisible(true);
-            huaweiView.setState(Frame.NORMAL);
-            huaweiView.toFront();
-            return;
+        if (huaweiView == null) {
+            huaweiView = new HuaweiEchoView();
         }
-
-        huaweiView = new HuaweiEchoView();
+        huaweiView.setVisible(false);
         huaweiView.setVisible(true);
 
     }//GEN-LAST:event_jMenuItem9ActionPerformed
@@ -441,39 +454,35 @@ public class View extends javax.swing.JFrame {
     private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
         if (zyxelView == null) {
             zyxelView = new ZyxelView();
-            zyxelView.setVisible(true);
-            return;
         }
-
+        zyxelView.setVisible(false);
         zyxelView.setVisible(true);
+
     }//GEN-LAST:event_jMenuItem17ActionPerformed
 
     private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
         if (chimaView == null) {
             chimaView = new ChimaView();
-            chimaView.setVisible(true);
-            return;
         }
 
+        chimaView.setVisible(false);
         chimaView.setVisible(true);
     }//GEN-LAST:event_jMenuItem15ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
         if (nextView == null) {
             nextView = new NextFiber();
-            nextView.setVisible(true);
-            return;
         }
 
+        nextView.setVisible(false);
         nextView.setVisible(true);
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
         if (sumecView == null) {
             sumecView = new SumecView();
-            sumecView.setVisible(true);
-            return;
         }
+        sumecView.setVisible(false);
         sumecView.setVisible(true);
 
     }//GEN-LAST:event_jMenuItem19ActionPerformed
@@ -481,71 +490,76 @@ public class View extends javax.swing.JFrame {
     private void jMenuItem21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem21ActionPerformed
         if (tpLinkView == null) {
             tpLinkView = new TpLinkView();
-            tpLinkView.setVisible(true);
-            return;
         }
+        tpLinkView.setVisible(false);
         tpLinkView.setVisible(true);
     }//GEN-LAST:event_jMenuItem21ActionPerformed
 
     private void jMenuItem23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem23ActionPerformed
         if (easyLinkView == null) {
             easyLinkView = new EasyLinkView();
-            easyLinkView.setVisible(true);
         }
 
+        easyLinkView.setVisible(false);
         easyLinkView.setVisible(true);
     }//GEN-LAST:event_jMenuItem23ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        new ListarHistoricoView(this, false, Equipamento.DLINK).setVisible(true);
+        new HistoricoView(this, false, Equipamento.DLINK).setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem22ActionPerformed
-        new ListarHistoricoView(this, false, Equipamento.TP_LINK).setVisible(true);
+        new HistoricoView(this, false, Equipamento.TP_LINK).setVisible(true);
     }//GEN-LAST:event_jMenuItem22ActionPerformed
 
     private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
-        new ListarHistoricoView(this, false, Equipamento.CHIMA).setVisible(true);
+        new HistoricoView(this, false, Equipamento.CHIMA).setVisible(true);
     }//GEN-LAST:event_jMenuItem16ActionPerformed
 
     private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
-        new ListarHistoricoView(this, false, Equipamento.ZYXEL).setVisible(true);
+        new HistoricoView(this, false, Equipamento.ZYXEL).setVisible(true);
     }//GEN-LAST:event_jMenuItem18ActionPerformed
 
     private void jMenuItem20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem20ActionPerformed
-        new ListarHistoricoView(this, false, Equipamento.SUMEC).setVisible(true);
+        new HistoricoView(this, false, Equipamento.SUMEC).setVisible(true);
     }//GEN-LAST:event_jMenuItem20ActionPerformed
 
     private void jMenuItem24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem24ActionPerformed
-        new ListarHistoricoView(this, false, Equipamento.EASY_LINK).setVisible(true);
+        new HistoricoView(this, false, Equipamento.EASY_LINK).setVisible(true);
     }//GEN-LAST:event_jMenuItem24ActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
-        new ListarHistoricoView(this, false, Equipamento.NEXT_FIBER).setVisible(true);
+        new HistoricoView(this, false, Equipamento.NEXT_FIBER).setVisible(true);
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
-        new ListarHistoricoView(this, false, Equipamento.HUAWEI_ECO).setVisible(true);
+        new HistoricoView(this, false, Equipamento.HUAWEI_ECO).setVisible(true);
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
-        new ListarHistoricoView(this, false, Equipamento.HUAWEI_ECO).setVisible(true);
+        new HistoricoView(this, false, Equipamento.HUAWEI_ECO).setVisible(true);
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     private void jMenuItem25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem25ActionPerformed
-        new MercusysRouterView().setVisible(true);
+        if (mercusysView == null){
+            mercusysView = new MercusysRouterView();
+            }
+        mercusysView.setVisible(false);
+        mercusysView.setVisible(true);
     }//GEN-LAST:event_jMenuItem25ActionPerformed
 
+    
     private void jMenuItem26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem26ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem26ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+       
+            
         int resposta = JOptionPane.showConfirmDialog(null, "Esse processo irá encerrar todas as conexões ativas, verifique se nenhum equipamento está conectado ou em processo de atualização/reset antes de continuar");
 
         if (resposta == JOptionPane.YES_OPTION) {
 
-            Process p;
             try {
                 Runtime.getRuntime().exec("taskkill /im chromedriver.exe /f");
                 Runtime.getRuntime().exec("taskkill /im chrome.exe /f");
@@ -559,6 +573,14 @@ public class View extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem27ActionPerformed
+        if (modeloView == null){
+            modeloView = new ModeloView(this, false);
+        }
+        modeloView.setVisible(false);
+        modeloView.setVisible(true);
+    }//GEN-LAST:event_jMenuItem27ActionPerformed
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -616,6 +638,7 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem24;
     private javax.swing.JMenuItem jMenuItem25;
     private javax.swing.JMenuItem jMenuItem26;
+    private javax.swing.JMenuItem jMenuItem27;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
@@ -623,7 +646,12 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuItem menuListarTabela;
     private br.com.planet.src.PainelImagemFundo painelImagemFundo2;
     // End of variables declaration//GEN-END:variables
+
+    private void atualizaRodape() {
+        
+    }
 }

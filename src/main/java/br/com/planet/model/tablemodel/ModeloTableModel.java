@@ -27,6 +27,11 @@ public class ModeloTableModel extends AbstractTableModel{
     public int getColumnCount() {
         return colunas.length;
     }
+    
+    @Override
+    public String getColumnName(int indice){
+        return colunas[indice];
+    }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {

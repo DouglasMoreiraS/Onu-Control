@@ -8,6 +8,8 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import br.com.planet.util.hibernate.HibernateUtil;
+import javax.persistence.criteria.CriteriaBuilder;
+import org.hibernate.criterion.CriteriaQuery;
 
 public class GenericDAO<Entidade> {
 
