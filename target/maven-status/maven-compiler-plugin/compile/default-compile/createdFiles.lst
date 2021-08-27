@@ -3,6 +3,7 @@ br\com\planet\view\crud\ListarEquipamentoView$3.class
 br\com\planet\view\crud\EditarEquipamentoView.class
 br\com\planet\view\crud\ListarHistoricoView$4.class
 br\com\planet\view\crud\ListarHistoricoView$7.class
+br\com\planet\view\crud\ModeloView$1.class
 br\com\planet\view\crud\EditarEquipamentoView$4.class
 br\com\planet\view\View$1.class
 br\com\planet\view\equipamentos\EquipamentoView$1.class
@@ -37,6 +38,7 @@ br\com\planet\controlers\HuaweiControle.class
 br\com\planet\view\crud\ListarHistoricoView$10.class
 br\com\planet\view\View$17.class
 br\com\planet\view\crud\ListarEquipamentoView$8.class
+br\com\planet\util\hibernate\HibernateUtil.class
 br\com\planet\view\equipamentos\EquipamentoView.class
 br\com\planet\controlers\GponControle.class
 br\com\planet\exception\SemConexaoException.class
@@ -64,10 +66,10 @@ br\com\planet\controlers\ZyxelControle.class
 br\com\planet\view\View$23.class
 br\com\planet\controlers\MercusysRouterControle.class
 br\com\planet\model\bean\Manutencao.class
+br\com\planet\util\hibernate\HibernateProperties.class
 br\com\planet\view\crud\EditarEquipamentoView$3.class
 br\com\planet\view\View$22.class
 br\com\planet\view\crud\ListarEquipamentoView$10.class
-br\com\planet\util\HibernateUtil.class
 br\com\planet\view\View$2.class
 br\com\planet\view\View$5.class
 br\com\planet\view\crud\ListarEquipamentoView.class
@@ -82,6 +84,7 @@ br\com\planet\view\equipamentos\NextFiber.class
 br\com\planet\view\View$12.class
 br\com\planet\view\equipamentos\EquipamentoView$5.class
 br\com\planet\view\crud\ListarEquipamentoView$13.class
+br\com\planet\control\ModeloControl.class
 br\com\planet\view\equipamentos\EquipamentoView$2.class
 br\com\planet\view\View$8.class
 br\com\planet\util\FirmwarePath.class
@@ -96,6 +99,7 @@ br\com\planet\view\crud\ListarEquipamentoView$2.class
 br\com\planet\view\crud\ListarEquipamentoView$15.class
 br\com\planet\view\equipamentos\TpLinkView.class
 br\com\planet\util\PlainDocumentLimitado.class
+br\com\planet\view\crud\ModeloView.class
 br\com\planet\control\ExportaHistoricoExcelControl.class
 br\com\planet\control\EquipamentoControl.class
 br\com\planet\view\View$7.class
@@ -108,6 +112,7 @@ br\com\planet\view\equipamentos\MercusysRouterView.class
 br\com\planet\view\equipamentos\EquipamentoView$7.class
 br\com\planet\exception\SerialNumberViolationException.class
 br\com\planet\excel\ExportToExcel.class
+br\com\planet\model\tablemodel\ModeloTableModel.class
 br\com\planet\view\crud\EditarEquipamentoView$1.class
 br\com\planet\view\ExportaHistoricoExcelView$1.class
 br\com\planet\view\crud\ListarEquipamentoView$16.class

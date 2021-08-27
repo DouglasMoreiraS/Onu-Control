@@ -31,6 +31,18 @@ public class ListarEquipamentoView extends javax.swing.JDialog {
         this.atualizaGrafico();
 
     }
+    public ListarEquipamentoView(Frame parent, boolean modal, String modelo) {
+        super(parent, modal);
+        initComponents();
+        eqControl = new EquipamentoControl();
+        this.tblEquipamentos.setModel(eqControl.getTableModel());
+        this.parent = parent;
+        this.panelBotoesGrafico.setVisible(false);
+        this.alimentarComboBoxes();
+        this.cbModelo.setSelectedItem(modelo);
+        this.atualizaGrafico();
+
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

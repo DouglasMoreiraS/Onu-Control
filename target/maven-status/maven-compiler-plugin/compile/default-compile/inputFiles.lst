@@ -10,6 +10,7 @@ C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\vi
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\control\EquipamentoControl.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\model\tablemodel\ManutencaoTableModel.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\exception\SemConexaoException.java
+C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\util\hibernate\HibernateUtil.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\controlers\SumecControle.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\util\log\LogHuaweiEco.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\control\HistoricoControl.java
@@ -44,6 +45,7 @@ C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\mo
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\view\equipamentos\EasyLinkView.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\view\crud\ListarHistoricoView.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\model\tablemodel\ExportManutencaoTableModel.java
+C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\util\hibernate\HibernateProperties.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\controlers\MercusysRouterControle.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\view\equipamentos\HuaweiEchoView.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\view\equipamentos\TpLinkView.java
@@ -55,7 +57,6 @@ C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\vi
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\controlers\NextControle.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\exception\PatrimonioViolationException.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\exception\LoginException.java
-C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\util\HibernateUtil.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\controlers\ChimaControle.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\control\ExportaHistoricoExcelControl.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\dao\DataBase.java

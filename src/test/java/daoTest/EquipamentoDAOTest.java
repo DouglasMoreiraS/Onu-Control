@@ -14,7 +14,6 @@ public class EquipamentoDAOTest {
     @Test
     public void teste() throws Exception{
         
-        System.out.println(new EquipamentoDAO().buscarPorModelo(new ModeloDAO().buscar("next")).size());
         
        /* List<Manutencao> listM = BackupAndRestore.restore();
         

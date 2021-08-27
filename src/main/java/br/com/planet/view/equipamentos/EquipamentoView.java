@@ -441,10 +441,10 @@ public class EquipamentoView extends javax.swing.JFrame {
                     preencherCampos();
 
                     if (cbAutoConfig.isSelected()) {
+                      
                         if (control.needUpdate()) {
                             atualizar();
                         }
-
                         resetar();
                     }
 
@@ -453,7 +453,7 @@ public class EquipamentoView extends javax.swing.JFrame {
                 }
             } catch (Exception e) {
                 controlaBar(EquipamentoView.NO_SIGNAL);
-                JOptionPane.showMessageDialog(this, "Erro de conexão", "Erro", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Erro de conexão: \n \n" + e.getLocalizedMessage(), "Erro", JOptionPane.WARNING_MESSAGE);
                 control.close();
                 controlaTela("start");
 

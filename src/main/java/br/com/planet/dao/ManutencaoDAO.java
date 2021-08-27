@@ -7,7 +7,7 @@ import br.com.planet.model.bean.Modelo;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
-import br.com.planet.util.HibernateUtil;
+import br.com.planet.util.hibernate.HibernateUtil;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;

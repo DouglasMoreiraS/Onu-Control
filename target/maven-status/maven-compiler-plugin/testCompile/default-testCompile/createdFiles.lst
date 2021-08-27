@@ -1,0 +1,8 @@
+ViewTest\PingViewTest.class
+taskkill\TaskKillTest.class
+utilTest\UtilTest.class
+BackupRestoreTest.class
+daoTest\EquipamentoDAOTest.class
+ViewTest\GraficoTeste.class
+ViewTest\HistoricoTest.class
+ViewTest\SeleniumTeste.class
