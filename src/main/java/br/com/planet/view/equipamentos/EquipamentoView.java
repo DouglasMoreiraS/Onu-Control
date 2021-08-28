@@ -452,12 +452,11 @@ public class EquipamentoView extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(EquipamentoView.this, "Done", "Done", JOptionPane.INFORMATION_MESSAGE);
                 }
             } catch (Exception e) {
+                String message = e.getMessage().substring(0, e.getMessage().indexOf("\n"));
                 controlaBar(EquipamentoView.NO_SIGNAL);
-                JOptionPane.showMessageDialog(this, "Erro de conexão: \n \n" + e.getLocalizedMessage(), "Erro", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Erro de conexão: \n \n" + message, "Erro", JOptionPane.WARNING_MESSAGE);
                 control.close();
                 controlaTela("start");
-
-                return;
             }
 
         }).start();

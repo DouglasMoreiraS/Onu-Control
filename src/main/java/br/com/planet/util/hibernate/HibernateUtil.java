@@ -17,7 +17,7 @@ public class HibernateUtil {
 
     private static SessionFactory sessionFactory;
 
-    public static SessionFactory getSessionFactory() throws IOException {
+    public static SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
             try {
                 HibernateProperties propriedades = HibernateProperties.getProperties();
@@ -47,7 +47,6 @@ public class HibernateUtil {
                 sessionFactory = configuration.buildSessionFactory(serviceRegistry);
             } catch (IOException | HibernateException e) {
                 e.printStackTrace();
-                throw e;
             }
         }
         return sessionFactory;

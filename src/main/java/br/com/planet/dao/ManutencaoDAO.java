@@ -9,16 +9,14 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import br.com.planet.util.hibernate.HibernateUtil;
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.Set;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 
 public class ManutencaoDAO extends GenericDAO<Manutencao> {
 
     public List<Manutencao> listarPorEquipamento(Equipamento e) {
-        Session sessao = HibernateUtil.getSessionFactory().openSession();
 
+        Session sessao = HibernateUtil.getSessionFactory().openSession();
         try {
             Criteria consulta = sessao.createCriteria(Manutencao.class);
             consulta.add(Restrictions.eq("equipamento.sn", e.getSn()));
@@ -36,16 +34,15 @@ public class ManutencaoDAO extends GenericDAO<Manutencao> {
 
         try {
             Criteria consulta = sessao.createCriteria(Manutencao.class);
-           
+
             consulta.createAlias("equipamento", "e");
-            
-            
+
             //Modelo
             if (!busca[0].equals("")) {
                 Modelo m = new ModeloDAO().buscar(busca[0]);
-                
+
                 consulta.createAlias("e.modelo", "id");
-                
+
                 consulta.add(Restrictions.eq("e.modelo.id", m.getId()));
             }
             //Data
@@ -56,8 +53,8 @@ public class ManutencaoDAO extends GenericDAO<Manutencao> {
             if (!busca[2].equals("")) {
                 consulta.add(Restrictions.like("observacao", busca[2], MatchMode.ANYWHERE));
             }
-            
-            if (!busca[3].equals("")){
+
+            if (!busca[3].equals("")) {
                 consulta.add(Restrictions.like("e.sn", busca[3], MatchMode.ANYWHERE));
             }
 
