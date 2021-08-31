@@ -1,9 +1,8 @@
 package br.com.planet.view.crud;
 
 import br.com.planet.control.EquipamentoControl;
-import br.com.planet.model.bean.Equipamento;
+import br.com.planet.exception.DeleteViolationException;
 import br.com.planet.model.tablemodel.EquipamentoTableModel;
-import br.com.planet.util.GraficoEquipamentos;
 import br.com.planet.util.Utils;
 import java.awt.Frame;
 import javax.swing.ImageIcon;
@@ -22,23 +21,19 @@ public class EquipamentoView extends javax.swing.JDialog {
 
     public EquipamentoView(Frame parent, boolean modal) {
         super(parent, modal);
-        initComponents();
         eqControl = new EquipamentoControl();
-        this.tblEquipamentos.setModel(eqControl.getTableModel());
         this.parent = parent;
-        this.panelBotoesGrafico.setVisible(false);
-        this.alimentarComboBoxes();
-        this.atualizaGrafico();
+        initComponents();
+        initComponents2();
 
     }
+
     public EquipamentoView(Frame parent, boolean modal, String modelo) {
         super(parent, modal);
-        initComponents();
         eqControl = new EquipamentoControl();
-        this.tblEquipamentos.setModel(eqControl.getTableModel());
         this.parent = parent;
-        this.panelBotoesGrafico.setVisible(false);
-        this.alimentarComboBoxes();
+        initComponents();
+        initComponents2();
         this.cbModelo.setSelectedItem(modelo);
         this.atualizaGrafico();
 
@@ -123,11 +118,6 @@ public class EquipamentoView extends javax.swing.JDialog {
         cbModelo.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbModeloItemStateChanged(evt);
-            }
-        });
-        cbModelo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbModeloActionPerformed(evt);
             }
         });
 
@@ -430,19 +420,12 @@ public class EquipamentoView extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSnActionPerformed
 
-    private void cbModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbModeloActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbModeloActionPerformed
-
     private void cbModeloItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbModeloItemStateChanged
 
         if (cbModelo.getSelectedItem().toString().equals("Todos")) {
-            btnPatrimonio.setSelected(false);
-            btnFirmware.setSelected(false);
-            btnStatus.setSelected(false);
-            panelBotoesGrafico.setVisible(false);
+            btnFirmware.setEnabled(false);
         } else {
-            panelBotoesGrafico.setVisible(true);
+            btnFirmware.setEnabled(true);
         }
         atualizarTbl();
         atualizaGrafico();
@@ -450,14 +433,17 @@ public class EquipamentoView extends javax.swing.JDialog {
     }//GEN-LAST:event_cbModeloItemStateChanged
     private void txtSnKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSnKeyTyped
         atualizarTbl();
+        atualizaGrafico();
     }//GEN-LAST:event_txtSnKeyTyped
 
     private void txtFirmwareKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFirmwareKeyTyped
         atualizarTbl();
+        atualizaGrafico();
     }//GEN-LAST:event_txtFirmwareKeyTyped
 
     private void txtPatrimonioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPatrimonioKeyTyped
         atualizarTbl();
+        atualizaGrafico();
     }//GEN-LAST:event_txtPatrimonioKeyTyped
 
     private void btnLimpaFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpaFiltroActionPerformed
@@ -466,38 +452,41 @@ public class EquipamentoView extends javax.swing.JDialog {
         this.txtSn.setText("");
         this.txtPatrimonio.setText("");
         atualizarTbl();
+        atualizaGrafico();
     }//GEN-LAST:event_btnLimpaFiltroActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         eqControl.editar(parent);
         this.atualizarTbl();
+        atualizaGrafico();
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnCriarEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarEquipamentoActionPerformed
         eqControl.criar(parent);
         this.atualizarTbl();
+        atualizaGrafico();
     }//GEN-LAST:event_btnCriarEquipamentoActionPerformed
 
     private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
-        try {
-            int a = JOptionPane.showConfirmDialog(null, "Deseja excluir o equipamento?");
-            if (a == (JOptionPane.YES_OPTION)) {
-                if (eqControl.deletar()) {
-                    JOptionPane.showMessageDialog(this, "Equipamento Deletado", "Deletar", JOptionPane.INFORMATION_MESSAGE);
-                    atualizarTbl();
-                } else {
-                    JOptionPane.showMessageDialog(this, "Existem registros desse equipamento, exclua-os primeiro", "Deletar", JOptionPane.INFORMATION_MESSAGE);
-                    eqControl.historico(parent);
-                }
+
+        int a = JOptionPane.showConfirmDialog(null, "Deseja excluir o equipamento?");
+        if (a == (JOptionPane.YES_OPTION)) {
+            try {
+                eqControl.deletar();
+                JOptionPane.showMessageDialog(this, "Equipamento Deletado", "Deletar", JOptionPane.INFORMATION_MESSAGE);
+                atualizarTbl();
+                atualizaGrafico();
+
+            } catch (DeleteViolationException e) {
+                JOptionPane.showMessageDialog(this, "Existem registros desse equipamento, exclua-os primeiro", "Deletar", JOptionPane.INFORMATION_MESSAGE);
+                eqControl.historico(parent);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }//GEN-LAST:event_btnDeletarActionPerformed
 
     private void cbStatusItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbStatusItemStateChanged
         atualizarTbl();
-        System.out.println(cbStatus.getSelectedIndex());
+        atualizaGrafico();
     }//GEN-LAST:event_cbStatusItemStateChanged
 
     private void tblEquipamentosMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEquipamentosMouseReleased
@@ -511,7 +500,6 @@ public class EquipamentoView extends javax.swing.JDialog {
     }//GEN-LAST:event_tblEquipamentosMouseReleased
 
     private void btnPatrimonioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPatrimonioActionPerformed
-
         btnFirmware.setSelected(false);
         btnStatus.setSelected(false);
         atualizaGrafico();
@@ -621,23 +609,26 @@ public class EquipamentoView extends javax.swing.JDialog {
         this.tblEquipamentos.setModel(eqControl.getTableModel());
 
         jpanelTitulo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, this.tblEquipamentos.getModel().getRowCount() + " equipamentos Registrados", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
-        
+
         atualizaGrafico();
     }
 
     private void atualizaGrafico() {
         pieDataSet = new DefaultPieDataset();
-        String titulo = "";
+        String titulo;
 
         if (cbModelo.getSelectedItem().toString().equals("Todos")) {
             titulo = "Equipamentos Registrados";
-            for (String s : eqControl.getModelos()) {
-                int quantidade = Equipamento.getQuantidadeDeEquipamentos(s);
-                if (quantidade > 0) {
-                    pieDataSet.setValue(s + "(" + quantidade + ")", quantidade);
-                }
-            }
 
+            if (btnPatrimonio.isSelected()) {
+                titulo = titulo.concat(" (Patrimonio)");
+                pieDataSet = eqControl.getGrafico("patrimonio");
+            } else if (btnStatus.isSelected()) {
+                titulo = titulo.concat(" (Status)");
+                pieDataSet = eqControl.getGrafico("status");
+            } else {
+                pieDataSet = eqControl.getGrafico("");
+            }
         } else {
 
             titulo = cbModelo.getSelectedItem().toString();
@@ -649,16 +640,17 @@ public class EquipamentoView extends javax.swing.JDialog {
                 titulo = titulo.concat(" - Patrimonio");
                 pieDataSet = eqControl.getGrafico("patrimonio");
 
-            } else if (btnFirmware.isSelected()){
+            } else if (btnFirmware.isSelected()) {
                 titulo = titulo.concat(" - Firmware");
                 pieDataSet = eqControl.getGrafico("firmware");
-            }else {
-                pieDataSet = eqControl.getGrafico("");
+            } else {
+                pieDataSet = eqControl.getGrafico("contagem");
             }
         }
 
         JFreeChart grafico = ChartFactory.createPieChart(titulo, pieDataSet, false, true, false);
 
+        //Peguei no GUI memo tava quebrando a cabeça aqui
         ChartPanel myChartPanel = new ChartPanel(grafico, true); //criei o painel de grafico colocando meu grafico previamente gerado
         myChartPanel.setSize(panelGrafico.getWidth(), panelGrafico.getHeight()); //setei o tamanho do grafico conforme o painel que usarei
         myChartPanel.setVisible(true);
@@ -667,6 +659,14 @@ public class EquipamentoView extends javax.swing.JDialog {
         panelGrafico.revalidate(); // revalidei meu painel, para que ele se atualize
         panelGrafico.repaint();
 
+    }
+
+    private void initComponents2() {
+        this.tblEquipamentos.setModel(eqControl.getTableModel());
+
+        this.alimentarComboBoxes();
+        this.atualizaGrafico();
+        btnFirmware.setEnabled(false);
     }
 
 }

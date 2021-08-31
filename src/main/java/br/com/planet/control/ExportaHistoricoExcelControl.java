@@ -74,7 +74,7 @@ public final class ExportaHistoricoExcelControl {
         }
 
         excel = new ExportToExcel();
-        excel.ExportToHuawei(export, path);
+        excel.Export(export, path);
     }
 
 }

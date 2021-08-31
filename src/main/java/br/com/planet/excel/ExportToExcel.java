@@ -20,7 +20,7 @@ public class ExportToExcel {
 
     private String path;
 
-    public boolean ExportToHuawei(List<Manutencao> m, String path) throws Exception {
+    public boolean Export(List<Manutencao> m, String path) throws Exception {
 
         try {
 
