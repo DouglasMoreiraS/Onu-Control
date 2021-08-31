@@ -6,7 +6,13 @@ import br.com.planet.util.PlainDocumentLimitado;
 import br.com.planet.util.Utils;
 import java.awt.Frame;
 import java.awt.event.KeyEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+import javax.xml.bind.ValidationException;
 
 public class HistoricoView extends javax.swing.JDialog {
 
@@ -29,7 +35,7 @@ public class HistoricoView extends javax.swing.JDialog {
         initComponents();
         initComponents2();
         cbModelo.setSelectedItem(equipamento);
-        
+
         atualizarTbl();
 
     }
@@ -41,14 +47,15 @@ public class HistoricoView extends javax.swing.JDialog {
         initComponents();
         initComponents2();
 
-        if (!equipamento.isEmpty())
+        if (!equipamento.isEmpty()) {
             cbModelo.setSelectedItem(equipamento);
+        }
 
         txtData.setText(data);
         txtObservacao.setText(observacao);
         txtSnEquip.setText(snEquipamento);
         cbFiltro.setSelected(filtrar);
-        
+
         atualizarTbl();
     }
 
@@ -73,6 +80,7 @@ public class HistoricoView extends javax.swing.JDialog {
         tblHistorico = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         btnDeletar = new javax.swing.JButton();
+        btnExportarSelecionados = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -257,12 +265,21 @@ public class HistoricoView extends javax.swing.JDialog {
             }
         });
 
+        btnExportarSelecionados.setText("Exportar Selecionados");
+        btnExportarSelecionados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExportarSelecionadosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(btnExportarSelecionados)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -270,7 +287,9 @@ public class HistoricoView extends javax.swing.JDialog {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnDeletar)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDeletar)
+                    .addComponent(btnExportarSelecionados))
                 .addContainerGap())
         );
 
@@ -394,6 +413,29 @@ public class HistoricoView extends javax.swing.JDialog {
         atualizarTbl();
     }//GEN-LAST:event_txtSnEquipKeyTyped
 
+    private void btnExportarSelecionadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarSelecionadosActionPerformed
+        if (tblHistorico.getSelectedRows().length != 0) {
+
+            String path = "";
+
+            JFileChooser chooser = new JFileChooser();
+            chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            int res = chooser.showOpenDialog(this);
+            if (res == JFileChooser.APPROVE_OPTION) {
+                try {
+                    path = chooser.getSelectedFile().getAbsolutePath();
+                    control.exportarExcel(path, tblHistorico.getSelectedRows());
+                    JOptionPane.showMessageDialog(this, "Exportado com sucesso", "Exportar Histórico", JOptionPane.INFORMATION_MESSAGE);
+                } catch (ValidationException ex) {
+                    JOptionPane.showMessageDialog(this, "Erro ao exportar registros: " + ex.getMessage(), "Exportar Histórico", JOptionPane.WARNING_MESSAGE);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, "Erro ao exportar registros: " + ex.getMessage(), "Exportar Histórico", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+
+        }
+    }//GEN-LAST:event_btnExportarSelecionadosActionPerformed
+
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -420,6 +462,7 @@ public class HistoricoView extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDeletar;
+    private javax.swing.JButton btnExportarSelecionados;
     private javax.swing.JButton btnLimpaFiltro;
     private javax.swing.JCheckBox cbFiltro;
     private javax.swing.JComboBox<String> cbModelo;
@@ -477,6 +520,7 @@ public class HistoricoView extends javax.swing.JDialog {
     }
 
     private void initComponents2() {
+        tblHistorico.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         this.tblHistorico.setModel(control.getTableModel());
         this.alimentarcbModelo();
         this.txtData.setDocument(new PlainDocumentLimitado(10));

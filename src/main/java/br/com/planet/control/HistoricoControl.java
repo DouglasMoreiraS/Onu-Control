@@ -7,6 +7,8 @@ import br.com.planet.model.bean.Modelo;
 import br.com.planet.model.tablemodel.ManutencaoTableModel;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.TableModel;
 import javax.xml.bind.ValidationException;
 
@@ -47,18 +49,22 @@ public class HistoricoControl {
         this.historicoList.addAll(dao.listar());
     }
 
-    public void exportarExcel(String path, int rows[]) throws ValidationException {
+    public void exportarExcel(String path, int rows[]) throws ValidationException, Exception {
         List<Manutencao> export = new ArrayList();
         for (int i : rows) {
             export.add(historicoList.get(i));
         }
 
         if (export.isEmpty()) {
-            throw new ValidationException("Nada foi selecionado");
+            throw new ValidationException("Não há registros selecionados");
         }
 
-        // excel = new ExportToExcel();
-        // excel.ExportToHuawei(export, path);
+        ExportToExcel excel = new ExportToExcel();
+        try {
+            excel.ExportToHuawei(export, path);
+        } catch (Exception ex) {
+            throw ex;
+        }
     }
 
     public String[] getModelos() {

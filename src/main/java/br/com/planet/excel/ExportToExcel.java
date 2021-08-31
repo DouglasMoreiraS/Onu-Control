@@ -24,7 +24,7 @@ public class ExportToExcel {
 
         try {
 
-            FileOutputStream fileOut = new FileOutputStream(path +"//"+ "teste" + ".xlsx");
+            FileOutputStream fileOut = new FileOutputStream(path +"//"+ "export(" + m.size() +")" + ".xlsx");
 
             XSSFWorkbook workbook = new XSSFWorkbook();
             XSSFSheet sheet = workbook.createSheet();
@@ -32,10 +32,17 @@ public class ExportToExcel {
             for (Manutencao e : m) {
                 Row row = sheet.createRow(sheet.getPhysicalNumberOfRows());
 
-                Cell cellSN = row.createCell(0);
-                Cell cellObs = row.createCell(1);
-                cellSN.setCellValue(e.getEquipamento().getSn());
+                Cell cellData = row.createCell(0);
+                Cell cellModelo = row.createCell(1);
+                Cell cellSn = row.createCell(2);
+                Cell cellObs = row.createCell(3);
+                Cell cellPon = row.createCell(4);
+
+                cellData.setCellValue(e.getData());
+                cellModelo.setCellValue(e.getEquipamento().getModelo().getNome());
+                cellSn.setCellValue(e.getEquipamento().getSn());
                 cellObs.setCellValue(e.getObservacao());
+                cellPon.setCellValue(e.getPon());
 
             }
 
