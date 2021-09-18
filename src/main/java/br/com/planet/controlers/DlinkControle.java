@@ -79,11 +79,9 @@ public class DlinkControle extends Controle {
             txtLogin.sendKeys(login);
             txtSenha.sendKeys(senha);
 
-            driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-
             btnLogin.click();
 
-            Thread.sleep(3000);
+            Thread.sleep(1000);
 
             if (Utils.existsElement(driver, "/html/body/div[1]/div[3]/div/div/div[2]/div[2]/button[1]")) {
                 driver.findElement(By.xpath("/html/body/div[1]/div[3]/div/div/div[2]/div[2]/button[1]")).click();
@@ -120,7 +118,7 @@ public class DlinkControle extends Controle {
 
     public void getFirmware() throws Exception {
         try {
-
+            
             driver.get("http://192.168.0.1/admin/index.html#/summary");
 
             WebDriverWait wait = new WebDriverWait(driver, 10);
@@ -215,11 +213,10 @@ public class DlinkControle extends Controle {
             driver.findElement(By.xpath("/html/body/div[1]/div[3]/div/div/div[3]/div/button[1]")).click();
 
             //campos senha
-            WebDriverWait wait = new WebDriverWait(driver, 10);
-            WebElement campoSenha1 = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[1]/div[3]/div/div/form/div[3]/label[1]/div[1]/div/input")));
 
             if (Utils.existsElement(driver, "/html/body/div[1]/div[3]/div/div/form/div[3]/label[1]/div[1]/div/input")) {
-                campoSenha1.sendKeys(senha);
+                
+                driver.findElement(By.xpath("/html/body/div[1]/div[3]/div/div/form/div[3]/label[1]/div[1]/div/input")).sendKeys(senha);
                 driver.findElement((By.name("confirmPassword"))).sendKeys(senha);
 
                 //apply
@@ -227,6 +224,7 @@ public class DlinkControle extends Controle {
             }
 
         } catch (Exception e) {
+            System.out.println("Erro Dlink Primeira Configuração: " + e.getMessage());
             throw e;
         }
     }

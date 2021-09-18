@@ -14,8 +14,8 @@ public class NextControle extends Controle {
 
     public NextControle(boolean condition) {
         super(condition);
-        this.macAdressURL = "http://192.168.1.1/status.asp";
         this.url = "http://192.168.1.1";
+        this.macAdressURL = url +"/status.asp";
         this.login = "admin";
         this.senha = "admin";
         this.senha2 = "@#Pl4n3t#@";
@@ -25,9 +25,9 @@ public class NextControle extends Controle {
 
         this.firmwareAtualVersion = "V1.0.8";
         
-        this.urlFirmware = "http://192.168.1.1/status.asp";
-        this.urlPon = "http://192.168.1.1/status_pon.asp";
-        this.urlSn = "http://192.168.1.1/status.asp";
+        this.urlFirmware = url + "/status.asp";
+        this.urlPon = url + "/status_pon.asp";
+        this.urlSn = url + "/status.asp";
         
         this.xpathFirmware = "/html/body/form[1]/div[1]/div[2]/table/tbody/tr[3]/td";
         this.xpathPon = "/html/body/div[2]/div[2]/table/tbody/tr[5]/td";
@@ -89,7 +89,7 @@ public class NextControle extends Controle {
 
     public void updateFirmware() throws InterruptedException, Exception {
         try {
-            driver.get("http://192.168.1.1/upgrade.asp");
+            driver.get(url+ "/upgrade.asp");
 
             driver.findElement(By.xpath("/html/body/form/div[1]/table/tbody/tr/th/input")).sendKeys(FirmwarePath.NEXT_FIBER_1_0_8);
 
@@ -127,7 +127,7 @@ public class NextControle extends Controle {
     public void reset() throws Exception {
         try {
             driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-            driver.get("http://192.168.1.1/saveconf.asp");
+            driver.get(url + "/saveconf.asp");
 
             driver.findElement(By.xpath("/html/body/form[3]/div/table/tbody/tr/td/input[1]")).click();
 
@@ -147,7 +147,7 @@ public class NextControle extends Controle {
 
     public void setWifiPassword() throws Exception {
         try {
-            driver.get("http://192.168.1.1/wlwpa.asp");
+            driver.get(url + "/wlwpa.asp");
 
             driver.findElement(By.xpath("/html/body/form/div[1]/table[4]/tbody/tr[8]/td/input[2]")).click();
             driver.findElement(By.xpath("/html/body/form/div[1]/table[4]/tbody/tr[8]/td/input[1]")).clear();
@@ -167,7 +167,7 @@ public class NextControle extends Controle {
     
     public void ppoe(){
         try{
-            driver.get("http://192.168.1.1/multi_wan_generic.asp");
+            driver.get(url + "/multi_wan_generic.asp");
             
             driver.findElement(By.xpath("/html/body/form/div[1]/table/tbody/tr[3]/td/input")).clear();
             driver.findElement(By.xpath("/html/body/form/div[1]/table/tbody/tr[3]/td/input")).sendKeys("504");

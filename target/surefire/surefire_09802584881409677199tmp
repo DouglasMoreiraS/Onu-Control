@@ -1,0 +1,8 @@
+#surefire_0
+#Tue Sep 14 10:16:42 BRT 2021
+basedir=C\:\\Users\\PC_PLANET\\Documents\\GitHub\\OnuControl2.0
+test=ping.pingTest
+file.encoding=UTF-8
+user.dir=C\:\\Users\\PC_PLANET\\Documents\\GitHub\\OnuControl2.0
+maven.ext.class.path=C\:\\Users\\PC_PLANET\\Downloads\\netbeans-12.3-bin\\netbeans\\java\\maven-nblib\\netbeans-eventspy.jar
+localRepository=C\:\\Users\\PC_PLANET\\.m2\\repository

@@ -144,6 +144,7 @@ public class Controle {
 
     public void close() {
         try {
+     //       Thread.sleep(3);
             driver.quit();
         } catch (Exception e) {
             System.out.println("Erro ao fechar: " + e.getMessage());
@@ -166,7 +167,7 @@ public class Controle {
     }
 
     public void restart() {
-        this.driver.close();
+        this.close();
         this.driver = new ChromeDriver(options);
         this.driver.get(url);
     }

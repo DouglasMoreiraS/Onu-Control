@@ -86,16 +86,16 @@ public class EquipamentoView extends javax.swing.JDialog {
         jLabel4.setText("Patrimonio");
 
         txtPatrimonio.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtPatrimonioKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPatrimonioKeyReleased(evt);
             }
         });
 
         jLabel3.setText("Firmware");
 
         txtFirmware.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtFirmwareKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtFirmwareKeyReleased(evt);
             }
         });
 
@@ -108,8 +108,8 @@ public class EquipamentoView extends javax.swing.JDialog {
             }
         });
         txtSn.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtSnKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSnKeyReleased(evt);
             }
         });
 
@@ -431,20 +431,6 @@ public class EquipamentoView extends javax.swing.JDialog {
         atualizaGrafico();
 
     }//GEN-LAST:event_cbModeloItemStateChanged
-    private void txtSnKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSnKeyTyped
-        atualizarTbl();
-        atualizaGrafico();
-    }//GEN-LAST:event_txtSnKeyTyped
-
-    private void txtFirmwareKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFirmwareKeyTyped
-        atualizarTbl();
-        atualizaGrafico();
-    }//GEN-LAST:event_txtFirmwareKeyTyped
-
-    private void txtPatrimonioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPatrimonioKeyTyped
-        atualizarTbl();
-        atualizaGrafico();
-    }//GEN-LAST:event_txtPatrimonioKeyTyped
 
     private void btnLimpaFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpaFiltroActionPerformed
         this.cbModelo.setSelectedIndex(0);
@@ -517,6 +503,21 @@ public class EquipamentoView extends javax.swing.JDialog {
         btnFirmware.setSelected(false);
         atualizaGrafico();
     }//GEN-LAST:event_btnStatusActionPerformed
+
+    private void txtSnKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSnKeyReleased
+        atualizarTbl();
+        atualizaGrafico();
+    }//GEN-LAST:event_txtSnKeyReleased
+
+    private void txtFirmwareKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFirmwareKeyReleased
+        atualizarTbl();
+        atualizaGrafico();
+    }//GEN-LAST:event_txtFirmwareKeyReleased
+
+    private void txtPatrimonioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPatrimonioKeyReleased
+        atualizarTbl();
+        atualizaGrafico();
+    }//GEN-LAST:event_txtPatrimonioKeyReleased
 
     public static void main(String args[]) {
         try {

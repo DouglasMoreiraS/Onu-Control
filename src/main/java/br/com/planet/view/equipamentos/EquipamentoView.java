@@ -41,16 +41,23 @@ public class EquipamentoView extends javax.swing.JFrame {
         //iniciarPing();
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-
+                
+                String message = "";
+                int resposta;
                 if (flagUpdate == 1) {
-                    JOptionPane.showMessageDialog(EquipamentoView.this, "O equipamento está em processo de atualização, por favor aguarde a conclusão antes de finalizar.", "Aviso", JOptionPane.WARNING_MESSAGE);
-                    return;
+                    message = "O equipamento está em processo de atualização, tem certeza que deseja fechar?";
+                } else if (flagReset == 1) {
+                    message = "O equipamento está em processo de reset, tem certeza que deseja fechar?";
                 }
-                if (flagReset == 1) {
-                    JOptionPane.showMessageDialog(EquipamentoView.this, "O equipamento está em processo de reset, por favor aguarde a conclusão antes de finalizar.", "Aviso", JOptionPane.WARNING_MESSAGE);
-                    return;
+                
+                if (!message.equals("")){
+                    resposta= JOptionPane.showConfirmDialog(null, message);
+                    
+                    if (resposta == JOptionPane.CANCEL_OPTION || resposta == JOptionPane.NO_OPTION){
+                        return;
+                    }
                 }
-
+                
                 if (chima != null) {
                     if (chima.isAlive()) {
                         chima.stop();
@@ -452,9 +459,11 @@ public class EquipamentoView extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(EquipamentoView.this, "Done", "Done", JOptionPane.INFORMATION_MESSAGE);
                 }
             } catch (Exception e) {
-                String message = e.getMessage().substring(0, e.getMessage().indexOf("\n"));
+                e.printStackTrace();
+                
+                
                 controlaBar(EquipamentoView.NO_SIGNAL);
-                JOptionPane.showMessageDialog(this, "Erro de conexão: \n \n" + message, "Erro", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Erro de conexão: \n \n", "Erro", JOptionPane.WARNING_MESSAGE);
                 control.close();
                 controlaTela("start");
             }

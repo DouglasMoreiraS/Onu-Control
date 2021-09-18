@@ -1,4 +1,6 @@
 ViewTest\PingViewTest.class
+nextTemperatura.class
+ping\pingTest.class
 taskkill\TaskKillTest.class
 utilTest\UtilTest.class
 BackupRestoreTest.class

@@ -12,7 +12,7 @@ public class Utils {
 
     public static boolean existsElement(WebDriver driver, String xpath) {
         try {
-            driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+ //           driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
             driver.findElement(By.xpath(xpath));
         } catch (NoSuchElementException e) {
             return false;

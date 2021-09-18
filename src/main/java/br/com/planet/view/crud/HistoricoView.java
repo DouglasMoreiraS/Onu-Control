@@ -96,8 +96,8 @@ public class HistoricoView extends javax.swing.JDialog {
         jLabel4.setText("Observação");
 
         txtObservacao.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtObservacaoKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtObservacaoKeyReleased(evt);
             }
         });
 
@@ -108,11 +108,6 @@ public class HistoricoView extends javax.swing.JDialog {
         cbModelo.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbModeloItemStateChanged(evt);
-            }
-        });
-        cbModelo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbModeloActionPerformed(evt);
             }
         });
 
@@ -127,17 +122,12 @@ public class HistoricoView extends javax.swing.JDialog {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        txtData.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDataActionPerformed(evt);
-            }
-        });
         txtData.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtDataKeyPressed(evt);
             }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtDataKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtDataKeyReleased(evt);
             }
         });
 
@@ -147,15 +137,10 @@ public class HistoricoView extends javax.swing.JDialog {
                 cbFiltroItemStateChanged(evt);
             }
         });
-        cbFiltro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbFiltroActionPerformed(evt);
-            }
-        });
 
         txtSnEquip.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtSnEquipKeyTyped(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSnEquipKeyReleased(evt);
             }
         });
 
@@ -230,11 +215,6 @@ public class HistoricoView extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tblHistorico.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                tblHistoricoFocusLost(evt);
-            }
-        });
         tblHistorico.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblHistoricoMouseClicked(evt);
@@ -329,21 +309,9 @@ public class HistoricoView extends javax.swing.JDialog {
         atualizarTbl();
     }//GEN-LAST:event_btnLimpaFiltroActionPerformed
 
-    private void txtObservacaoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtObservacaoKeyTyped
-        atualizarTbl();
-    }//GEN-LAST:event_txtObservacaoKeyTyped
-
     private void cbModeloItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbModeloItemStateChanged
         atualizarTbl();
     }//GEN-LAST:event_cbModeloItemStateChanged
-
-    private void cbModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbModeloActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbModeloActionPerformed
-
-    private void tblHistoricoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tblHistoricoFocusLost
-
-    }//GEN-LAST:event_tblHistoricoFocusLost
 
     private void tblHistoricoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHistoricoMouseClicked
         this.control.setHistoricoSelecionado(tblHistorico.getSelectedRow());
@@ -370,15 +338,6 @@ public class HistoricoView extends javax.swing.JDialog {
         }*/
     }//GEN-LAST:event_btnDeletarActionPerformed
 
-    private void txtDataKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDataKeyTyped
-        String chars = "0123456789";
-        if (!chars.contains(evt.getKeyChar() + "")) {
-            evt.consume();
-        }
-
-        atualizarTbl();
-    }//GEN-LAST:event_txtDataKeyTyped
-
     private void txtDataKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDataKeyPressed
         int keyCode = evt.getKeyCode();
         if (keyCode != KeyEvent.VK_DELETE && keyCode != KeyEvent.VK_BACK_SPACE) {
@@ -397,21 +356,9 @@ public class HistoricoView extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_txtDataKeyPressed
 
-    private void cbFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFiltroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbFiltroActionPerformed
-
     private void cbFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbFiltroItemStateChanged
         atualizarTbl();
     }//GEN-LAST:event_cbFiltroItemStateChanged
-
-    private void txtDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDataActionPerformed
-
-    private void txtSnEquipKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSnEquipKeyTyped
-        atualizarTbl();
-    }//GEN-LAST:event_txtSnEquipKeyTyped
 
     private void btnExportarSelecionadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarSelecionadosActionPerformed
         if (tblHistorico.getSelectedRows().length != 0) {
@@ -435,6 +382,23 @@ public class HistoricoView extends javax.swing.JDialog {
 
         }
     }//GEN-LAST:event_btnExportarSelecionadosActionPerformed
+
+    private void txtDataKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDataKeyReleased
+        String chars = "0123456789";
+        if (!chars.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+
+        atualizarTbl();
+    }//GEN-LAST:event_txtDataKeyReleased
+
+    private void txtObservacaoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtObservacaoKeyReleased
+        atualizarTbl();
+    }//GEN-LAST:event_txtObservacaoKeyReleased
+
+    private void txtSnEquipKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSnEquipKeyReleased
+        atualizarTbl();
+    }//GEN-LAST:event_txtSnEquipKeyReleased
 
     public static void main(String args[]) {
         try {
