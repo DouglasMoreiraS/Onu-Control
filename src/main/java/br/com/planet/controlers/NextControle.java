@@ -170,11 +170,11 @@ public class NextControle extends Controle {
             driver.get(url + "/multi_wan_generic.asp");
             
             driver.findElement(By.xpath("/html/body/form/div[1]/table/tbody/tr[3]/td/input")).clear();
-            driver.findElement(By.xpath("/html/body/form/div[1]/table/tbody/tr[3]/td/input")).sendKeys("504");
+            driver.findElement(By.xpath("/html/body/form/div[1]/table/tbody/tr[3]/td/input")).sendKeys("501");
             driver.findElement(By.xpath("/html/body/form/div[2]/div[2]/table/tbody/tr[1]/td/input")).clear();
-            driver.findElement(By.xpath("/html/body/form/div[2]/div[2]/table/tbody/tr[1]/td/input")).sendKeys("k");
+            driver.findElement(By.xpath("/html/body/form/div[2]/div[2]/table/tbody/tr[1]/td/input")).sendKeys("geandson");
             driver.findElement(By.xpath("/html/body/form/div[2]/div[2]/table/tbody/tr[2]/td/input[1]")).clear();
-            driver.findElement(By.xpath("/html/body/form/div[2]/div[2]/table/tbody/tr[2]/td/input[1]")).sendKeys("k");
+            driver.findElement(By.xpath("/html/body/form/div[2]/div[2]/table/tbody/tr[2]/td/input[1]")).sendKeys("geandson");
             driver.findElement(By.xpath("/html/body/form/div[8]/input[5]")).click();
             
         }catch (Exception e){

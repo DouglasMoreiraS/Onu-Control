@@ -51,6 +51,7 @@ C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\mo
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\util\hibernate\HibernateProperties.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\controlers\MercusysRouterControle.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\view\equipamentos\HuaweiEchoView.java
+C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\controlers\ZyxelRouterControle.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\view\equipamentos\TpLinkView.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\view\crud\HistoricoView.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\view\ExportaHistoricoExcelView.java

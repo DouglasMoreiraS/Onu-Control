@@ -9,6 +9,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import br.com.planet.util.Utils;
+import org.openqa.selenium.NoAlertPresentException;
 
 public class DlinkControle extends Controle {
 
@@ -51,9 +52,7 @@ public class DlinkControle extends Controle {
             if (Utils.existsElement(driver, "html/body/div[1]/div[3]/div/div/div[2]/a")) {
 
                 primeiraConfiguracao();
-                Thread.sleep(3000);
-                this.restart();
-                driver.get(url);
+
             }
 
             if (Utils.existsElement(driver, "/html/body/div[8]/div[2]/form/div[1]/div[1]/label/div[1]")) {
@@ -92,6 +91,7 @@ public class DlinkControle extends Controle {
             }
 
             try {
+                Thread.sleep(1000);
                 txtLogin.sendKeys(login);
                 return false;
             } catch (Exception e) {
@@ -118,10 +118,16 @@ public class DlinkControle extends Controle {
 
     public void getFirmware() throws Exception {
         try {
-            
+
             driver.get("http://192.168.0.1/admin/index.html#/summary");
 
-            WebDriverWait wait = new WebDriverWait(driver, 10);
+            WebDriverWait wait = new WebDriverWait(driver, 999);
+
+            try{
+                driver.switchTo().alert().accept();
+            }catch (NoAlertPresentException e){
+                System.out.println(e.getMessage());
+            }
             WebElement firmwareElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[2]/div[2]/div[3]/div[2]/div[2]/div/div/div/div[1]/div[3]/span[2]/a")));
             String firmware = firmwareElement.getText();
 
@@ -208,14 +214,14 @@ public class DlinkControle extends Controle {
     private void primeiraConfiguracao() throws Exception {
         try {
             //botoes
+            Thread.sleep(2000);
             driver.findElement(By.xpath("/html/body/div[1]/div[3]/div/div/div[2]/a")).click();
             driver.findElement(By.xpath("/html/body/div[1]/div[3]/div/div/div[3]/ul/li[1]/a")).click();
             driver.findElement(By.xpath("/html/body/div[1]/div[3]/div/div/div[3]/div/button[1]")).click();
 
             //campos senha
-
             if (Utils.existsElement(driver, "/html/body/div[1]/div[3]/div/div/form/div[3]/label[1]/div[1]/div/input")) {
-                
+
                 driver.findElement(By.xpath("/html/body/div[1]/div[3]/div/div/form/div[3]/label[1]/div[1]/div/input")).sendKeys(senha);
                 driver.findElement((By.name("confirmPassword"))).sendKeys(senha);
 
@@ -223,33 +229,36 @@ public class DlinkControle extends Controle {
                 driver.findElement(By.xpath("/html/body/div[1]/div[3]/div/div/div[2]/a[2]")).click();
             }
 
+            Thread.sleep(3000);
+            this.restart();
+
         } catch (Exception e) {
             System.out.println("Erro Dlink Primeira Configuração: " + e.getMessage());
             throw e;
         }
     }
-    
-    public void ppoe(){
-        
+
+    public void ppoe() {
+
         try {
-            
-            driver.get(url+ "admin/index.html#/network/wan/info");
-            
+
+            driver.get(url + "admin/index.html#/network/wan/info");
+
             driver.findElement(By.xpath("/html/body/div[2]/div[2]/div[3]/div[2]/div[2]/div/ui-view/ui-view/div/div/div/div[2]/div/div[2]/div[1]/button[1]")).click();
             driver.findElement(By.xpath("/html/body/div[2]/div[2]/div[3]/div[2]/div[2]/div/ui-view/ui-view/div/form/div[2]/div[2]/div/div[1]/div/label[1]/div[1]/div/input")).clear();
             driver.findElement(By.xpath("/html/body/div[2]/div[2]/div[3]/div[2]/div[2]/div/ui-view/ui-view/div/form/div[2]/div[2]/div/div[1]/div/label[1]/div[1]/div/input")).sendKeys("k");
-            
+
             driver.findElement(By.xpath("/html/body/div[2]/div[2]/div[3]/div[2]/div[2]/div/ui-view/ui-view/div/form/div[2]/div[2]/div/div[1]/div/label[2]/div[1]/div/input")).clear();
             driver.findElement(By.xpath("/html/body/div[2]/div[2]/div[3]/div[2]/div[2]/div/ui-view/ui-view/div/form/div[2]/div[2]/div/div[1]/div/label[2]/div[1]/div/input")).sendKeys("k");
-            
+
             driver.findElement(By.xpath("/html/body/div[2]/div[2]/div[3]/div[2]/div[2]/div/ui-view/ui-view/div/form/div[3]/div/div/button")).click();
-            
+
         } catch (Exception e) {
             System.out.println("Erro Dlink PPOE: " + e.getMessage());
             e.printStackTrace();
             throw e;
         }
-        
+
     }
-    
+
 }

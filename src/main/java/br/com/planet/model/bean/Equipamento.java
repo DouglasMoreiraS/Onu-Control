@@ -28,6 +28,7 @@ public class Equipamento implements Serializable {
     public static final String TP_LINK = "Tp-Link WR840N";
     public static final String EASY_LINK = "Easy Link";
     public static final String MERCUSYS_ROUTER_AC12G = "Mercusys AC12G";
+    public static final String ZYXEL_EMG5523  = "Zyxel EMG5523-T50B";
     public static final String UNKNOWN = "Unknown";
 
     @Id

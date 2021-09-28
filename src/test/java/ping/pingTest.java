@@ -8,7 +8,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class pingTest {
 
-    @Test
     public void teste(){
         ChimaControle controle = new ChimaControle(true);
         

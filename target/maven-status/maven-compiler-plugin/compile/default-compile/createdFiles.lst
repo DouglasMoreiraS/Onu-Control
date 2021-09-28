@@ -117,6 +117,7 @@ br\com\planet\view\equipamentos\EquipamentoView$7.class
 br\com\planet\exception\SerialNumberViolationException.class
 br\com\planet\excel\ExportToExcel.class
 br\com\planet\view\crud\EquipamentoView$13.class
+br\com\planet\controlers\ZyxelRouterControle.class
 br\com\planet\view\crud\EquipamentoView$7.class
 br\com\planet\view\crud\EquipamentoView.class
 br\com\planet\model\tablemodel\ModeloTableModel.class
