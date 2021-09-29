@@ -35,7 +35,7 @@ public class DataBase {
     public static DataBase getInstance() {
         return instancia;
     }
-/*
+    /*
     public List<Equipamento> getListEquipamentos() {
         List<Equipamento> lista = new ArrayList<>();
 
@@ -118,6 +118,13 @@ public class DataBase {
             XSSFWorkbook workbook = new XSSFWorkbook(arquivo);
 
             for (int i = 0; i < 3; i++) {
+    
+       Cell cellId = row.createCell(0);
+                Cell cellData = row.createCell(1);
+                Cell cellEquip = row.createCell(2);
+                Cell cellObs = row.createCell(3);
+                Cell cellPon = row.createCell(4);
+    
 
                 XSSFSheet sheet = workbook.getSheetAt(i);
 
@@ -370,7 +377,7 @@ public class DataBase {
             System.out.println("Erro ao abrir arquivo");
         }
     }
-
+ 
     public void salvar(List<Manutencao> mList) {
 
         try {
@@ -379,10 +386,11 @@ public class DataBase {
 
             XSSFWorkbook workbook = new XSSFWorkbook();
 
-            XSSFSheet sheet;
+            XSSFSheet sheetModelo;
+            XSSFSheet sheetEquip;
+            XSSFSheet sheetRegistro;
 
-            sheet = workbook.createSheet();
-
+            sheetModelo = workbook.createSheet();
             for (Manutencao m : mList) {
                 Row row = sheet.createRow(sheet.getPhysicalNumberOfRows());
 
@@ -397,7 +405,7 @@ public class DataBase {
                 Cell cellTipo = row.createCell(8);
 
                 cellData.setCellValue(m.getData());
-                cellModelo.setCellValue(m.getEquipamento().getModelo());
+                cellModelo.setCellValue(m.getEquipamento().getModelo().getId());
                 cellSN.setCellValue(m.getEquipamento().getSn());
                 cellObs.setCellValue(m.getObservacao());
 //                cellPon.setCellValue(m.getEquipamento().getPon());
@@ -426,7 +434,7 @@ public class DataBase {
         }
 
     }
-
+/*
     public List<Manutencao> getList(String sn, int tipo) {
 
         List<Manutencao> lista = new ArrayList<>();

@@ -46,7 +46,7 @@ public class ModeloControl {
     }
     
     public void equipamentoList(Frame parent){
-        new EquipamentoView (parent, true, modeloSelecionado.getNome());
+        new EquipamentoView (parent, true, modeloSelecionado.getNome()).setVisible(true);
     }
     
     public boolean deletar(){
