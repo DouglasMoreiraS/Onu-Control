@@ -28,6 +28,7 @@ br\com\planet\view\InitFrame$1.class
 br\com\planet\view\crud\EquipamentoView$4.class
 br\com\planet\view\View$13.class
 br\com\planet\view\crud\HistoricoView$2.class
+br\com\planet\view\PpoeConfigView.class
 br\com\planet\controlers\ChimaControle.class
 br\com\planet\util\log\LogHuaweiEco.class
 br\com\planet\view\View$24.class
@@ -99,9 +100,12 @@ br\com\planet\view\crud\EquipamentoView$16.class
 br\com\planet\view\crud\EquipamentoView$8.class
 br\com\planet\view\ExportaHistoricoExcelView.class
 br\com\planet\dao\EquipamentoDAO.class
+br\com\planet\view\PpoeConfigView$1.class
 br\com\planet\view\View$25.class
 br\com\planet\exception\PatrimonioViolationException.class
+br\com\planet\util\PropertiesUtil.class
 br\com\planet\view\crud\HistoricoView$9.class
+br\com\planet\view\equipamentos\EquipamentoView$8.class
 br\com\planet\view\equipamentos\TpLinkView.class
 br\com\planet\util\PlainDocumentLimitado.class
 br\com\planet\view\crud\ModeloView.class
@@ -110,6 +114,7 @@ br\com\planet\control\EquipamentoControl.class
 br\com\planet\view\View$7.class
 br\com\planet\control\HistoricoControl.class
 br\com\planet\view\View$14.class
+br\com\planet\view\PpoeConfigView$2.class
 br\com\planet\view\crud\EditarEquipamentoView$5.class
 br\com\planet\view\crud\HistoricoView$1.class
 br\com\planet\view\equipamentos\MercusysRouterView.class
@@ -123,6 +128,7 @@ br\com\planet\view\crud\EquipamentoView.class
 br\com\planet\model\tablemodel\ModeloTableModel.class
 br\com\planet\view\crud\EditarEquipamentoView$1.class
 br\com\planet\view\crud\ModeloView$6.class
+br\com\planet\view\View$27.class
 br\com\planet\view\ExportaHistoricoExcelView$1.class
 br\com\planet\view\crud\HistoricoView$8.class
 br\com\planet\model\tablemodel\ManutencaoTableModel.class

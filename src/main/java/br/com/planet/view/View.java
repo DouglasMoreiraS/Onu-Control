@@ -2,6 +2,7 @@ package br.com.planet.view;
 
 import br.com.planet.view.equipamentos.*;
 import br.com.planet.control.*;
+import br.com.planet.controlers.NextControle;
 import br.com.planet.dao.BackupAndRestore;
 import br.com.planet.model.bean.Equipamento;
 import br.com.planet.view.crud.EquipamentoView;
@@ -86,6 +87,7 @@ public class View extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem28 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ONT Facility");
@@ -398,6 +400,14 @@ public class View extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem2);
 
+        jMenuItem28.setText("PPOE");
+        jMenuItem28.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem28ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem28);
+
         jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
@@ -470,12 +480,14 @@ public class View extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem15ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
-        if (nextView == null) {
+       /* if (nextView == null) {
             nextView = new NextFiber();
         }
 
         nextView.setVisible(false);
-        nextView.setVisible(true);
+        nextView.setVisible(true);*/
+        br.com.planet.view.equipamentos.EquipamentoView view = new br.com.planet.view.equipamentos.EquipamentoView(true, "/images/nextfiber.png", Equipamento.NEXT_FIBER, new NextControle(false));
+        view.setVisible(true);
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
@@ -581,6 +593,11 @@ public class View extends javax.swing.JFrame {
         modeloView.setVisible(false);
         modeloView.setVisible(true);
     }//GEN-LAST:event_jMenuItem27ActionPerformed
+
+    private void jMenuItem28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem28ActionPerformed
+        PpoeConfigView view = new PpoeConfigView();
+        view.setVisible(true);
+    }//GEN-LAST:event_jMenuItem28ActionPerformed
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -639,6 +656,7 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem25;
     private javax.swing.JMenuItem jMenuItem26;
     private javax.swing.JMenuItem jMenuItem27;
+    private javax.swing.JMenuItem jMenuItem28;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;

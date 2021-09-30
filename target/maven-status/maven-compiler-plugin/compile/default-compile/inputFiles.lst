@@ -1,6 +1,7 @@
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\view\View.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\util\ImagesPath.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\view\equipamentos\ChimaView.java
+C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\util\PropertiesUtil.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\util\PlainDocumentLimitado.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\util\Utils.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\exception\DeleteViolationException.java
@@ -32,6 +33,7 @@ C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\mo
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\dao\EquipamentoDAO.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\excel\ExportToExcel.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\util\FirmwarePath.java
+C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\view\PpoeConfigView.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\control\ModeloControl.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\controlers\HuaweiControle.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\view\equipamentos\NextFiber.java

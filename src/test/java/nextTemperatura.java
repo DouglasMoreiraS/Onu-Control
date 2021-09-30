@@ -8,7 +8,6 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 public class nextTemperatura {
 
-  //  @Test
     public void testeUsoCPu() {
 
         String url = "http://192.168.3.1";

@@ -29,7 +29,6 @@ public class GraficoTeste extends JFrame {
         this.pack();
     }
 
-    @Test
     public void teste() {
         new GraficoTeste().setVisible(true);
         while (true){}

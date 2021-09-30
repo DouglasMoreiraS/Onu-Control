@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import br.com.planet.model.bean.Equipamento;
 import br.com.planet.model.bean.Manutencao;
+import br.com.planet.util.PropertiesUtil;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import java.util.Properties;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -36,6 +38,9 @@ public class Controle {
     String urlPon;
     String urlFirmware;
     String urlSn;
+    String urlReset;
+    String urlUpdate;
+    String urlPPOE;
 
     ChromeOptions options;
     WebDriver driver;
@@ -52,13 +57,21 @@ public class Controle {
 
     String endereco;
     
+    String firmwarePath;
+    
     boolean headless;
 
+    Properties properties;
+
+    String ppoeVlan;
+    String ppoeUser;
+    String ppoePass;
+    
     public Controle(boolean headless) {
-        this.headless = headless;
+        this.headless = !headless;
         WebDriverManager.chromedriver().setup();
         options = new ChromeOptions();
-        options.setHeadless(!headless);
+        options.setHeadless(this.headless);
         historico = new ArrayList();
         m = new Manutencao();
     }
@@ -133,9 +146,9 @@ public class Controle {
         }
     }
 
-    public void open() {
+    public void open(boolean headless) {
         try {
-            options.setHeadless(headless);
+            options.setHeadless(!headless);
             driver = new ChromeDriver(options);
         } catch (Exception e){
             System.out.println("Erro ao abrir: " + e.getMessage());
@@ -238,7 +251,13 @@ public class Controle {
         }
     }
     
-    private void capturarEndereco(){
+    protected void loadProperties(String path){
+        properties = PropertiesUtil.getProperties(path);
+        Properties p = PropertiesUtil.getProperties(Utils.PROPERTIES_DIRECTORY + "\\ppoe.properties");
+        ppoeVlan = p.getProperty("p.ppoe.vlan");
+        ppoeUser = p.getProperty("p.ppoe.login");
+        ppoePass = p.getProperty("p.ppoe.password");
     }
 
+    
 }

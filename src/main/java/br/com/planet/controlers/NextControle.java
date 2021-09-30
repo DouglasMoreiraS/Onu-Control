@@ -4,41 +4,53 @@ import br.com.planet.dao.ModeloDAO;
 import java.util.concurrent.TimeUnit;
 import br.com.planet.model.bean.Equipamento;
 import br.com.planet.util.FirmwarePath;
+import br.com.planet.util.Utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class NextControle extends Controle {
 
-    private String senha2;
-    private String senha3 = "HPF$6107#Zeus";
-
+    private final String senha2;
+    private final String senha3;
+    private final String urlWifiConfig;
+    
     public NextControle(boolean condition) {
         super(condition);
-        this.url = "http://192.168.1.1";
-        this.macAdressURL = url +"/status.asp";
-        this.login = "admin";
-        this.senha = "admin";
-        this.senha2 = "@#Pl4n3t#@";
+        loadProperties(Utils.PROPERTIES_DIRECTORY + "\\nextfiber.properties");
+        
+        this.login = properties.getProperty("p.user");
+        this.senha = properties.getProperty("p.pass");
+        this.senha2 = properties.getProperty("p.pass1");
+        this.senha3 = properties.getProperty("p.pass2");
         this.driver = new ChromeDriver(options);
         m.getEquipamento().setModelo(new ModeloDAO().buscar(Equipamento.NEXT_FIBER));
         tipo = NextControle.ONT_TYPE;
 
-        this.firmwareAtualVersion = "V1.0.8";
+        this.firmwareAtualVersion = properties.getProperty("p.firmware.atual");
+      
+        this.url = properties.getProperty("p.url.main");
+        this.urlFirmware = properties.getProperty("p.url.firmware");
+        this.urlUpdate = properties.getProperty("p.url.upgrade");
+        this.urlPon = properties.getProperty("p.url.pon");
+        this.urlSn = properties.getProperty("p.url.sn");
+        this.urlPPOE = properties.getProperty("p.url.ppoe_config");
+        this.urlWifiConfig = properties.getProperty("p.url.wifi_config");
+        this.urlReset = properties.getProperty("p.url.reset");
         
-        this.urlFirmware = url + "/status.asp";
-        this.urlPon = url + "/status_pon.asp";
-        this.urlSn = url + "/status.asp";
+        this.xpathFirmware = properties.getProperty("p.xpath.firmware");
+        this.xpathPon = properties.getProperty("p.xpath.pon");
+        this.xpathSn = properties.getProperty("p.xpath.sn");
         
-        this.xpathFirmware = "/html/body/form[1]/div[1]/div[2]/table/tbody/tr[3]/td";
-        this.xpathPon = "/html/body/div[2]/div[2]/table/tbody/tr[5]/td";
-        this.xpathSn = "/html/body/form[1]/div[2]/div[2]/table/tbody/tr[4]/td";
+        this.title = properties.getProperty("p.title");
+        
+        this.firmwarePath = properties.getProperty("p.firmware.path");
     }
 
 
     public boolean pingar() {
         try {
             driver.get(url);
-            if (this.driver.getTitle().equals("XPON HGU")) {
+            if (this.driver.getTitle().equals(title)) {
                 return true;
             }
             return false;
@@ -52,7 +64,7 @@ public class NextControle extends Controle {
     public boolean logar() throws Exception {
         try {
             driver.get(url);
-            if (driver.getTitle().equals("XPON HGU")) {
+            if (driver.getTitle().equals(title)) {
                 return true;
             }
 
@@ -61,7 +73,7 @@ public class NextControle extends Controle {
             driver.findElement(By.xpath("/html/body/div/div/form/ul/li[3]/input")).click();
 
             driver.get(url);
-            if (driver.getTitle().equals("XPON HGU")) {
+            if (driver.getTitle().equals(title)) {
                 return true;
             }
 
@@ -71,7 +83,7 @@ public class NextControle extends Controle {
 
             driver.get(url);
             
-            if (driver.getTitle().equals("XPON HGU")){
+            if (driver.getTitle().equals(title)){
                 return true;
             }
             
@@ -79,7 +91,7 @@ public class NextControle extends Controle {
             driver.findElement(By.xpath("/html/body/div/div/form/ul/li[2]/input")).sendKeys(senha3);
             driver.findElement(By.xpath("/html/body/div/div/form/ul/li[3]/input")).click();
             
-            return driver.getTitle().equals("XPON HGU");
+            return driver.getTitle().equals(title);
             
         } catch (Exception e) {
             System.out.println("Erro NextFiber logar: " + e.getMessage());
@@ -89,9 +101,9 @@ public class NextControle extends Controle {
 
     public void updateFirmware() throws InterruptedException, Exception {
         try {
-            driver.get(url+ "/upgrade.asp");
+            driver.get(urlUpdate);
 
-            driver.findElement(By.xpath("/html/body/form/div[1]/table/tbody/tr/th/input")).sendKeys(FirmwarePath.NEXT_FIBER_1_0_8);
+            driver.findElement(By.xpath("/html/body/form/div[1]/table/tbody/tr/th/input")).sendKeys(this.firmwarePath);
 
             driver.findElement(By.xpath("/html/body/form/div[2]/input[1]")).click();
 
@@ -127,7 +139,7 @@ public class NextControle extends Controle {
     public void reset() throws Exception {
         try {
             driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-            driver.get(url + "/saveconf.asp");
+            driver.get(urlReset);
 
             driver.findElement(By.xpath("/html/body/form[3]/div/table/tbody/tr/td/input[1]")).click();
 
@@ -147,7 +159,7 @@ public class NextControle extends Controle {
 
     public void setWifiPassword() throws Exception {
         try {
-            driver.get(url + "/wlwpa.asp");
+            driver.get(urlWifiConfig);
 
             driver.findElement(By.xpath("/html/body/form/div[1]/table[4]/tbody/tr[8]/td/input[2]")).click();
             driver.findElement(By.xpath("/html/body/form/div[1]/table[4]/tbody/tr[8]/td/input[1]")).clear();
@@ -167,18 +179,18 @@ public class NextControle extends Controle {
     
     public void ppoe(){
         try{
-            driver.get(url + "/multi_wan_generic.asp");
+            driver.get(urlPPOE);
             
             driver.findElement(By.xpath("/html/body/form/div[1]/table/tbody/tr[3]/td/input")).clear();
-            driver.findElement(By.xpath("/html/body/form/div[1]/table/tbody/tr[3]/td/input")).sendKeys("501");
+            driver.findElement(By.xpath("/html/body/form/div[1]/table/tbody/tr[3]/td/input")).sendKeys(ppoeVlan);
             driver.findElement(By.xpath("/html/body/form/div[2]/div[2]/table/tbody/tr[1]/td/input")).clear();
-            driver.findElement(By.xpath("/html/body/form/div[2]/div[2]/table/tbody/tr[1]/td/input")).sendKeys("geandson");
+            driver.findElement(By.xpath("/html/body/form/div[2]/div[2]/table/tbody/tr[1]/td/input")).sendKeys(ppoeUser);
             driver.findElement(By.xpath("/html/body/form/div[2]/div[2]/table/tbody/tr[2]/td/input[1]")).clear();
-            driver.findElement(By.xpath("/html/body/form/div[2]/div[2]/table/tbody/tr[2]/td/input[1]")).sendKeys("geandson");
+            driver.findElement(By.xpath("/html/body/form/div[2]/div[2]/table/tbody/tr[2]/td/input[1]")).sendKeys(ppoePass);
             driver.findElement(By.xpath("/html/body/form/div[8]/input[5]")).click();
             
         }catch (Exception e){
-            System.out.println("Erro Next IPV6: " + e.getMessage());
+            System.out.println("Erro Next PPOE: " + e.getMessage());
         }
     }
     

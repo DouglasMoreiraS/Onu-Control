@@ -5,10 +5,12 @@ import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
 import br.com.planet.controlers.Controle;
 import br.com.planet.exception.PatrimonioViolationException;
+import br.com.planet.model.bean.Equipamento;
 import br.com.planet.model.tablemodel.RemoteAcessTableModel;
 import javax.swing.JPanel;
 import br.com.planet.src.PainelImagemFundo;
 import br.com.planet.view.crud.HistoricoView;
+import javax.swing.ImageIcon;
 
 public class EquipamentoView extends javax.swing.JFrame {
 
@@ -34,11 +36,65 @@ public class EquipamentoView extends javax.swing.JFrame {
         initComponents();
         btnPpoe.setVisible(ppoe);
 
-        txtObservacao.setLineWrap(true); // para quebra a linha
+        txtObservacao.setLineWrap(true); // para quebrar a linha
+        txtObservacao.setWrapStyleWord(false);
+        
+
+        controlaTela("init");
+
+        this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                
+                String message = "";
+                int resposta;
+                if (flagUpdate == 1) {
+                    message = "O equipamento está em processo de atualização, tem certeza que deseja fechar?";
+                } else if (flagReset == 1) {
+                    message = "O equipamento está em processo de reset, tem certeza que deseja fechar?";
+                }
+                
+                if (!message.equals("")){
+                    resposta= JOptionPane.showConfirmDialog(null, message);
+                    
+                    if (resposta == JOptionPane.CANCEL_OPTION || resposta == JOptionPane.NO_OPTION){
+                        return;
+                    }
+                }
+                
+                if (chima != null) {
+                    if (chima.isAlive()) {
+                        chima.stop();
+                    }
+                }
+
+                if (chimaPing != null) {
+                    if (chimaPing.isAlive()) {
+                        chimaPing.stop();
+                    }
+                }
+
+                if (control != null) {
+                    control.close();
+                }
+
+                controlaTela("init");
+                EquipamentoView.this.dispose();
+
+            }
+        });
+    }
+    public EquipamentoView(boolean ppoe, String imagePath, String title, Controle controle) {
+        initComponents();
+        btnPpoe.setVisible(ppoe);
+
+        getPainelImg().setImg(new ImageIcon(getClass().getResource(imagePath)));
+        this.setTitle(title);
+        this.control = controle;
+        txtObservacao.setLineWrap(true); // para quebrar a linha
         txtObservacao.setWrapStyleWord(false);
 
         controlaTela("init");
-        //iniciarPing();
+
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 
@@ -443,7 +499,7 @@ public class EquipamentoView extends javax.swing.JFrame {
             }
 
             try {
-                setControl();
+                control.open(cbNavegador.isSelected());
                 if (conectar()) {
                     preencherCampos();
 

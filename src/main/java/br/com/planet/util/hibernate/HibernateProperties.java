@@ -1,5 +1,6 @@
 package br.com.planet.util.hibernate;
 
+import br.com.planet.util.PropertiesUtil;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -9,7 +10,7 @@ import java.util.logging.Logger;
 
 public class HibernateProperties {
 
-    private static final String PATH = System.getProperty("user.dir") + "//config.properties";
+    private static final String PATH = System.getProperty("user.dir") + "//data//config.properties";
     private String host;
     private String login;
     private String pass;
@@ -17,40 +18,33 @@ public class HibernateProperties {
     public static HibernateProperties getProperties() throws FileNotFoundException, IOException {
 
         HibernateProperties retorno = new HibernateProperties();
-        Properties p = new Properties();
-        FileInputStream file = new FileInputStream(PATH);
+        Properties p = PropertiesUtil.getProperties(PATH);
 
-        p.load(file);
+        if (p != null) {
 
-        retorno.host = p.getProperty("p.server.host");
-        retorno.login = p.getProperty("p.server.login");
-        retorno.pass = p.getProperty("p.server.password");
+            retorno.host = p.getProperty("p.server.host");
+            retorno.login = p.getProperty("p.server.login");
+            retorno.pass = p.getProperty("p.server.password");
 
-        return retorno;
+            return retorno;
+        } else {
+            return null;
+        }
     }
 
     public static boolean verificarProperties() {
-        System.out.println(PATH);
-
-        try {
-            FileInputStream file = new FileInputStream(PATH);
-            return true;
-
-        } catch (FileNotFoundException ex) {
-            return false;
-        }
-
+        return PropertiesUtil.getProperties(PATH) != null;
     }
 
-    public  String getHost() {
+    public String getHost() {
         return host;
     }
 
-    public  String getLogin() {
+    public String getLogin() {
         return login;
     }
 
-    public  String getPass() {
+    public String getPass() {
         return pass;
     }
 

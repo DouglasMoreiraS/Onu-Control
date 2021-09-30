@@ -24,7 +24,6 @@ import org.apache.poi.ss.usermodel.Row;
 
 public class BackupRestoreTest {
 
-    //@Test
     public void backup() {
 
         FileOutputStream fileOut = null;
@@ -113,7 +112,6 @@ public class BackupRestoreTest {
         }
     }
 
-    @Test
     public void restore() {
 
         FileInputStream arquivo = null;

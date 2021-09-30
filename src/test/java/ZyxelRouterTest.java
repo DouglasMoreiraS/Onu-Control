@@ -7,7 +7,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class ZyxelRouterTest {
 
-    @Test
     public void teste() {
 
         WebDriverManager.chromedriver().setup();
