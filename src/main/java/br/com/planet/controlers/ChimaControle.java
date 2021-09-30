@@ -19,20 +19,6 @@ public class ChimaControle extends Controle {
 
         this.loadProperties(Utils.PROPERTIES_DIRECTORY + "\\chima.properties");
 
-        this.login = properties.getProperty("p.user");
-        this.senha = properties.getProperty("p.pass");
-
-        this.url = properties.getProperty("p.url.main");
-        this.urlSn = properties.getProperty("p.url.sn");
-        this.urlFirmware = properties.getProperty("p.url.firmware");
-        this.urlPon = properties.getProperty("p.url.pon");
-        this.urlReset = properties.getProperty("p.url.reset");
-
-        this.xpathSn = properties.getProperty("p.xpath.sn");
-        this.xpathFirmware = properties.getProperty("p.xpath.firmware");
-        this.xpathPon = properties.getProperty("p.xpath.pon");
-
-        this.title = properties.getProperty("p.title");
     }
 
     @Override
@@ -62,18 +48,6 @@ public class ChimaControle extends Controle {
             throw new Exception(e);
         }
 
-    }
-
-    public void logout() throws Exception {
-        try {
-            driver.get("http://192.168.250.1/admin/logout.asp");
-            driver.findElement(By.xpath("/html/body/blockquote/form/input[1]")).click();
-            Alert popup = driver.switchTo().alert();
-            popup.accept();
-        } catch (Exception e) {
-            System.out.println("Erro Chima logout: " + e.getMessage());
-            throw new Exception(e);
-        }
     }
 
     @Override

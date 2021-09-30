@@ -1,6 +1,5 @@
 package br.com.planet.controlers;
 
-import br.com.planet.dao.ModeloDAO;
 import java.util.concurrent.TimeUnit;
 import br.com.planet.model.bean.Equipamento;
 import org.openqa.selenium.By;
@@ -18,14 +17,12 @@ public class DlinkControle extends Controle {
 
     public DlinkControle(boolean condition) {
         super(condition);
+        this.loadProperties(Utils.PROPERTIES_DIRECTORY + "\\dlink.properties");
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-        this.url = "http://192.168.0.1/";
-        this.login = "admin";
-        this.senha = "1234";
-        m.getEquipamento().setModelo(new ModeloDAO().buscar(Equipamento.DLINK));
+
+        m.getEquipamento().setModelo(Equipamento.DLINK);
         this.m.getEquipamento().setTipo(Controle.ROUTER_TYPE);
-        this.firmwareAtualVersion = "1.0.0";
 
     }
 
@@ -105,11 +102,10 @@ public class DlinkControle extends Controle {
 
     public void getSn() throws Exception {
         try {
-            driver.get("http://192.168.0.1/admin/index.html#/summary");
+            driver.get(urlSn);
             WebDriverWait wait = new WebDriverWait(driver, 10);
             WebElement sn = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"mblock\"]/div[2]/div/div/div/div[1]/div[7]/span[2]")));
             m.getEquipamento().setSn(sn.getText());
-            System.out.println(m.getEquipamento().getSn());
         } catch (Exception e) {
             System.out.println("Erro DLINK getSN: " + e.getMessage());
             throw new Exception(e);
@@ -119,7 +115,7 @@ public class DlinkControle extends Controle {
     public void getFirmware() throws Exception {
         try {
 
-            driver.get("http://192.168.0.1/admin/index.html#/summary");
+            driver.get(urlFirmware);
 
             WebDriverWait wait = new WebDriverWait(driver, 999);
 
@@ -154,7 +150,7 @@ public class DlinkControle extends Controle {
                 this.logar();
             }
 
-            driver.get("http://192.168.0.1/admin/index.html#/system/firmware");
+            driver.get(urlUpdate);
 
             WebDriverWait wait = new WebDriverWait(driver, 9999);
 
@@ -171,7 +167,6 @@ public class DlinkControle extends Controle {
 
             this.m.setUpdate(true);
 
-            this.headless = true;
             this.restart();
             this.login = "Admin";
             this.senha = "@#Pl4n3t#@";
@@ -183,7 +178,7 @@ public class DlinkControle extends Controle {
         }
     }
 
-    public boolean needPreset() {
+    public boolean needUpdate() {
         try {
 
             if (m.getEquipamento().getFirmware() == null) {
@@ -196,19 +191,6 @@ public class DlinkControle extends Controle {
             e.printStackTrace();
         }
         return false;
-    }
-
-    @Override
-    public boolean needUpdate() {
-        return !m.getEquipamento().getFirmware().contains("1.0.0");
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getUrl() {
-        return url;
     }
 
     private void primeiraConfiguracao() throws Exception {
@@ -242,14 +224,14 @@ public class DlinkControle extends Controle {
 
         try {
 
-            driver.get(url + "admin/index.html#/network/wan/info");
+            driver.get(urlPPOE);
 
             driver.findElement(By.xpath("/html/body/div[2]/div[2]/div[3]/div[2]/div[2]/div/ui-view/ui-view/div/div/div/div[2]/div/div[2]/div[1]/button[1]")).click();
             driver.findElement(By.xpath("/html/body/div[2]/div[2]/div[3]/div[2]/div[2]/div/ui-view/ui-view/div/form/div[2]/div[2]/div/div[1]/div/label[1]/div[1]/div/input")).clear();
-            driver.findElement(By.xpath("/html/body/div[2]/div[2]/div[3]/div[2]/div[2]/div/ui-view/ui-view/div/form/div[2]/div[2]/div/div[1]/div/label[1]/div[1]/div/input")).sendKeys("k");
+            driver.findElement(By.xpath("/html/body/div[2]/div[2]/div[3]/div[2]/div[2]/div/ui-view/ui-view/div/form/div[2]/div[2]/div/div[1]/div/label[1]/div[1]/div/input")).sendKeys(ppoeUser);
 
             driver.findElement(By.xpath("/html/body/div[2]/div[2]/div[3]/div[2]/div[2]/div/ui-view/ui-view/div/form/div[2]/div[2]/div/div[1]/div/label[2]/div[1]/div/input")).clear();
-            driver.findElement(By.xpath("/html/body/div[2]/div[2]/div[3]/div[2]/div[2]/div/ui-view/ui-view/div/form/div[2]/div[2]/div/div[1]/div/label[2]/div[1]/div/input")).sendKeys("k");
+            driver.findElement(By.xpath("/html/body/div[2]/div[2]/div[3]/div[2]/div[2]/div/ui-view/ui-view/div/form/div[2]/div[2]/div/div[1]/div/label[2]/div[1]/div/input")).sendKeys(ppoePass);
 
             driver.findElement(By.xpath("/html/body/div[2]/div[2]/div[3]/div[2]/div[2]/div/ui-view/ui-view/div/form/div[3]/div/div/button")).click();
 

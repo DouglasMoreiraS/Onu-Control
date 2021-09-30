@@ -13,39 +13,21 @@ public class NextControle extends Controle {
     private final String senha2;
     private final String senha3;
     private final String urlWifiConfig;
-    
+
     public NextControle(boolean condition) {
         super(condition);
         loadProperties(Utils.PROPERTIES_DIRECTORY + "\\nextfiber.properties");
-        
-        this.login = properties.getProperty("p.user");
-        this.senha = properties.getProperty("p.pass");
-        this.senha2 = properties.getProperty("p.pass1");
-        this.senha3 = properties.getProperty("p.pass2");
+
         this.driver = new ChromeDriver(options);
-        m.getEquipamento().setModelo(new ModeloDAO().buscar(Equipamento.NEXT_FIBER));
+        m.getEquipamento().setModelo(Equipamento.NEXT_FIBER);
         tipo = NextControle.ONT_TYPE;
 
+        this.senha2 = properties.getProperty("p.pass1");
+        this.senha3 = properties.getProperty("p.pass2");
         this.firmwareAtualVersion = properties.getProperty("p.firmware.atual");
-      
-        this.url = properties.getProperty("p.url.main");
-        this.urlFirmware = properties.getProperty("p.url.firmware");
-        this.urlUpdate = properties.getProperty("p.url.upgrade");
-        this.urlPon = properties.getProperty("p.url.pon");
-        this.urlSn = properties.getProperty("p.url.sn");
-        this.urlPPOE = properties.getProperty("p.url.ppoe_config");
         this.urlWifiConfig = properties.getProperty("p.url.wifi_config");
-        this.urlReset = properties.getProperty("p.url.reset");
-        
-        this.xpathFirmware = properties.getProperty("p.xpath.firmware");
-        this.xpathPon = properties.getProperty("p.xpath.pon");
-        this.xpathSn = properties.getProperty("p.xpath.sn");
-        
-        this.title = properties.getProperty("p.title");
-        
-        this.firmwarePath = properties.getProperty("p.firmware.path");
-    }
 
+    }
 
     public boolean pingar() {
         try {
@@ -82,17 +64,17 @@ public class NextControle extends Controle {
             driver.findElement(By.xpath("/html/body/div/div/form/ul/li[3]/input")).click();
 
             driver.get(url);
-            
-            if (driver.getTitle().equals(title)){
+
+            if (driver.getTitle().equals(title)) {
                 return true;
             }
-            
+
             driver.findElement(By.xpath("/html/body/div/div/form/ul/li[1]/input")).sendKeys(login);
             driver.findElement(By.xpath("/html/body/div/div/form/ul/li[2]/input")).sendKeys(senha3);
             driver.findElement(By.xpath("/html/body/div/div/form/ul/li[3]/input")).click();
-            
+
             return driver.getTitle().equals(title);
-            
+
         } catch (Exception e) {
             System.out.println("Erro NextFiber logar: " + e.getMessage());
             throw new Exception(e);
@@ -113,9 +95,8 @@ public class NextControle extends Controle {
 
             while (!driver.findElement(By.xpath("/html/body/div/div/div[2]")).getText().equals("100%")) {
             }
-            
-            Thread.sleep(10000);
 
+            Thread.sleep(10000);
 
             while (true) {
                 try {
@@ -126,15 +107,13 @@ public class NextControle extends Controle {
             }
             this.m.setUpdate(true);
             this.atualizarInformacoes();
-            
+
         } catch (Exception e) {
             System.out.println("Next Fiber Erro Update Firmware" + e.getMessage());
             throw new Exception(e);
         }
 
     }
-
-   
 
     public void reset() throws Exception {
         try {
@@ -164,9 +143,9 @@ public class NextControle extends Controle {
             driver.findElement(By.xpath("/html/body/form/div[1]/table[4]/tbody/tr[8]/td/input[2]")).click();
             driver.findElement(By.xpath("/html/body/form/div[1]/table[4]/tbody/tr[8]/td/input[1]")).clear();
             driver.findElement(By.xpath("/html/body/form/div[1]/table[4]/tbody/tr[8]/td/input[1]")).sendKeys(senha2);
-            
+
             driver.findElement(By.xpath("/html/body/form/div[2]/input[3]")).click();
-            
+
         } catch (Exception e) {
             System.out.println("NextFiber erro setWifiPass: " + e.getMessage());
             throw new Exception(e);
@@ -176,11 +155,11 @@ public class NextControle extends Controle {
     public boolean needUpdate() {
         return !this.m.getEquipamento().getFirmware().equals(this.firmwareAtualVersion);
     }
-    
-    public void ppoe(){
-        try{
+
+    public void ppoe() {
+        try {
             driver.get(urlPPOE);
-            
+
             driver.findElement(By.xpath("/html/body/form/div[1]/table/tbody/tr[3]/td/input")).clear();
             driver.findElement(By.xpath("/html/body/form/div[1]/table/tbody/tr[3]/td/input")).sendKeys(ppoeVlan);
             driver.findElement(By.xpath("/html/body/form/div[2]/div[2]/table/tbody/tr[1]/td/input")).clear();
@@ -188,10 +167,10 @@ public class NextControle extends Controle {
             driver.findElement(By.xpath("/html/body/form/div[2]/div[2]/table/tbody/tr[2]/td/input[1]")).clear();
             driver.findElement(By.xpath("/html/body/form/div[2]/div[2]/table/tbody/tr[2]/td/input[1]")).sendKeys(ppoePass);
             driver.findElement(By.xpath("/html/body/form/div[8]/input[5]")).click();
-            
-        }catch (Exception e){
+
+        } catch (Exception e) {
             System.out.println("Erro Next PPOE: " + e.getMessage());
         }
     }
-    
+
 }

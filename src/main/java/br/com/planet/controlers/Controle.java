@@ -28,8 +28,6 @@ public class Controle {
     WebElement txtSenha;
     WebElement btnLogin;
     WebElement macAdress;
-    String macAdressURL;
-    String title;
 
     String xpathPon;
     String xpathFirmware;
@@ -48,17 +46,19 @@ public class Controle {
     Manutencao m;
     List<Manutencao> historico;
 
-    String url = "";
+    String url;
     String login;
     String senha;
+    String title;
+
     int tipo;
 
     String firmwareAtualVersion;
 
     String endereco;
-    
+
     String firmwarePath;
-    
+
     boolean headless;
 
     Properties properties;
@@ -66,7 +66,7 @@ public class Controle {
     String ppoeVlan;
     String ppoeUser;
     String ppoePass;
-    
+
     public Controle(boolean headless) {
         this.headless = !headless;
         WebDriverManager.chromedriver().setup();
@@ -148,16 +148,17 @@ public class Controle {
 
     public void open(boolean headless) {
         try {
-            options.setHeadless(!headless);
+            this.headless = !headless;
+            options.setHeadless(this.headless);
             driver = new ChromeDriver(options);
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Erro ao abrir: " + e.getMessage());
         }
     }
 
     public void close() {
         try {
-     //       Thread.sleep(3);
+            //       Thread.sleep(3);
             driver.quit();
         } catch (Exception e) {
             System.out.println("Erro ao fechar: " + e.getMessage());
@@ -181,8 +182,7 @@ public class Controle {
 
     public void restart() {
         this.close();
-        this.driver = new ChromeDriver(options);
-        this.driver.get(url);
+        this.open(headless);
     }
 
     public Manutencao getM() {
@@ -205,15 +205,15 @@ public class Controle {
         return historico;
     }
 
-    public void reset() throws Exception {
-        
-    }
-
     public boolean needUpdate() {
         return !m.getEquipamento().getFirmware().equals(firmwareAtualVersion);
     }
 
     public void updateFirmware() throws Exception {
+    }
+    
+    public void reset() throws Exception{
+        
     }
 
     void atualizarInformacoes() throws Exception {
@@ -250,14 +250,43 @@ public class Controle {
             this.m.getEquipamento().setStatus(true);
         }
     }
-    
-    protected void loadProperties(String path){
+
+    protected void loadProperties(String path) {
         properties = PropertiesUtil.getProperties(path);
+
+        this.url = properties.getProperty("p.url.main");
+
+        this.login = properties.getProperty("p.user");
+        this.senha = properties.getProperty("p.pass");
+
+        this.url = properties.getProperty("p.url.main");
+        this.urlFirmware = properties.getProperty("p.url.firmware");
+        this.urlUpdate = properties.getProperty("p.url.upgrade");
+        this.urlPon = properties.getProperty("p.url.pon");
+        this.urlSn = properties.getProperty("p.url.sn");
+        this.urlPPOE = properties.getProperty("p.url.ppoe_config");
+        this.urlReset = properties.getProperty("p.url.reset");
+
+        this.xpathFirmware = properties.getProperty("p.xpath.firmware");
+        this.xpathPon = properties.getProperty("p.xpath.pon");
+        this.xpathSn = properties.getProperty("p.xpath.sn");
+
+        this.title = properties.getProperty("p.title");
+
+        this.firmwarePath = properties.getProperty("p.firmware.path");
+
         Properties p = PropertiesUtil.getProperties(Utils.PROPERTIES_DIRECTORY + "\\ppoe.properties");
         ppoeVlan = p.getProperty("p.ppoe.vlan");
         ppoeUser = p.getProperty("p.ppoe.login");
         ppoePass = p.getProperty("p.ppoe.password");
     }
 
-    
+    public String getTitle() {
+        return title;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
 }
