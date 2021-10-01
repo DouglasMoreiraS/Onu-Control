@@ -7,15 +7,14 @@ import javax.swing.ImageIcon;
 public class DlinkView extends EquipamentoView {
 
     public DlinkView() {
-        super(false);
+        super(true);
         this.getPainelImg().setImg(new ImageIcon(getClass().getResource("/images/dlink.png")));
         this.setTitle(Equipamento.DLINK);
-    }
-
-    @Override
-    public void setControl() {
-        control = new DlinkControle(getCbNavegador());
+        
     }
     
-
+    @Override
+    public void setControl(){
+        this.control = new DlinkControle();
+    }
 }

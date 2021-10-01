@@ -17,8 +17,6 @@ public class NextControle extends Controle {
     public NextControle(boolean condition) {
         super(condition);
         loadProperties(Utils.PROPERTIES_DIRECTORY + "\\nextfiber.properties");
-
-        this.driver = new ChromeDriver(options);
         m.getEquipamento().setModelo(Equipamento.NEXT_FIBER);
         tipo = NextControle.ONT_TYPE;
 

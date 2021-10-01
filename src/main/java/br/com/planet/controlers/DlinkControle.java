@@ -1,25 +1,24 @@
 package br.com.planet.controlers;
 
-import java.util.concurrent.TimeUnit;
 import br.com.planet.model.bean.Equipamento;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import br.com.planet.util.Utils;
+import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 public class DlinkControle extends Controle {
 
     String url2;
     String wifiName;
 
-    public DlinkControle(boolean condition) {
-        super(condition);
+    public DlinkControle() {
+        super(false);
+        timeout = 2;
         this.loadProperties(Utils.PROPERTIES_DIRECTORY + "\\dlink.properties");
-        driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 
         m.getEquipamento().setModelo(Equipamento.DLINK);
         this.m.getEquipamento().setTipo(Controle.ROUTER_TYPE);
@@ -44,12 +43,14 @@ public class DlinkControle extends Controle {
 
     public boolean logar() throws Exception {
         try {
+            driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+            
             driver.get(url);
 
             if (Utils.existsElement(driver, "html/body/div[1]/div[3]/div/div/div[2]/a")) {
 
                 primeiraConfiguracao();
-
+                
             }
 
             if (Utils.existsElement(driver, "/html/body/div[8]/div[2]/form/div[1]/div[1]/label/div[1]")) {
@@ -87,6 +88,8 @@ public class DlinkControle extends Controle {
                 primeiraConfiguracao();
             }
 
+            driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
+            
             try {
                 Thread.sleep(1000);
                 txtLogin.sendKeys(login);
@@ -119,9 +122,9 @@ public class DlinkControle extends Controle {
 
             WebDriverWait wait = new WebDriverWait(driver, 999);
 
-            try{
+            try {
                 driver.switchTo().alert().accept();
-            }catch (NoAlertPresentException e){
+            } catch (NoAlertPresentException e) {
                 System.out.println(e.getMessage());
             }
             WebElement firmwareElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[2]/div[2]/div[3]/div[2]/div[2]/div/div/div/div[1]/div[3]/span[2]/a")));
@@ -144,7 +147,7 @@ public class DlinkControle extends Controle {
     public void updateFirmware() throws Exception {
 
         try {
-            if (!headless) {
+            if (headless == true) {
                 options.setHeadless(false);
                 this.restart();
                 this.logar();
@@ -213,7 +216,7 @@ public class DlinkControle extends Controle {
 
             Thread.sleep(3000);
             this.restart();
-
+            driver.get(url);
         } catch (Exception e) {
             System.out.println("Erro Dlink Primeira Configuração: " + e.getMessage());
             throw e;

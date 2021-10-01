@@ -499,6 +499,7 @@ public class EquipamentoView extends javax.swing.JFrame {
             }
 
             try {
+                setControl();
                 control.open(cbNavegador.isSelected());
                 if (conectar()) {
                     preencherCampos();

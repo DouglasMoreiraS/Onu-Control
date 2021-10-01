@@ -12,14 +12,10 @@ public class HuaweiControle extends Controle {
 
     public HuaweiControle(boolean condition) {
         super(condition);
-        url = "http://192.168.100.1";
-        login = "telecomadmin";
-        senha = "admintelecom";
-        driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        loadProperties(Utils.PROPERTIES_DIRECTORY + "\\huawei.properties");
+        timeout = 5;
         this.tipo = Controle.ONT_TYPE;
-
-        m.getEquipamento().setModelo(new ModeloDAO().buscar(Equipamento.HUAWEI_ECO));
+        m.getEquipamento().setModelo(Equipamento.HUAWEI_ECO);
     }
 
     
@@ -28,7 +24,7 @@ public class HuaweiControle extends Controle {
             driver.manage().timeouts().pageLoadTimeout(3, TimeUnit.SECONDS);
             driver.get(url);
             driver.getTitle();
-            return driver.getTitle().equals("HG8546M");
+            return driver.getTitle().equals(title);
 
         } catch (Exception e) {
             System.out.println(Utils.getAtualDate() + " ERRO: Huawei Eco pingar: " + e.getMessage());
@@ -174,11 +170,11 @@ public class HuaweiControle extends Controle {
             driver.findElement(By.xpath("/html/body/form/div[2]/table/tbody[1]/tr[6]/td[2]/span[2]/input")).click();
             driver.findElement(By.xpath("/html/body/form/div[2]/table/tbody[1]/tr[7]/td[2]/select")).click();
             driver.findElement(By.xpath("/html/body/form/div[2]/table/tbody[1]/tr[7]/td[2]/select/option[3]")).click();
-            driver.findElement(By.xpath("/html/body/form/div[2]/table/tbody[1]/tr[11]/td[2]/input")).sendKeys("504");
+            driver.findElement(By.xpath("/html/body/form/div[2]/table/tbody[1]/tr[11]/td[2]/input")).sendKeys(ppoeVlan);
             driver.findElement(By.xpath("/html/body/form/div[2]/table/tbody[1]/tr[17]/td[2]/input")).clear();
-            driver.findElement(By.xpath("/html/body/form/div[2]/table/tbody[1]/tr[17]/td[2]/input")).sendKeys("k");
+            driver.findElement(By.xpath("/html/body/form/div[2]/table/tbody[1]/tr[17]/td[2]/input")).sendKeys(ppoeUser);
             driver.findElement(By.xpath("/html/body/form/div[2]/table/tbody[1]/tr[18]/td[2]/input")).clear();
-            driver.findElement(By.xpath("/html/body/form/div[2]/table/tbody[1]/tr[18]/td[2]/input")).sendKeys("k");
+            driver.findElement(By.xpath("/html/body/form/div[2]/table/tbody[1]/tr[18]/td[2]/input")).sendKeys(ppoePass);
             driver.findElement(By.xpath("/html/body/form/table[2]/tbody/tr/td[2]/input[2]")).click();
         }catch (Exception e){
             e.printStackTrace();

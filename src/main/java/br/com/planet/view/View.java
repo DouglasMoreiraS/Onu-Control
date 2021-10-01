@@ -2,6 +2,7 @@ package br.com.planet.view;
 
 import br.com.planet.view.equipamentos.*;
 import br.com.planet.control.*;
+import br.com.planet.controlers.DlinkControle;
 import br.com.planet.controlers.NextControle;
 import br.com.planet.dao.BackupAndRestore;
 import br.com.planet.model.bean.Equipamento;
@@ -27,7 +28,7 @@ public class View extends javax.swing.JFrame {
     EasyLinkView easyLinkView;
     DlinkView dlinkView;
     MercusysRouterView mercusysView;
-    
+
     public View() {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
@@ -480,14 +481,12 @@ public class View extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem15ActionPerformed
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
-       /* if (nextView == null) {
+        if (nextView == null) {
             nextView = new NextFiber();
         }
 
         nextView.setVisible(false);
-        nextView.setVisible(true);*/
-        br.com.planet.view.equipamentos.EquipamentoView view = new br.com.planet.view.equipamentos.EquipamentoView(true, "/images/nextfiber.png", Equipamento.NEXT_FIBER, new NextControle(false));
-        view.setVisible(true);
+        nextView.setVisible(true);
     }//GEN-LAST:event_jMenuItem10ActionPerformed
 
     private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
@@ -553,21 +552,20 @@ public class View extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     private void jMenuItem25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem25ActionPerformed
-        if (mercusysView == null){
+        if (mercusysView == null) {
             mercusysView = new MercusysRouterView();
-            }
+        }
         mercusysView.setVisible(false);
         mercusysView.setVisible(true);
     }//GEN-LAST:event_jMenuItem25ActionPerformed
 
-    
+
     private void jMenuItem26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem26ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem26ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-       
-            
+
         int resposta = JOptionPane.showConfirmDialog(null, "Esse processo irá encerrar todas as conexões ativas, verifique se nenhum equipamento está conectado ou em processo de atualização/reset antes de continuar");
 
         if (resposta == JOptionPane.YES_OPTION) {
@@ -587,7 +585,7 @@ public class View extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem27ActionPerformed
-        if (modeloView == null){
+        if (modeloView == null) {
             modeloView = new ModeloView(this, false);
         }
         modeloView.setVisible(false);
@@ -670,6 +668,6 @@ public class View extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void atualizaRodape() {
-        
+
     }
 }

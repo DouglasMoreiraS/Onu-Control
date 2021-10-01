@@ -12,6 +12,7 @@ import br.com.planet.model.bean.Manutencao;
 import br.com.planet.util.PropertiesUtil;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -67,13 +68,14 @@ public class Controle {
     String ppoeUser;
     String ppoePass;
 
+    int timeout;
+
     public Controle(boolean headless) {
-        this.headless = !headless;
         WebDriverManager.chromedriver().setup();
         options = new ChromeOptions();
-        options.setHeadless(this.headless);
         historico = new ArrayList();
         m = new Manutencao();
+        timeout = 0;
     }
 
     public boolean start() throws Exception {
@@ -148,9 +150,12 @@ public class Controle {
 
     public void open(boolean headless) {
         try {
+            System.out.println("1 " + this.headless);
             this.headless = !headless;
+            System.out.println("2 " + this.headless);
             options.setHeadless(this.headless);
             driver = new ChromeDriver(options);
+            driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
         } catch (Exception e) {
             System.out.println("Erro ao abrir: " + e.getMessage());
         }
@@ -182,7 +187,8 @@ public class Controle {
 
     public void restart() {
         this.close();
-        this.open(headless);
+        this.open(!headless);
+
     }
 
     public Manutencao getM() {
@@ -211,9 +217,9 @@ public class Controle {
 
     public void updateFirmware() throws Exception {
     }
-    
-    public void reset() throws Exception{
-        
+
+    public void reset() throws Exception {
+
     }
 
     void atualizarInformacoes() throws Exception {
@@ -274,6 +280,7 @@ public class Controle {
         this.title = properties.getProperty("p.title");
 
         this.firmwarePath = properties.getProperty("p.firmware.path");
+        this.firmwareAtualVersion = properties.getProperty("p.firmware.atual");
 
         Properties p = PropertiesUtil.getProperties(Utils.PROPERTIES_DIRECTORY + "\\ppoe.properties");
         ppoeVlan = p.getProperty("p.ppoe.vlan");
