@@ -150,10 +150,6 @@ public class NextControle extends Controle {
         }
     }
 
-    public boolean needUpdate() {
-        return !this.m.getEquipamento().getFirmware().equals(this.firmwareAtualVersion);
-    }
-
     public void ppoe() {
         try {
             driver.get(urlPPOE);
@@ -168,6 +164,22 @@ public class NextControle extends Controle {
 
         } catch (Exception e) {
             System.out.println("Erro Next PPOE: " + e.getMessage());
+        }
+    }
+
+    public void getFirmware() throws Exception {
+        try {
+            driver.get(urlFirmware);
+            m.getEquipamento().setFirmware(driver.findElement(By.xpath(xpathFirmware)).getText());
+
+            if (m.getEquipamento().getFirmware().toLowerCase().equals("v1.0.3")) {
+                System.out.println("Aparelho Novo");
+                m.setObservacao("Aparelho Novo");
+            }
+
+        } catch (Exception e) {
+            System.out.println(getClass().getName() + " getFirmware Erro: " + e.getMessage());
+            throw new Exception(e);
         }
     }
 

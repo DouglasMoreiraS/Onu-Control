@@ -48,12 +48,14 @@ br\com\planet\controlers\GponControle.class
 br\com\planet\exception\SemConexaoException.class
 br\com\planet\view\View$3.class
 br\com\planet\main\Main.class
+br\com\planet\view\crud\PropertiesView.class
 br\com\planet\dao\BackupAndRestore.class
 br\com\planet\view\equipamentos\DlinkView.class
 br\com\planet\view\crud\EquipamentoView$10.class
 br\com\planet\util\Utils.class
 br\com\planet\view\crud\EquipamentoView$3.class
 br\com\planet\controlers\TpLinkControlador.class
+br\com\planet\view\crud\PropertiesView$1$1.class
 br\com\planet\controlers\Controle.class
 br\com\planet\exception\DeleteViolationException.class
 br\com\planet\model\bean\Modelo.class
@@ -105,7 +107,6 @@ br\com\planet\view\View$25.class
 br\com\planet\exception\PatrimonioViolationException.class
 br\com\planet\util\PropertiesUtil.class
 br\com\planet\view\crud\HistoricoView$9.class
-br\com\planet\view\equipamentos\EquipamentoView$8.class
 br\com\planet\view\equipamentos\TpLinkView.class
 br\com\planet\util\PlainDocumentLimitado.class
 br\com\planet\view\crud\ModeloView.class
@@ -134,6 +135,7 @@ br\com\planet\view\crud\HistoricoView$8.class
 br\com\planet\model\tablemodel\ManutencaoTableModel.class
 br\com\planet\controlers\DlinkControle.class
 br\com\planet\dao\DataBase.class
+br\com\planet\view\crud\PropertiesView$1.class
 br\com\planet\view\equipamentos\EasyLinkView.class
 br\com\planet\util\PingUrl.class
 br\com\planet\view\equipamentos\ChimaView.class

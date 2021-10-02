@@ -150,9 +150,7 @@ public class Controle {
 
     public void open(boolean headless) {
         try {
-            System.out.println("1 " + this.headless);
             this.headless = !headless;
-            System.out.println("2 " + this.headless);
             options.setHeadless(this.headless);
             driver = new ChromeDriver(options);
             driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);

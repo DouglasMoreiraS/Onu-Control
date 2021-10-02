@@ -83,59 +83,6 @@ public class EquipamentoView extends javax.swing.JFrame {
             }
         });
     }
-    public EquipamentoView(boolean ppoe, String imagePath, String title, Controle controle) {
-        initComponents();
-        btnPpoe.setVisible(ppoe);
-
-        getPainelImg().setImg(new ImageIcon(getClass().getResource(imagePath)));
-        this.setTitle(title);
-        this.control = controle;
-        txtObservacao.setLineWrap(true); // para quebrar a linha
-        txtObservacao.setWrapStyleWord(false);
-
-        controlaTela("init");
-
-        this.addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                
-                String message = "";
-                int resposta;
-                if (flagUpdate == 1) {
-                    message = "O equipamento está em processo de atualização, tem certeza que deseja fechar?";
-                } else if (flagReset == 1) {
-                    message = "O equipamento está em processo de reset, tem certeza que deseja fechar?";
-                }
-                
-                if (!message.equals("")){
-                    resposta= JOptionPane.showConfirmDialog(null, message);
-                    
-                    if (resposta == JOptionPane.CANCEL_OPTION || resposta == JOptionPane.NO_OPTION){
-                        return;
-                    }
-                }
-                
-                if (chima != null) {
-                    if (chima.isAlive()) {
-                        chima.stop();
-                    }
-                }
-
-                if (chimaPing != null) {
-                    if (chimaPing.isAlive()) {
-                        chimaPing.stop();
-                    }
-                }
-
-                if (control != null) {
-                    control.close();
-                }
-
-                controlaTela("init");
-                EquipamentoView.this.dispose();
-
-            }
-        });
-    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -658,7 +605,6 @@ public class EquipamentoView extends javax.swing.JFrame {
         try {
             if (control.start()) {
                 controlaBar(EquipamentoView.CONNECT);
-                control.findHistorico();
                 return true;
             } else {
                 throw new Exception();
