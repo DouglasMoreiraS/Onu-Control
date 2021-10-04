@@ -49,6 +49,7 @@ C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\mo
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\exception\SerialNumberViolationException.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\model\bean\Manutencao.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\view\equipamentos\EasyLinkView.java
+C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\view\crud\PropertiesView.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\model\tablemodel\ExportManutencaoTableModel.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\util\hibernate\HibernateProperties.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\controlers\MercusysRouterControle.java

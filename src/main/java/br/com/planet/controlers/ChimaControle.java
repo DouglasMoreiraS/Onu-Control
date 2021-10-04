@@ -2,6 +2,7 @@ package br.com.planet.controlers;
 
 import br.com.planet.dao.ModeloDAO;
 import br.com.planet.model.bean.Equipamento;
+import br.com.planet.util.PropertiesUtil;
 import br.com.planet.util.Utils;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.Alert;
@@ -17,7 +18,7 @@ public class ChimaControle extends Controle {
 
         m.getEquipamento().setModelo(new ModeloDAO().buscar(Equipamento.CHIMA));
 
-        this.loadProperties(Utils.PROPERTIES_DIRECTORY + "\\chima.properties");
+        this.loadProperties(PropertiesUtil.PROPERTIES_DIRECTORY + "\\chima.properties");
 
     }
 

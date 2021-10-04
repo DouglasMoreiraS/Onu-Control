@@ -14,7 +14,7 @@ public class PpoeConfigView extends javax.swing.JFrame {
         initComponents();
         pUtil = new PropertiesUtil();
         
-        p = pUtil.getProperties(Utils.PROPERTIES_DIRECTORY + "\\ppoe.properties");
+        p = pUtil.getProperties(PropertiesUtil.PPOE_PROPERTIES_DIRECTORY);
         this.txtVLAN.setText(p.getProperty("p.ppoe.vlan"));
         this.txtUsuario.setText(p.getProperty("p.ppoe.login"));
         this.txtSenha.setText(p.getProperty("p.ppoe.password"));
@@ -108,7 +108,7 @@ public class PpoeConfigView extends javax.swing.JFrame {
         p.setProperty("p.ppoe.vlan", txtVLAN.getText());
         p.setProperty("p.ppoe.login", txtUsuario.getText());
         p.setProperty("p.ppoe.password", txtSenha.getText());
-        PropertiesUtil.saveProperties(p, Utils.PROPERTIES_DIRECTORY + "\\ppoe.properties");
+        PropertiesUtil.saveProperties(p, PropertiesUtil.PROPERTIES_DIRECTORY + "\\ppoe.properties");
         this.dispose();
         
     }//GEN-LAST:event_jButton1ActionPerformed

@@ -3,6 +3,7 @@ package br.com.planet.controlers;
 import br.com.planet.dao.ModeloDAO;
 import br.com.planet.model.bean.Equipamento;
 import br.com.planet.util.FirmwarePath;
+import br.com.planet.util.PropertiesUtil;
 import br.com.planet.util.Utils;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -14,7 +15,7 @@ public class EasyLinkControle extends Controle {
     public EasyLinkControle(boolean visible) {
         super(visible);
         driver = new ChromeDriver(options);
-        this.loadProperties(Utils.PROPERTIES_DIRECTORY + "\\easylink.properties");
+        this.loadProperties(PropertiesUtil.PROPERTIES_DIRECTORY + "\\easylink.properties");
 
         m.getEquipamento().setModelo(Equipamento.EASY_LINK);
 

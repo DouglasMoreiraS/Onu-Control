@@ -11,7 +11,7 @@ import org.openqa.selenium.WebDriver;
 public class Utils {
 
     public static String THIS_DIRECTORY = System.getProperty("user.dir");
-    public static String PROPERTIES_DIRECTORY = System.getProperty("user.dir")+ "\\data";
+    
 
     public static boolean existsElement(WebDriver driver, String xpath) {
         try {

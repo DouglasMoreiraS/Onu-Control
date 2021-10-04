@@ -4,6 +4,7 @@ import br.com.planet.dao.ModeloDAO;
 import java.util.concurrent.TimeUnit;
 import br.com.planet.model.bean.Equipamento;
 import br.com.planet.util.FirmwarePath;
+import br.com.planet.util.PropertiesUtil;
 import br.com.planet.util.Utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -16,13 +17,12 @@ public class NextControle extends Controle {
 
     public NextControle(boolean condition) {
         super(condition);
-        loadProperties(Utils.PROPERTIES_DIRECTORY + "\\nextfiber.properties");
+        loadProperties(PropertiesUtil.PROPERTIES_DIRECTORY + "\\nextfiber.properties");
         m.getEquipamento().setModelo(Equipamento.NEXT_FIBER);
         tipo = NextControle.ONT_TYPE;
 
         this.senha2 = properties.getProperty("p.pass1");
         this.senha3 = properties.getProperty("p.pass2");
-        this.firmwareAtualVersion = properties.getProperty("p.firmware.atual");
         this.urlWifiConfig = properties.getProperty("p.url.wifi_config");
 
     }

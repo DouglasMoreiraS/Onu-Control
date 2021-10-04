@@ -1,6 +1,7 @@
 package br.com.planet.controlers;
 
 import br.com.planet.model.bean.Equipamento;
+import br.com.planet.util.PropertiesUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -18,7 +19,7 @@ public class DlinkControle extends Controle {
     public DlinkControle() {
         super(false);
         timeout = 2;
-        this.loadProperties(Utils.PROPERTIES_DIRECTORY + "\\dlink.properties");
+        this.loadProperties(PropertiesUtil.PROPERTIES_DIRECTORY + "\\dlink.properties");
 
         m.getEquipamento().setModelo(Equipamento.DLINK);
         this.m.getEquipamento().setTipo(Controle.ROUTER_TYPE);

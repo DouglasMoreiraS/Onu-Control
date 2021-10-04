@@ -280,7 +280,7 @@ public class Controle {
         this.firmwarePath = properties.getProperty("p.firmware.path");
         this.firmwareAtualVersion = properties.getProperty("p.firmware.atual");
 
-        Properties p = PropertiesUtil.getProperties(Utils.PROPERTIES_DIRECTORY + "\\ppoe.properties");
+        Properties p = PropertiesUtil.getProperties(PropertiesUtil.PPOE_PROPERTIES_DIRECTORY);
         ppoeVlan = p.getProperty("p.ppoe.vlan");
         ppoeUser = p.getProperty("p.ppoe.login");
         ppoePass = p.getProperty("p.ppoe.password");

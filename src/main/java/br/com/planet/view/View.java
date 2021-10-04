@@ -89,6 +89,7 @@ public class View extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem28 = new javax.swing.JMenuItem();
+        jMenuItem29 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ONT Facility");
@@ -409,6 +410,14 @@ public class View extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem28);
 
+        jMenuItem29.setText("Propriedades Equipamentos");
+        jMenuItem29.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem29ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem29);
+
         jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
@@ -596,6 +605,10 @@ public class View extends javax.swing.JFrame {
         PpoeConfigView view = new PpoeConfigView();
         view.setVisible(true);
     }//GEN-LAST:event_jMenuItem28ActionPerformed
+
+    private void jMenuItem29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem29ActionPerformed
+        new br.com.planet.view.PropertiesView(this, true).setVisible(true);
+    }//GEN-LAST:event_jMenuItem29ActionPerformed
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -655,6 +668,7 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem26;
     private javax.swing.JMenuItem jMenuItem27;
     private javax.swing.JMenuItem jMenuItem28;
+    private javax.swing.JMenuItem jMenuItem29;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;

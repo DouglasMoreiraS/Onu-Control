@@ -1,9 +1,11 @@
 br\com\planet\view\crud\EquipamentoView$15.class
+br\com\planet\control\PropriedadesControl.class
 br\com\planet\view\View$19.class
 br\com\planet\view\crud\ModeloView$4.class
 br\com\planet\view\crud\ModeloView$7.class
 br\com\planet\view\crud\EditarEquipamentoView.class
 br\com\planet\view\crud\EquipamentoView$12.class
+br\com\planet\model\bean\Propriedades.class
 br\com\planet\view\crud\ModeloView$1.class
 br\com\planet\view\crud\EditarEquipamentoView$4.class
 br\com\planet\view\View$1.class
@@ -11,6 +13,7 @@ br\com\planet\view\equipamentos\EquipamentoView$1.class
 br\com\planet\src\ping\Ping.class
 br\com\planet\model\tablemodel\RemoteAcessTableModel.class
 br\com\planet\view\crud\HistoricoView$5.class
+br\com\planet\view\PropertiesView$4.class
 br\com\planet\view\crud\EditarEquipamentoView$2.class
 br\com\planet\view\ExportaHistoricoExcelView$4.class
 br\com\planet\view\View$21.class
@@ -28,6 +31,8 @@ br\com\planet\view\InitFrame$1.class
 br\com\planet\view\crud\EquipamentoView$4.class
 br\com\planet\view\View$13.class
 br\com\planet\view\crud\HistoricoView$2.class
+br\com\planet\view\PropertiesView$1.class
+br\com\planet\view\PropertiesView.class
 br\com\planet\view\PpoeConfigView.class
 br\com\planet\controlers\ChimaControle.class
 br\com\planet\util\log\LogHuaweiEco.class
@@ -41,6 +46,7 @@ br\com\planet\model\tablemodel\EquipamentoTableModel.class
 br\com\planet\controlers\HuaweiControle.class
 br\com\planet\view\crud\HistoricoView$4.class
 br\com\planet\view\crud\EquipamentoView$17.class
+br\com\planet\view\PropertiesView$2.class
 br\com\planet\view\View$17.class
 br\com\planet\util\hibernate\HibernateUtil.class
 br\com\planet\view\equipamentos\EquipamentoView.class
@@ -48,14 +54,12 @@ br\com\planet\controlers\GponControle.class
 br\com\planet\exception\SemConexaoException.class
 br\com\planet\view\View$3.class
 br\com\planet\main\Main.class
-br\com\planet\view\crud\PropertiesView.class
 br\com\planet\dao\BackupAndRestore.class
 br\com\planet\view\equipamentos\DlinkView.class
 br\com\planet\view\crud\EquipamentoView$10.class
 br\com\planet\util\Utils.class
 br\com\planet\view\crud\EquipamentoView$3.class
 br\com\planet\controlers\TpLinkControlador.class
-br\com\planet\view\crud\PropertiesView$1$1.class
 br\com\planet\controlers\Controle.class
 br\com\planet\exception\DeleteViolationException.class
 br\com\planet\model\bean\Modelo.class
@@ -82,6 +86,7 @@ br\com\planet\view\View$22.class
 br\com\planet\view\View$2.class
 br\com\planet\view\View$5.class
 br\com\planet\view\ExportaEquipamentosExcelView$1.class
+br\com\planet\view\PropertiesView$3.class
 br\com\planet\view\crud\EquipamentoView$2.class
 br\com\planet\view\crud\HistoricoView$3.class
 br\com\planet\util\GraficoEquipamentos.class
@@ -109,9 +114,11 @@ br\com\planet\util\PropertiesUtil.class
 br\com\planet\view\crud\HistoricoView$9.class
 br\com\planet\view\equipamentos\TpLinkView.class
 br\com\planet\util\PlainDocumentLimitado.class
+br\com\planet\view\View$28.class
 br\com\planet\view\crud\ModeloView.class
 br\com\planet\control\ExportaHistoricoExcelControl.class
 br\com\planet\control\EquipamentoControl.class
+br\com\planet\view\PropertiesView$5.class
 br\com\planet\view\View$7.class
 br\com\planet\control\HistoricoControl.class
 br\com\planet\view\View$14.class
@@ -135,7 +142,6 @@ br\com\planet\view\crud\HistoricoView$8.class
 br\com\planet\model\tablemodel\ManutencaoTableModel.class
 br\com\planet\controlers\DlinkControle.class
 br\com\planet\dao\DataBase.class
-br\com\planet\view\crud\PropertiesView$1.class
 br\com\planet\view\equipamentos\EasyLinkView.class
 br\com\planet\util\PingUrl.class
 br\com\planet\view\equipamentos\ChimaView.class
@@ -152,6 +158,7 @@ br\com\planet\view\crud\EquipamentoView$14.class
 br\com\planet\view\equipamentos\SumecView.class
 br\com\planet\view\equipamentos\EquipamentoView$6.class
 br\com\planet\view\crud\HistoricoView$7.class
+br\com\planet\view\PropertiesView$6.class
 br\com\planet\dao\ModeloDAO.class
 br\com\planet\view\crud\ModeloView$5.class
 br\com\planet\view\ExportaHistoricoExcelView$2.class
