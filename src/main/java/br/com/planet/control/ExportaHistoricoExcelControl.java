@@ -74,7 +74,7 @@ public final class ExportaHistoricoExcelControl {
         }
 
         excel = new ExportToExcel();
-        excel.Export(export, path);
+        excel.exportManutencao(export, path);
     }
 
 }

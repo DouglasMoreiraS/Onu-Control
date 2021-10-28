@@ -21,14 +21,28 @@ public class ManutencaoDAO extends GenericDAO<Manutencao> {
             Criteria consulta = sessao.createCriteria(Manutencao.class);
             consulta.add(Restrictions.eq("equipamento.sn", e.getSn()));
             List<Manutencao> resultado = (List<Manutencao>) consulta.list();
-            return resultado;
+            return Manutencao.ordenarPorData(resultado);
         } catch (Exception ex) {
             throw ex;
         } finally {
             sessao.close();
         }
     }
-
+    
+    public List<Manutencao> listar() {
+        Session sessao = HibernateUtil.getSessionFactory().openSession();
+        try {
+            Criteria consulta = sessao.createCriteria(Manutencao.class);
+            List<Manutencao> resultado = consulta.list();
+            return Manutencao.ordenarPorData(resultado);
+        } catch (RuntimeException erro) {
+            throw erro;
+        } finally {
+            sessao.close();
+        }
+    }
+    
+    
     public List<Manutencao> buscaEspecifica(String[] busca, int filtro) {
         Session sessao = HibernateUtil.getSessionFactory().openSession();
 
@@ -79,10 +93,10 @@ public class ManutencaoDAO extends GenericDAO<Manutencao> {
                         manList.add(retorno.get(i));
                     }
                 }
-                return manList;
+                return Manutencao.ordenarPorData(manList);
             }
 
-            return retorno;
+            return Manutencao.ordenarPorData(retorno);
         } catch (Exception e) {
             e.printStackTrace();
             throw e;

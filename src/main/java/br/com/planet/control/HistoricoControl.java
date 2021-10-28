@@ -61,7 +61,7 @@ public class HistoricoControl {
 
         ExportToExcel excel = new ExportToExcel();
         try {
-            excel.Export(export, path);
+            excel.exportManutencao(export, path);
         } catch (Exception ex) {
             throw ex;
         }

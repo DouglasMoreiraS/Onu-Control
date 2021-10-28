@@ -38,13 +38,12 @@ public class EquipamentoView extends javax.swing.JFrame {
 
         txtObservacao.setLineWrap(true); // para quebrar a linha
         txtObservacao.setWrapStyleWord(false);
-        
 
         controlaTela("init");
 
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-                
+
                 String message = "";
                 int resposta;
                 if (flagUpdate == 1) {
@@ -52,15 +51,15 @@ public class EquipamentoView extends javax.swing.JFrame {
                 } else if (flagReset == 1) {
                     message = "O equipamento está em processo de reset, tem certeza que deseja fechar?";
                 }
-                
-                if (!message.equals("")){
-                    resposta= JOptionPane.showConfirmDialog(null, message);
-                    
-                    if (resposta == JOptionPane.CANCEL_OPTION || resposta == JOptionPane.NO_OPTION){
+
+                if (!message.equals("")) {
+                    resposta = JOptionPane.showConfirmDialog(null, message);
+
+                    if (resposta == JOptionPane.CANCEL_OPTION || resposta == JOptionPane.NO_OPTION) {
                         return;
                     }
                 }
-                
+
                 if (chima != null) {
                     if (chima.isAlive()) {
                         chima.stop();
@@ -452,7 +451,7 @@ public class EquipamentoView extends javax.swing.JFrame {
                     preencherCampos();
 
                     if (cbAutoConfig.isSelected()) {
-                      
+
                         if (control.needUpdate()) {
                             atualizar();
                         }
@@ -464,8 +463,7 @@ public class EquipamentoView extends javax.swing.JFrame {
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                
-                
+
                 controlaBar(EquipamentoView.NO_SIGNAL);
                 JOptionPane.showMessageDialog(this, "Erro de conexão: \n \n", "Erro", JOptionPane.WARNING_MESSAGE);
                 control.close();
@@ -484,7 +482,6 @@ public class EquipamentoView extends javax.swing.JFrame {
                 this.control.getM().getEquipamento().setPatrimonio(txtPatrimonio.getText());
                 this.control.getM().getEquipamento().setStatus(cbAtivo.isSelected());
                 control.save();
-                control.close();
 
                 JOptionPane.showMessageDialog(this, "Salvo com sucesso", "Salvar", JOptionPane.INFORMATION_MESSAGE);
             } catch (PatrimonioViolationException e) {
@@ -630,7 +627,7 @@ public class EquipamentoView extends javax.swing.JFrame {
                 this.lblHistoricoInfo.setEnabled(false);
                 this.btnHistorico.setEnabled(false);
                 this.txtObservacao.setEnabled(false);
-                this.txtPatrimonio.setEnabled(false);
+                this.txtPatrimonio.setEnabled(true);
             }
 
             case "ready" -> {
@@ -759,7 +756,14 @@ public class EquipamentoView extends javax.swing.JFrame {
         }
 
         txtObservacao.setText(control.getM().getObservacao());
-        txtPatrimonio.setText(control.getM().getEquipamento().getPatrimonio());
+
+        String patrimonio = control.getM().getEquipamento().getPatrimonio();
+
+        if (patrimonio != null) {
+            if (!patrimonio.equals("")) {
+                txtPatrimonio.setText(patrimonio);
+            }
+        }
 
         cbAtivo.setSelected(control.getM().getEquipamento().isStatus());
 

@@ -13,11 +13,8 @@ public class ChimaControle extends Controle {
 
     public ChimaControle(boolean condition) {
         super(condition);
-        driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-
+        timeout = 5;
         m.getEquipamento().setModelo(new ModeloDAO().buscar(Equipamento.CHIMA));
-
         this.loadProperties(PropertiesUtil.PROPERTIES_DIRECTORY + "\\chima.properties");
 
     }

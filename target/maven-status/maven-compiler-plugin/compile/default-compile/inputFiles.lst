@@ -42,6 +42,7 @@ C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\vi
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\model\bean\Modelo.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\dao\GenericDAO.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\view\equipamentos\EquipamentoView.java
+C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\view\PropertiesView.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\view\InitFrame.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\util\GraficoEquipamentos.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\dao\ManutencaoDAO.java
@@ -49,7 +50,7 @@ C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\mo
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\exception\SerialNumberViolationException.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\model\bean\Manutencao.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\view\equipamentos\EasyLinkView.java
-C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\view\crud\PropertiesView.java
+C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\model\bean\Propriedades.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\model\tablemodel\ExportManutencaoTableModel.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\util\hibernate\HibernateProperties.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\controlers\MercusysRouterControle.java
@@ -59,6 +60,7 @@ C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\vi
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\view\crud\HistoricoView.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\view\ExportaHistoricoExcelView.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\model\tablemodel\EquipamentoTableModel.java
+C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\control\PropriedadesControl.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\view\equipamentos\DlinkView.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\controlers\TpLinkControlador.java
 C:\Users\PC_PLANET\Documents\GitHub\OnuControl2.0\src\main\java\br\com\planet\view\equipamentos\ZyxelView.java

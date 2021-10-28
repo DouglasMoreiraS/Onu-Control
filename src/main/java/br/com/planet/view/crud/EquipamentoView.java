@@ -6,8 +6,10 @@ import br.com.planet.model.tablemodel.EquipamentoTableModel;
 import br.com.planet.util.Utils;
 import java.awt.Frame;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.xml.bind.ValidationException;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -70,6 +72,7 @@ public class EquipamentoView extends javax.swing.JDialog {
         btnEditar = new javax.swing.JButton();
         btnCriarEquipamento = new javax.swing.JButton();
         btnDeletar = new javax.swing.JButton();
+        btnExportar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Equipamentos Cadastrados");
@@ -343,6 +346,14 @@ public class EquipamentoView extends javax.swing.JDialog {
             }
         });
 
+        btnExportar.setText("Exportar Selecionados");
+        btnExportar.setEnabled(false);
+        btnExportar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExportarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -350,6 +361,8 @@ public class EquipamentoView extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnCriarEquipamento)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnExportar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -366,7 +379,8 @@ public class EquipamentoView extends javax.swing.JDialog {
                     .addComponent(btnHistorico)
                     .addComponent(btnEditar)
                     .addComponent(btnCriarEquipamento)
-                    .addComponent(btnDeletar))
+                    .addComponent(btnDeletar)
+                    .addComponent(btnExportar))
                 .addContainerGap())
         );
 
@@ -399,14 +413,20 @@ public class EquipamentoView extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblEquipamentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEquipamentosMouseClicked
-        this.eqControl.setEquipamentoSelecionado(tblEquipamentos.getSelectedRow());
-        String path = Utils.getImgIcon(eqControl.getEquipamentoSelecionado().getModelo().getNome());
-        this.painelImagemFundo.setImg(new ImageIcon(getClass().getResource(path)));
-        this.painelImagemFundo.repaint();
-        this.btnHistorico.setEnabled(true);
-        this.btnEditar.setEnabled(true);
+        if (tblEquipamentos.getSelectedRows().length != 0) {
+            this.eqControl.setEquipamentoSelecionado(tblEquipamentos.getSelectedRow());
+            String path = Utils.getImgIcon(eqControl.getEquipamentoSelecionado().getModelo().getNome());
+            this.painelImagemFundo.setImg(new ImageIcon(getClass().getResource(path)));
+            this.painelImagemFundo.repaint();
 
-
+            this.btnHistorico.setEnabled(true);
+            this.btnEditar.setEnabled(true);
+            this.btnExportar.setEnabled(true);
+        } else {
+            this.btnHistorico.setEnabled(false);
+            this.btnEditar.setEnabled(false);
+            this.btnExportar.setEnabled(false);
+        }
     }//GEN-LAST:event_tblEquipamentosMouseClicked
 
     private void tblEquipamentosFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tblEquipamentosFocusLost
@@ -519,6 +539,31 @@ public class EquipamentoView extends javax.swing.JDialog {
         atualizaGrafico();
     }//GEN-LAST:event_txtPatrimonioKeyReleased
 
+    private void btnExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarActionPerformed
+
+         if (tblEquipamentos.getSelectedRows().length != 0) {
+
+            String path = "";
+
+            JFileChooser chooser = new JFileChooser();
+            chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            int res = chooser.showOpenDialog(this);
+            if (res == JFileChooser.APPROVE_OPTION) {
+                try {
+                    path = chooser.getSelectedFile().getAbsolutePath();
+                    eqControl.exportarExcel(path, tblEquipamentos.getSelectedRows());
+                    JOptionPane.showMessageDialog(this, "Exportado com sucesso", "Exportar Equipamentos", JOptionPane.INFORMATION_MESSAGE);
+                } catch (ValidationException ex) {
+                    JOptionPane.showMessageDialog(this, "Erro ao exportar registros: " + ex.getMessage(), "Exportar Equipamentos", JOptionPane.WARNING_MESSAGE);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, "Erro ao exportar registros: " + ex.getMessage(), "Exportar Equipamentos", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+
+        }
+        
+    }//GEN-LAST:event_btnExportarActionPerformed
+
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -546,6 +591,7 @@ public class EquipamentoView extends javax.swing.JDialog {
     private javax.swing.JButton btnCriarEquipamento;
     private javax.swing.JButton btnDeletar;
     private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnExportar;
     private javax.swing.JToggleButton btnFirmware;
     private javax.swing.JButton btnHistorico;
     private javax.swing.JButton btnLimpaFiltro;

@@ -210,6 +210,9 @@ public class Controle {
     }
 
     public boolean needUpdate() {
+        if (firmwareAtualVersion == null){
+            return false;
+        }
         return !m.getEquipamento().getFirmware().equals(firmwareAtualVersion);
     }
 

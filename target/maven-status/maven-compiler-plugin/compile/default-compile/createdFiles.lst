@@ -6,6 +6,7 @@ br\com\planet\view\crud\ModeloView$7.class
 br\com\planet\view\crud\EditarEquipamentoView.class
 br\com\planet\view\crud\EquipamentoView$12.class
 br\com\planet\model\bean\Propriedades.class
+br\com\planet\view\crud\EquipamentoView$18.class
 br\com\planet\view\crud\ModeloView$1.class
 br\com\planet\view\crud\EditarEquipamentoView$4.class
 br\com\planet\view\View$1.class
@@ -68,6 +69,7 @@ br\com\planet\controlers\SumecControle.class
 br\com\planet\controlers\EasyLinkControle.class
 br\com\planet\view\crud\HistoricoView$10.class
 br\com\planet\view\View$11.class
+br\com\planet\model\bean\Manutencao$1.class
 br\com\planet\view\equipamentos\EquipamentoView$3.class
 br\com\planet\view\crud\EquipamentoView$11.class
 br\com\planet\view\View$9.class

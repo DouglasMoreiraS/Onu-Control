@@ -1,5 +1,6 @@
 package br.com.planet.controlers;
 
+import br.com.planet.dao.ManutencaoDAO;
 import br.com.planet.model.bean.Equipamento;
 import br.com.planet.util.PropertiesUtil;
 import org.openqa.selenium.By;
@@ -18,12 +19,12 @@ public class DlinkControle extends Controle {
 
     public DlinkControle() {
         super(false);
-        timeout = 2;
+        timeout = 10;
         this.loadProperties(PropertiesUtil.PROPERTIES_DIRECTORY + "\\dlink.properties");
 
         m.getEquipamento().setModelo(Equipamento.DLINK);
         this.m.getEquipamento().setTipo(Controle.ROUTER_TYPE);
-
+        dao = new ManutencaoDAO();
     }
 
     public boolean start() throws Exception {
@@ -45,13 +46,13 @@ public class DlinkControle extends Controle {
     public boolean logar() throws Exception {
         try {
             driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-            
+
             driver.get(url);
 
             if (Utils.existsElement(driver, "html/body/div[1]/div[3]/div/div/div[2]/a")) {
 
                 primeiraConfiguracao();
-                
+
             }
 
             if (Utils.existsElement(driver, "/html/body/div[8]/div[2]/form/div[1]/div[1]/label/div[1]")) {
@@ -90,7 +91,7 @@ public class DlinkControle extends Controle {
             }
 
             driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
-            
+
             try {
                 Thread.sleep(1000);
                 txtLogin.sendKeys(login);
@@ -128,7 +129,8 @@ public class DlinkControle extends Controle {
             } catch (NoAlertPresentException e) {
                 System.out.println(e.getMessage());
             }
-            WebElement firmwareElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[2]/div[2]/div[3]/div[2]/div[2]/div/div/div/div[1]/div[3]/span[2]/a")));
+            //WebElement firmwareElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[2]/div[2]/div[3]/div[2]/div[2]/div/div/div/div[1]/div[3]/span[2]/a")));
+            WebElement firmwareElement = driver.findElement(By.xpath("/html/body/div[2]/div[2]/div[3]/div[2]/div[2]/div/div/div/div[1]/div[3]/span[2]/a"));
             String firmware = firmwareElement.getText();
 
             if (firmware.equals("")) {
@@ -157,6 +159,9 @@ public class DlinkControle extends Controle {
             driver.get(urlUpdate);
 
             WebDriverWait wait = new WebDriverWait(driver, 9999);
+
+            WebElement firmwarePathElement = driver.findElement(By.xpath("//*[@id=\"mblock\"]/div[2]/div/ui-view/div/div/div/div/div[3]/form/label/input"));
+            firmwarePathElement.sendKeys(this.firmwarePath);
 
             WebElement button = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"mblock\"]/div[2]/div/ui-view/div/div/div/div/div[3]/form/div/button")));
 

@@ -7,7 +7,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class TaskKillTest {
     
-    @Test
     public void testTask(){
         WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver();

@@ -1,17 +1,21 @@
 package br.com.planet.control;
 
 import br.com.planet.dao.EquipamentoDAO;
+import br.com.planet.excel.ExportToExcel;
 import br.com.planet.exception.DeleteViolationException;
 import br.com.planet.exception.PatrimonioViolationException;
 import br.com.planet.exception.SerialNumberViolationException;
 import br.com.planet.model.bean.Equipamento;
+import br.com.planet.model.bean.Manutencao;
 import br.com.planet.model.bean.Modelo;
 import br.com.planet.model.tablemodel.EquipamentoTableModel;
 import br.com.planet.util.GraficoEquipamentos;
 import br.com.planet.view.crud.EditarEquipamentoView;
 import br.com.planet.view.crud.HistoricoView;
 import java.awt.Frame;
+import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.ValidationException;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
@@ -128,7 +132,7 @@ public class EquipamentoControl {
                     }
                 }
                 return pieDataSet;
-                
+
             }
 
         }
@@ -154,4 +158,21 @@ public class EquipamentoControl {
         Modelo.salvar(modelo);
     }
 
+    public void exportarExcel(String path, int rows[]) throws ValidationException, Exception {
+        List<Equipamento> export = new ArrayList();
+        for (int i : rows) {
+            export.add(equipamentoList.get(i));
+        }
+
+        if (export.isEmpty()) {
+            throw new ValidationException("Não há registros selecionados");
+        }
+
+        ExportToExcel excel = new ExportToExcel();
+        try {
+            excel.exportEquipamento(export, path);
+        } catch (Exception ex) {
+            throw ex;
+        }
+    }
 }

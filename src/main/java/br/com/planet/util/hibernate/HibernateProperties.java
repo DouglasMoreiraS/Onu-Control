@@ -23,6 +23,7 @@ public class HibernateProperties {
         if (p != null) {
 
             retorno.host = p.getProperty("p.server.host");
+            System.out.println(retorno.host);
             retorno.login = p.getProperty("p.server.login");
             retorno.pass = p.getProperty("p.server.password");
 

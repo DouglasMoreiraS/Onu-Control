@@ -6,6 +6,9 @@ import br.com.planet.model.bean.Equipamento;
 import br.com.planet.util.FirmwarePath;
 import br.com.planet.util.PropertiesUtil;
 import br.com.planet.util.Utils;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -95,6 +98,11 @@ public class NextControle extends Controle {
             }
 
             Thread.sleep(10000);
+            int cont = 0;
+
+            FileWriter arq = new FileWriter("C:\\firmwares\\nextfiber\\log.txt", true);
+            PrintWriter pwriter = new PrintWriter(arq);
+            pwriter.println(Utils.getAtualDate() + " start");
 
             while (true) {
                 try {
@@ -102,7 +110,13 @@ public class NextControle extends Controle {
                     break;
                 } catch (Exception e) {
                 }
+                cont++;
+
             }
+            System.out.println(cont);
+            pwriter.println(Utils.getAtualDate() + " finish: " + cont + System.lineSeparator() + " ************" + System.lineSeparator());
+            pwriter.close();
+
             this.m.setUpdate(true);
             this.atualizarInformacoes();
 

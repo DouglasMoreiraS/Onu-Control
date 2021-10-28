@@ -11,7 +11,6 @@ import org.junit.Test;
 
 public class EquipamentoDAOTest {
 
-    @Test
     public void teste() throws Exception{
         
         

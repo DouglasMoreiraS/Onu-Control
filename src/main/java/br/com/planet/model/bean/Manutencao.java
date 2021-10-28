@@ -2,6 +2,12 @@ package br.com.planet.model.bean;
 
 import br.com.planet.dao.ManutencaoDAO;
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -115,5 +121,27 @@ public class Manutencao implements Serializable {
         dao.salvar(m);
     }
 
-
+    
+    public static List<Manutencao> ordenarPorData(List<Manutencao> man){
+        
+        List<Manutencao> m = man;
+        
+        Collections.sort(m, new Comparator<Manutencao>() {
+            public int compare(Manutencao o1, Manutencao o2) {
+                 int retorno = 0;  
+                try {
+                    SimpleDateFormat dtf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                    
+                    Date data1 = dtf.parse(o1.getData());
+                    Date data2 = dtf.parse(o2.getData());
+                    retorno = data2.compareTo(data1);
+                } catch (ParseException ex) {
+                    ex.printStackTrace();
+                }
+                return retorno;
+            }
+        });
+        return m;
+    }
+    
 }

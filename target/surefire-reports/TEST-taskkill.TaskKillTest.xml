@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="0" name="taskkill.TaskKillTest" time="8.536" errors="0" skipped="0">
+<testsuite tests="1" failures="0" name="taskkill.TaskKillTest" time="20.499" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="16.0.1+9-24"/>
@@ -59,5 +59,5 @@
     <property name="sun.cpu.endian" value="little"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="taskkill.TaskKillTest" name="testTask" time="8.536"/>
+  <testcase classname="taskkill.TaskKillTest" name="testTask" time="20.499"/>
 </testsuite>
