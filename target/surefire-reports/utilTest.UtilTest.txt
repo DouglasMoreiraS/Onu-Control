@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: utilTest.UtilTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 2.495 sec <<< FAILURE!
-wifiNames(utilTest.UtilTest)  Time elapsed: 2.164 sec  <<< ERROR!
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 5.307 sec <<< FAILURE!
+wifiNames(utilTest.UtilTest)  Time elapsed: 5.039 sec  <<< ERROR!
 java.lang.NullPointerException: Cannot invoke "String.contains(java.lang.CharSequence)" because "line" is null
 	at utilTest.UtilTest.wifiNames(UtilTest.java:32)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)

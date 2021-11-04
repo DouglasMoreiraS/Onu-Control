@@ -16,6 +16,7 @@ public class ChimaControle extends Controle {
         timeout = 5;
         m.getEquipamento().setModelo(new ModeloDAO().buscar(Equipamento.CHIMA));
         this.loadProperties(PropertiesUtil.PROPERTIES_DIRECTORY + "\\chima.properties");
+        this.m.setObservacao("Aparelho Novo");
 
     }
 

@@ -26,6 +26,7 @@ public class Equipamento implements Serializable {
     public static final String HUAWEI_GPON = "Huawei GPON";
     public static final String HUAWEI_ECO = "Huawei EchoLife";
     public static final String TP_LINK = "Tp-Link WR840N";
+    public static final String TP_LINK1 = "Tp-Link Archer C20";
     public static final String EASY_LINK = "Easy Link";
     public static final String MERCUSYS_ROUTER_AC12G = "Mercusys AC12G";
     public static final String ZYXEL_EMG5523  = "Zyxel EMG5523-T50B";
@@ -150,7 +151,15 @@ public class Equipamento implements Serializable {
                     throw new PatrimonioViolationException("Esse patrimonio já foi cadastrado");
                 }
             }
-
+            ModeloDAO dao1 = new ModeloDAO();
+            
+            Modelo mm = dao1.buscar(e.getModelo().getNome());
+            
+            if (mm == null){
+                System.out.println("é nulo");
+                new ModeloDAO().salvar(e.getModelo());
+            }
+            
             dao.salvar(e);
 
             return true;

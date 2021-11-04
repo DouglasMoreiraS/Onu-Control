@@ -9,6 +9,7 @@ ZyxelRouterTest.class
 nextTemperatura.class
 utilTest\UtilTest.class
 ordenatorTest.class
+daoTest\ModeloDAOTest.class
 BackupRestoreTest.class
 daoTest\EquipamentoDAOTest.class
 ordenatorTest$1.class

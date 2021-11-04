@@ -25,9 +25,11 @@ public class View extends javax.swing.JFrame {
     NextFiber nextView;
     SumecView sumecView;
     TpLinkView tpLinkView;
+    TpLinkC20View tpLinkc20View;
     EasyLinkView easyLinkView;
     DlinkView dlinkView;
     MercusysRouterView mercusysView;
+    NokiaView nokiaView;
 
     public View() {
         initComponents();
@@ -48,12 +50,16 @@ public class View extends javax.swing.JFrame {
         jMenu7 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
-        jMenu16 = new javax.swing.JMenu();
-        jMenuItem21 = new javax.swing.JMenuItem();
-        jMenuItem22 = new javax.swing.JMenuItem();
         jMenu18 = new javax.swing.JMenu();
         jMenuItem25 = new javax.swing.JMenuItem();
         jMenuItem26 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenu16 = new javax.swing.JMenu();
+        jMenuItem21 = new javax.swing.JMenuItem();
+        jMenuItem22 = new javax.swing.JMenuItem();
+        jMenu19 = new javax.swing.JMenu();
+        jMenuItem30 = new javax.swing.JMenuItem();
+        jMenuItem31 = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
         jMenu13 = new javax.swing.JMenu();
         jMenuItem15 = new javax.swing.JMenuItem();
@@ -77,6 +83,9 @@ public class View extends javax.swing.JFrame {
         jMenu12 = new javax.swing.JMenu();
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenuItem14 = new javax.swing.JMenuItem();
+        jMenu20 = new javax.swing.JMenu();
+        jMenuItem32 = new javax.swing.JMenuItem();
+        jMenuItem33 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem27 = new javax.swing.JMenuItem();
@@ -146,26 +155,6 @@ public class View extends javax.swing.JFrame {
 
         jMenu6.add(jMenu7);
 
-        jMenu16.setText("TPLink WR840N");
-
-        jMenuItem21.setText("Acesso Remoto");
-        jMenuItem21.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem21ActionPerformed(evt);
-            }
-        });
-        jMenu16.add(jMenuItem21);
-
-        jMenuItem22.setText("Historico");
-        jMenuItem22.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem22ActionPerformed(evt);
-            }
-        });
-        jMenu16.add(jMenuItem22);
-
-        jMenu6.add(jMenu16);
-
         jMenu18.setText("Mercusys AC12G");
 
         jMenuItem25.setText("Acesso Remoto");
@@ -185,6 +174,50 @@ public class View extends javax.swing.JFrame {
         jMenu18.add(jMenuItem26);
 
         jMenu6.add(jMenu18);
+
+        jMenu4.setText("TPLink");
+
+        jMenu16.setText("TPLink WR840N");
+
+        jMenuItem21.setText("Acesso Remoto");
+        jMenuItem21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem21ActionPerformed(evt);
+            }
+        });
+        jMenu16.add(jMenuItem21);
+
+        jMenuItem22.setText("Historico");
+        jMenuItem22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem22ActionPerformed(evt);
+            }
+        });
+        jMenu16.add(jMenuItem22);
+
+        jMenu4.add(jMenu16);
+
+        jMenu19.setText("TPLink Archer C20");
+
+        jMenuItem30.setText("Acesso Remoto");
+        jMenuItem30.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem30ActionPerformed(evt);
+            }
+        });
+        jMenu19.add(jMenuItem30);
+
+        jMenuItem31.setText("Historico");
+        jMenuItem31.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem31ActionPerformed(evt);
+            }
+        });
+        jMenu19.add(jMenuItem31);
+
+        jMenu4.add(jMenu19);
+
+        jMenu6.add(jMenu4);
 
         jMenu5.add(jMenu6);
 
@@ -328,6 +361,26 @@ public class View extends javax.swing.JFrame {
         jMenu12.add(jMenuItem14);
 
         jMenu9.add(jMenu12);
+
+        jMenu20.setText("Nokia G-140W-C");
+
+        jMenuItem32.setText("Acesso Remoto");
+        jMenuItem32.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem32ActionPerformed(evt);
+            }
+        });
+        jMenu20.add(jMenuItem32);
+
+        jMenuItem33.setText("Histórico");
+        jMenuItem33.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem33ActionPerformed(evt);
+            }
+        });
+        jMenu20.add(jMenuItem33);
+
+        jMenu9.add(jMenu20);
 
         jMenu5.add(jMenu9);
 
@@ -609,6 +662,30 @@ public class View extends javax.swing.JFrame {
     private void jMenuItem29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem29ActionPerformed
         new br.com.planet.view.PropertiesView(this, true).setVisible(true);
     }//GEN-LAST:event_jMenuItem29ActionPerformed
+
+    private void jMenuItem30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem30ActionPerformed
+         if (tpLinkc20View == null) {
+            tpLinkc20View = new TpLinkC20View();
+        }
+        tpLinkc20View.setVisible(false);
+        tpLinkc20View.setVisible(true);
+    }//GEN-LAST:event_jMenuItem30ActionPerformed
+
+    private void jMenuItem31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem31ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem31ActionPerformed
+
+    private void jMenuItem33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem33ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem33ActionPerformed
+
+    private void jMenuItem32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem32ActionPerformed
+        if (nokiaView == null) {
+            nokiaView = new NokiaView();
+        }
+        nokiaView.setVisible(false);
+        nokiaView.setVisible(true);
+    }//GEN-LAST:event_jMenuItem32ActionPerformed
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -639,8 +716,11 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu16;
     private javax.swing.JMenu jMenu17;
     private javax.swing.JMenu jMenu18;
+    private javax.swing.JMenu jMenu19;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu20;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
@@ -670,6 +750,10 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem28;
     private javax.swing.JMenuItem jMenuItem29;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem30;
+    private javax.swing.JMenuItem jMenuItem31;
+    private javax.swing.JMenuItem jMenuItem32;
+    private javax.swing.JMenuItem jMenuItem33;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;

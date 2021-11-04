@@ -1,6 +1,6 @@
 package br.com.planet.view.equipamentos;
 
-import br.com.planet.controlers.TpLinkControlador;
+import br.com.planet.controlers.TpLinkWR840NControle;
 import br.com.planet.model.bean.Equipamento;
 
 public class TpLinkView extends EquipamentoView{
@@ -12,7 +12,7 @@ public class TpLinkView extends EquipamentoView{
     
     @Override
     public void setControl(){
-        this.control = new TpLinkControlador(getCbNavegador());
+        this.control = new TpLinkWR840NControle(getCbNavegador());
     }
     
     

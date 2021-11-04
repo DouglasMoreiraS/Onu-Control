@@ -3,6 +3,7 @@ package br.com.planet.controlers;
 import br.com.planet.dao.DataBase;
 import br.com.planet.dao.EquipamentoDAO;
 import br.com.planet.dao.ManutencaoDAO;
+import br.com.planet.dao.ModeloDAO;
 import br.com.planet.exception.PatrimonioViolationException;
 import br.com.planet.util.Utils;
 import java.util.ArrayList;
@@ -51,6 +52,8 @@ public class Controle {
     String login;
     String senha;
     String title;
+    
+    String name;
 
     int tipo;
 
@@ -210,7 +213,7 @@ public class Controle {
     }
 
     public boolean needUpdate() {
-        if (firmwareAtualVersion == null){
+        if (firmwarePath == null){
             return false;
         }
         return !m.getEquipamento().getFirmware().equals(firmwareAtualVersion);
@@ -282,7 +285,10 @@ public class Controle {
 
         this.firmwarePath = properties.getProperty("p.firmware.path");
         this.firmwareAtualVersion = properties.getProperty("p.firmware.atual");
-
+        this.m.getEquipamento().setModelo(new ModeloDAO().buscar(properties.getProperty("name")));
+        
+        
+        
         Properties p = PropertiesUtil.getProperties(PropertiesUtil.PPOE_PROPERTIES_DIRECTORY);
         ppoeVlan = p.getProperty("p.ppoe.vlan");
         ppoeUser = p.getProperty("p.ppoe.login");

@@ -15,7 +15,7 @@ public class Modelo implements Serializable {
     public static List<Modelo> getListaDeModelos() {
         return new ModeloDAO().listar();
     }
-
+    
     public static void salvar(Modelo modelo) throws Exception {
 
         ModeloDAO dao = new ModeloDAO();
@@ -35,6 +35,14 @@ public class Modelo implements Serializable {
     @Column(name = "nome", nullable = false, length = 50)
     private String nome;
 
+    public Modelo (){
+        
+    }
+    
+    public Modelo (String nome){
+        this.nome = nome;
+    }
+    
     public Integer getId() {
         return id;
     }

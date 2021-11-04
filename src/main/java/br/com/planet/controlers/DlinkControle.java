@@ -27,22 +27,6 @@ public class DlinkControle extends Controle {
         dao = new ManutencaoDAO();
     }
 
-    public boolean start() throws Exception {
-        try {
-            if (logar()) {
-                getFirmware();
-                getSn();
-                getPatrimonio();
-                getStatus();
-                return true;
-            }
-            return false;
-        } catch (Exception e) {
-            System.out.println("Erro DLINK Start: " + e.getMessage());
-            throw (e);
-        }
-    }
-
     public boolean logar() throws Exception {
         try {
             driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
@@ -250,6 +234,10 @@ public class DlinkControle extends Controle {
             throw e;
         }
 
+    }
+    
+    
+    public void getPon()throws Exception{ 
     }
 
 }
