@@ -17,7 +17,6 @@ import org.junit.Test;
 
 public class UtilTest {
 
-    @Test
     public void wifiNames() throws IOException {
         ArrayList<String> ssids = new ArrayList<String>();
         ArrayList<String> signals = new ArrayList<String>();

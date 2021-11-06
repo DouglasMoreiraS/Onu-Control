@@ -1,23 +1,15 @@
 package br.com.planet.controlers;
 
-import br.com.planet.dao.ModeloDAO;
-import br.com.planet.model.bean.Equipamento;
 import br.com.planet.util.PropertiesUtil;
-import br.com.planet.util.Utils;
-import java.util.concurrent.TimeUnit;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 public class ChimaControle extends Controle {
 
-    public ChimaControle(boolean condition) {
-        super(condition);
+    public ChimaControle() {
+        super();
         timeout = 5;
-        m.getEquipamento().setModelo(new ModeloDAO().buscar(Equipamento.CHIMA));
         this.loadProperties(PropertiesUtil.PROPERTIES_DIRECTORY + "\\chima.properties");
         this.m.setObservacao("Aparelho Novo");
-
     }
 
     @Override

@@ -10,12 +10,7 @@ public class NextFiber extends EquipamentoView {
     public NextFiber(){
         super(true);
         getPainelImg().setImg(new ImageIcon(getClass().getResource("/images/nextfiber.png")));
-        this.setTitle(Equipamento.NEXT_FIBER);
+         this.control = new NextControle();
+        this.setTitle(control.getM().getEquipamento().getModelo().getNome());
     }
-
-    @Override
-    public void setControl(){
-        this.control = new NextControle(this.getCbNavegador());
-    }
-    
 }

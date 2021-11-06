@@ -1,7 +1,6 @@
 package br.com.planet.controlers;
 
 import br.com.planet.dao.ManutencaoDAO;
-import br.com.planet.model.bean.Equipamento;
 import br.com.planet.util.PropertiesUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -10,7 +9,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import br.com.planet.util.Utils;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 public class DlinkControle extends Controle {
 
@@ -18,13 +16,10 @@ public class DlinkControle extends Controle {
     String wifiName;
 
     public DlinkControle() {
-        super(false);
+        super();
         timeout = 10;
         this.loadProperties(PropertiesUtil.PROPERTIES_DIRECTORY + "\\dlink.properties");
-
-        m.getEquipamento().setModelo(Equipamento.DLINK);
         this.m.getEquipamento().setTipo(Controle.ROUTER_TYPE);
-        dao = new ManutencaoDAO();
     }
 
     public boolean logar() throws Exception {

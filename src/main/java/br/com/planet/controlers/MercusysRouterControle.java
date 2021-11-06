@@ -1,26 +1,17 @@
 package br.com.planet.controlers;
 
-import br.com.planet.dao.ModeloDAO;
-import br.com.planet.model.bean.Equipamento;
+import br.com.planet.util.PropertiesUtil;
 import br.com.planet.util.Utils;
-import java.util.concurrent.TimeUnit;
 import javax.security.auth.login.LoginException;
 import org.openqa.selenium.By;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 public class MercusysRouterControle extends Controle {
 
-    public MercusysRouterControle(boolean condition) {
-        super(condition);
-        driver = new ChromeDriver(options);
-
-        this.url = "http://192.168.1.1";
-        this.login = "";
-        this.senha = "12345678";
-        m.getEquipamento().setModelo(new ModeloDAO().buscar(Equipamento.MERCUSYS_ROUTER_AC12G));
+    public MercusysRouterControle() {
+        super();
+        timeout = 10;
+        super.loadProperties(PropertiesUtil.PROPERTIES_DIRECTORY  +"\\mercusysa12g.properties");
         this.m.getEquipamento().setTipo(Controle.ROUTER_TYPE);
-        this.firmwareAtualVersion = "";
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
     }
 
 

@@ -1,6 +1,6 @@
 package br.com.planet.controlers;
 
-import java.util.concurrent.TimeUnit;   
+import java.util.concurrent.TimeUnit;
 import br.com.planet.util.PropertiesUtil;
 import org.openqa.selenium.By;
 import br.com.planet.util.Utils;
@@ -8,8 +8,8 @@ import org.openqa.selenium.WebElement;
 
 public class NokiaControle extends Controle {
 
-    public NokiaControle(boolean condition) {
-        super(condition);
+    public NokiaControle() {
+        super();
         loadProperties(PropertiesUtil.PROPERTIES_DIRECTORY + "\\nokia.properties");
         timeout = 5;
         this.tipo = Controle.ONT_TYPE;
@@ -87,9 +87,15 @@ public class NokiaControle extends Controle {
 
             driver.switchTo().frame(driver.findElement(By.xpath("//*[@id=\"content\"]/tbody/tr[2]/td[3]/iframe")));
             driver.findElement(By.xpath("//*[@id=\"Restore_button\"]")).click();
-            driver.switchTo().alert().accept();
+
+            if (Utils.existsElement(driver, "//*[@id=\"status1\"]")) {
+
+                driver.findElement(By.xpath("//*[@id=\"Restore_button\"]")).click();
+
+            }
+            /*driver.switchTo().alert().accept();
             Thread.sleep(60000);
-            driver.navigate().refresh();
+            driver.navigate().refresh();*/
 
             while (true) {
                 try {
@@ -164,8 +170,8 @@ public class NokiaControle extends Controle {
             throw (e);
         }
     }
-    
-    public void close(){
+
+    public void close() {
         driver.navigate().refresh();
         driver.findElement(By.xpath("//*[@id=\"logout\"]")).click();
         super.close();

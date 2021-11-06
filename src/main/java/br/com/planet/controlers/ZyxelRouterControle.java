@@ -8,7 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class ZyxelRouterControle extends Controle{
 
     public ZyxelRouterControle(boolean headless) {
-        super(headless);
+        super();
         this.url = "http://192.168.1.1/";
         this.login = "admin";
         this.senha = "@#Pl4n3t#@";

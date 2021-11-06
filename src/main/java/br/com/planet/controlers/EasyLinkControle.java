@@ -1,10 +1,7 @@
 package br.com.planet.controlers;
 
-import br.com.planet.dao.ModeloDAO;
 import br.com.planet.model.bean.Equipamento;
-import br.com.planet.util.FirmwarePath;
 import br.com.planet.util.PropertiesUtil;
-import br.com.planet.util.Utils;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
@@ -12,13 +9,10 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class EasyLinkControle extends Controle {
 
-    public EasyLinkControle(boolean visible) {
-        super(visible);
+    public EasyLinkControle() {
+        super();
         driver = new ChromeDriver(options);
         this.loadProperties(PropertiesUtil.PROPERTIES_DIRECTORY + "\\easylink.properties");
-
-        m.getEquipamento().setModelo(Equipamento.EASY_LINK);
-
     }
 
     @Override

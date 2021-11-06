@@ -1,22 +1,18 @@
 package br.com.planet.controlers;
 
-import br.com.planet.dao.ModeloDAO;
 import java.util.concurrent.TimeUnit;
-import br.com.planet.model.bean.Equipamento;
 import br.com.planet.util.PropertiesUtil;
 import org.openqa.selenium.By;
-import org.openqa.selenium.chrome.ChromeDriver;
 import br.com.planet.util.Utils;
 import org.openqa.selenium.WebElement;
 
 public class HuaweiControle extends Controle {
 
     public HuaweiControle(boolean condition) {
-        super(condition);
+        super();
         loadProperties(PropertiesUtil.PROPERTIES_DIRECTORY + "\\huawei.properties");
         timeout = 5;
-        this.tipo = Controle.ONT_TYPE;
-        m.getEquipamento().setModelo(Equipamento.HUAWEI_ECO);
+        this.m.getEquipamento().setTipo(Controle.ONT_TYPE);
     }
 
     

@@ -22,7 +22,7 @@ public class Equipamento implements Serializable {
     public static final String CHIMA = "Chima";
     public static final String SUMEC = "Sumec";
     public static final String NEXT_FIBER = "Next Fiber";
-    public static final String DLINK = "D-link";
+    public static final String DLINK = "D-link DIR-842";
     public static final String HUAWEI_GPON = "Huawei GPON";
     public static final String HUAWEI_ECO = "Huawei EchoLife";
     public static final String TP_LINK = "Tp-Link WR840N";

@@ -73,7 +73,7 @@ public class Controle {
 
     int timeout;
 
-    public Controle(boolean headless) {
+    public Controle() {
         WebDriverManager.chromedriver().setup();
         options = new ChromeOptions();
         historico = new ArrayList();

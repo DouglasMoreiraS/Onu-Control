@@ -17,7 +17,7 @@ public class ZyxelControle extends Controle {
     private String model;
 
     public ZyxelControle(boolean condition) {
-        super(condition);
+        super();
         driver = new ChromeDriver(options);
         this.login = "admin";
         this.senha = "1234";

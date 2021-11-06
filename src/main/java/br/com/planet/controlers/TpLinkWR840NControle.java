@@ -1,7 +1,5 @@
 package br.com.planet.controlers;
 
-import br.com.planet.dao.ModeloDAO;
-import br.com.planet.model.bean.Equipamento;
 import br.com.planet.util.PropertiesUtil;
 import br.com.planet.util.Utils;
 import org.openqa.selenium.By;
@@ -11,8 +9,8 @@ import org.openqa.selenium.WebElement;
 
 public class TpLinkWR840NControle extends Controle {
 
-    public TpLinkWR840NControle(boolean condition) {
-        super(condition);
+    public TpLinkWR840NControle() {
+        super();
         timeout = 10;
         this.loadProperties(PropertiesUtil.PROPERTIES_DIRECTORY + "\\tplink.properties");
         tipo = Controle.ROUTER_TYPE;
@@ -43,12 +41,12 @@ public class TpLinkWR840NControle extends Controle {
                 driver.findElement(By.xpath("//*[@id=\"pc-login-btn\"]")).click();
             }
 
-            if (Utils.existsElement(driver, "//*[@id=\"confirm-yes\"]") && driver.findElement(By.xpath("//*[@id=\"confirm-yes\"]")).isDisplayed()) {
+            if (Utils.existsElement(driver, "//*[@id=\"confirm-yes\"]")) {
 
                 for (int tries = 2; tries != 0; tries--) {
                     try {
                         driver.findElement(By.xpath("//*[@id=\"confirm-yes\"]")).click();
-                    } catch (NoSuchElementException e) {
+                    } catch (WebDriverException e) {
 
                     }
                 }
@@ -76,7 +74,9 @@ public class TpLinkWR840NControle extends Controle {
     public void getSn() throws Exception {
         try {
             this.sendMeMainPage();
-
+            
+            Thread.sleep(2000);
+            
             driver.findElement(By.xpath("//*[@id=\"menuTree\"]/li[3]/a")).click();
             Thread.sleep(500);
             driver.findElement(By.xpath("//*[@id=\"menuTree\"]/li[3]/ul/li[2]/a")).click();
@@ -99,9 +99,9 @@ public class TpLinkWR840NControle extends Controle {
     public void getFirmware() throws Exception {
         try {
             sendMeMainPage();
-            
+
             Thread.sleep(1000);
-            
+
             WebElement firm = driver.findElement(By.xpath("//*[@id=\"bot_sver\"]"));
             String firmware = firm.getAttribute("innerText");
             System.out.println(firmware);

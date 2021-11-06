@@ -12,14 +12,10 @@ import org.openqa.selenium.WebElement;
 
 public class TpLinkC20Controle extends Controle {
 
-    public TpLinkC20Controle(boolean condition) {
-        super(condition);
+    public TpLinkC20Controle() {
+        super();
         timeout = 10;
         this.loadProperties(PropertiesUtil.PROPERTIES_DIRECTORY + "\\tplinkc20.properties");
-
-        m.getEquipamento().setModelo(new ModeloDAO().buscar(Equipamento.TP_LINK1));
-        tipo = Controle.ROUTER_TYPE;
-
     }
 
     public boolean logar() throws Exception {
@@ -44,10 +40,19 @@ public class TpLinkC20Controle extends Controle {
 
                 driver.findElement(By.xpath("//*[@id=\"pc-login-btn\"]")).click();
             }
-
+            
             if (Utils.existsElement(driver, "//*[@id=\"confirm-yes\"]")) {
-                driver.findElement(By.xpath("//*[@id=\"confirm-yes\"]")).click();
+
+                for (int tries = 2; tries != 0; tries--) {
+                    try {
+                        driver.findElement(By.xpath("//*[@id=\"confirm-yes\"]")).click();
+                    } catch (WebDriverException e) {
+
+                    }
+                }
             }
+
+            
 
             if (Utils.existsElement(driver, "//*[@id=\"advanced\"]")) {
                 System.out.println("Existe");

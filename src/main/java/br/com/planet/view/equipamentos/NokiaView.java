@@ -1,23 +1,15 @@
 package br.com.planet.view.equipamentos;
 
-import br.com.planet.controlers.HuaweiControle;
 import br.com.planet.controlers.NokiaControle;
-import br.com.planet.model.bean.Equipamento;
-import javax.swing.ImageIcon;
 
 public class NokiaView extends EquipamentoView {
-    
-    
+
     public NokiaView() {
         super(true);
         //getPainelImg().setImg(new ImageIcon(getClass().getResource("/images/nokia.png")));
-        this.setTitle("Nokia");
-        
+        this.control = new NokiaControle();
+        this.setTitle(control.getM().getEquipamento().getModelo().getNome());
     }
-    
-    @Override
-    public void setControl(){
-        this.control = new NokiaControle(getCbNavegador());
-    }
-    
+
+
 }

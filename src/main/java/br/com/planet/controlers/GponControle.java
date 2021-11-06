@@ -1,13 +1,12 @@
 package br.com.planet.controlers;
 
-import br.com.planet.model.bean.Equipamento;
 import br.com.planet.model.bean.Manutencao;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class GponControle extends Controle{
     
-    public GponControle(boolean condition){
-        super(condition);
+    public GponControle(){
+        super();
         this.url = "http://192.168.100.1";
         
         this.login = "telecomadmin";

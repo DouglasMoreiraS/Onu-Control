@@ -9,13 +9,8 @@ public class ChimaView extends EquipamentoView{
     public ChimaView() {
         super(false);
         this.getPainelImg().setImg(new ImageIcon(getClass().getResource("/images/chima.png")));
-        this.setTitle(Equipamento.CHIMA);
+        control = new ChimaControle();
+        this.setTitle(control.getM().getEquipamento().getModelo().getNome());
     }
-    
 
-    @Override
-    public void setControl() {
-        control = new ChimaControle(getCbNavegador());
-    }
-    
 }

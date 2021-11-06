@@ -437,6 +437,7 @@ public class EquipamentoView extends javax.swing.JFrame {
         controlaTela("init");
         controlaTela("wait");
         new Thread(() -> {
+            
             if (control != null) {
                 try {
                     control.close();
@@ -445,7 +446,6 @@ public class EquipamentoView extends javax.swing.JFrame {
             }
 
             try {
-                setControl();
                 control.open(cbNavegador.isSelected());
                 if (conectar()) {
                     preencherCampos();
