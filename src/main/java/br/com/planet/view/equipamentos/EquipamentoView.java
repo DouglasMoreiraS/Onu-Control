@@ -4,13 +4,13 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
 import br.com.planet.controlers.Controle;
+import br.com.planet.exception.OldFirmwareException;
 import br.com.planet.exception.PatrimonioViolationException;
-import br.com.planet.model.bean.Equipamento;
 import br.com.planet.model.tablemodel.RemoteAcessTableModel;
 import javax.swing.JPanel;
 import br.com.planet.src.PainelImagemFundo;
+import br.com.planet.util.ImagesUtil;
 import br.com.planet.view.crud.HistoricoView;
-import javax.swing.ImageIcon;
 
 public class EquipamentoView extends javax.swing.JFrame {
 
@@ -40,47 +40,22 @@ public class EquipamentoView extends javax.swing.JFrame {
         txtObservacao.setWrapStyleWord(false);
 
         controlaTela("init");
+        windowListener();
+    }
 
-        this.addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
+    public EquipamentoView(Controle control) {
+        initComponents();
 
-                String message = "";
-                int resposta;
-                if (flagUpdate == 1) {
-                    message = "O equipamento está em processo de atualização, tem certeza que deseja fechar?";
-                } else if (flagReset == 1) {
-                    message = "O equipamento está em processo de reset, tem certeza que deseja fechar?";
-                }
+        this.control = control;
+        this.btnPpoe.setVisible(control.isPpoe());
 
-                if (!message.equals("")) {
-                    resposta = JOptionPane.showConfirmDialog(null, message);
+        this.getPainelImg().setImg(ImagesUtil.getImgIcon(control.getM().getEquipamento().getModelo()));
 
-                    if (resposta == JOptionPane.CANCEL_OPTION || resposta == JOptionPane.NO_OPTION) {
-                        return;
-                    }
-                }
+        txtObservacao.setLineWrap(true); // para quebrar a linha
+        txtObservacao.setWrapStyleWord(false);
 
-                if (chima != null) {
-                    if (chima.isAlive()) {
-                        chima.stop();
-                    }
-                }
-
-                if (chimaPing != null) {
-                    if (chimaPing.isAlive()) {
-                        chimaPing.stop();
-                    }
-                }
-
-                if (control != null) {
-                    control.close();
-                }
-
-                controlaTela("init");
-                EquipamentoView.this.dispose();
-
-            }
-        });
+        controlaTela("init");
+        windowListener();
     }
 
     @SuppressWarnings("unchecked")
@@ -116,13 +91,12 @@ public class EquipamentoView extends javax.swing.JFrame {
         barConnection = new javax.swing.JProgressBar();
         btnConectar = new javax.swing.JButton();
         cbAutoConfig = new javax.swing.JCheckBox();
-        painelImagemFundo = new br.com.planet.src.PainelImagemFundo();
         cbNavegador = new javax.swing.JCheckBox();
+        painelImagemFundo = new br.com.planet.src.PainelImagemFundo();
 
         jLabel6.setText("jLabel6");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(586, 497));
         setMinimumSize(new java.awt.Dimension(586, 497));
         setResizable(false);
 
@@ -205,7 +179,7 @@ public class EquipamentoView extends javax.swing.JFrame {
                     .addGroup(panelHistoricoLayout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addComponent(btnHistorico)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
         panelHistoricoLayout.setVerticalGroup(
             panelHistoricoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -255,7 +229,7 @@ public class EquipamentoView extends javax.swing.JFrame {
                 .addGroup(panelInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelInformacoesLayout.createSequentialGroup()
                         .addComponent(btnUpdateFirmware, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                         .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInformacoesLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -297,7 +271,7 @@ public class EquipamentoView extends javax.swing.JFrame {
             .addGroup(panelInformacoesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelHistorico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelHistorico, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
                     .addGroup(panelInformacoesLayout.createSequentialGroup()
                         .addGroup(panelInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -351,8 +325,7 @@ public class EquipamentoView extends javax.swing.JFrame {
 
         cbAutoConfig.setText("Configurar Automaticamente");
 
-        painelImagemFundo.setMaximumSize(new java.awt.Dimension(100, 100));
-        painelImagemFundo.setMinimumSize(new java.awt.Dimension(100, 100));
+        cbNavegador.setText("Navegador");
 
         javax.swing.GroupLayout painelImagemFundoLayout = new javax.swing.GroupLayout(painelImagemFundo);
         painelImagemFundo.setLayout(painelImagemFundoLayout);
@@ -364,8 +337,6 @@ public class EquipamentoView extends javax.swing.JFrame {
             painelImagemFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 100, Short.MAX_VALUE)
         );
-
-        cbNavegador.setText("Navegador");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -382,10 +353,10 @@ public class EquipamentoView extends javax.swing.JFrame {
                                     .addComponent(cbAutoConfig, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(cbNavegador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                            .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(btnConectar, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(84, 84, 84)))
+                                .addGap(86, 86, 86)))
                         .addComponent(painelImagemFundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -393,19 +364,19 @@ public class EquipamentoView extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(barConnection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(barConnection, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 2, Short.MAX_VALUE)
-                        .addComponent(painelImagemFundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(cbAutoConfig)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cbNavegador)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnConectar)
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                        .addComponent(painelImagemFundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -426,7 +397,7 @@ public class EquipamentoView extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelInformacoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
 
         pack();
@@ -437,7 +408,7 @@ public class EquipamentoView extends javax.swing.JFrame {
         controlaTela("init");
         controlaTela("wait");
         new Thread(() -> {
-            
+
             if (control != null) {
                 try {
                     control.close();
@@ -461,6 +432,11 @@ public class EquipamentoView extends javax.swing.JFrame {
                     controlaTela("ready");
                     JOptionPane.showMessageDialog(EquipamentoView.this, "Done", "Done", JOptionPane.INFORMATION_MESSAGE);
                 }
+            } catch (OldFirmwareException ex) {
+                controlaBar(EquipamentoView.NO_SIGNAL);
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.WARNING_MESSAGE);
+                control.close();
+                controlaTela("start");
             } catch (Exception e) {
                 e.printStackTrace();
 
@@ -484,11 +460,17 @@ public class EquipamentoView extends javax.swing.JFrame {
                 control.save();
 
                 JOptionPane.showMessageDialog(this, "Salvo com sucesso", "Salvar", JOptionPane.INFORMATION_MESSAGE);
+
+                controlaTela("start");
+                controlaBar(NO_SIGNAL);
+                this.btnSalvar.setText("Salvar");
+                control.close();
+
             } catch (PatrimonioViolationException e) {
-                JOptionPane.showMessageDialog(this, e.getMessage(), "Erro ao Salvar", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Esse patrimonio já está cadastrado", JOptionPane.WARNING_MESSAGE);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, "Erro ao salvar", "Erro", JOptionPane.ERROR_MESSAGE);
-            } finally {
+               
                 controlaTela("start");
                 controlaBar(NO_SIGNAL);
                 this.btnSalvar.setText("Salvar");
@@ -822,5 +804,48 @@ public class EquipamentoView extends javax.swing.JFrame {
             controlaBar(EquipamentoView.CONNECT);
             flagReset = 0;
         }
+    }
+
+    void windowListener() {
+        this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+
+                String message = "";
+                int resposta;
+                if (flagUpdate == 1) {
+                    message = "O equipamento está em processo de atualização, tem certeza que deseja fechar?";
+                } else if (flagReset == 1) {
+                    message = "O equipamento está em processo de reset, tem certeza que deseja fechar?";
+                }
+
+                if (!message.equals("")) {
+                    resposta = JOptionPane.showConfirmDialog(null, message);
+
+                    if (resposta == JOptionPane.CANCEL_OPTION || resposta == JOptionPane.NO_OPTION) {
+                        return;
+                    }
+                }
+
+                if (chima != null) {
+                    if (chima.isAlive()) {
+                        chima.stop();
+                    }
+                }
+
+                if (chimaPing != null) {
+                    if (chimaPing.isAlive()) {
+                        chimaPing.stop();
+                    }
+                }
+
+                if (control != null) {
+                    control.close();
+                }
+
+                controlaTela("init");
+                EquipamentoView.this.dispose();
+
+            }
+        });
     }
 }

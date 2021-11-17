@@ -21,7 +21,6 @@ public class NextControle extends Controle {
     public NextControle() {
         super();
         loadProperties(PropertiesUtil.PROPERTIES_DIRECTORY + "\\nextfiber.properties");
-        m.getEquipamento().setModelo(Equipamento.NEXT_FIBER);
         tipo = NextControle.ONT_TYPE;
 
         this.senha2 = properties.getProperty("p.pass1");

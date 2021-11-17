@@ -1,9 +1,6 @@
 package br.com.planet.controlers;
 
-import br.com.planet.dao.ManutencaoDAO;
-import br.com.planet.dao.ModeloDAO;
 import br.com.planet.exception.SemConexaoException;
-import br.com.planet.model.bean.Equipamento;
 import br.com.planet.model.bean.Manutencao;
 import br.com.planet.util.FirmwarePath;
 import org.openqa.selenium.Alert;
@@ -24,7 +21,6 @@ public class ZyxelControle extends Controle {
         this.url = "http://192.168.1.1";
         this.title = "login";
 
-        m.getEquipamento().setModelo(new ModeloDAO().buscar(Equipamento.ZYXEL));
 
         this.urlSn = "http://192.168.1.1/cgi-bin/status_deviceinfo.asp";
         this.urlFirmware = "http://192.168.1.1/cgi-bin/status_deviceinfo.asp";

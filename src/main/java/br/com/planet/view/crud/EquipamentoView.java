@@ -1,8 +1,10 @@
 package br.com.planet.view.crud;
 
 import br.com.planet.control.EquipamentoControl;
+import br.com.planet.dao.ModeloDAO;
 import br.com.planet.exception.DeleteViolationException;
 import br.com.planet.model.tablemodel.EquipamentoTableModel;
+import br.com.planet.util.ImagesUtil;
 import br.com.planet.util.Utils;
 import java.awt.Frame;
 import javax.swing.ImageIcon;
@@ -415,8 +417,7 @@ public class EquipamentoView extends javax.swing.JDialog {
     private void tblEquipamentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEquipamentosMouseClicked
         if (tblEquipamentos.getSelectedRows().length != 0) {
             this.eqControl.setEquipamentoSelecionado(tblEquipamentos.getSelectedRow());
-            String path = Utils.getImgIcon(eqControl.getEquipamentoSelecionado().getModelo().getNome());
-            this.painelImagemFundo.setImg(new ImageIcon(getClass().getResource(path)));
+            this.painelImagemFundo.setImg(ImagesUtil.getImgIcon(eqControl.getEquipamentoSelecionado().getModelo()));
             this.painelImagemFundo.repaint();
 
             this.btnHistorico.setEnabled(true);
@@ -644,7 +645,7 @@ public class EquipamentoView extends javax.swing.JDialog {
         String modelo = "";
         if (!cbModelo.getSelectedItem().toString().equals("Todos")) {
             modelo = cbModelo.getItemAt(cbModelo.getSelectedIndex());
-            this.painelImagemFundo.setImg(new ImageIcon(getClass().getResource(Utils.getImgIcon(modelo))));
+            this.painelImagemFundo.setImg(ImagesUtil.getImgIcon(new ModeloDAO().buscar(modelo)));
             this.painelImagemFundo.repaint();
         }
         String sn = txtSn.getText().trim();
@@ -697,7 +698,7 @@ public class EquipamentoView extends javax.swing.JDialog {
 
         JFreeChart grafico = ChartFactory.createPieChart(titulo, pieDataSet, false, true, false);
 
-        //Peguei no GUI memo tava quebrando a cabeça aqui
+        //Peguei esse techo de codigo no GUJ, depois vou ler a documentação e aprimorar.
         ChartPanel myChartPanel = new ChartPanel(grafico, true); //criei o painel de grafico colocando meu grafico previamente gerado
         myChartPanel.setSize(panelGrafico.getWidth(), panelGrafico.getHeight()); //setei o tamanho do grafico conforme o painel que usarei
         myChartPanel.setVisible(true);

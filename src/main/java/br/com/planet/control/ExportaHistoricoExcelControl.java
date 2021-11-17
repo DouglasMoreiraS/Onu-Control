@@ -10,6 +10,7 @@ import java.util.List;
 import javax.xml.bind.ValidationException;
 import br.com.planet.model.bean.Equipamento;
 import br.com.planet.model.bean.Manutencao;
+import br.com.planet.model.bean.Modelo;
 import br.com.planet.model.tablemodel.ManutencaoTableModel;
 import br.com.planet.view.ExportaHistoricoExcelView;
 
@@ -52,10 +53,9 @@ public final class ExportaHistoricoExcelControl {
 
     public void comboBoxNames() {
         view.getCbEquipamentos().addItem("Todos");
-        equipamentos = new Equipamento().getAllEquipaments();
-        for (String s : equipamentos) {
-            view.getCbEquipamentos().addItem(s);
-        }
+        
+        Modelo.getListaDeModelos().forEach(modelo -> view.getCbEquipamentos().addItem(modelo.getNome()));
+        
     }
 
     public void atualizaTableModel() {

@@ -15,7 +15,6 @@ public class HuaweiEchoView extends EquipamentoView {
         }
         
         
-        this.setTitle(new ModeloDAO().buscar(Equipamento.HUAWEI_ECO).getNome());
     }
 
     @Override

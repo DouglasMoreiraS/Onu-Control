@@ -1,0 +1,78 @@
+17/11/2021 11:30:08: 
+Erro:--Classe: br.com.planet.controlers.TpLinkWR840NControle--Metodo: close();--Descrição: Cannot invoke "org.openqa.selenium.WebDriver.quit()" because "this.driver" is null
+********************
+
+17/11/2021 11:31:41: 
+***Erro***/r/nbr.com.planet.controlers.TpLinkWR840NControle.logar(); /r/nDescrição: no such window: target window already closed
+from unknown error: web view not found
+  (Session info: chrome=96.0.4664.45)
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'DESKTOP-IRLCR5J', ip: '192.168.10.115', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '16.0.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 96.0.4664.45, chrome: {chromedriverVersion: 96.0.4664.45 (76e4c1bb2ab46..., userDataDir: C:\Users\PC_PLA~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:54009}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: 92bdfd4406a59995308e23c5be205202
+*** Element info: {Using=xpath, value=//*[@id="pc-setPwd-new"]}
+********************
+
+17/11/2021 11:34:53: 
+ Erro:--Classe: br.com.planet.controlers.TpLinkWR840NControle--Metodo: close();--Descrição: Cannot invoke "org.openqa.selenium.WebDriver.quit()" because "this.driver" is null 
+ ******************** 
+ 
+17/11/2021 11:35:06: 
+ ***Erro*** /r/n br.com.planet.controlers.TpLinkWR840NControle.logar(); /r/n Descrição: unknown error: cannot determine loading status
+from disconnected: unable to send message to renderer
+  (Session info: chrome=96.0.4664.45)
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'DESKTOP-IRLCR5J', ip: '192.168.10.115', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '16.0.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 96.0.4664.45, chrome: {chromedriverVersion: 96.0.4664.45 (76e4c1bb2ab46..., userDataDir: C:\Users\PC_PLA~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:65153}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: cd72c80e0602842e0486b2008ca299ef 
+ ******************** 
+ 
+17/11/2021 11:51:33: 
+ Erro:--Classe: br.com.planet.controlers.TpLinkWR840NControle--Metodo: close();--Descrição: Cannot invoke "org.openqa.selenium.WebDriver.quit()" because "this.driver" is null 
+ ******************** 
+ 
+17/11/2021 11:53:55: 
+ ***Erro*** /r/nbr.com.planet.controlers.TpLinkWR840NControle.logar(); /r/nDescrição: unknown error: net::ERR_CONNECTION_TIMED_OUT
+  (Session info: chrome=96.0.4664.45)
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'DESKTOP-IRLCR5J', ip: '192.168.10.115', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '16.0.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 96.0.4664.45, chrome: {chromedriverVersion: 96.0.4664.45 (76e4c1bb2ab46..., userDataDir: C:\Users\PC_PLA~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:60852}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: 86b7035941db6e4bdd67d6a79103ec92 
+ ******************** 
+ 
+17/11/2021 12:20:19: ***Erro***
+
+
+17/11/2021 12:20:19: br.com.planet.controlers.TpLinkWR840NControle.logar();
+
+
+17/11/2021 12:20:19: Descrição: unknown error: net::ERR_CONNECTION_TIMED_OUT
+  (Session info: headless chrome=96.0.4664.45)
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'DESKTOP-IRLCR5J', ip: '192.168.10.115', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '16.0.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 96.0.4664.45, chrome: {chromedriverVersion: 96.0.4664.45 (76e4c1bb2ab46..., userDataDir: C:\Users\PC_PLA~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:51931}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: 4cf078e66b1b8ec3a773ba77a34ef4ac
+
+
+17/11/2021 12:22:49: br.com.planet.controlers.TpLinkWR840NControle.logar();
+17/11/2021 12:22:49: Descrição: unknown error: net::ERR_CONNECTION_TIMED_OUT
+  (Session info: headless chrome=96.0.4664.45)
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'DESKTOP-IRLCR5J', ip: '192.168.10.115', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '16.0.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 96.0.4664.45, chrome: {chromedriverVersion: 96.0.4664.45 (76e4c1bb2ab46..., userDataDir: C:\Users\PC_PLA~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:56789}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: aa0c85ccfbabc4914153de9153e768d4
+*******************************************
+17/11/2021 12:26:37: br.com.planet.controlers.TpLinkWR840NControle.logar();
+Descrição: unknown error: net::ERR_CONNECTION_TIMED_OUT
+  (Session info: headless chrome=96.0.4664.45)
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'DESKTOP-IRLCR5J', ip: '192.168.10.115', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '16.0.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 96.0.4664.45, chrome: {chromedriverVersion: 96.0.4664.45 (76e4c1bb2ab46..., userDataDir: C:\Users\PC_PLA~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:52710}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: b7f1b9e989130fc728c7fba4faab485d
+*******************************************

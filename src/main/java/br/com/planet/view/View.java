@@ -3,9 +3,11 @@ package br.com.planet.view;
 import br.com.planet.view.equipamentos.*;
 import br.com.planet.control.*;
 import br.com.planet.controlers.DlinkControle;
+import br.com.planet.controlers.MercusysMW301RControle;
 import br.com.planet.controlers.NextControle;
 import br.com.planet.dao.BackupAndRestore;
 import br.com.planet.model.bean.Equipamento;
+import br.com.planet.model.bean.Modelo;
 import br.com.planet.view.crud.EquipamentoView;
 import br.com.planet.view.crud.HistoricoView;
 import br.com.planet.view.crud.ModeloView;
@@ -34,7 +36,7 @@ public class View extends javax.swing.JFrame {
     public View() {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
-        painelImagemFundo2.setImg(new ImageIcon(getClass().getResource("/images/background.png")));
+        painelImagemFundo1.setImg(new ImageIcon(getClass().getResource("/images/background.png")));
         atualizaRodape();
     }
 
@@ -42,7 +44,7 @@ public class View extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        painelImagemFundo2 = new br.com.planet.src.PainelImagemFundo();
+        painelImagemFundo1 = new br.com.planet.src.PainelImagemFundo();
         jPanel1 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu5 = new javax.swing.JMenu();
@@ -50,9 +52,6 @@ public class View extends javax.swing.JFrame {
         jMenu7 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
-        jMenu18 = new javax.swing.JMenu();
-        jMenuItem25 = new javax.swing.JMenuItem();
-        jMenuItem26 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenu16 = new javax.swing.JMenu();
         jMenuItem21 = new javax.swing.JMenuItem();
@@ -60,6 +59,13 @@ public class View extends javax.swing.JFrame {
         jMenu19 = new javax.swing.JMenu();
         jMenuItem30 = new javax.swing.JMenuItem();
         jMenuItem31 = new javax.swing.JMenuItem();
+        jMenu21 = new javax.swing.JMenu();
+        jMenu18 = new javax.swing.JMenu();
+        jMenuItem25 = new javax.swing.JMenuItem();
+        jMenuItem26 = new javax.swing.JMenuItem();
+        jMenu22 = new javax.swing.JMenu();
+        jMenuItem34 = new javax.swing.JMenuItem();
+        jMenuItem35 = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
         jMenu13 = new javax.swing.JMenu();
         jMenuItem15 = new javax.swing.JMenuItem();
@@ -105,18 +111,18 @@ public class View extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1211, 1021));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout painelImagemFundo2Layout = new javax.swing.GroupLayout(painelImagemFundo2);
-        painelImagemFundo2.setLayout(painelImagemFundo2Layout);
-        painelImagemFundo2Layout.setHorizontalGroup(
-            painelImagemFundo2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1410, Short.MAX_VALUE)
+        javax.swing.GroupLayout painelImagemFundo1Layout = new javax.swing.GroupLayout(painelImagemFundo1);
+        painelImagemFundo1.setLayout(painelImagemFundo1Layout);
+        painelImagemFundo1Layout.setHorizontalGroup(
+            painelImagemFundo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1340, Short.MAX_VALUE)
         );
-        painelImagemFundo2Layout.setVerticalGroup(
-            painelImagemFundo2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 720, Short.MAX_VALUE)
+        painelImagemFundo1Layout.setVerticalGroup(
+            painelImagemFundo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 750, Short.MAX_VALUE)
         );
 
-        getContentPane().add(painelImagemFundo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1410, 720));
+        getContentPane().add(painelImagemFundo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1340, 750));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -154,26 +160,6 @@ public class View extends javax.swing.JFrame {
         jMenu7.add(jMenuItem8);
 
         jMenu6.add(jMenu7);
-
-        jMenu18.setText("Mercusys AC12G");
-
-        jMenuItem25.setText("Acesso Remoto");
-        jMenuItem25.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem25ActionPerformed(evt);
-            }
-        });
-        jMenu18.add(jMenuItem25);
-
-        jMenuItem26.setText("Historico");
-        jMenuItem26.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem26ActionPerformed(evt);
-            }
-        });
-        jMenu18.add(jMenuItem26);
-
-        jMenu6.add(jMenu18);
 
         jMenu4.setText("TPLink");
 
@@ -218,6 +204,50 @@ public class View extends javax.swing.JFrame {
         jMenu4.add(jMenu19);
 
         jMenu6.add(jMenu4);
+
+        jMenu21.setText("Mercusys");
+
+        jMenu18.setText("Mercusys AC12G");
+
+        jMenuItem25.setText("Acesso Remoto");
+        jMenuItem25.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem25ActionPerformed(evt);
+            }
+        });
+        jMenu18.add(jMenuItem25);
+
+        jMenuItem26.setText("Historico");
+        jMenuItem26.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem26ActionPerformed(evt);
+            }
+        });
+        jMenu18.add(jMenuItem26);
+
+        jMenu21.add(jMenu18);
+
+        jMenu22.setText("Mercusys MW301R");
+
+        jMenuItem34.setText("Acesso Remoto");
+        jMenuItem34.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem34ActionPerformed(evt);
+            }
+        });
+        jMenu22.add(jMenuItem34);
+
+        jMenuItem35.setText("Historico");
+        jMenuItem35.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem35ActionPerformed(evt);
+            }
+        });
+        jMenu22.add(jMenuItem35);
+
+        jMenu21.add(jMenu22);
+
+        jMenu6.add(jMenu21);
 
         jMenu5.add(jMenu6);
 
@@ -578,39 +608,39 @@ public class View extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem23ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        new HistoricoView(this, false, Equipamento.DLINK).setVisible(true);
+        new HistoricoView(this, false, Modelo.DLINK).setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem22ActionPerformed
-        new HistoricoView(this, false, Equipamento.TP_LINK).setVisible(true);
+        new HistoricoView(this, false, Modelo.TP_LINK).setVisible(true);
     }//GEN-LAST:event_jMenuItem22ActionPerformed
 
     private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
-        new HistoricoView(this, false, Equipamento.CHIMA).setVisible(true);
+        new HistoricoView(this, false, Modelo.CHIMA).setVisible(true);
     }//GEN-LAST:event_jMenuItem16ActionPerformed
 
     private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
-        new HistoricoView(this, false, Equipamento.ZYXEL).setVisible(true);
+        new HistoricoView(this, false, Modelo.ZYXEL).setVisible(true);
     }//GEN-LAST:event_jMenuItem18ActionPerformed
 
     private void jMenuItem20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem20ActionPerformed
-        new HistoricoView(this, false, Equipamento.SUMEC).setVisible(true);
+        new HistoricoView(this, false, Modelo.SUMEC).setVisible(true);
     }//GEN-LAST:event_jMenuItem20ActionPerformed
 
     private void jMenuItem24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem24ActionPerformed
-        new HistoricoView(this, false, Equipamento.EASY_LINK).setVisible(true);
+        new HistoricoView(this, false, Modelo.EASY_LINK).setVisible(true);
     }//GEN-LAST:event_jMenuItem24ActionPerformed
 
     private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
-        new HistoricoView(this, false, Equipamento.NEXT_FIBER).setVisible(true);
+        new HistoricoView(this, false, Modelo.NEXT_FIBER).setVisible(true);
     }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
-        new HistoricoView(this, false, Equipamento.HUAWEI_ECO).setVisible(true);
+        new HistoricoView(this, false, Modelo.HUAWEI_ECO).setVisible(true);
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
-        new HistoricoView(this, false, Equipamento.HUAWEI_ECO).setVisible(true);
+        new HistoricoView(this, false, Modelo.HUAWEI_ECO).setVisible(true);
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     private void jMenuItem25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem25ActionPerformed
@@ -686,6 +716,17 @@ public class View extends javax.swing.JFrame {
         nokiaView.setVisible(false);
         nokiaView.setVisible(true);
     }//GEN-LAST:event_jMenuItem32ActionPerformed
+
+    private void jMenuItem34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem34ActionPerformed
+        br.com.planet.view.equipamentos.EquipamentoView mw301r = new br.com.planet.view.equipamentos.EquipamentoView(new MercusysMW301RControle());
+        
+        mw301r.setVisible(true);
+        
+    }//GEN-LAST:event_jMenuItem34ActionPerformed
+
+    private void jMenuItem35ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem35ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem35ActionPerformed
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -719,6 +760,8 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu19;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu20;
+    private javax.swing.JMenu jMenu21;
+    private javax.swing.JMenu jMenu22;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
@@ -754,6 +797,8 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem31;
     private javax.swing.JMenuItem jMenuItem32;
     private javax.swing.JMenuItem jMenuItem33;
+    private javax.swing.JMenuItem jMenuItem34;
+    private javax.swing.JMenuItem jMenuItem35;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
@@ -762,7 +807,7 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuItem menuListarTabela;
-    private br.com.planet.src.PainelImagemFundo painelImagemFundo2;
+    private br.com.planet.src.PainelImagemFundo painelImagemFundo1;
     // End of variables declaration//GEN-END:variables
 
     private void atualizaRodape() {

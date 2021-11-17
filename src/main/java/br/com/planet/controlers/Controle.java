@@ -11,6 +11,7 @@ import java.util.List;
 import br.com.planet.model.bean.Equipamento;
 import br.com.planet.model.bean.Manutencao;
 import br.com.planet.util.PropertiesUtil;
+import br.com.planet.util.log.Log;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
@@ -52,7 +53,7 @@ public class Controle {
     String login;
     String senha;
     String title;
-    
+
     String name;
 
     int tipo;
@@ -73,12 +74,14 @@ public class Controle {
 
     int timeout;
 
+    boolean ppoe;
+
     public Controle() {
         WebDriverManager.chromedriver().setup();
         options = new ChromeOptions();
         historico = new ArrayList();
         m = new Manutencao();
-        timeout = 0;
+        timeout = 10;
     }
 
     public boolean start() throws Exception {
@@ -111,6 +114,10 @@ public class Controle {
             m.setPon(driver.findElement(By.xpath(xpathPon)).getText());
         } catch (Exception e) {
             System.out.println(getClass().getName() + " getPon Erro: " + e.getMessage());
+            Log.getInstance().write("Erro:"
+                    + "--Classe: " + getClass().getName()
+                    + "--Metodo: getPon();"
+                    + "--Descrição: " + e.getMessage());
             e.printStackTrace();
             throw new Exception(e);
         }
@@ -122,6 +129,10 @@ public class Controle {
             m.getEquipamento().setFirmware(driver.findElement(By.xpath(xpathFirmware)).getText());
         } catch (Exception e) {
             System.out.println(getClass().getName() + " getFirmware Erro: " + e.getMessage());
+            Log.getInstance().write("Erro:"
+                    + "--Classe: " + getClass().getName()
+                    + "--Metodo: getFirmware();"
+                    + "--Descrição: " + e.getMessage());
             throw new Exception(e);
         }
     }
@@ -132,6 +143,10 @@ public class Controle {
             m.getEquipamento().setSn(driver.findElement(By.xpath(xpathSn)).getText());
         } catch (Exception e) {
             System.out.println(getClass().getName() + " getSn Erro: " + e.getMessage());
+            Log.getInstance().write("Erro:"
+                    + "--Classe: " + getClass().getName()
+                    + "--Metodo: getSn();"
+                    + "--Descrição: " + e.getMessage());
             e.printStackTrace();
             throw new Exception(e);
 
@@ -147,7 +162,13 @@ public class Controle {
             this.btnLogin.click();
             return true;
         } catch (Exception e) {
+            Log.getInstance().write("Erro:"
+                    + "--Classe: " + getClass().getName()
+                    + "--Metodo: logar();"
+                    + "--Descrição: " + e.getMessage());
+
             throw new Exception(e);
+
         }
     }
 
@@ -159,6 +180,10 @@ public class Controle {
             driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
         } catch (Exception e) {
             System.out.println("Erro ao abrir: " + e.getMessage());
+            Log.getInstance().write("Erro:"
+                    + "--Classe: " + getClass().getName()
+                    + "--Metodo: open();"
+                    + "--Descrição: " + e.getMessage());
         }
     }
 
@@ -168,6 +193,10 @@ public class Controle {
             driver.quit();
         } catch (Exception e) {
             System.out.println("Erro ao fechar: " + e.getMessage());
+            Log.getInstance().write("Erro:"
+                    + "--Classe: " + getClass().getName()
+                    + "--Metodo: close();"
+                    + "--Descrição: " + e.getMessage());
         }
     }
 
@@ -176,9 +205,15 @@ public class Controle {
             m.setData(Utils.getAtualDate());
             Equipamento.salvar(m.getEquipamento());
             dao.salvar(m);
+        } catch (PatrimonioViolationException e) {
+            throw e;
         } catch (Exception e) {
             System.out.println("Erro ao salvar: " + e.getMessage());
-            throw new Exception(e);
+            Log.getInstance().write("Erro:"
+                    + "--Classe: " + getClass().getName()
+                    + "--Metodo: salvar();"
+                    + "--Descrição: " + e.getMessage());
+            throw e;
         }
     }
 
@@ -213,7 +248,7 @@ public class Controle {
     }
 
     public boolean needUpdate() {
-        if (firmwarePath == null){
+        if (firmwarePath == null) {
             return false;
         }
         return !m.getEquipamento().getFirmware().equals(firmwareAtualVersion);
@@ -286,13 +321,18 @@ public class Controle {
         this.firmwarePath = properties.getProperty("p.firmware.path");
         this.firmwareAtualVersion = properties.getProperty("p.firmware.atual");
         this.m.getEquipamento().setModelo(new ModeloDAO().buscar(properties.getProperty("name")));
-        
-        
-        
+
         Properties p = PropertiesUtil.getProperties(PropertiesUtil.PPOE_PROPERTIES_DIRECTORY);
         ppoeVlan = p.getProperty("p.ppoe.vlan");
         ppoeUser = p.getProperty("p.ppoe.login");
         ppoePass = p.getProperty("p.ppoe.password");
+
+        if (p.getProperty("p.ppoe.true") == "1") {
+            this.ppoe = true;
+        } else {
+            this.ppoe = false;
+        }
+
     }
 
     public String getTitle() {
@@ -303,4 +343,17 @@ public class Controle {
         return url;
     }
 
+    public boolean isPpoe() {
+        return ppoe;
+    }
+
+    public void writeLog(String method, String description) {
+        Log.getInstance().open();
+        Log.getInstance().write("*******************************************");
+        Log.getInstance().write(Utils.getAtualDate()+ ": " +getClass().getName()+"."+ method + "();");
+        Log.getInstance().write("Descrição: " + description);
+        Log.getInstance().write("*******************************************");
+        Log.getInstance().close();
+
+    }
 }

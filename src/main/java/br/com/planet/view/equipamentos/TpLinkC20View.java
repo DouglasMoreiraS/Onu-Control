@@ -7,7 +7,6 @@ public class TpLinkC20View extends EquipamentoView{
 
     public TpLinkC20View() {
         super(false);
-        setTitle(Equipamento.TP_LINK1);
         this.control = new TpLinkC20Controle();
         this.setTitle(control.getM().getEquipamento().getModelo().getNome());
     }

@@ -10,7 +10,6 @@ public class ZyxelView extends EquipamentoView {
     public ZyxelView() {
         super(false);
         getPainelImg().setImg(new ImageIcon(getClass().getResource("/images/zyxel.png")));
-        this.setTitle(Equipamento.ZYXEL);
     }
 
     @Override

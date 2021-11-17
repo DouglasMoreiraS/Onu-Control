@@ -1,7 +1,6 @@
 ping\pingTest.class
 taskkill\TaskKillTest.class
 NextFiberUpdateTest.class
-ViewTest\GraficoTeste.class
 ViewTest\HistoricoTest.class
 ViewTest\SeleniumTeste.class
 ViewTest\PingViewTest.class
@@ -10,6 +9,7 @@ nextTemperatura.class
 utilTest\UtilTest.class
 ordenatorTest.class
 daoTest\ModeloDAOTest.class
+utilTest\logTest.class
 BackupRestoreTest.class
 daoTest\EquipamentoDAOTest.class
 ordenatorTest$1.class

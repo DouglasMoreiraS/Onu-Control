@@ -13,7 +13,6 @@ public class ZyxelRouterControle extends Controle{
         this.login = "admin";
         this.senha = "@#Pl4n3t#@";
         this.driver = new ChromeDriver(options);
-        m.getEquipamento().setModelo(new ModeloDAO().buscar(Equipamento.ZYXEL_EMG5523));
     }
     
     @Override 

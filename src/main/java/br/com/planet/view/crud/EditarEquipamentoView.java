@@ -1,10 +1,7 @@
 package br.com.planet.view.crud;
 
 import br.com.planet.control.EquipamentoControl;
-import br.com.planet.exception.PatrimonioViolationException;
-import br.com.planet.exception.SerialNumberViolationException;
-import br.com.planet.util.Utils;
-import javax.swing.ImageIcon;
+import br.com.planet.util.ImagesUtil;
 import javax.swing.JOptionPane;
 
 public class EditarEquipamentoView extends javax.swing.JDialog {
@@ -278,37 +275,8 @@ public class EditarEquipamentoView extends javax.swing.JDialog {
     }//GEN-LAST:event_txtFirmwareActionPerformed
 
     private void cbModeloItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbModeloItemStateChanged
-        String path = Utils.getImgIcon(cbModelo.getSelectedItem().toString());
-        this.painelImagemFundo.setImg(new ImageIcon(getClass().getResource(path)));
+        this.painelImagemFundo.setImg(ImagesUtil.getImgIcon(control.getEquipamentoSelecionado().getModelo()));
     }//GEN-LAST:event_cbModeloItemStateChanged
-
-    public static void main(String args[]) {
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-
-                }
-            }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EditarEquipamentoView.class
-                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                EditarEquipamentoView dialog = new EditarEquipamentoView(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbModelo;
@@ -348,8 +316,7 @@ public class EditarEquipamentoView extends javax.swing.JDialog {
 
             cbStatus.setSelected(control.getEquipamentoSelecionado().isStatus());
 
-            String path = Utils.getImgIcon(control.getEquipamentoSelecionado().getModelo().getNome());
-            this.painelImagemFundo.setImg(new ImageIcon(getClass().getResource(path)));
+            this.painelImagemFundo.setImg(ImagesUtil.getImgIcon(control.getEquipamentoSelecionado().getModelo()));
         }
     }
 }

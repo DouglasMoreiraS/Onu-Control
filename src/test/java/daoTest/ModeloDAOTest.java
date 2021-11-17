@@ -6,11 +6,9 @@ import org.junit.Test;
 
 
 public class ModeloDAOTest {
-
     public void salvar(){
         
-        new ModeloDAO().salvar(new Modelo("Nokia G-140W-C"));
+        new ModeloDAO().salvar(new Modelo("Mercusys MW301R"));
         
     }
-    
 }

@@ -12,6 +12,20 @@ import javax.persistence.Id;
 @Entity
 public class Modelo implements Serializable {
 
+    
+    public static final String ZYXEL = "Zyxel";
+    public static final String CHIMA = "Chima";
+    public static final String SUMEC = "Sumec";
+    public static final String NEXT_FIBER = "Next Fiber";
+    public static final String DLINK = "D-link DIR-842";
+    public static final String HUAWEI_GPON = "Huawei GPON";
+    public static final String HUAWEI_ECO = "Huawei EchoLife";
+    public static final String TP_LINK = "Tp-Link WR840N";
+    public static final String TP_LINK1 = "Tp-Link Archer C20";
+    public static final String EASY_LINK = "Easy Link";
+    public static final String MERCUSYS_ROUTER_AC12G = "Mercusys AC12G";
+    public static final String ZYXEL_EMG5523  = "Zyxel EMG5523-T50B";
+    
     public static List<Modelo> getListaDeModelos() {
         return new ModeloDAO().listar();
     }
@@ -59,4 +73,5 @@ public class Modelo implements Serializable {
         this.nome = nome;
     }
 
+    
 }

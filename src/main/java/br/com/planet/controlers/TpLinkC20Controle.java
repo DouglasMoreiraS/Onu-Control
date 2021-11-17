@@ -1,21 +1,28 @@
 package br.com.planet.controlers;
 
-import br.com.planet.dao.ModeloDAO;
-import br.com.planet.model.bean.Equipamento;
-import br.com.planet.model.bean.Modelo;
+import br.com.planet.exception.OldFirmwareException;
 import br.com.planet.util.PropertiesUtil;
 import br.com.planet.util.Utils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 
 public class TpLinkC20Controle extends Controle {
 
+    private int modelo = 0; //Existem 2 modelos desse roteador: o BR e o W, o HTML deles são diferentes, então essa chave define qual o modelo conectado
+    //para que o codigo funcione
+    //0 = W
+    //1 = BR
+
+    private String brFirmwarePath;
+    private String wFirmwarePath;
+
     public TpLinkC20Controle() {
         super();
         timeout = 10;
         this.loadProperties(PropertiesUtil.PROPERTIES_DIRECTORY + "\\tplinkc20.properties");
+        brFirmwarePath = properties.getProperty("br.firmware.path");
+        wFirmwarePath = properties.getProperty("w.firmware.path");
     }
 
     public boolean logar() throws Exception {
@@ -23,43 +30,47 @@ public class TpLinkC20Controle extends Controle {
         try {
             driver.get(url);
 
-            String xpathLogin1 = "//*[@id=\"pc-setPwd-new\"]";
-            String xpathLogin2 = "//*[@id=\"pc-setPwd-confirm\"]";
-
-            String xpathLogin = "//*[@id=\"pc-login-password\"]";
-
-            if (Utils.existsElement(driver, xpathLogin1) && driver.findElement(By.xpath(xpathLogin1)).isDisplayed()) {
-                driver.findElement(By.xpath(xpathLogin1)).clear();
-                driver.findElement(By.xpath(xpathLogin1)).sendKeys(senha);
-                driver.findElement(By.xpath(xpathLogin2)).clear();
-                driver.findElement(By.xpath(xpathLogin2)).sendKeys(senha);
-                driver.findElement(By.xpath("//*[@id=\"pc-setPwd-btn\"]")).click();
-            } else if (Utils.existsElement(driver, xpathLogin)) {
-                driver.findElement(By.xpath(xpathLogin)).clear();
-                driver.findElement(By.xpath(xpathLogin)).sendKeys(senha);
-
-                driver.findElement(By.xpath("//*[@id=\"pc-login-btn\"]")).click();
-            }
-            
-            if (Utils.existsElement(driver, "//*[@id=\"confirm-yes\"]")) {
-
-                for (int tries = 2; tries != 0; tries--) {
-                    try {
-                        driver.findElement(By.xpath("//*[@id=\"confirm-yes\"]")).click();
-                    } catch (WebDriverException e) {
-
-                    }
-                }
-            }
-
-            
-
-            if (Utils.existsElement(driver, "//*[@id=\"advanced\"]")) {
-                System.out.println("Existe");
+            if (Utils.existsElement(driver, "//*[@id=\"pcPassword\"]") || Utils.existsElement(driver, "//*[@id=\"pcPassword\"]")) {
+                modelo = 1;
+                
                 return true;
             } else {
-                System.out.println("Nao existe");
-                return false;
+                String xpathLogin1 = "//*[@id=\"pc-setPwd-new\"]";
+                String xpathLogin2 = "//*[@id=\"pc-setPwd-confirm\"]";
+
+                String xpathLogin = "//*[@id=\"pc-login-password\"]";
+
+                if (Utils.existsElement(driver, xpathLogin1) && driver.findElement(By.xpath(xpathLogin1)).isDisplayed()) {
+                    driver.findElement(By.xpath(xpathLogin1)).clear();
+                    driver.findElement(By.xpath(xpathLogin1)).sendKeys(senha);
+                    driver.findElement(By.xpath(xpathLogin2)).clear();
+                    driver.findElement(By.xpath(xpathLogin2)).sendKeys(senha);
+                    driver.findElement(By.xpath("//*[@id=\"pc-setPwd-btn\"]")).click();
+                } else if (Utils.existsElement(driver, xpathLogin)) {
+                    driver.findElement(By.xpath(xpathLogin)).clear();
+                    driver.findElement(By.xpath(xpathLogin)).sendKeys(senha);
+
+                    driver.findElement(By.xpath("//*[@id=\"pc-login-btn\"]")).click();
+                }
+
+                if (Utils.existsElement(driver, "//*[@id=\"confirm-yes\"]")) {
+
+                    for (int tries = 2; tries != 0; tries--) {
+                        try {
+                            driver.findElement(By.xpath("//*[@id=\"confirm-yes\"]")).click();
+                        } catch (WebDriverException e) {
+
+                        }
+                    }
+                }
+
+                if (Utils.existsElement(driver, "//*[@id=\"advanced\"]")) {
+                    System.out.println("Existe");
+                    return true;
+                } else {
+                    System.out.println("Nao existe");
+                    return false;
+                }
             }
 
         } catch (Exception e) {

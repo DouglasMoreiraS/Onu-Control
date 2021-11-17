@@ -5,7 +5,9 @@ import java.io.IOException;
 
 public class ImagesPath {
     
-    private static final String IMAGE_FOLDER = "\\images\\";            
+    private static final String IMAGE_FOLDER = "\\images\\";
+    
+    
     
     public static final String getNextFiberFolder() throws IOException{
         return new File(".").getCanonicalPath() + IMAGE_FOLDER + "nextfiber.png";
