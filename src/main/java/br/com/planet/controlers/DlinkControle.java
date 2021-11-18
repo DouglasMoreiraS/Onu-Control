@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import br.com.planet.util.Utils;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.WebDriverException;
 
 public class DlinkControle extends Controle {
 
@@ -20,9 +21,12 @@ public class DlinkControle extends Controle {
         timeout = 10;
         this.loadProperties(PropertiesUtil.PROPERTIES_DIRECTORY + "\\dlink.properties");
         this.m.getEquipamento().setTipo(Controle.ROUTER_TYPE);
+        System.out.println(login);
     }
 
-    public boolean logar() throws Exception {
+    public boolean logar() throws WebDriverException {
+    
+    
         try {
             driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 
@@ -35,6 +39,7 @@ public class DlinkControle extends Controle {
             }
 
             if (Utils.existsElement(driver, "/html/body/div[8]/div[2]/form/div[1]/div[1]/label/div[1]")) {
+                System.out.println("Its here");
                 this.login = "Admin";
                 this.senha = "@#Pl4n3t#@";
             }
@@ -54,9 +59,10 @@ public class DlinkControle extends Controle {
                 }
                 btnLogin = driver.findElement(By.xpath("//*[@id=\"ngdialog1\"]/div[2]/form/div[2]/button[1]"));
             }
+             System.out.println(login);
             txtLogin.sendKeys(login);
             txtSenha.sendKeys(senha);
-
+            Thread.sleep(500);
             btnLogin.click();
 
             Thread.sleep(1000);
@@ -75,28 +81,36 @@ public class DlinkControle extends Controle {
                 Thread.sleep(1000);
                 txtLogin.sendKeys(login);
                 return false;
-            } catch (Exception e) {
+            } catch (InterruptedException ex) {
+                this.writeLog("logar", ex.getMessage());
+                return false;
+            } catch (WebDriverException e) {
                 return true;
             }
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println("Erro DLINK InternalLogar: " + e.getMessage());
+            this.writeLog("logar", e.getMessage());
             throw e;
+        } catch (InterruptedException ex) {
+            this.writeLog("logar", ex.getMessage());
+            return false;
         }
     }
 
-    public void getSn() throws Exception {
+    public void getSn() throws WebDriverException {
         try {
             driver.get(urlSn);
             WebDriverWait wait = new WebDriverWait(driver, 10);
             WebElement sn = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"mblock\"]/div[2]/div/div/div/div[1]/div[7]/span[2]")));
             m.getEquipamento().setSn(sn.getText());
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println("Erro DLINK getSN: " + e.getMessage());
-            throw new Exception(e);
+            this.writeLog("getSn", e.getMessage());
+            throw e;
         }
     }
 
-    public void getFirmware() throws Exception {
+    public void getFirmware() throws WebDriverException {
         try {
 
             driver.get(urlFirmware);
@@ -108,7 +122,6 @@ public class DlinkControle extends Controle {
             } catch (NoAlertPresentException e) {
                 System.out.println(e.getMessage());
             }
-            //WebElement firmwareElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[2]/div[2]/div[3]/div[2]/div[2]/div/div/div/div[1]/div[3]/span[2]/a")));
             WebElement firmwareElement = driver.findElement(By.xpath("/html/body/div[2]/div[2]/div[3]/div[2]/div[2]/div/div/div/div[1]/div[3]/span[2]/a"));
             String firmware = firmwareElement.getText();
 
@@ -120,13 +133,14 @@ public class DlinkControle extends Controle {
             }
             this.m.getEquipamento().setFirmware(firmware);
 
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println("Erro DLINK getFirmware " + e.getMessage());
+            this.writeLog("getFirmware", e.getMessage());
             throw e;
         }
     }
 
-    public void updateFirmware() throws Exception {
+    public void updateFirmware() throws WebDriverException {
 
         try {
             if (headless == true) {
@@ -161,8 +175,13 @@ public class DlinkControle extends Controle {
             this.logar();
             this.getFirmware();
 
-        } catch (Exception e) {
-            throw new Exception(e);
+        } catch (WebDriverException e) {
+            System.out.println("Erro DLink updateFirmware: " + e.getMessage());
+            this.writeLog("updateFirmware", e.getMessage());
+            throw e;
+        } catch (InterruptedException ex) {
+            this.writeLog("updateFirmware", ex.getMessage());
+
         }
     }
 
@@ -174,14 +193,15 @@ public class DlinkControle extends Controle {
             }
 
             return !m.getEquipamento().getFirmware().contains(firmwareAtualVersion);
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println("Erro Dlink NeedPreset: " + e.getMessage());
+            this.writeLog("needUpdate", e.getMessage());
             e.printStackTrace();
         }
         return false;
     }
 
-    private void primeiraConfiguracao() throws Exception {
+    private void primeiraConfiguracao() throws WebDriverException {
         try {
             //botoes
             Thread.sleep(2000);
@@ -202,13 +222,16 @@ public class DlinkControle extends Controle {
             Thread.sleep(3000);
             this.restart();
             driver.get(url);
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println("Erro Dlink Primeira Configuração: " + e.getMessage());
+            this.writeLog("primeiraConfiguracao", e.getMessage());
             throw e;
+        } catch (InterruptedException ex){
+            this.writeLog("primeiraConfiguracao", ex.getMessage());
         }
     }
 
-    public void ppoe() {
+    public void ppoe() throws WebDriverException{
 
         try {
 
@@ -223,16 +246,16 @@ public class DlinkControle extends Controle {
 
             driver.findElement(By.xpath("/html/body/div[2]/div[2]/div[3]/div[2]/div[2]/div/ui-view/ui-view/div/form/div[3]/div/div/button")).click();
 
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println("Erro Dlink PPOE: " + e.getMessage());
+            this.writeLog("ppoe", e.getMessage());
             e.printStackTrace();
             throw e;
         }
 
     }
-    
-    
-    public void getPon()throws Exception{ 
+
+    public void getPon() throws WebDriverException {
     }
 
 }

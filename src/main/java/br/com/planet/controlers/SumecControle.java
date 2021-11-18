@@ -2,6 +2,7 @@ package br.com.planet.controlers;
 
 import br.com.planet.util.PropertiesUtil;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriverException;
 
 public class SumecControle extends Controle {
 
@@ -12,7 +13,7 @@ public class SumecControle extends Controle {
     }
 
     @Override
-    public boolean logar() throws Exception {
+    public boolean logar() throws WebDriverException {
         try {
             driver.get(url);
 
@@ -35,13 +36,13 @@ public class SumecControle extends Controle {
                 return true;
             }
 
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println("Erro SUMEC logar: " + e.getMessage());
-            throw new Exception(e);
+            throw new WebDriverException(e);
         }
     }
 
-    public void reset() throws Exception {
+    public void reset() throws WebDriverException {
 
         try {
             driver.get(urlReset);
@@ -57,22 +58,24 @@ public class SumecControle extends Controle {
                 }
             }
             this.atualizarInformacoes();
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println("Erro SUMEC reset: " + e.getMessage());
-            throw new Exception(e);
+            throw new WebDriverException(e);
+        }catch (InterruptedException ex){
+            
         }
     }
 
-    public void logout() throws Exception {
+    public void logout() throws WebDriverException {
         try {
             driver.get("http://192.168.101.1/admin/logout.asp");
             driver.findElement(By.xpath("/html/body/blockquote/form/input[1]")).click();
 
             driver.switchTo().alert().accept();
 
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println("Erro SUMEC logout: " + e.getMessage());
-            throw new Exception(e);
+            throw new WebDriverException(e);
         }
     }
 

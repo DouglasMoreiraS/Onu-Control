@@ -76,6 +76,8 @@ public class Controle {
 
     boolean ppoe;
 
+    String path;
+
     public Controle() {
         WebDriverManager.chromedriver().setup();
         options = new ChromeOptions();
@@ -84,76 +86,67 @@ public class Controle {
         timeout = 10;
     }
 
-    public boolean start() throws Exception {
+    public boolean start() throws WebDriverException {
         try {
 
             if (logar()) {
                 atualizarInformacoes();
                 return true;
             }
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             throw e;
         }
         return false;
     }
 
-    public boolean pingar() throws Exception {
+    public boolean pingar() throws WebDriverException {
 
         try {
             driver.get(url);
             if (driver.getTitle().equals(title));
             return true;
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             return false;
         }
     }
 
-    public void getPon() throws Exception {
+    public void getPon() throws WebDriverException {
+
         try {
             driver.get(urlPon);
             m.setPon(driver.findElement(By.xpath(xpathPon)).getText());
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println(getClass().getName() + " getPon Erro: " + e.getMessage());
-            Log.getInstance().write("Erro:"
-                    + "--Classe: " + getClass().getName()
-                    + "--Metodo: getPon();"
-                    + "--Descrição: " + e.getMessage());
-            e.printStackTrace();
-            throw new Exception(e);
+            this.writeLog("getPon", e.getMessage());
+            throw e;
         }
     }
 
-    public void getFirmware() throws Exception {
+    public void getFirmware() throws WebDriverException {
+
         try {
             driver.get(urlFirmware);
             m.getEquipamento().setFirmware(driver.findElement(By.xpath(xpathFirmware)).getText());
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println(getClass().getName() + " getFirmware Erro: " + e.getMessage());
-            Log.getInstance().write("Erro:"
-                    + "--Classe: " + getClass().getName()
-                    + "--Metodo: getFirmware();"
-                    + "--Descrição: " + e.getMessage());
-            throw new Exception(e);
+            this.writeLog("getFirmware", e.getMessage());
+            throw e;
         }
     }
 
-    public void getSn() throws Exception {
+    public void getSn() throws WebDriverException {
         try {
             driver.get(urlSn);
             m.getEquipamento().setSn(driver.findElement(By.xpath(xpathSn)).getText());
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println(getClass().getName() + " getSn Erro: " + e.getMessage());
-            Log.getInstance().write("Erro:"
-                    + "--Classe: " + getClass().getName()
-                    + "--Metodo: getSn();"
-                    + "--Descrição: " + e.getMessage());
-            e.printStackTrace();
-            throw new Exception(e);
+            this.writeLog("getSn", e.getMessage());
+            throw e;
 
         }
     }
 
-    public boolean logar() throws Exception {
+    public boolean logar() throws WebDriverException {
         try {
             this.driver.get(url);
 
@@ -161,13 +154,10 @@ public class Controle {
             this.txtSenha.sendKeys(this.senha);
             this.btnLogin.click();
             return true;
-        } catch (Exception e) {
-            Log.getInstance().write("Erro:"
-                    + "--Classe: " + getClass().getName()
-                    + "--Metodo: logar();"
-                    + "--Descrição: " + e.getMessage());
+        } catch (WebDriverException e) {
+            this.writeLog("logar", e.getMessage());
 
-            throw new Exception(e);
+            throw new WebDriverException(e);
 
         }
     }
@@ -178,25 +168,19 @@ public class Controle {
             options.setHeadless(this.headless);
             driver = new ChromeDriver(options);
             driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
-        } catch (Exception e) {
+            this.loadProperties(this.path);
+        } catch (WebDriverException e) {
             System.out.println("Erro ao abrir: " + e.getMessage());
-            Log.getInstance().write("Erro:"
-                    + "--Classe: " + getClass().getName()
-                    + "--Metodo: open();"
-                    + "--Descrição: " + e.getMessage());
+            this.writeLog("open", e.getMessage());
         }
     }
 
     public void close() {
         try {
-            //       Thread.sleep(3);
             driver.quit();
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println("Erro ao fechar: " + e.getMessage());
-            Log.getInstance().write("Erro:"
-                    + "--Classe: " + getClass().getName()
-                    + "--Metodo: close();"
-                    + "--Descrição: " + e.getMessage());
+            this.writeLog("close", e.getMessage());
         }
     }
 
@@ -205,14 +189,12 @@ public class Controle {
             m.setData(Utils.getAtualDate());
             Equipamento.salvar(m.getEquipamento());
             dao.salvar(m);
+            m = new Manutencao();
         } catch (PatrimonioViolationException e) {
             throw e;
         } catch (Exception e) {
             System.out.println("Erro ao salvar: " + e.getMessage());
-            Log.getInstance().write("Erro:"
-                    + "--Classe: " + getClass().getName()
-                    + "--Metodo: salvar();"
-                    + "--Descrição: " + e.getMessage());
+            this.writeLog("salvar", e.getMessage());
             throw e;
         }
     }
@@ -254,14 +236,14 @@ public class Controle {
         return !m.getEquipamento().getFirmware().equals(firmwareAtualVersion);
     }
 
-    public void updateFirmware() throws Exception {
+    public void updateFirmware() throws WebDriverException {
     }
 
-    public void reset() throws Exception {
+    public void reset() throws WebDriverException {
 
     }
 
-    void atualizarInformacoes() throws Exception {
+    void atualizarInformacoes() throws WebDriverException {
         try {
             this.getSn();
             this.getPon();
@@ -269,8 +251,8 @@ public class Controle {
             this.findHistorico();
             this.getPatrimonio();
             this.getStatus();
-        } catch (Exception e) {
-            throw (e);
+        } catch (WebDriverException e) {
+            throw e;
         }
     }
 
@@ -297,6 +279,7 @@ public class Controle {
     }
 
     protected void loadProperties(String path) {
+        this.path = path;
         properties = PropertiesUtil.getProperties(path);
 
         this.url = properties.getProperty("p.url.main");
@@ -350,7 +333,7 @@ public class Controle {
     public void writeLog(String method, String description) {
         Log.getInstance().open();
         Log.getInstance().write("*******************************************");
-        Log.getInstance().write(Utils.getAtualDate()+ ": " +getClass().getName()+"."+ method + "();");
+        Log.getInstance().write(Utils.getAtualDate() + ": " + getClass().getName() + "." + method + "();");
         Log.getInstance().write("Descrição: " + description);
         Log.getInstance().write("*******************************************");
         Log.getInstance().close();

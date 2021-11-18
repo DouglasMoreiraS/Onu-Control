@@ -5,6 +5,7 @@ import br.com.planet.util.PropertiesUtil;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class EasyLinkControle extends Controle {
@@ -16,7 +17,7 @@ public class EasyLinkControle extends Controle {
     }
 
     @Override
-    public boolean logar() throws Exception {
+    public boolean logar() throws WebDriverException {
 
         try {
 
@@ -36,40 +37,42 @@ public class EasyLinkControle extends Controle {
             } catch (Exception e) {
                 return true;
             }
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println("Erro EasyLInk logar " + e.getMessage());
             throw e;
         }
     }
 
-    public void logout() throws Exception {
+    public void logout() throws WebDriverException {
         try {
             driver.get("http://192.168.101.8/admin/logout.asp");
             driver.findElement(By.xpath("/html/body/blockquote/form/input[1]")).click();
             Alert popup = driver.switchTo().alert();
             popup.accept();
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println("Erro EasyLink logout: " + e.getMessage());
-            throw new Exception(e);
+            throw new WebDriverException(e);
         }
     }
 
     @Override
-    public void reset() throws Exception {
+    public void reset() throws WebDriverException {
         try {
             driver.get(urlReset);
             driver.findElement(By.xpath("/html/body/blockquote/table[2]/tbody/tr[3]/td[2]/font/input")).click();
             driver.switchTo().alert().accept();
             Thread.sleep(60000);
             this.start();
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println("Erro EasyLink Reset: " + e.getMessage());
-            throw new Exception(e);
+            throw new WebDriverException(e);
+        }catch (InterruptedException ex){
+            
         }
     }
 
     @Override
-    public void updateFirmware() throws Exception {
+    public void updateFirmware() throws WebDriverException {
         try {
 
             driver.get(urlUpdate);
@@ -93,9 +96,11 @@ public class EasyLinkControle extends Controle {
                 }
             }
 
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println("Erro EasyLink UpdateFirmware: " + e.getMessage());
             throw e;
+        }catch (InterruptedException ex){
+            
         }
     }
 

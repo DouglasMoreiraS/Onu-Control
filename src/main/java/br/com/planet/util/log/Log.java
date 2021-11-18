@@ -1,13 +1,9 @@
 package br.com.planet.util.log;
 
-import br.com.planet.util.Utils;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Log {
 
@@ -58,7 +54,7 @@ public class Log {
         Log.getInstance().open();
         Log.getInstance().write("************************");
         Log.getInstance().write(message);
-        Log.getInstance().write("************************");
+        Log.getInstance().write("************************\n\n");
         Log.getInstance().close();
     }
 

@@ -18,7 +18,7 @@ public class TpLinkWR840NControle extends Controle {
 
     }
 
-    public boolean logar() throws Exception {
+    public boolean logar() throws WebDriverException {
 
         try {
             driver.get(url);
@@ -60,7 +60,7 @@ public class TpLinkWR840NControle extends Controle {
                 return false;
             }
 
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println("Erro TPLINK logar: " + e.getMessage());
             this.writeLog("logar", e.getMessage());
             throw e;
@@ -72,12 +72,12 @@ public class TpLinkWR840NControle extends Controle {
     }
 
     @Override
-    public void getSn() throws Exception {
+    public void getSn() throws WebDriverException {
         try {
             this.sendMeMainPage();
-            
+
             Thread.sleep(2000);
-            
+
             driver.findElement(By.xpath("//*[@id=\"menuTree\"]/li[3]/a")).click();
             Thread.sleep(500);
             driver.findElement(By.xpath("//*[@id=\"menuTree\"]/li[3]/ul/li[2]/a")).click();
@@ -94,11 +94,13 @@ public class TpLinkWR840NControle extends Controle {
             System.out.println("Erro TPLINK getSn: " + e.getMessage());
             this.writeLog("getSn", e.getMessage());
             throw e;
+        } catch (InterruptedException ex) {
+            this.writeLog("getSn", ex.getMessage());
         }
 
     }
 
-    public void getFirmware() throws Exception {
+    public void getFirmware() throws WebDriverException {
         try {
             sendMeMainPage();
 
@@ -111,13 +113,11 @@ public class TpLinkWR840NControle extends Controle {
             m.getEquipamento().setFirmware((firmware.substring(firmware.indexOf(":") + 1, firmware.indexOf("Rel."))).trim());
 
         } catch (WebDriverException e) {
-            
-            System.out.println("getLocalizedMessage: " + e.getLocalizedMessage());
-            System.out.println("getMessage: " + e.getMessage());
-            
             System.out.println("Erro TPLINK getFirmware: " + e.getMessage());
             this.writeLog("getFirmware", e.getMessage());
             throw e;
+        }catch (InterruptedException ex){
+            
         }
     }
 
@@ -128,7 +128,7 @@ public class TpLinkWR840NControle extends Controle {
             WebElement firmwarePathElement = driver.findElement(By.xpath("//*[@id=\"filename\"]"));
             firmwarePathElement.sendKeys(firmwarePath);
             driver.findElement(By.xpath("//*[@id=\"t_upgrade\"]")).click();
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println("Erro TPLINK WR840N updateFirmware: " + e.getMessage());
             this.writeLog("updateFirmware", e.getMessage());
         }
@@ -146,10 +146,10 @@ public class TpLinkWR840NControle extends Controle {
                     }
                 }
             }
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println("Erro TPLINK Main Page: " + e.getMessage());
             this.writeLog("sendMeMainPage", e.getMessage());
-            
+
             throw e;
         }
 

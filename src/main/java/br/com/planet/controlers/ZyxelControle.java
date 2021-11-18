@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import br.com.planet.util.Utils;
+import org.openqa.selenium.WebDriverException;
 
 public class ZyxelControle extends Controle {
 
@@ -71,7 +72,7 @@ public class ZyxelControle extends Controle {
     }
 
     @Override
-    public boolean logar() throws Exception {
+    public boolean logar() throws WebDriverException {
         try {
 
             if (isLoged()) {
@@ -87,16 +88,18 @@ public class ZyxelControle extends Controle {
 
             driver.findElement(By.xpath("/html/body/form/div/table/tbody/tr/td/table[5]/tbody/tr/td/div/table/tbody/tr[2]/td/table/tbody/tr[3]/td/input[1]")).click();
             return true;
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println("Erro Zyxel InternalLogar: " + e.getMessage());
-            throw new Exception(e);
+            throw new WebDriverException(e);
+        }catch (InterruptedException ex){
+            return false;
         }
 
     }
 
 
     @Override
-    public void updateFirmware() throws Exception {
+    public void updateFirmware() throws WebDriverException {
 
         try {
 
@@ -135,13 +138,15 @@ public class ZyxelControle extends Controle {
                 } catch (Exception e) {
                 }
             }
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println("Erro Zyxel Update Firmware: " + e.getMessage());
-            throw new Exception(e);
+            throw new WebDriverException(e);
+        }catch (InterruptedException ex){
+            
         }
     }
 
-    public void reset() throws InterruptedException, Exception {
+    public void reset() throws  WebDriverException {
         try {
             driver.get("http://192.168.1.1/cgi-bin/tools_system.asp");
             driver.findElement(By.xpath("/html/body/form/table[1]/tbody/tr[4]/td[5]/input")).click();
@@ -164,9 +169,11 @@ public class ZyxelControle extends Controle {
 
             this.logar();
             System.out.println("Passei aqui");
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println("Erro Zyxel Update Reset: " + e.getMessage());
-            throw new Exception(e);
+            throw new WebDriverException(e);
+        }catch (InterruptedException ex){
+            
         }
     }
 

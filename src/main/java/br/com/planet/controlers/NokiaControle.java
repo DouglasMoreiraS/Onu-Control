@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 import br.com.planet.util.PropertiesUtil;
 import org.openqa.selenium.By;
 import br.com.planet.util.Utils;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 
 public class NokiaControle extends Controle {
@@ -15,21 +16,21 @@ public class NokiaControle extends Controle {
         this.tipo = Controle.ONT_TYPE;
     }
 
-    public boolean pingar() throws Exception {
+    public boolean pingar() throws WebDriverException {
         try {
             driver.manage().timeouts().pageLoadTimeout(3, TimeUnit.SECONDS);
             driver.get(url);
             driver.getTitle();
             return driver.getTitle().equals(title);
 
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println(Utils.getAtualDate() + " ERRO: Nokia pingar: " + e.getMessage());
-            throw new Exception(e);
+            throw e;
         }
     }
 
     @Override
-    public boolean logar() throws Exception {
+    public boolean logar() throws WebDriverException {
         try {
             driver.get(url);
             driver.findElement(By.xpath("//*[@id=\"username\"]")).clear();
@@ -39,46 +40,46 @@ public class NokiaControle extends Controle {
 
             driver.findElement(By.xpath("/html/body/form/table/tbody/tr[2]/td[2]/table/tbody/tr[4]/td[1]/input")).click();
             return true;
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println("ERRO: Nokia logar: " + e.getMessage());
-            throw new Exception(e);
+            throw e;
         }
     }
 
-    public void getPon() throws Exception {
+    public void getPon() throws WebDriverException {
         try {
             driver.navigate().refresh();
             driver.switchTo().frame(driver.findElement(By.xpath("//*[@id=\"content\"]/tbody/tr[2]/td[3]/iframe")));
             m.setPon(driver.findElement(By.xpath("//*[@id=\"Table_pon5_2_table\"]")).getText());
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println("ERRO: Nokia getPon: " + e.getMessage());
-            throw new Exception(e);
+            throw e;
         }
     }
 
-    public void getFirmware() throws Exception {
+    public void getFirmware() throws WebDriverException {
         try {
             driver.navigate().refresh();
             driver.switchTo().frame(driver.findElement(By.xpath("//*[@id=\"content\"]/tbody/tr[2]/td[3]/iframe")));
             m.getEquipamento().setFirmware(driver.findElement(By.xpath("//*[@id=\"Table_base6_2_table\"]")).getText());
         } catch (Exception e) {
             System.out.println("ERRO: " + name + " getFirmware: " + e.getMessage());
-            throw new Exception(e);
+            throw e;
         }
     }
 
-    public void getSn() throws Exception {
+    public void getSn() throws WebDriverException {
         try {
             driver.navigate().refresh();
             driver.switchTo().frame(driver.findElement(By.xpath("//*[@id=\"content\"]/tbody/tr[2]/td[3]/iframe")));
             m.getEquipamento().setSn(driver.findElement(By.xpath("//*[@id=\"Table_base4_2_table\"]")).getText());
         } catch (Exception e) {
             System.out.println("ERRO: Huawei Eco getSn: " + e.getMessage());
-            throw new Exception(e);
+            throw e;
         }
     }
 
-    public void reset() throws Exception {
+    public void reset() throws WebDriverException {
 
         try {
             driver.navigate().refresh();
@@ -106,9 +107,9 @@ public class NokiaControle extends Controle {
             }
 
             this.atualizarInformacoes();
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println("ERRO:" + name + " Reset : " + e.getMessage());
-            throw new Exception(e);
+            throw e;
         }
     }
 
@@ -165,7 +166,7 @@ public class NokiaControle extends Controle {
 
             driver.findElement(By.xpath("//*[@id=\"do_edit\"]")).click();
 
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             e.printStackTrace();
             throw (e);
         }

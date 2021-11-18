@@ -134,6 +134,7 @@ br\com\planet\control\EquipamentoControl.class
 br\com\planet\view\PropertiesView$5.class
 br\com\planet\view\View$7.class
 br\com\planet\control\HistoricoControl.class
+br\com\planet\util\TrayIconDemo.class
 br\com\planet\view\View$14.class
 br\com\planet\view\PpoeConfigView$2.class
 br\com\planet\view\crud\EditarEquipamentoView$5.class

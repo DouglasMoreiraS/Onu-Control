@@ -3,6 +3,7 @@ package br.com.planet.controlers;
 import br.com.planet.dao.ModeloDAO;
 import br.com.planet.model.bean.Equipamento;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class ZyxelRouterControle extends Controle{
@@ -16,7 +17,7 @@ public class ZyxelRouterControle extends Controle{
     }
     
     @Override 
-    public boolean logar()throws Exception{ 
+    public boolean logar()throws WebDriverException{ 
         
         try {
             driver.get(url);
@@ -24,7 +25,7 @@ public class ZyxelRouterControle extends Controle{
             driver.findElement(By.xpath("/html/body/div/div/div[4]/form/div[1]/div[1]/div/input")).sendKeys(login);
             driver.findElement(By.xpath("/html/body/div/div/div[4]/form/div[2]/div/div[1]/input[1]")).sendKeys(senha);
             driver.findElement(By.xpath("/html/body/div/div/div[4]/form/div[4]/button")).click();
-        } catch (Exception e){
+        } catch (WebDriverException e){
             
         }
         return false;

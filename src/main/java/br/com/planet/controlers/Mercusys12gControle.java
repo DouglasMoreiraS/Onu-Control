@@ -2,8 +2,6 @@ package br.com.planet.controlers;
 
 import br.com.planet.util.PropertiesUtil;
 import br.com.planet.util.Utils;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.security.auth.login.LoginException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriverException;
@@ -17,7 +15,7 @@ public class Mercusys12gControle extends Controle {
         this.m.getEquipamento().setTipo(Controle.ROUTER_TYPE);
     }
 
-    public boolean logar() throws Exception {
+    public boolean logar() throws WebDriverException{
 
         try {
             driver.get(url);
@@ -40,17 +38,17 @@ public class Mercusys12gControle extends Controle {
 
                 if (Utils.existsElement(driver, "//*[@id=\"loginError\"]")) {
                     if (driver.findElement(By.xpath("//*[@id=\"loginError\"]")).isDisplayed()) {
-                        throw new LoginException("Aparelho precisa ser resetado manualmente para ser acessado");
+                  //      throw new LoginException("Aparelho precisa ser resetado manualmente para ser acessado");
                     }
                 }
             }
             return true;
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             throw e;
         }
     }
 
-    public void getSn() throws Exception {
+    public void getSn() throws WebDriverException {
         try {
             driver.findElement(By.xpath("//*[@id=\"headFunc\"]/li[2]")).click();
 
@@ -62,19 +60,19 @@ public class Mercusys12gControle extends Controle {
                 }
             }
             m.getEquipamento().setSn(driver.findElement(By.xpath("//*[@id=\"mac\"]")).getText());
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println(Utils.getAtualDate() + "Erro Mercusys getSn: " + e.getMessage());
             throw e;
         }
     }
 
-    public void getFirmware() throws Exception {
+    public void getFirmware() throws WebDriverException {
         try {
             driver.findElement(By.xpath("//*[@id=\"headFunc\"]/li[2]")).click();
 
             String firmware = driver.findElement(By.xpath("//*[@id=\"softVersion\"]")).getText();
             m.getEquipamento().setFirmware(firmware.substring(firmware.indexOf(":") + 1, firmware.indexOf("Rel")));
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println(Utils.getAtualDate() + "Erro Mercusys getFirmware: " + e.getMessage());
             throw e;
         }

@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class NextControle extends Controle {
@@ -36,14 +37,14 @@ public class NextControle extends Controle {
                 return true;
             }
             return false;
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             return false;
         }
 
     }
 
     @Override
-    public boolean logar() throws Exception {
+    public boolean logar() throws WebDriverException {
         try {
             driver.get(url);
             if (driver.getTitle().equals(title)) {
@@ -75,13 +76,13 @@ public class NextControle extends Controle {
 
             return driver.getTitle().equals(title);
 
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println("Erro NextFiber logar: " + e.getMessage());
-            throw new Exception(e);
+            throw new WebDriverException(e);
         }
     }
 
-    public void updateFirmware() throws InterruptedException, Exception {
+    public void updateFirmware() throws WebDriverException {
         try {
             driver.get(urlUpdate);
 
@@ -96,37 +97,30 @@ public class NextControle extends Controle {
             while (!driver.findElement(By.xpath("/html/body/div/div/div[2]")).getText().equals("100%")) {
             }
 
-            Thread.sleep(10000);
-            int cont = 0;
-
-            FileWriter arq = new FileWriter("C:\\firmwares\\nextfiber\\log.txt", true);
-            PrintWriter pwriter = new PrintWriter(arq);
-            pwriter.println(Utils.getAtualDate() + " start");
+            Thread.sleep(60000);
 
             while (true) {
                 try {
                     this.logar();
                     break;
-                } catch (Exception e) {
+                } catch (WebDriverException e) {
                 }
-                cont++;
 
             }
-            System.out.println(cont);
-            pwriter.println(Utils.getAtualDate() + " finish: " + cont + System.lineSeparator() + " ************" + System.lineSeparator());
-            pwriter.close();
 
             this.m.setUpdate(true);
             this.atualizarInformacoes();
 
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println("Next Fiber Erro Update Firmware" + e.getMessage());
-            throw new Exception(e);
+            throw new WebDriverException(e);
+        } catch (InterruptedException ex){
+            
         }
 
     }
 
-    public void reset() throws Exception {
+    public void reset() throws WebDriverException {
         try {
             driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
             driver.get(urlReset);
@@ -140,14 +134,16 @@ public class NextControle extends Controle {
             this.logar();
             this.atualizarInformacoes();
             this.setWifiPassword();
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println("NextFiber erro reset: " + e.getMessage());
-            throw new Exception(e);
+            throw new WebDriverException(e);
+        } catch (InterruptedException ex){
+            
         }
 
     }
 
-    public void setWifiPassword() throws Exception {
+    public void setWifiPassword() throws WebDriverException {
         try {
             driver.get(urlWifiConfig);
 
@@ -157,9 +153,9 @@ public class NextControle extends Controle {
 
             driver.findElement(By.xpath("/html/body/form/div[2]/input[3]")).click();
 
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println("NextFiber erro setWifiPass: " + e.getMessage());
-            throw new Exception(e);
+            throw new WebDriverException(e);
         }
     }
 
@@ -175,12 +171,12 @@ public class NextControle extends Controle {
             driver.findElement(By.xpath("/html/body/form/div[2]/div[2]/table/tbody/tr[2]/td/input[1]")).sendKeys(ppoePass);
             driver.findElement(By.xpath("/html/body/form/div[8]/input[5]")).click();
 
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println("Erro Next PPOE: " + e.getMessage());
         }
     }
 
-    public void getFirmware() throws Exception {
+    public void getFirmware() throws WebDriverException {
         try {
             driver.get(urlFirmware);
             m.getEquipamento().setFirmware(driver.findElement(By.xpath(xpathFirmware)).getText());
@@ -190,9 +186,9 @@ public class NextControle extends Controle {
                 m.setObservacao("Aparelho Novo");
             }
 
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println(getClass().getName() + " getFirmware Erro: " + e.getMessage());
-            throw new Exception(e);
+            throw new WebDriverException(e);
         }
     }
 

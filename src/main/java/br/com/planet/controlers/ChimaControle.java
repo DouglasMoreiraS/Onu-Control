@@ -2,6 +2,7 @@ package br.com.planet.controlers;
 
 import br.com.planet.util.PropertiesUtil;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriverException;
 
 public class ChimaControle extends Controle {
 
@@ -13,7 +14,7 @@ public class ChimaControle extends Controle {
     }
 
     @Override
-    public boolean logar() throws Exception {
+    public boolean logar() throws WebDriverException {
 
         try {
             driver.get(url);
@@ -34,24 +35,26 @@ public class ChimaControle extends Controle {
                 return true;
             }
 
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println("Erro Chima logar: " + e.getMessage());
-            throw new Exception(e);
+            throw new WebDriverException(e);
         }
 
     }
 
     @Override
-    public void reset() throws Exception {
+    public void reset() throws WebDriverException {
         try {
             driver.get(urlReset);
             driver.findElement(By.xpath("/html/body/blockquote/table[2]/tbody/tr[3]/td[2]/font/input")).click();
             driver.switchTo().alert().accept();
             Thread.sleep(60000);
             this.start();
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println("Erro Chima Reset: " + e.getMessage());
-            throw new Exception(e);
+            throw new WebDriverException(e);
+        }catch(InterruptedException ex){
+            
         }
     }
 

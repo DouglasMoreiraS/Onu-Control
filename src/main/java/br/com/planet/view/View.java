@@ -29,7 +29,7 @@ public class View extends javax.swing.JFrame {
     TpLinkView tpLinkView;
     TpLinkC20View tpLinkc20View;
     EasyLinkView easyLinkView;
-    DlinkView dlinkView;
+    br.com.planet.view.equipamentos.EquipamentoView dlinkView;
     MercusysRouterView mercusysView;
     NokiaView nokiaView;
 
@@ -539,7 +539,7 @@ public class View extends javax.swing.JFrame {
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         if (dlinkView == null) {
-            dlinkView = new DlinkView();
+            dlinkView = new br.com.planet.view.equipamentos.EquipamentoView(new DlinkControle());
         }
         dlinkView.setVisible(false);
         dlinkView.setVisible(true);

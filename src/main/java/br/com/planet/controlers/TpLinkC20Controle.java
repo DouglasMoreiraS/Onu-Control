@@ -1,6 +1,5 @@
 package br.com.planet.controlers;
 
-import br.com.planet.exception.OldFirmwareException;
 import br.com.planet.util.PropertiesUtil;
 import br.com.planet.util.Utils;
 import org.openqa.selenium.By;
@@ -9,7 +8,8 @@ import org.openqa.selenium.WebElement;
 
 public class TpLinkC20Controle extends Controle {
 
-    private int modelo = 0; //Existem 2 modelos desse roteador: o BR e o W, o HTML deles são diferentes, então essa chave define qual o modelo conectado
+    private int modelo = 0; 
+    //Existem 2 modelos desse roteador: o BR e o W, o HTML deles são diferentes, então essa chave define qual o modelo conectado
     //para que o codigo funcione
     //0 = W
     //1 = BR
@@ -25,7 +25,7 @@ public class TpLinkC20Controle extends Controle {
         wFirmwarePath = properties.getProperty("w.firmware.path");
     }
 
-    public boolean logar() throws Exception {
+    public boolean logar() throws WebDriverException {
 
         try {
             driver.get(url);
@@ -73,7 +73,7 @@ public class TpLinkC20Controle extends Controle {
                 }
             }
 
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println("Erro TPLINK logar: " + e.getMessage());
             throw e;
         }
@@ -83,7 +83,7 @@ public class TpLinkC20Controle extends Controle {
     }
 
     @Override
-    public void getSn() throws Exception {
+    public void getSn() throws WebDriverException {
         try {
             this.sendMeMainPage();
 
@@ -96,14 +96,16 @@ public class TpLinkC20Controle extends Controle {
             String serial = sn.getAttribute("value");
 
             m.getEquipamento().setSn(serial);
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println("Erro TPLINK getSn: " + e.getMessage());
             throw e;
+        }catch (InterruptedException ex){
+            
         }
 
     }
 
-    public void getFirmware() throws Exception {
+    public void getFirmware() throws WebDriverException {
         try {
             sendMeMainPage();
 
@@ -113,7 +115,7 @@ public class TpLinkC20Controle extends Controle {
 
             m.getEquipamento().setFirmware(firmware.substring(firmware.indexOf(":") + 1, firmware.indexOf("Rel.")));
 
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println("Erro TPLINK getFirmware: " + e.getMessage());
             throw e;
         }
@@ -126,7 +128,7 @@ public class TpLinkC20Controle extends Controle {
             WebElement firmwarePathElement = driver.findElement(By.xpath("//*[@id=\"filename\"]"));
             firmwarePathElement.sendKeys(firmwarePath);
             driver.findElement(By.xpath("//*[@id=\"t_upgrade\"]")).click();
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println("Erro TPLINK WR840N updateFirmware: " + e.getMessage());
         }
     }
@@ -137,7 +139,7 @@ public class TpLinkC20Controle extends Controle {
             if (Utils.existsElement(driver, "//*[@id=\"advanced\"]")) {
                 driver.findElement(By.xpath("//*[@id=\"advanced\"]")).click();
             }
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println("Erro TPLINK Main Page: " + e.getMessage());
             throw e;
         }

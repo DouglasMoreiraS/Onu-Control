@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 import br.com.planet.util.PropertiesUtil;
 import org.openqa.selenium.By;
 import br.com.planet.util.Utils;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 
 public class HuaweiControle extends Controle {
@@ -16,21 +17,21 @@ public class HuaweiControle extends Controle {
     }
 
     
-    public boolean pingar() throws Exception{
+    public boolean pingar() throws WebDriverException{
         try {
             driver.manage().timeouts().pageLoadTimeout(3, TimeUnit.SECONDS);
             driver.get(url);
             driver.getTitle();
             return driver.getTitle().equals(title);
 
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println(Utils.getAtualDate() + " ERRO: Huawei Eco pingar: " + e.getMessage());
-            throw new Exception(e);
+            throw new WebDriverException(e);
         }
     }
 
     @Override
-    public boolean logar() throws Exception {
+    public boolean logar() throws WebDriverException{
         try {
             driver.get(url);
             driver.findElement(By.xpath("/html/body/div[2]/table/tbody/tr[2]/td/table/tbody/tr[1]/td[3]/input")).clear();
@@ -40,62 +41,62 @@ public class HuaweiControle extends Controle {
 
             driver.findElement(By.xpath("/html/body/div[2]/table/tbody/tr[2]/td/table/tbody/tr[2]/td[3]/button")).click();
             return true;
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println("ERRO: Huawei Eco logar: " + e.getMessage());
-            throw new Exception(e);
+            throw new WebDriverException(e);
         }
     }
 
-    public void getPon() throws Exception {
+    public void getPon() throws WebDriverException {
         try {
             driver.navigate().refresh();
             driver.findElement(By.xpath("/html/body/div/div[2]/div[1]/ul/li[7]")).click();
             driver.switchTo().frame(driver.findElement(By.id("frameContent")));
             m.setPon(driver.findElement(By.xpath("/html/body/table[1]/tbody/tr[4]/td[2]")).getText());
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println("ERRO: Huawei Eco getPon: " + e.getMessage());
-            throw new Exception(e);
+            throw new WebDriverException(e);
         }
     }
 
-    public void getFirmware() throws Exception {
+    public void getFirmware() throws WebDriverException {
         try {
             driver.navigate().refresh();
             driver.switchTo().frame(driver.findElement(By.id("frameContent")));
             m.getEquipamento().setFirmware(driver.findElement(By.xpath("/html/body/form/div/table/tbody/tr[7]/td[2]")).getText());
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println("ERRO: Huawei Eco getFirmware: " + e.getMessage());
-            throw new Exception(e);
+            throw new WebDriverException(e);
         }
     }
 
-    public void getSn() throws Exception {
+    public void getSn() throws WebDriverException {
         try {
             driver.navigate().refresh();
             driver.switchTo().frame(driver.findElement(By.id("frameContent")));
             String sn = driver.findElement(By.xpath("/html/body/form/div/table/tbody/tr[4]/td[2]")).getText();
             m.getEquipamento().setSn(sn.substring(sn.indexOf("(") + 1, sn.indexOf(")")));
             System.out.println("MAC: " + m.getEquipamento().getSn());
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println("ERRO: Huawei Eco getSn: " + e.getMessage());
-            throw new Exception(e);
+            throw new WebDriverException(e);
         }
     }
 
-    private void getId() throws Exception {
+    private void getId() throws WebDriverException {
 
         try {
             driver.navigate().refresh();
             driver.switchTo().frame(driver.findElement(By.id("frameContent")));
             String id = (driver.findElement(By.xpath("/html/body/form/div/table/tbody/tr[3]/td[2]")).getText());
             m.setObservacao(id.substring(id.indexOf(":") + 1, id.indexOf("/CHIP")));
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println("ERRO: Huawei Eco getID: " + e.getMessage());
-            throw new Exception(e);
+            throw new WebDriverException(e);
         }
     }
 
-    public void reset() throws Exception {
+    public void reset() throws WebDriverException {
 
         try {
             driver.navigate().refresh();
@@ -113,14 +114,16 @@ public class HuaweiControle extends Controle {
                 try {
                     this.logar();
                     break;
-                } catch (Exception e) {
+                } catch (WebDriverException e) {
                 }
             }
             
             this.atualizarInformacoes();
-        } catch (Exception e) {
+        } catch (WebDriverException e) {
             System.out.println("ERRO: Huawei Eco Reset (InterruptedException): " + e.getMessage());
-            throw new Exception(e);
+            throw new WebDriverException(e);
+        } catch (InterruptedException e){
+            this.writeLog("reset", e.getMessage());
         }
     }
 
@@ -173,7 +176,7 @@ public class HuaweiControle extends Controle {
             driver.findElement(By.xpath("/html/body/form/div[2]/table/tbody[1]/tr[18]/td[2]/input")).clear();
             driver.findElement(By.xpath("/html/body/form/div[2]/table/tbody[1]/tr[18]/td[2]/input")).sendKeys(ppoePass);
             driver.findElement(By.xpath("/html/body/form/table[2]/tbody/tr/td[2]/input[2]")).click();
-        }catch (Exception e){
+        }catch (WebDriverException e){
             e.printStackTrace();
             throw (e);
         }
