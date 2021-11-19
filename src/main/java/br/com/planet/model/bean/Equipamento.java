@@ -16,9 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
 @Entity
-public class Equipamento implements Serializable {
-    
-    
+public class Equipamento implements Serializable, Comparable<Equipamento>{
+
     public static final String UNKNOWN = "Unknown";
 
     @Id
@@ -116,8 +115,8 @@ public class Equipamento implements Serializable {
     public void setModelo(Modelo m) {
         this.modelo = m;
     }
-    
-    public void setModelo(String m){
+
+    public void setModelo(String m) {
         this.modelo = new ModeloDAO().buscar(m);
     }
 
@@ -141,14 +140,14 @@ public class Equipamento implements Serializable {
                 }
             }
             ModeloDAO dao1 = new ModeloDAO();
-            
+
             Modelo mm = dao1.buscar(e.getModelo().getNome());
-            
-            if (mm == null){
+
+            if (mm == null) {
                 System.out.println("é nulo");
                 new ModeloDAO().salvar(e.getModelo());
             }
-            
+
             dao.salvar(e);
 
             return true;
@@ -161,7 +160,7 @@ public class Equipamento implements Serializable {
         if (e.getSn().equals("")) {
             throw new SerialNumberViolationException("Serial Number não pode ser nulo");
         } else if (e.getModelo().equals("")) {
-            
+
         } else if (e.getFirmware().equals("")) {
             e.setFirmware(Equipamento.UNKNOWN);
         }
@@ -183,13 +182,14 @@ public class Equipamento implements Serializable {
     }
 
     public static int getQuantidadeDeEquipamentos(String nome) {
-        List <Equipamento> retorno = new EquipamentoDAO().buscarPorModelo(new ModeloDAO().buscar(nome));
-        
-        if (retorno == null)
+        List<Equipamento> retorno = new EquipamentoDAO().buscarPorModelo(new ModeloDAO().buscar(nome));
+
+        if (retorno == null) {
             return 0;
-        else
+        } else {
             return retorno.size();
-        
+        }
+
     }
 
     public static void deletar(Equipamento e) throws DeleteViolationException {
@@ -201,6 +201,9 @@ public class Equipamento implements Serializable {
         }
     }
 
-
+    @Override
+    public int compareTo(Equipamento o) {
+        return this.modelo.getNome().compareTo(o.getModelo().getNome());
+    }
 
 }

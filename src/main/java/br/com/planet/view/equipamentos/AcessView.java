@@ -14,55 +14,50 @@ import br.com.planet.util.TrayIconDemo;
 import br.com.planet.util.log.Log;
 import br.com.planet.view.crud.HistoricoView;
 import java.awt.AWTException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-public class EquipamentoView extends javax.swing.JFrame {
-    
+public class AcessView extends javax.swing.JFrame {
+
     static final int NO_SIGNAL = 0;
     static final int CONNECT = 1;
     static final int UPDATE = 2;
     static final int RESET = 3;
-    
+
     Controle control;
     int keyConnection;
-    
+
     Thread chima;
     Thread chimaPing;
-    
+
     int flagUpdate;
     int flagReset;
-    
-    public EquipamentoView() {
-        initComponents();
-    }
-    
-    public EquipamentoView(boolean ppoe) {
+
+    public AcessView(boolean ppoe) {
         initComponents();
         btnPpoe.setVisible(ppoe);
-        
+
         txtObservacao.setLineWrap(true); // para quebrar a linha
         txtObservacao.setWrapStyleWord(false);
-        
+
         controlaTela("init");
         windowListener();
     }
-    
-    public EquipamentoView(Controle control) {
+
+    public AcessView(Controle control) {
+
         initComponents();
-        
         this.control = control;
-        this.btnPpoe.setVisible(control.isPpoe());
-        
-        this.getPainelImg().setImg(ImagesUtil.getImgIcon(control.getM().getEquipamento().getModelo()));
-        
-        txtObservacao.setLineWrap(true); // para quebrar a linha
+
+        this.getPainelImg().setImg(ImagesUtil.getImgIcon(control.getM().getEquipamento().getModelo())); //Setando a imagem do modelo.
+        this.setTitle(control.getM().getEquipamento().getModelo().getNome()); //Setando o nome do modelo no title do jFrame.
+
+//         Esses dois comandos são para quebrar a linha do txtObservação
+        txtObservacao.setLineWrap(true);
         txtObservacao.setWrapStyleWord(false);
-        
+
         controlaTela("init");
         windowListener();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -413,44 +408,44 @@ public class EquipamentoView extends javax.swing.JFrame {
         controlaTela("init");
         controlaTela("wait");
         new Thread(() -> {
-            
+
             if (control != null) {
                 try {
                     control.close();
                 } catch (Exception e) {
                 }
             }
-            
+
             try {
                 control.open(cbNavegador.isSelected());
                 if (conectar()) {
                     preencherCampos();
-                    
+
                     if (cbAutoConfig.isSelected()) {
-                        
+
                         if (control.needUpdate()) {
                             atualizar();
                         }
                         resetar();
                     }
-                    
+
                     controlaTela("ready");
-                    JOptionPane.showMessageDialog(EquipamentoView.this, "Done", "Done", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(AcessView.this, "Done", "Done", JOptionPane.INFORMATION_MESSAGE);
                 }
             } catch (OldFirmwareException ex) {
-                controlaBar(EquipamentoView.NO_SIGNAL);
+                controlaBar(AcessView.NO_SIGNAL);
                 JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.WARNING_MESSAGE);
                 control.close();
                 controlaTela("start");
             } catch (Exception e) {
                 e.printStackTrace();
-                
-                controlaBar(EquipamentoView.NO_SIGNAL);
+
+                controlaBar(AcessView.NO_SIGNAL);
                 JOptionPane.showMessageDialog(this, "Erro de conexão: \n \n", "Erro", JOptionPane.WARNING_MESSAGE);
                 control.close();
                 controlaTela("start");
             }
-            
+
         }).start();
     }//GEN-LAST:event_btnConectarActionPerformed
 
@@ -463,27 +458,29 @@ public class EquipamentoView extends javax.swing.JFrame {
                 this.control.getM().getEquipamento().setPatrimonio(txtPatrimonio.getText());
                 this.control.getM().getEquipamento().setStatus(cbAtivo.isSelected());
                 control.save();
-                
+
                 JOptionPane.showMessageDialog(this, "Salvo com sucesso", "Salvar", JOptionPane.INFORMATION_MESSAGE);
-                
+
                 controlaTela("start");
                 controlaBar(NO_SIGNAL);
                 this.btnSalvar.setText("Salvar");
                 control.close();
-                
+
             } catch (PatrimonioViolationException e) {
-                JOptionPane.showMessageDialog(this, e.getMessage(), "Esse patrimonio já está cadastrado", JOptionPane.WARNING_MESSAGE);
+
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Erro", JOptionPane.WARNING_MESSAGE);
                 this.btnSalvar.setText("Salvar");
-                this.btnSalvar.setEnabled(true);
+                this.controlaTela("ready");
+
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, "Erro ao salvar", "Erro", JOptionPane.ERROR_MESSAGE);
-                
+
                 controlaTela("start");
                 controlaBar(NO_SIGNAL);
                 this.btnSalvar.setText("Salvar");
                 control.close();
             }
-            
+
         }).start();
 
     }//GEN-LAST:event_btnSalvarActionPerformed
@@ -497,7 +494,7 @@ public class EquipamentoView extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Erro ao atualizar", "Atualização", JOptionPane.ERROR_MESSAGE);
                 control.close();
             } finally {
-                
+
             }
         }).start();
     }//GEN-LAST:event_btnUpdateFirmwareActionPerformed
@@ -530,28 +527,12 @@ public class EquipamentoView extends javax.swing.JFrame {
             } finally {
                 this.btnPpoe.setText("PPOE");
                 controlaTela("ready");
-                controlaBar(EquipamentoView.CONNECT);
+                controlaBar(AcessView.CONNECT);
             }
-            
+
         }).start();
     }//GEN-LAST:event_btnPpoeActionPerformed
-    
-    public static void main(String args[]) {
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EquipamentoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        
-        java.awt.EventQueue.invokeLater(() -> {
-            new EquipamentoView().setVisible(true);
-        });
-    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JProgressBar barConnection;
@@ -590,7 +571,7 @@ public class EquipamentoView extends javax.swing.JFrame {
     boolean conectar() throws Exception {
         try {
             if (control.start()) {
-                controlaBar(EquipamentoView.CONNECT);
+                controlaBar(AcessView.CONNECT);
                 return true;
             } else {
                 throw new Exception();
@@ -599,11 +580,11 @@ public class EquipamentoView extends javax.swing.JFrame {
             throw (e);
         }
     }
-    
+
     void controlaTela(String estado) {
-        
+
         switch (estado) {
-            
+
             case "wait" -> {
                 cbNavegador.setEnabled(false);
                 cbAutoConfig.setEnabled(false);
@@ -617,8 +598,9 @@ public class EquipamentoView extends javax.swing.JFrame {
                 this.btnHistorico.setEnabled(false);
                 this.txtObservacao.setEnabled(false);
                 this.txtPatrimonio.setEnabled(true);
+
             }
-            
+
             case "ready" -> {
                 cbNavegador.setEnabled(true);
                 cbAutoConfig.setEnabled(true);
@@ -629,7 +611,7 @@ public class EquipamentoView extends javax.swing.JFrame {
                 btnPpoe.setEnabled(true);
                 txtObservacao.setEnabled(true);
                 txtPatrimonio.setEnabled(true);
-                
+
                 if (!this.control.getHistorico().isEmpty()) {
                     this.tblHistorico.setVisible(true);
                     this.lblHistoricoInfo.setVisible(true);
@@ -641,150 +623,151 @@ public class EquipamentoView extends javax.swing.JFrame {
                     this.btnHistorico.setEnabled(true);
                     this.lblHistoricoInfo.setText(control.getHistorico().size() + " registros desse equipamento");
                 }
-                
+
                 try {
                     new TrayIconDemo().displayTray(lblModelo.getText(), "Done");
                 } catch (AWTException ex) {
                     Log.fastWrite("TrayIconDemo erro: " + ex.getMessage());
                 }
-                
+
             }
-            
+
             case "start" -> {
                 cbNavegador.setEnabled(true);
                 cbAutoConfig.setEnabled(true);
                 btnConectar.setText("Conectar");
                 btnConectar.setEnabled(true);
                 this.panelInformacoes.setVisible(false);
-                
+
                 this.lblModelo.setText("");
                 this.lblFirmware.setText("");
                 this.lblPon.setText("");
                 this.txtObservacao.setText("");
                 this.txtPatrimonio.setText("");
-                
+
                 this.btnPpoe.setEnabled(false);
                 this.btnSalvar.setEnabled(false);
                 this.btnReset.setEnabled(false);
                 this.btnUpdateFirmware.setEnabled(false);
                 this.txtObservacao.setEnabled(false);
                 this.txtPatrimonio.setEnabled(false);
-                
+
             }
-            
+
             case "init" -> {
                 this.barConnection.setStringPainted(true);
                 this.barConnection.setString("No Signal");
                 this.cbAutoConfig.setEnabled(true);
-                
+
                 this.btnConectar.setEnabled(true);
                 this.btnConectar.setText("Conectar");
                 this.tblHistorico.setVisible(false);
                 this.lblHistoricoInfo.setVisible(false);
                 this.btnHistorico.setVisible(false);
                 this.panelInformacoes.setVisible(false);
-                
+
                 this.lblModelo.setText("");
                 this.lblFirmware.setText("");
                 this.lblPon.setText("");
                 this.txtObservacao.setText("");
                 this.txtPatrimonio.setText("");
-                
+
+                this.btnPpoe.setVisible(control.isPpoe());
                 this.btnSalvar.setEnabled(false);
                 this.btnSalvar.setEnabled(false);
                 this.btnReset.setEnabled(false);
                 this.btnUpdateFirmware.setEnabled(false);
                 this.txtObservacao.setEnabled(false);
                 this.txtPatrimonio.setEnabled(false);
-                
+
                 this.keyConnection = 0;
             }
         }
     }
-    
+
     void controlaBar(int state) {
-        
+
         switch (state) {
-            
+
             case 0:
                 this.barConnection.setStringPainted(true);
                 this.barConnection.setString("Sem sinal");
                 this.barConnection.setValue(0);
                 break;
-            
+
             case 1:
                 this.barConnection.setString("Conectado");
                 this.barConnection.setValue(100);
                 break;
-            
+
             case 2:
                 this.barConnection.setString("Atualizando...");
                 this.barConnection.setValue(100);
                 break;
-            
+
             case 3:
                 this.barConnection.setString("Resetando...");
                 this.barConnection.setValue(100);
                 break;
         }
-        
+
     }
-    
+
     private void carregarTabela() {
         this.tblHistorico.setModel(new RemoteAcessTableModel(control.getHistorico()));
     }
-    
+
     public PainelImagemFundo getPainelImg() {
         return painelImagemFundo;
     }
-    
+
     void preencherCampos() {
-        
+
         lblModelo.setText(control.getM().getEquipamento().getModelo().getNome());
         lblFirmware.setText(control.getM().getEquipamento().getFirmware());
         lblPon.setText(control.getM().getPon());
         lblSn.setText(control.getM().getEquipamento().getSn());
         this.carregarTabela();
-        
+
         if (!control.getHistorico().isEmpty()) {
             panelHistorico.setVisible(true);
         }
-        
+
         txtObservacao.setText(control.getM().getObservacao());
-        
+
         String patrimonio = control.getM().getEquipamento().getPatrimonio();
-        
+
         if (patrimonio != null) {
             if (!patrimonio.equals("")) {
                 txtPatrimonio.setText(patrimonio);
             }
         }
-        
+
         cbAtivo.setSelected(control.getM().getEquipamento().isStatus());
-        
+
         this.panelInformacoes.setVisible(true);
-        
+
         this.btnConectar.setText("Reconectar");
-        
+
     }
-    
+
     public JPanel getPanelInformacoes() {
         return panelInformacoes;
     }
-    
+
     public boolean getCbNavegador() {
         return cbNavegador.isSelected();
     }
-    
+
     public void setControl() {
     }
-    
+
     private void atualizar() throws Exception {
         if (this.control.needUpdate()) {
             this.controlaBar(UPDATE);
             this.controlaTela("wait");
             this.flagUpdate = 1;
-            
+
             try {
                 this.btnUpdateFirmware.setText("Atualizando...");
                 control.updateFirmware();
@@ -799,12 +782,12 @@ public class EquipamentoView extends javax.swing.JFrame {
             }
         }
     }
-    
+
     private void resetar() throws Exception {
         controlaTela("wait");
-        controlaBar(EquipamentoView.RESET);
+        controlaBar(AcessView.RESET);
         this.flagReset = 1;
-        
+
         try {
             this.btnReset.setText("Resetando...");
             control.reset();
@@ -814,15 +797,21 @@ public class EquipamentoView extends javax.swing.JFrame {
         } finally {
             this.btnReset.setText("Resetar Configurações");
             controlaTela("ready");
-            controlaBar(EquipamentoView.CONNECT);
+            controlaBar(AcessView.CONNECT);
             flagReset = 0;
         }
     }
     
+    
+    /**
+    * Esse windowListener evita 
+    * que resquicios do driver fiquem ativos na memória
+    * (chromedriver.exe e chrome.exe por exemplo)
+    **/ 
     void windowListener() {
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-                
+
                 String message = "";
                 int resposta;
                 if (flagUpdate == 1) {
@@ -830,34 +819,29 @@ public class EquipamentoView extends javax.swing.JFrame {
                 } else if (flagReset == 1) {
                     message = "O equipamento está em processo de reset, tem certeza que deseja fechar?";
                 }
-                
+
                 if (!message.equals("")) {
                     resposta = JOptionPane.showConfirmDialog(null, message);
-                    
+
                     if (resposta == JOptionPane.CANCEL_OPTION || resposta == JOptionPane.NO_OPTION) {
                         return;
                     }
                 }
-                
+
                 if (chima != null) {
                     if (chima.isAlive()) {
-                        chima.stop();
+                        chima.interrupt();
                     }
+
                 }
-                
-                if (chimaPing != null) {
-                    if (chimaPing.isAlive()) {
-                        chimaPing.stop();
-                    }
-                }
-                
+
                 if (control != null) {
                     control.close();
                 }
-                
+
                 controlaTela("init");
-                EquipamentoView.this.dispose();
-                
+                AcessView.this.dispose();
+
             }
         });
     }

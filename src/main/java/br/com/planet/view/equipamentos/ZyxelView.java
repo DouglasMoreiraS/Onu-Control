@@ -5,7 +5,7 @@ import br.com.planet.model.bean.Equipamento;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-public class ZyxelView extends EquipamentoView {
+public class ZyxelView extends AcessView {
 
     public ZyxelView() {
         super(false);
@@ -14,7 +14,7 @@ public class ZyxelView extends EquipamentoView {
 
     @Override
     public void setControl() {
-        this.control = new ZyxelControle(getCbNavegador());
+        this.control = new ZyxelControle();
     }
 
     @Override
@@ -23,7 +23,7 @@ public class ZyxelView extends EquipamentoView {
         try {
             ((ZyxelControle) control).identificar();
             if (((ZyxelControle) control).getModel().equals("PMG2005-T20D")) {
-                controlaBar(EquipamentoView.CONNECT);
+                controlaBar(AcessView.CONNECT);
 
                 while (true) {
                     String senha = JOptionPane.showInputDialog(this, "Senha: ", "Senha");
@@ -43,7 +43,7 @@ public class ZyxelView extends EquipamentoView {
                 }
             }
             if (control.start()) {
-                controlaBar(EquipamentoView.CONNECT);
+                controlaBar(AcessView.CONNECT);
                 control.findHistorico();
                 preencherCampos();
                 return true;

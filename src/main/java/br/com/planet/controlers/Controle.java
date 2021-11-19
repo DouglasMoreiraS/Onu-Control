@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import br.com.planet.model.bean.Equipamento;
 import br.com.planet.model.bean.Manutencao;
+import br.com.planet.model.bean.Modelo;
 import br.com.planet.util.PropertiesUtil;
 import br.com.planet.util.log.Log;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -177,7 +178,8 @@ public class Controle {
 
     public void close() {
         try {
-            driver.quit();
+            if (driver != null)
+                driver.quit();
         } catch (WebDriverException e) {
             System.out.println("Erro ao fechar: " + e.getMessage());
             this.writeLog("close", e.getMessage());
@@ -327,7 +329,7 @@ public class Controle {
     }
 
     public boolean isPpoe() {
-        return ppoe;
+        return (m.getEquipamento().getTipo() != this.ONU_TYPE);
     }
 
     public void writeLog(String method, String description) {

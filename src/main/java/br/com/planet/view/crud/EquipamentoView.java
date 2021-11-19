@@ -662,20 +662,20 @@ public class EquipamentoView extends javax.swing.JDialog {
     }
 
     private void atualizaGrafico() {
-        pieDataSet = new DefaultPieDataset();
         String titulo;
-
+        JFreeChart grafico;
+        
         if (cbModelo.getSelectedItem().toString().equals("Todos")) {
             titulo = "Equipamentos Registrados";
 
             if (btnPatrimonio.isSelected()) {
                 titulo = titulo.concat(" (Patrimonio)");
-                pieDataSet = eqControl.getGrafico("patrimonio");
+                grafico = eqControl.getGrafico("patrimonio");
             } else if (btnStatus.isSelected()) {
                 titulo = titulo.concat(" (Status)");
-                pieDataSet = eqControl.getGrafico("status");
+                grafico = eqControl.getGrafico("status");
             } else {
-                pieDataSet = eqControl.getGrafico("");
+                grafico = eqControl.getGrafico("");
             }
         } else {
 
@@ -683,20 +683,19 @@ public class EquipamentoView extends javax.swing.JDialog {
 
             if (btnStatus.isSelected()) {
                 titulo = titulo.concat(" - Status");
-                pieDataSet = eqControl.getGrafico("status");
+                grafico = eqControl.getGrafico("status");
             } else if (btnPatrimonio.isSelected()) {
                 titulo = titulo.concat(" - Patrimonio");
-                pieDataSet = eqControl.getGrafico("patrimonio");
+                grafico = eqControl.getGrafico("patrimonio");
 
             } else if (btnFirmware.isSelected()) {
                 titulo = titulo.concat(" - Firmware");
-                pieDataSet = eqControl.getGrafico("firmware");
+                grafico = eqControl.getGrafico("firmware");
             } else {
-                pieDataSet = eqControl.getGrafico("contagem");
+                grafico = eqControl.getGrafico("contagem");
             }
         }
-
-        JFreeChart grafico = ChartFactory.createPieChart(titulo, pieDataSet, false, true, false);
+                
 
         //Peguei esse techo de codigo no GUJ, depois vou ler a documentação e aprimorar.
         ChartPanel myChartPanel = new ChartPanel(grafico, true); //criei o painel de grafico colocando meu grafico previamente gerado

@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 
 public class HuaweiControle extends Controle {
 
-    public HuaweiControle(boolean condition) {
+    public HuaweiControle() {
         super();
         loadProperties(PropertiesUtil.PROPERTIES_DIRECTORY + "\\huawei.properties");
         timeout = 5;

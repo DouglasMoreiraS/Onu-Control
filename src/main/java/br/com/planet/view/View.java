@@ -2,9 +2,18 @@ package br.com.planet.view;
 
 import br.com.planet.view.equipamentos.*;
 import br.com.planet.control.*;
+import br.com.planet.controlers.ChimaControle;
 import br.com.planet.controlers.DlinkControle;
+import br.com.planet.controlers.EasyLinkControle;
+import br.com.planet.controlers.HuaweiControle;
+import br.com.planet.controlers.Mercusys12gControle;
 import br.com.planet.controlers.MercusysMW301RControle;
 import br.com.planet.controlers.NextControle;
+import br.com.planet.controlers.NokiaControle;
+import br.com.planet.controlers.SumecControle;
+import br.com.planet.controlers.TpLinkC20Controle;
+import br.com.planet.controlers.TpLinkWR840NControle;
+import br.com.planet.controlers.ZyxelControle;
 import br.com.planet.dao.BackupAndRestore;
 import br.com.planet.model.bean.Equipamento;
 import br.com.planet.model.bean.Modelo;
@@ -21,17 +30,18 @@ public class View extends javax.swing.JFrame {
     HistoricoView hisView;
     ModeloView modeloView;
 
-    HuaweiEchoView huaweiView;
+    AcessView huaweiView;
     ZyxelView zyxelView;
-    ChimaView chimaView;
-    NextFiber nextView;
-    SumecView sumecView;
-    TpLinkView tpLinkView;
-    TpLinkC20View tpLinkc20View;
-    EasyLinkView easyLinkView;
-    br.com.planet.view.equipamentos.EquipamentoView dlinkView;
-    MercusysRouterView mercusysView;
-    NokiaView nokiaView;
+    AcessView chimaView;
+    AcessView nextView;
+    AcessView sumecView;
+    AcessView tpLinkView;
+    AcessView tpLinkc20View;
+    AcessView easyLinkView;
+    AcessView dlinkView;
+    AcessView mercusysac12gView;
+    AcessView mercusysMW301RView;
+    AcessView nokiaView;
 
     public View() {
         initComponents();
@@ -539,7 +549,7 @@ public class View extends javax.swing.JFrame {
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         if (dlinkView == null) {
-            dlinkView = new br.com.planet.view.equipamentos.EquipamentoView(new DlinkControle());
+            dlinkView = new br.com.planet.view.equipamentos.AcessView(new DlinkControle());
         }
         dlinkView.setVisible(false);
         dlinkView.setVisible(true);
@@ -547,7 +557,7 @@ public class View extends javax.swing.JFrame {
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
         if (huaweiView == null) {
-            huaweiView = new HuaweiEchoView();
+            huaweiView = new AcessView(new HuaweiControle());
         }
         huaweiView.setVisible(false);
         huaweiView.setVisible(true);
@@ -565,7 +575,7 @@ public class View extends javax.swing.JFrame {
 
     private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
         if (chimaView == null) {
-            chimaView = new ChimaView();
+            chimaView = new AcessView(new ChimaControle());
         }
 
         chimaView.setVisible(false);
@@ -574,7 +584,7 @@ public class View extends javax.swing.JFrame {
 
     private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
         if (nextView == null) {
-            nextView = new NextFiber();
+            nextView = new AcessView(new NextControle());
         }
 
         nextView.setVisible(false);
@@ -583,7 +593,7 @@ public class View extends javax.swing.JFrame {
 
     private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
         if (sumecView == null) {
-            sumecView = new SumecView();
+            sumecView = new AcessView(new SumecControle());
         }
         sumecView.setVisible(false);
         sumecView.setVisible(true);
@@ -592,7 +602,7 @@ public class View extends javax.swing.JFrame {
 
     private void jMenuItem21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem21ActionPerformed
         if (tpLinkView == null) {
-            tpLinkView = new TpLinkView();
+            tpLinkView = new AcessView(new TpLinkWR840NControle());
         }
         tpLinkView.setVisible(false);
         tpLinkView.setVisible(true);
@@ -600,7 +610,7 @@ public class View extends javax.swing.JFrame {
 
     private void jMenuItem23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem23ActionPerformed
         if (easyLinkView == null) {
-            easyLinkView = new EasyLinkView();
+            easyLinkView = new AcessView(new EasyLinkControle());
         }
 
         easyLinkView.setVisible(false);
@@ -644,16 +654,16 @@ public class View extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     private void jMenuItem25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem25ActionPerformed
-        if (mercusysView == null) {
-            mercusysView = new MercusysRouterView();
+        if (mercusysac12gView == null) {
+            mercusysac12gView = new AcessView(new Mercusys12gControle());
         }
-        mercusysView.setVisible(false);
-        mercusysView.setVisible(true);
+        mercusysac12gView.setVisible(false);
+        mercusysac12gView.setVisible(true);
     }//GEN-LAST:event_jMenuItem25ActionPerformed
 
 
     private void jMenuItem26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem26ActionPerformed
-        // TODO add your handling code here:
+       new HistoricoView(this, false, Modelo.MERCUSYS_ROUTER_AC12G).setVisible(true);
     }//GEN-LAST:event_jMenuItem26ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -695,7 +705,7 @@ public class View extends javax.swing.JFrame {
 
     private void jMenuItem30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem30ActionPerformed
          if (tpLinkc20View == null) {
-            tpLinkc20View = new TpLinkC20View();
+            tpLinkc20View = new AcessView(new TpLinkC20Controle());
         }
         tpLinkc20View.setVisible(false);
         tpLinkc20View.setVisible(true);
@@ -711,16 +721,18 @@ public class View extends javax.swing.JFrame {
 
     private void jMenuItem32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem32ActionPerformed
         if (nokiaView == null) {
-            nokiaView = new NokiaView();
+            nokiaView = new AcessView(new NokiaControle());
         }
         nokiaView.setVisible(false);
         nokiaView.setVisible(true);
     }//GEN-LAST:event_jMenuItem32ActionPerformed
 
     private void jMenuItem34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem34ActionPerformed
-        br.com.planet.view.equipamentos.EquipamentoView mw301r = new br.com.planet.view.equipamentos.EquipamentoView(new MercusysMW301RControle());
-        
-        mw301r.setVisible(true);
+        if (mercusysMW301RView==null){
+            mercusysMW301RView = new AcessView(new MercusysMW301RControle());
+        }
+        mercusysMW301RView.setVisible(false);
+        mercusysMW301RView.setVisible(true);
         
     }//GEN-LAST:event_jMenuItem34ActionPerformed
 

@@ -14,7 +14,6 @@ public class TpLinkWR840NControle extends Controle {
         timeout = 10;
         this.loadProperties(PropertiesUtil.PROPERTIES_DIRECTORY + "\\tplink.properties");
         tipo = Controle.ROUTER_TYPE;
-        this.m.setObservacao("Comodato");
 
     }
 
@@ -112,12 +111,14 @@ public class TpLinkWR840NControle extends Controle {
 
             m.getEquipamento().setFirmware((firmware.substring(firmware.indexOf(":") + 1, firmware.indexOf("Rel."))).trim());
 
+            this.m.setObservacao("Comodato");
+            
         } catch (WebDriverException e) {
             System.out.println("Erro TPLINK getFirmware: " + e.getMessage());
             this.writeLog("getFirmware", e.getMessage());
             throw e;
-        }catch (InterruptedException ex){
-            
+        } catch (InterruptedException ex) {
+
         }
     }
 

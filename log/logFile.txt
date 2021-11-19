@@ -132,3 +132,17 @@ Driver info: org.openqa.selenium.chrome.ChromeDriver
 Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 96.0.4664.45, chrome: {chromedriverVersion: 96.0.4664.45 (76e4c1bb2ab46..., userDataDir: C:\Users\PC_PLA~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:63341}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
 Session ID: 97f5f3945080d74696a1a7073f5a85a9
 *******************************************
+*******************************************
+19/11/2021 12:55:46: br.com.planet.controlers.DlinkControle.getSn();
+Descrição: Expected condition failed: waiting for presence of element located by: By.xpath: //*[@id="mblock"]/div[2]/div/div/div/div[1]/div[7]/span[2] (tried for 10 second(s) with 500 milliseconds interval)
+*******************************************
+*******************************************
+19/11/2021 13:02:06: br.com.planet.controlers.DlinkControle.logar();
+Descrição: unknown error: net::ERR_CONNECTION_TIMED_OUT
+  (Session info: headless chrome=96.0.4664.45)
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'DESKTOP-IRLCR5J', ip: '192.168.10.111', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '16.0.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 96.0.4664.45, chrome: {chromedriverVersion: 96.0.4664.45 (76e4c1bb2ab46..., userDataDir: C:\Users\PC_PLA~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:63323}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: 3c8ef2cf0225d10896623021f59bce21
+*******************************************

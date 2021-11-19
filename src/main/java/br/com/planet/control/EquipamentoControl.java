@@ -14,9 +14,15 @@ import br.com.planet.view.crud.EditarEquipamentoView;
 import br.com.planet.view.crud.HistoricoView;
 import java.awt.Frame;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.xml.bind.ValidationException;
+import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 
@@ -97,27 +103,32 @@ public class EquipamentoControl {
         }
     }
 
-    public DefaultPieDataset getGrafico(String tipo) {
+    public JFreeChart getGrafico(String titulo) {
 
-        switch (tipo) {
+        JFreeChart retorno;
+
+        switch (titulo) {
             case "status" -> {
-                return new GraficoEquipamentos().graficoStatus(equipamentoList);
+                retorno = ChartFactory.createPieChart(titulo, new GraficoEquipamentos().graficoStatus(equipamentoList), false, true, false);
             }
 
             case "patrimonio" -> {
-                return new GraficoEquipamentos().graficoPatrimonio(equipamentoList);
+                retorno = ChartFactory.createPieChart(titulo, new GraficoEquipamentos().graficoPatrimonio(equipamentoList), false, true, false);
             }
 
             case "firmware" -> {
-                return new GraficoEquipamentos().graficoFirmware(equipamentoList);
+                retorno = ChartFactory.createPieChart(titulo, new GraficoEquipamentos().graficoFirmware(equipamentoList), false, true, false);
+
             }
             case "contagem" -> {
-                return new GraficoEquipamentos().graficoContagem(equipamentoList);
+                retorno = ChartFactory.createPieChart(titulo, new GraficoEquipamentos().graficoContagem(equipamentoList), false, true, false);
             }
 
             default -> {
-                DefaultPieDataset pieDataSet = new DefaultPieDataset();
-
+                DefaultCategoryDataset barDataSet = new DefaultCategoryDataset();
+                
+                Collections.sort(equipamentoList);
+                
                 for (String s : this.getModelos()) {
 
                     int quantidade = 0;
@@ -128,15 +139,14 @@ public class EquipamentoControl {
                         }
                     }
                     if (quantidade > 0) {
-                        pieDataSet.setValue(s + "(" + quantidade + ")", quantidade);
+                        barDataSet.setValue(quantidade, "Equipamentos", s);
+                        //   pieDataSet.setValue(s + "(" + quantidade + ")", quantidade);
                     }
                 }
-                return pieDataSet;
-
+                retorno = ChartFactory.createBarChart("Ranking Equipamentos", "Equipamentos", "Quantidade", barDataSet, PlotOrientation.HORIZONTAL, true, false, false);
             }
-
         }
-
+        return retorno;
     }
 
     public String[] getModelos() {
