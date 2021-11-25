@@ -1,36 +1,28 @@
 package br.com.planet.controlers;
 
 import br.com.planet.exception.SemConexaoException;
-import br.com.planet.model.bean.Manutencao;
-import br.com.planet.util.FirmwarePath;
+import br.com.planet.util.PropertiesUtil;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.chrome.ChromeDriver;
 import br.com.planet.util.Utils;
 import org.openqa.selenium.WebDriverException;
 
 public class ZyxelControle extends Controle {
 
     private String model;
-
+    private String firmwareT20D;
+    private String firmwarePathT20D;
+    
     public ZyxelControle() {
         super();
-        driver = new ChromeDriver(options);
-        this.login = "admin";
-        this.senha = "1234";
-        this.url = "http://192.168.1.1";
-        this.title = "login";
-
-
-        this.urlSn = "http://192.168.1.1/cgi-bin/status_deviceinfo.asp";
-        this.urlFirmware = "http://192.168.1.1/cgi-bin/status_deviceinfo.asp";
-        this.urlPon = "http://192.168.1.1/cgi-bin/status_deviceinfo.asp";
-
-        this.xpathSn = "html/body/form/table[1]/tbody/tr[5]/td[5]";
-        this.xpathFirmware = "html/body/form/table[1]/tbody/tr[3]/td[5]";
-        this.xpathPon = "/html/body/form/table[2]/tbody/tr[6]/td[5]";
-
+        loadProperties(PropertiesUtil.PROPERTIES_DIRECTORY + "\\zyxel.properties");
+        tipo = this.ONU_TYPE;
+        
+        firmwareT20D = properties.getProperty("p.firmware.atual1");
+        firmwarePathT20D = properties.getProperty("p.firmware.path1");
+        
+        
     }
 
     public boolean pingar() {
@@ -47,7 +39,7 @@ public class ZyxelControle extends Controle {
     public boolean isLoged() {
         try {
             this.driver.get(url);
-            if ((driver.getTitle().equals("login")) && (Utils.existsElement(driver, "/html/body/form/div/table/tbody/tr/td/table[5]/tbody/tr/td/div/table/tbody/tr[2]/td/table/tbody/tr[1]/td[2]/input"))) {
+            if ((driver.getTitle().equals(title)) && (Utils.existsElement(driver, "/html/body/form/div/table/tbody/tr/td/table[5]/tbody/tr/td/div/table/tbody/tr[2]/td/table/tbody/tr[1]/td[2]/input"))) {
                 return false;
             }
             return true;
@@ -61,11 +53,12 @@ public class ZyxelControle extends Controle {
         return false;
     }
 
-    public void identificar() {
+    public boolean identificar() {
 
         try {
             driver.get(url);
             this.model = driver.findElement(By.xpath("/html/body/form/div/table/tbody/tr/td/table[3]/tbody/tr/td[2]/font")).getText();
+            return model.equals("PMG2005-T20B");
         } catch (Exception e) {
             throw new SemConexaoException(e.getMessage());
         }
@@ -106,12 +99,12 @@ public class ZyxelControle extends Controle {
             String file;
 
             if (this.model.equals("PMG2005-T20B")) {
-                file =FirmwarePath.ZYXEL_PMG2005_T20B;
+                file = firmwarePath;
             } else {
-                file =FirmwarePath.ZYXEL_PMG2005_T20D;
+                file = firmwarePathT20D;
             }
 
-            driver.get("http://192.168.1.1/cgi-bin/tools_update.asp");
+            driver.get(urlUpdate);
 
             Alert popup = driver.switchTo().alert();
             popup.accept();
@@ -148,7 +141,7 @@ public class ZyxelControle extends Controle {
 
     public void reset() throws  WebDriverException {
         try {
-            driver.get("http://192.168.1.1/cgi-bin/tools_system.asp");
+            driver.get(urlReset);
             driver.findElement(By.xpath("/html/body/form/table[1]/tbody/tr[4]/td[5]/input")).click();
 
             driver.findElement(By.xpath("/html/body/form/table[2]/tbody/tr/td[3]/input[4]")).click();
@@ -183,29 +176,16 @@ public class ZyxelControle extends Controle {
             driver.get("http://192.168.1.1/cgi-bin/status_deviceinfo.asp");
 
             if (this.model.equals("PMG2005-T20B")) {
-                return !driver.findElement(By.xpath("/html/body/form/table[1]/tbody/tr[3]/td[5]")).getText().equals("V1.00(ABNK.2)b9_C0");
+                return !driver.findElement(By.xpath("/html/body/form/table[1]/tbody/tr[3]/td[5]")).getText().equals(firmwareAtualVersion);
 
             } else {
-                return !driver.findElement(By.xpath("/html/body/form/table[1]/tbody/tr[3]/td[5]")).getText().equals("V1.00(ABUT.1)b1_C0");
+                return !driver.findElement(By.xpath("/html/body/form/table[1]/tbody/tr[3]/td[5]")).getText().equals(firmwareT20D);
             }
         } catch (Exception e) {
             System.out.println("Erro Zyxel NeedUpdate: " + e.getMessage());
 
         }
         return false;
-    }
-
-    public Manutencao getM() {
-        return m;
-    }
-
-    public String getLastMaintance() {
-
-        if (historico.isEmpty()) {
-            return "";
-        }
-
-        return historico.get(historico.size() - 1).getData();
     }
 
     public String getModel() {

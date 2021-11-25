@@ -2,12 +2,8 @@ package br.com.planet.view.crud;
 
 import br.com.planet.control.HistoricoControl;
 import br.com.planet.dao.ModeloDAO;
-import br.com.planet.model.bean.Equipamento;
-import br.com.planet.model.bean.Modelo;
-import br.com.planet.util.ImagesPath;
 import br.com.planet.util.ImagesUtil;
 import br.com.planet.util.PlainDocumentLimitado;
-import br.com.planet.util.Utils;
 import java.awt.Frame;
 import java.awt.event.KeyEvent;
 import java.util.logging.Level;
@@ -319,7 +315,7 @@ public class HistoricoView extends javax.swing.JDialog {
 
     private void tblHistoricoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHistoricoMouseClicked
         this.control.setHistoricoSelecionado(tblHistorico.getSelectedRow());
-        this.painelImagemFundo.setImg(ImagesUtil.getImgIcon(control.getHistoricoSelecionado().getEquipamento().getModelo()));
+        this.painelImagemFundo.setImg(ImagesUtil.getImgIcon(control.getHistoricoSelecionado().getEquipamento().getModelo().getNome()));
         this.painelImagemFundo.repaint();
         this.btnDeletar.setEnabled(true);
     }//GEN-LAST:event_tblHistoricoMouseClicked
@@ -464,7 +460,7 @@ public class HistoricoView extends javax.swing.JDialog {
         if (!cbModelo.getSelectedItem().toString().equals("Todos")) {
             modelo = cbModelo.getItemAt(cbModelo.getSelectedIndex());
 
-            this.painelImagemFundo.setImg(ImagesUtil.getImgIcon(new ModeloDAO().buscar(modelo)));
+            this.painelImagemFundo.setImg(ImagesUtil.getImgIcon(modelo));
             this.painelImagemFundo.repaint();
         }
 

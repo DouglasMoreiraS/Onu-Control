@@ -9,11 +9,6 @@ public class EditarEquipamentoView extends javax.swing.JDialog {
     EquipamentoControl control;
     int key;
 
-    public EditarEquipamentoView(java.awt.Frame parent, boolean modal) {
-        //   super(parent, modal);
-        //  initComponents();
-    }
-
     public EditarEquipamentoView(java.awt.Frame parent, boolean modal, EquipamentoControl control, int key) {
         super(parent, modal);
         initComponents();
@@ -275,7 +270,7 @@ public class EditarEquipamentoView extends javax.swing.JDialog {
     }//GEN-LAST:event_txtFirmwareActionPerformed
 
     private void cbModeloItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbModeloItemStateChanged
-        this.painelImagemFundo.setImg(ImagesUtil.getImgIcon(control.getEquipamentoSelecionado().getModelo()));
+        this.painelImagemFundo.setImg(ImagesUtil.getImgIcon(cbModelo.getSelectedItem().toString()));
     }//GEN-LAST:event_cbModeloItemStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -316,7 +311,7 @@ public class EditarEquipamentoView extends javax.swing.JDialog {
 
             cbStatus.setSelected(control.getEquipamentoSelecionado().isStatus());
 
-            this.painelImagemFundo.setImg(ImagesUtil.getImgIcon(control.getEquipamentoSelecionado().getModelo()));
+            this.painelImagemFundo.setImg(ImagesUtil.getImgIcon(control.getEquipamentoSelecionado().getModelo().getNome()));
         }
     }
 }

@@ -8,21 +8,16 @@ import javax.swing.JOptionPane;
 public class ZyxelView extends AcessView {
 
     public ZyxelView() {
-        super(false);
+        super(new ZyxelControle());
         getPainelImg().setImg(new ImageIcon(getClass().getResource("/images/zyxel.png")));
+        
     }
 
-    @Override
-    public void setControl() {
-        this.control = new ZyxelControle();
-    }
 
     @Override
     boolean conectar() throws Exception {
-
         try {
-            ((ZyxelControle) control).identificar();
-            if (((ZyxelControle) control).getModel().equals("PMG2005-T20D")) {
+            if (!((ZyxelControle)control).identificar()) {
                 controlaBar(AcessView.CONNECT);
 
                 while (true) {
@@ -44,15 +39,14 @@ public class ZyxelView extends AcessView {
             }
             if (control.start()) {
                 controlaBar(AcessView.CONNECT);
-                control.findHistorico();
-                preencherCampos();
                 return true;
+            } else {
+                throw new Exception();
             }
-            
+
         } catch (Exception e) {
             e.printStackTrace();
             throw e;
         }
-        return false;
     }
 }

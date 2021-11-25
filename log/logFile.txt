@@ -146,3 +146,83 @@ Driver info: org.openqa.selenium.chrome.ChromeDriver
 Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 96.0.4664.45, chrome: {chromedriverVersion: 96.0.4664.45 (76e4c1bb2ab46..., userDataDir: C:\Users\PC_PLA~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:63323}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
 Session ID: 3c8ef2cf0225d10896623021f59bce21
 *******************************************
+*******************************************
+25/11/2021 09:49:28: br.com.planet.controlers.ZyxelControle.getSn();
+Descrição: no such element: Unable to locate element: {"method":"xpath","selector":"html/body/form/table[1]/tbody/tr[5]/td[5]"}
+  (Session info: headless chrome=96.0.4664.45)
+For documentation on this error, please visit: https://www.seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'DESKTOP-IRLCR5J', ip: '192.168.10.114', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '16.0.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 96.0.4664.45, chrome: {chromedriverVersion: 96.0.4664.45 (76e4c1bb2ab46..., userDataDir: C:\Users\PC_PLA~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:56972}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: 8de24b4c31e6fcf2aafeee1a2731c2b3
+*** Element info: {Using=xpath, value=html/body/form/table[1]/tbody/tr[5]/td[5]}
+*******************************************
+*******************************************
+25/11/2021 10:54:08: br.com.planet.controlers.ZyxelControle.getSn();
+Descrição: unknown error: net::ERR_CONNECTION_TIMED_OUT
+  (Session info: headless chrome=96.0.4664.45)
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'DESKTOP-IRLCR5J', ip: '192.168.10.114', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '16.0.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 96.0.4664.45, chrome: {chromedriverVersion: 96.0.4664.45 (76e4c1bb2ab46..., userDataDir: C:\Users\PC_PLA~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:63385}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: 0ab9b736a6ad61ef48cfab21a9cd6719
+*******************************************
+*******************************************
+25/11/2021 11:00:06: br.com.planet.controlers.ZyxelControle.getSn();
+Descrição: no such element: Unable to locate element: {"method":"xpath","selector":"html/body/form/table[1]/tbody/tr[5]/td[5]"}
+  (Session info: headless chrome=96.0.4664.45)
+For documentation on this error, please visit: https://www.seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'DESKTOP-IRLCR5J', ip: '192.168.10.114', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '16.0.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 96.0.4664.45, chrome: {chromedriverVersion: 96.0.4664.45 (76e4c1bb2ab46..., userDataDir: C:\Users\PC_PLA~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:63924}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: 1aa3d7bf4e1477502a0fef73e529e2bf
+*** Element info: {Using=xpath, value=html/body/form/table[1]/tbody/tr[5]/td[5]}
+*******************************************
+*******************************************
+25/11/2021 11:00:34: br.com.planet.controlers.ZyxelControle.getSn();
+Descrição: unknown error: net::ERR_CONNECTION_TIMED_OUT
+  (Session info: headless chrome=96.0.4664.45)
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'DESKTOP-IRLCR5J', ip: '192.168.10.114', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '16.0.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 96.0.4664.45, chrome: {chromedriverVersion: 96.0.4664.45 (76e4c1bb2ab46..., userDataDir: C:\Users\PC_PLA~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:63924}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: 1aa3d7bf4e1477502a0fef73e529e2bf
+*******************************************
+*******************************************
+25/11/2021 11:13:41: br.com.planet.controlers.ZyxelControle.getSn();
+Descrição: no such element: Unable to locate element: {"method":"xpath","selector":"html/body/form/table[1]/tbody/tr[5]/td[5]"}
+  (Session info: headless chrome=96.0.4664.45)
+For documentation on this error, please visit: https://www.seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'DESKTOP-IRLCR5J', ip: '192.168.10.114', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '16.0.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 96.0.4664.45, chrome: {chromedriverVersion: 96.0.4664.45 (76e4c1bb2ab46..., userDataDir: C:\Users\PC_PLA~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:64772}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: 4a870e17c44afae1b7a616a2c9e02dd1
+*** Element info: {Using=xpath, value=html/body/form/table[1]/tbody/tr[5]/td[5]}
+*******************************************
+*******************************************
+25/11/2021 11:35:57: br.com.planet.controlers.ZyxelControle.getSn();
+Descrição: no such element: Unable to locate element: {"method":"xpath","selector":"html/body/form/table[1]/tbody/tr[5]/td[5]"}
+  (Session info: headless chrome=96.0.4664.45)
+For documentation on this error, please visit: https://www.seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'DESKTOP-IRLCR5J', ip: '192.168.10.114', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '16.0.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 96.0.4664.45, chrome: {chromedriverVersion: 96.0.4664.45 (76e4c1bb2ab46..., userDataDir: C:\Users\PC_PLA~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:49233}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: 0977b8f5078c967b5ee55961a3951811
+*** Element info: {Using=xpath, value=html/body/form/table[1]/tbody/tr[5]/td[5]}
+*******************************************
+*******************************************
+25/11/2021 12:11:21: br.com.planet.controlers.ZyxelControle.getSn();
+Descrição: no such element: Unable to locate element: {"method":"xpath","selector":"html/body/form/table[1]/tbody/tr[5]/td[5]"}
+  (Session info: headless chrome=96.0.4664.45)
+For documentation on this error, please visit: https://www.seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'DESKTOP-IRLCR5J', ip: '192.168.10.114', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '16.0.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 96.0.4664.45, chrome: {chromedriverVersion: 96.0.4664.45 (76e4c1bb2ab46..., userDataDir: C:\Users\PC_PLA~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:50771}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: 79aaa3e608b5a95307411f19d29e47c0
+*** Element info: {Using=xpath, value=html/body/form/table[1]/tbody/tr[5]/td[5]}
+*******************************************

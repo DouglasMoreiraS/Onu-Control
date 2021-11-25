@@ -1,9 +1,7 @@
 ping\pingTest.class
 taskkill\TaskKillTest.class
 NextFiberUpdateTest.class
-ViewTest\HistoricoTest.class
 ViewTest\SeleniumTeste.class
-ViewTest\PingViewTest.class
 ZyxelRouterTest.class
 nextTemperatura.class
 utilTest\UtilTest.class

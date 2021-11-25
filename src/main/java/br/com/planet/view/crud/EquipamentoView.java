@@ -417,7 +417,7 @@ public class EquipamentoView extends javax.swing.JDialog {
     private void tblEquipamentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEquipamentosMouseClicked
         if (tblEquipamentos.getSelectedRows().length != 0) {
             this.eqControl.setEquipamentoSelecionado(tblEquipamentos.getSelectedRow());
-            this.painelImagemFundo.setImg(ImagesUtil.getImgIcon(eqControl.getEquipamentoSelecionado().getModelo()));
+            this.painelImagemFundo.setImg(ImagesUtil.getImgIcon(eqControl.getEquipamentoSelecionado().getModelo().getNome()));
             this.painelImagemFundo.repaint();
 
             this.btnHistorico.setEnabled(true);
@@ -645,7 +645,7 @@ public class EquipamentoView extends javax.swing.JDialog {
         String modelo = "";
         if (!cbModelo.getSelectedItem().toString().equals("Todos")) {
             modelo = cbModelo.getItemAt(cbModelo.getSelectedIndex());
-            this.painelImagemFundo.setImg(ImagesUtil.getImgIcon(new ModeloDAO().buscar(modelo)));
+            this.painelImagemFundo.setImg(ImagesUtil.getImgIcon(modelo));
             this.painelImagemFundo.repaint();
         }
         String sn = txtSn.getText().trim();

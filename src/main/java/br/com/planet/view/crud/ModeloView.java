@@ -292,7 +292,7 @@ public class ModeloView extends javax.swing.JDialog {
 
     private void tblModelosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblModelosMouseClicked
         this.control.setModeloSelecionado(tblModelos.getSelectedRow());
-        this.painelImagemFundo1.setImg(ImagesUtil.getImgIcon(control.getModeloSelecionado()));
+        this.painelImagemFundo1.setImg(ImagesUtil.getImgIcon(control.getModeloSelecionado().getNome()));
         this.painelImagemFundo1.repaint();
 
         this.txtModelo.setText(control.getModeloSelecionado().getNome());

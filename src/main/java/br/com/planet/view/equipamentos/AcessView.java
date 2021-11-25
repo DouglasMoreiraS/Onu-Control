@@ -47,7 +47,7 @@ public class AcessView extends javax.swing.JFrame {
         initComponents();
         this.control = control;
 
-        this.getPainelImg().setImg(ImagesUtil.getImgIcon(control.getM().getEquipamento().getModelo())); //Setando a imagem do modelo.
+        this.getPainelImg().setImg(ImagesUtil.getImgIcon(control.getM().getEquipamento().getModelo().getNome())); //Setando a imagem do modelo.
         this.setTitle(control.getM().getEquipamento().getModelo().getNome()); //Setando o nome do modelo no title do jFrame.
 
 //         Esses dois comandos são para quebrar a linha do txtObservação
