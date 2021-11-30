@@ -11,6 +11,7 @@ public class ChimaControle extends Controle {
         timeout = 5;
         this.loadProperties(PropertiesUtil.PROPERTIES_DIRECTORY + "\\chima.properties");
         this.m.setObservacao("Aparelho Novo");
+        this.m.getEquipamento().setTipo(this.ONU_TYPE);
     }
 
     @Override

@@ -23,6 +23,7 @@ public class TpLinkC20Controle extends Controle {
         this.loadProperties(PropertiesUtil.PROPERTIES_DIRECTORY + "\\tplinkc20.properties");
         brFirmwarePath = properties.getProperty("br.firmware.path");
         wFirmwarePath = properties.getProperty("w.firmware.path");
+        this.m.getEquipamento().setTipo(this.ROUTER_TYPE);
     }
 
     public boolean logar() throws WebDriverException {

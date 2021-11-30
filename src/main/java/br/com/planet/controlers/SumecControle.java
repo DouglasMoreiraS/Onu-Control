@@ -10,6 +10,7 @@ public class SumecControle extends Controle {
         super();
         timeout = 10;
         this.loadProperties(PropertiesUtil.PROPERTIES_DIRECTORY + "\\sumec.properties");
+        this.m.getEquipamento().setTipo(Controle.ONU_TYPE);
     }
 
     @Override

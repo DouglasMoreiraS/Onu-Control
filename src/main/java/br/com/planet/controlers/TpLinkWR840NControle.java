@@ -13,7 +13,7 @@ public class TpLinkWR840NControle extends Controle {
         super();
         timeout = 10;
         this.loadProperties(PropertiesUtil.PROPERTIES_DIRECTORY + "\\tplink.properties");
-        tipo = Controle.ROUTER_TYPE;
+        this.m.getEquipamento().setTipo(Controle.ROUTER_TYPE);
 
     }
 

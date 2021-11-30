@@ -21,7 +21,6 @@ public class DlinkControle extends Controle {
         timeout = 10;
         this.loadProperties(PropertiesUtil.PROPERTIES_DIRECTORY + "\\dlink.properties");
         this.m.getEquipamento().setTipo(Controle.ROUTER_TYPE);
-        System.out.println(login);
     }
 
     public boolean logar() throws WebDriverException {

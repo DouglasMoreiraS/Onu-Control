@@ -673,6 +673,7 @@ public class AcessView extends javax.swing.JFrame {
                 this.txtPatrimonio.setText("");
 
                 this.btnPpoe.setVisible(control.isPpoe());
+                System.out.println(control.isPpoe());
                 this.btnSalvar.setEnabled(false);
                 this.btnSalvar.setEnabled(false);
                 this.btnReset.setEnabled(false);

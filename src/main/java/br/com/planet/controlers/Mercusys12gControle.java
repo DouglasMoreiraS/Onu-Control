@@ -2,7 +2,6 @@ package br.com.planet.controlers;
 
 import br.com.planet.util.PropertiesUtil;
 import br.com.planet.util.Utils;
-import javax.security.auth.login.LoginException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriverException;
 

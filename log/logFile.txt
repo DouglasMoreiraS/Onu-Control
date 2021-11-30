@@ -226,3 +226,84 @@ Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 9
 Session ID: 79aaa3e608b5a95307411f19d29e47c0
 *** Element info: {Using=xpath, value=html/body/form/table[1]/tbody/tr[5]/td[5]}
 *******************************************
+*******************************************
+26/11/2021 09:20:30: br.com.planet.controlers.ZyxelControle.close();
+Descrição: java.net.ConnectException: Failed to connect to localhost/[0:0:0:0:0:0:0:1]:2572
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'DESKTOP-IRLCR5J', ip: '192.168.10.114', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '16.0.1'
+Driver info: driver.version: RemoteWebDriver
+*******************************************
+*******************************************
+26/11/2021 09:22:45: br.com.planet.controlers.ZyxelControle.getSn();
+Descrição: unknown error: net::ERR_CONNECTION_TIMED_OUT
+  (Session info: headless chrome=96.0.4664.45)
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'DESKTOP-IRLCR5J', ip: '192.168.10.114', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '16.0.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 96.0.4664.45, chrome: {chromedriverVersion: 96.0.4664.45 (76e4c1bb2ab46..., userDataDir: C:\Users\PC_PLA~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:52829}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: ba94315e25bd51da21c4620fe2a385f1
+*******************************************
+*******************************************
+26/11/2021 09:34:35: br.com.planet.controlers.DlinkControle.logar();
+Descrição: unknown error: net::ERR_CONNECTION_TIMED_OUT
+  (Session info: headless chrome=96.0.4664.45)
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'DESKTOP-IRLCR5J', ip: '192.168.10.114', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '16.0.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 96.0.4664.45, chrome: {chromedriverVersion: 96.0.4664.45 (76e4c1bb2ab46..., userDataDir: C:\Users\PC_PLA~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:54011}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: 6cb33f503f3103c13cad0d170120cd52
+*******************************************
+*******************************************
+26/11/2021 09:35:38: br.com.planet.controlers.DlinkControle.logar();
+Descrição: unknown error: net::ERR_CONNECTION_TIMED_OUT
+  (Session info: headless chrome=96.0.4664.45)
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'DESKTOP-IRLCR5J', ip: '192.168.10.114', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '16.0.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 96.0.4664.45, chrome: {chromedriverVersion: 96.0.4664.45 (76e4c1bb2ab46..., userDataDir: C:\Users\PC_PLA~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:54068}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: eb65405983d535ef6fa3a6f300182e14
+*******************************************
+*******************************************
+26/11/2021 09:36:52: br.com.planet.controlers.DlinkControle.logar();
+Descrição: unknown error: net::ERR_CONNECTION_TIMED_OUT
+  (Session info: headless chrome=96.0.4664.45)
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'DESKTOP-IRLCR5J', ip: '192.168.10.114', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '16.0.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 96.0.4664.45, chrome: {chromedriverVersion: 96.0.4664.45 (76e4c1bb2ab46..., userDataDir: C:\Users\PC_PLA~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:54137}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: 9d27eaaf11484e5810f3def1a265e1bf
+*******************************************
+*******************************************
+26/11/2021 09:52:57: br.com.planet.controlers.DlinkControle.logar();
+Descrição: no such element: Unable to locate element: {"method":"xpath","selector":"//*[@id="ngdialog1"]/div[2]/form/div[1]/label/div[1]/div/input"}
+  (Session info: headless chrome=96.0.4664.45)
+For documentation on this error, please visit: https://www.seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'DESKTOP-IRLCR5J', ip: '192.168.10.114', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '16.0.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 96.0.4664.45, chrome: {chromedriverVersion: 96.0.4664.45 (76e4c1bb2ab46..., userDataDir: C:\Users\PC_PLA~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:55502}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: fbfca7e26239e5b9881d43eb3e852b1d
+*** Element info: {Using=xpath, value=//*[@id="ngdialog1"]/div[2]/form/div[1]/label/div[1]/div/input}
+*******************************************
+*******************************************
+26/11/2021 10:31:34: br.com.planet.controlers.DlinkControle.logar();
+Descrição: element not interactable
+  (Session info: headless chrome=96.0.4664.45)
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'DESKTOP-IRLCR5J', ip: '192.168.10.114', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '16.0.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 96.0.4664.45, chrome: {chromedriverVersion: 96.0.4664.45 (76e4c1bb2ab46..., userDataDir: C:\Users\PC_PLA~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:59509}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: a52b771332d9c77311a3a371d9976716
+*******************************************
+*******************************************
+26/11/2021 11:54:24: br.com.planet.controlers.NextControle.getPon();
+Descrição: no such element: Unable to locate element: {"method":"xpath","selector":"/html/body/div[2]/div[2]/table/tbody/tr[5]/td"}
+  (Session info: chrome=96.0.4664.45)
+For documentation on this error, please visit: https://www.seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'DESKTOP-IRLCR5J', ip: '192.168.10.114', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '16.0.1'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 96.0.4664.45, chrome: {chromedriverVersion: 96.0.4664.45 (76e4c1bb2ab46..., userDataDir: C:\Users\PC_PLA~1\AppData\L...}, goog:chromeOptions: {debuggerAddress: localhost:51216}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:virtualAuthenticators: true}
+Session ID: cefdddeda62e704ecb28855ad12ad0ed
+*** Element info: {Using=xpath, value=/html/body/div[2]/div[2]/table/tbody/tr[5]/td}
+*******************************************

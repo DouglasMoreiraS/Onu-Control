@@ -1,17 +1,9 @@
 package br.com.planet.controlers;
 
-import br.com.planet.dao.ModeloDAO;
 import java.util.concurrent.TimeUnit;
-import br.com.planet.model.bean.Equipamento;
-import br.com.planet.util.FirmwarePath;
 import br.com.planet.util.PropertiesUtil;
-import br.com.planet.util.Utils;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.PrintWriter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 public class NextControle extends Controle {
 
@@ -22,8 +14,7 @@ public class NextControle extends Controle {
     public NextControle() {
         super();
         loadProperties(PropertiesUtil.PROPERTIES_DIRECTORY + "\\nextfiber.properties");
-        tipo = NextControle.ONT_TYPE;
-
+        this.m.getEquipamento().setTipo(this.ONT_TYPE);
         this.senha2 = properties.getProperty("p.pass1");
         this.senha3 = properties.getProperty("p.pass2");
         this.urlWifiConfig = properties.getProperty("p.url.wifi_config");

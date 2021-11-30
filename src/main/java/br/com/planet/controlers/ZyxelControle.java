@@ -17,7 +17,7 @@ public class ZyxelControle extends Controle {
     public ZyxelControle() {
         super();
         loadProperties(PropertiesUtil.PROPERTIES_DIRECTORY + "\\zyxel.properties");
-        tipo = this.ONU_TYPE;
+        this.m.getEquipamento().setTipo(this.ONU_TYPE);
         
         firmwareT20D = properties.getProperty("p.firmware.atual1");
         firmwarePathT20D = properties.getProperty("p.firmware.path1");

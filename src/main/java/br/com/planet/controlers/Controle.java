@@ -1,6 +1,5 @@
 package br.com.planet.controlers;
 
-import br.com.planet.dao.DataBase;
 import br.com.planet.dao.EquipamentoDAO;
 import br.com.planet.dao.ManutencaoDAO;
 import br.com.planet.dao.ModeloDAO;
@@ -10,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import br.com.planet.model.bean.Equipamento;
 import br.com.planet.model.bean.Manutencao;
-import br.com.planet.model.bean.Modelo;
 import br.com.planet.util.PropertiesUtil;
 import br.com.planet.util.log.Log;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -165,6 +163,7 @@ public class Controle {
 
     public void open(boolean headless) {
         try {
+            m = new Manutencao();
             this.headless = !headless;
             options.setHeadless(this.headless);
             driver = new ChromeDriver(options);
@@ -191,7 +190,7 @@ public class Controle {
             m.setData(Utils.getAtualDate());
             Equipamento.salvar(m.getEquipamento());
             dao.salvar(m);
-            m = new Manutencao();
+            
         } catch (PatrimonioViolationException e) {
             throw e;
         } catch (Exception e) {
