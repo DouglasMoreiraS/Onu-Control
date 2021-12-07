@@ -8,6 +8,8 @@ import javax.swing.ImageIcon;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
 
 public class Utils {
 
@@ -21,6 +23,20 @@ public class Utils {
             return false;
         }
         return true;
+    }
+
+    public static boolean displayedElement(WebDriver driver, String xpath) {
+
+        try {
+            WebElement element = driver.findElement(By.xpath(xpath));
+            if (element.isDisplayed()){
+                System.out.println("Elemento displayed");
+            }
+            return element.isDisplayed();
+        } catch (WebDriverException e) {
+            return false;
+        }
+
     }
 
     public static final String getAtualDate() {

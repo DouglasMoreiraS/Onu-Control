@@ -27,6 +27,8 @@ C:\Users\PROJETOS\Documents\GitHub\Onu-Control\src\main\java\br\com\planet\view\
 C:\Users\PROJETOS\Documents\GitHub\Onu-Control\src\main\java\br\com\planet\view\InitFrame.java
 C:\Users\PROJETOS\Documents\GitHub\Onu-Control\src\main\java\br\com\planet\util\hibernate\HibernateProperties.java
 C:\Users\PROJETOS\Documents\GitHub\Onu-Control\src\main\java\br\com\planet\excel\ExportToExcel.java
+C:\Users\PROJETOS\Documents\GitHub\Onu-Control\src\main\java\br\com\planet\controlers\Dlink842Controle.java
+C:\Users\PROJETOS\Documents\GitHub\Onu-Control\src\main\java\br\com\planet\controlers\Dlink841Controle.java
 C:\Users\PROJETOS\Documents\GitHub\Onu-Control\src\main\java\br\com\planet\controlers\GponControle.java
 C:\Users\PROJETOS\Documents\GitHub\Onu-Control\src\main\java\br\com\planet\controlers\SumecControle.java
 C:\Users\PROJETOS\Documents\GitHub\Onu-Control\src\main\java\br\com\planet\util\PlainDocumentLimitado.java
@@ -53,11 +55,11 @@ C:\Users\PROJETOS\Documents\GitHub\Onu-Control\src\main\java\br\com\planet\util\
 C:\Users\PROJETOS\Documents\GitHub\Onu-Control\src\main\java\br\com\planet\controlers\HuaweiControle.java
 C:\Users\PROJETOS\Documents\GitHub\Onu-Control\src\main\java\br\com\planet\view\PpoeConfigView.java
 C:\Users\PROJETOS\Documents\GitHub\Onu-Control\src\main\java\br\com\planet\dao\GenericDAO.java
+C:\Users\PROJETOS\Documents\GitHub\Onu-Control\src\main\java\br\com\planet\controlers\ZTEF601Controle.java
 C:\Users\PROJETOS\Documents\GitHub\Onu-Control\src\main\java\br\com\planet\controlers\NextControle.java
 C:\Users\PROJETOS\Documents\GitHub\Onu-Control\src\main\java\br\com\planet\util\Utils.java
 C:\Users\PROJETOS\Documents\GitHub\Onu-Control\src\main\java\br\com\planet\model\bean\Firmware.java
 C:\Users\PROJETOS\Documents\GitHub\Onu-Control\src\main\java\br\com\planet\exception\SemConexaoException.java
-C:\Users\PROJETOS\Documents\GitHub\Onu-Control\src\main\java\br\com\planet\controlers\DlinkControle.java
 C:\Users\PROJETOS\Documents\GitHub\Onu-Control\src\main\java\br\com\planet\controlers\EasyLinkControle.java
 C:\Users\PROJETOS\Documents\GitHub\Onu-Control\src\main\java\br\com\planet\controlers\ZyxelControle.java
 C:\Users\PROJETOS\Documents\GitHub\Onu-Control\src\main\java\br\com\planet\util\ImagesUtil.java

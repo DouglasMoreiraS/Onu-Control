@@ -22,6 +22,7 @@ br\com\planet\view\crud\EditarEquipamentoView$2.class
 br\com\planet\view\ExportaHistoricoExcelView$4.class
 br\com\planet\view\View$21.class
 br\com\planet\model\tablemodel\ExportManutencaoTableModel.class
+br\com\planet\view\View$36.class
 br\com\planet\view\View$30.class
 br\com\planet\view\View.class
 br\com\planet\dao\ManutencaoDAO.class
@@ -47,10 +48,12 @@ br\com\planet\dao\GenericDAO.class
 br\com\planet\util\ImagesPath.class
 br\com\planet\view\crud\HistoricoView.class
 br\com\planet\model\tablemodel\EquipamentoTableModel.class
+br\com\planet\controlers\Dlink841Controle.class
 br\com\planet\controlers\HuaweiControle.class
 br\com\planet\view\crud\HistoricoView$4.class
 br\com\planet\view\equipamentos\AcessView$2.class
 br\com\planet\view\crud\EquipamentoView$17.class
+br\com\planet\controlers\Dlink842Controle.class
 br\com\planet\view\PropertiesView$2.class
 br\com\planet\view\View$17.class
 br\com\planet\controlers\MercusysMW301RControle.class
@@ -70,6 +73,7 @@ br\com\planet\model\bean\Modelo.class
 br\com\planet\controlers\SumecControle.class
 br\com\planet\controlers\EasyLinkControle.class
 br\com\planet\view\crud\HistoricoView$10.class
+br\com\planet\view\View$35.class
 br\com\planet\view\View$11.class
 br\com\planet\model\bean\Manutencao$1.class
 br\com\planet\view\crud\EquipamentoView$11.class
@@ -93,6 +97,7 @@ br\com\planet\view\View$2.class
 br\com\planet\view\View$5.class
 br\com\planet\view\ExportaEquipamentosExcelView$1.class
 br\com\planet\view\PropertiesView$3.class
+br\com\planet\controlers\ZTEF601Controle.class
 br\com\planet\view\crud\EquipamentoView$2.class
 br\com\planet\view\equipamentos\AcessView$7.class
 br\com\planet\view\crud\HistoricoView$3.class
@@ -147,7 +152,7 @@ br\com\planet\view\ExportaHistoricoExcelView$1.class
 br\com\planet\view\crud\HistoricoView$8.class
 br\com\planet\view\equipamentos\AcessView$5.class
 br\com\planet\model\tablemodel\ManutencaoTableModel.class
-br\com\planet\controlers\DlinkControle.class
+br\com\planet\view\View$37.class
 br\com\planet\dao\DataBase.class
 br\com\planet\util\PingUrl.class
 br\com\planet\view\equipamentos\AcessView$6.class

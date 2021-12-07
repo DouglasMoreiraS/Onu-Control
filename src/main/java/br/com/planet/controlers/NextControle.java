@@ -7,16 +7,12 @@ import org.openqa.selenium.WebDriverException;
 
 public class NextControle extends Controle {
 
-    private final String senha2;
-    private final String senha3;
     private final String urlWifiConfig;
 
     public NextControle() {
         super();
         loadProperties(PropertiesUtil.PROPERTIES_DIRECTORY + "\\nextfiber.properties");
         this.m.getEquipamento().setTipo(this.ONT_TYPE);
-        this.senha2 = properties.getProperty("p.pass1");
-        this.senha3 = properties.getProperty("p.pass2");
         this.urlWifiConfig = properties.getProperty("p.url.wifi_config");
 
     }

@@ -116,6 +116,14 @@
             <version>0.16</version>
             <scope>test</scope>
         </dependency>
+        <!--
+        PhantomJS (dando erro ao baixar dependencia, verificar repositorio)
+        <dependency>
+            <groupId>com.github.klieber</groupId>
+            <artifactId>phantomjs</artifactId>
+            <version>2.1.1</version>
+        </dependency>
+        -->
         
     </dependencies>
     <name>Planet Internet</name>

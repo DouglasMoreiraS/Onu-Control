@@ -8,7 +8,7 @@ import org.junit.Test;
 public class ModeloDAOTest {
     public void salvar(){
         
-        new ModeloDAO().salvar(new Modelo("Mercusys MW301R"));
+        new ModeloDAO().salvar(new Modelo("Dlink DIR-841"));
         
     }
 }

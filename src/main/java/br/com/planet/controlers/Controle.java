@@ -12,11 +12,14 @@ import br.com.planet.model.bean.Manutencao;
 import br.com.planet.util.PropertiesUtil;
 import br.com.planet.util.log.Log;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Controle {
 
@@ -44,13 +47,17 @@ public class Controle {
 
     ChromeOptions options;
     WebDriver driver;
-
+    WebDriverWait wait;
+    
     Manutencao m;
     List<Manutencao> historico;
 
     String url;
     String login;
+    String login1;
     String senha;
+    String senha2;
+    String senha3;
     String title;
 
     String name;
@@ -80,6 +87,11 @@ public class Controle {
     public Controle() {
         WebDriverManager.chromedriver().setup();
         options = new ChromeOptions();
+
+       /* Map<String, Object> prefs = new HashMap<String, Object>();
+        prefs.put("profile.managed_default_content_settings.images", 2);
+        options.setExperimentalOption("prefs", prefs);*/
+        
         historico = new ArrayList();
         m = new Manutencao();
         timeout = 10;
@@ -166,8 +178,11 @@ public class Controle {
             m = new Manutencao();
             this.headless = !headless;
             options.setHeadless(this.headless);
+            
             driver = new ChromeDriver(options);
             driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
+            wait = new WebDriverWait(driver, 30);
+            
             this.loadProperties(this.path);
         } catch (WebDriverException e) {
             System.out.println("Erro ao abrir: " + e.getMessage());
@@ -286,7 +301,10 @@ public class Controle {
         this.url = properties.getProperty("p.url.main");
 
         this.login = properties.getProperty("p.user");
+        this.login1 = properties.getProperty("p.user1");
         this.senha = properties.getProperty("p.pass");
+        this.senha2 = properties.getProperty("p.pass1");
+        this.senha3 = properties.getProperty("p.pass2");
 
         this.url = properties.getProperty("p.url.main");
         this.urlFirmware = properties.getProperty("p.url.firmware");
@@ -311,12 +329,6 @@ public class Controle {
         ppoeUser = p.getProperty("p.ppoe.login");
         ppoePass = p.getProperty("p.ppoe.password");
 
-        if (p.getProperty("p.ppoe.true") == "1") {
-            this.ppoe = true;
-        } else {
-            this.ppoe = false;
-        }
-
     }
 
     public String getTitle() {
@@ -328,6 +340,7 @@ public class Controle {
     }
 
     public boolean isPpoe() {
+        System.out.println(m.getEquipamento().getTipo() + " " + this.ONU_TYPE);
         return (m.getEquipamento().getTipo() != this.ONU_TYPE);
     }
 

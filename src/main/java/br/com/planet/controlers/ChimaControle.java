@@ -10,7 +10,7 @@ public class ChimaControle extends Controle {
         super();
         timeout = 5;
         this.loadProperties(PropertiesUtil.PROPERTIES_DIRECTORY + "\\chima.properties");
-        this.m.setObservacao("Aparelho Novo");
+        
         this.m.getEquipamento().setTipo(this.ONU_TYPE);
     }
 
@@ -18,7 +18,7 @@ public class ChimaControle extends Controle {
     public boolean logar() throws WebDriverException {
 
         try {
-            driver.get(url);
+            driver.get("http://192.168.0.1/admin/index.html#/home");
 
             if (driver.getTitle().equals(title)) {
                 return true;
@@ -27,7 +27,7 @@ public class ChimaControle extends Controle {
             driver.findElement(By.xpath("/html/body/blockquote[1]/form/center/table/tbody/tr/td/table/tbody/tr[2]/td[3]/font/input")).sendKeys(login);
             driver.findElement(By.xpath("/html/body/blockquote[1]/form/center/table/tbody/tr/td/table/tbody/tr[3]/td[3]/font/input")).sendKeys(senha);
             driver.findElement(By.xpath("/html/body/blockquote[1]/form/center/table/tbody/tr/td/table/tbody/tr[4]/td[3]/input")).click();
-
+            this.m.setObservacao("Aparelho Novo");
             try {
                 driver.get(url);
                 driver.findElement(By.xpath("/html/body/blockquote[1]/form/center/table/tbody/tr/td/table/tbody/tr[2]/td[3]/font/input")).sendKeys(login);
