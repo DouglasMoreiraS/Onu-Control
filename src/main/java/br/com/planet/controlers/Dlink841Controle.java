@@ -151,7 +151,7 @@ public class Dlink841Controle extends Controle {
 
             driver.get(urlUpdate);
 
-            WebDriverWait wait = new WebDriverWait(driver, 9999);
+            WebDriverWait wait = new WebDriverWait(driver, 10);
 
             WebElement firmwarePathElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"mblock\"]/div[2]/div/ui-view/div/div/div/div/div[3]/form/label/input")));
             firmwarePathElement.sendKeys(this.firmwarePath);
