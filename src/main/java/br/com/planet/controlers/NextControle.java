@@ -12,7 +12,6 @@ public class NextControle extends Controle {
     public NextControle() {
         super();
         loadProperties(PropertiesUtil.PROPERTIES_DIRECTORY + "\\nextfiber.properties");
-        this.m.getEquipamento().setTipo(this.ONT_TYPE);
         this.urlWifiConfig = properties.getProperty("p.url.wifi_config");
 
     }

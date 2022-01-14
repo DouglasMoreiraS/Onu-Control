@@ -13,7 +13,6 @@ public class NokiaControle extends Controle {
         super();
         loadProperties(PropertiesUtil.PROPERTIES_DIRECTORY + "\\nokia.properties");
         timeout = 5;
-        this.m.getEquipamento().setTipo(Controle.ONT_TYPE);
     }
 
     public boolean pingar() throws WebDriverException {

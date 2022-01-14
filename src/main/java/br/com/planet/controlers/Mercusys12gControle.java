@@ -4,17 +4,17 @@ import br.com.planet.util.PropertiesUtil;
 import br.com.planet.util.Utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class Mercusys12gControle extends Controle {
 
     public Mercusys12gControle() {
         super();
-        timeout = 10;
+        timeout = 3;
         super.loadProperties(PropertiesUtil.PROPERTIES_DIRECTORY + "\\mercusysa12g.properties");
-        this.m.getEquipamento().setTipo(Controle.ROUTER_TYPE);
     }
 
-    public boolean logar() throws WebDriverException{
+    public boolean logar() throws WebDriverException {
 
         try {
             driver.get(url);
@@ -37,7 +37,7 @@ public class Mercusys12gControle extends Controle {
 
                 if (Utils.existsElement(driver, "//*[@id=\"loginError\"]")) {
                     if (driver.findElement(By.xpath("//*[@id=\"loginError\"]")).isDisplayed()) {
-                  //      throw new LoginException("Aparelho precisa ser resetado manualmente para ser acessado");
+                        //      throw new LoginException("Aparelho precisa ser resetado manualmente para ser acessado");
                     }
                 }
             }
@@ -51,14 +51,17 @@ public class Mercusys12gControle extends Controle {
         try {
             driver.findElement(By.xpath("//*[@id=\"headFunc\"]/li[2]")).click();
 
-            driver.findElement(By.xpath("//*[@id=\"netWorkData_menu\"]")).click();
-            for (int tries = 1; tries != 0; tries--) {
+            for (int tries = 2; tries != 0; tries--) {
                 try {
                     driver.findElement(By.xpath("//*[@id=\"netWorkData_menu1\"]")).click();
+                    
+                    m.getEquipamento().setSn(wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"mac\"]"))).getText());
+                    //*[@id="netWorkData_menu1"]
                 } catch (WebDriverException e) {
+                    System.out.println("tried " + tries + " times");
                 }
             }
-            m.getEquipamento().setSn(driver.findElement(By.xpath("//*[@id=\"mac\"]")).getText());
+           
         } catch (WebDriverException e) {
             System.out.println(Utils.getAtualDate() + "Erro Mercusys getSn: " + e.getMessage());
             throw e;
@@ -69,7 +72,14 @@ public class Mercusys12gControle extends Controle {
         try {
             driver.findElement(By.xpath("//*[@id=\"headFunc\"]/li[2]")).click();
 
-            String firmware = driver.findElement(By.xpath("//*[@id=\"softVersion\"]")).getText();
+            String firmware = "Unknow";
+
+            for (int tries = 2; tries != 0; tries--) {
+                try {
+                    firmware = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"softVersion\"]"))).getText();
+                } catch (WebDriverException e) {
+                }
+            }
             m.getEquipamento().setFirmware(firmware.substring(firmware.indexOf(":") + 1, firmware.indexOf("Rel")));
         } catch (WebDriverException e) {
             System.out.println(Utils.getAtualDate() + "Erro Mercusys getFirmware: " + e.getMessage());
@@ -101,9 +111,9 @@ public class Mercusys12gControle extends Controle {
                 } catch (WebDriverException e) {
                 }
             }
-            
+
             driver.findElement(By.xpath("//*[@id=\"wanSel\"]")).click();
-            
+
             Thread.sleep(1000);
             driver.findElement(By.xpath("//*[@id=\"selOptsUlwanSel\"]/li[3]")).click();
 

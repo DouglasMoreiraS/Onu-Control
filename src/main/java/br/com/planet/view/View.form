@@ -125,6 +125,26 @@
                     <Property name="text" type="java.lang.String" value="Dlink "/>
                   </Properties>
                   <SubComponents>
+                    <Menu class="javax.swing.JMenu" name="jMenu29">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Dlink DIR-615"/>
+                      </Properties>
+                      <SubComponents>
+                        <MenuItem class="javax.swing.JMenuItem" name="dlink841AcessMenu2">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Acesso Remoto"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dlink841AcessMenu2ActionPerformed"/>
+                          </Events>
+                        </MenuItem>
+                        <MenuItem class="javax.swing.JMenuItem" name="jMenuItem43">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Historico"/>
+                          </Properties>
+                        </MenuItem>
+                      </SubComponents>
+                    </Menu>
                     <Menu class="javax.swing.JMenu" name="jMenu26">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="Dlink DIR-841"/>
@@ -165,6 +185,33 @@
                           <Events>
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem39ActionPerformed"/>
                           </Events>
+                        </MenuItem>
+                      </SubComponents>
+                    </Menu>
+                  </SubComponents>
+                </Menu>
+                <Menu class="javax.swing.JMenu" name="jMenu27">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="IntelBras"/>
+                  </Properties>
+                  <SubComponents>
+                    <Menu class="javax.swing.JMenu" name="jMenu28">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="RF301K"/>
+                      </Properties>
+                      <SubComponents>
+                        <MenuItem class="javax.swing.JMenuItem" name="dlink841AcessMenu1">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Acesso Remoto"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dlink841AcessMenu1ActionPerformed"/>
+                          </Events>
+                        </MenuItem>
+                        <MenuItem class="javax.swing.JMenuItem" name="jMenuItem42">
+                          <Properties>
+                            <Property name="text" type="java.lang.String" value="Historico"/>
+                          </Properties>
                         </MenuItem>
                       </SubComponents>
                     </Menu>
@@ -439,26 +486,6 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu2">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Exportar"/>
-          </Properties>
-          <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Equipamentos"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem4">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="HIst&#xf3;rico"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem4ActionPerformed"/>
-              </Events>
-            </MenuItem>
-          </SubComponents>
-        </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu3">
           <Properties>
             <Property name="text" type="java.lang.String" value="Op&#xe7;&#xf5;es"/>
@@ -526,19 +553,19 @@
     <Container class="br.com.planet.src.PainelImagemFundo" name="painelImagemFundo1">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="0" y="0" width="1340" height="750"/>
+          <AbsoluteConstraints x="0" y="0" width="1370" height="780"/>
         </Constraint>
       </Constraints>
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="1340" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="1370" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="750" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="780" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>

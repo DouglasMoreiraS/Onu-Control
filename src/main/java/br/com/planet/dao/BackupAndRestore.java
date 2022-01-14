@@ -1,9 +1,6 @@
 package br.com.planet.dao;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import br.com.planet.model.bean.Equipamento;
 import br.com.planet.model.bean.Manutencao;
 
 public class BackupAndRestore {

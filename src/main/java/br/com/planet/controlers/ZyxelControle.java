@@ -13,16 +13,14 @@ public class ZyxelControle extends Controle {
     private String model;
     private String firmwareT20D;
     private String firmwarePathT20D;
-    
+
     public ZyxelControle() {
         super();
         loadProperties(PropertiesUtil.PROPERTIES_DIRECTORY + "\\zyxel.properties");
-        this.m.getEquipamento().setTipo(this.ONU_TYPE);
-        
+
         firmwareT20D = properties.getProperty("p.firmware.atual1");
         firmwarePathT20D = properties.getProperty("p.firmware.path1");
-        
-        
+
     }
 
     public boolean pingar() {
@@ -84,12 +82,11 @@ public class ZyxelControle extends Controle {
         } catch (WebDriverException e) {
             System.out.println("Erro Zyxel InternalLogar: " + e.getMessage());
             throw new WebDriverException(e);
-        }catch (InterruptedException ex){
+        } catch (InterruptedException ex) {
             return false;
         }
 
     }
-
 
     @Override
     public void updateFirmware() throws WebDriverException {
@@ -126,7 +123,7 @@ public class ZyxelControle extends Controle {
             while (true) {
                 try {
                     this.logar();
-                   this.atualizarInformacoes();
+                    this.atualizarInformacoes();
                     break;
                 } catch (Exception e) {
                 }
@@ -134,17 +131,18 @@ public class ZyxelControle extends Controle {
         } catch (WebDriverException e) {
             System.out.println("Erro Zyxel Update Firmware: " + e.getMessage());
             throw new WebDriverException(e);
-        }catch (InterruptedException ex){
-            
+        } catch (InterruptedException ex) {
+
         }
     }
 
-    public void reset() throws  WebDriverException {
+    public void reset() throws WebDriverException {
         try {
             driver.get(urlReset);
             driver.findElement(By.xpath("/html/body/form/table[1]/tbody/tr[4]/td[5]/input")).click();
-
+            driver.findElement(By.xpath("/html/body/form/table[1]/tbody/tr[6]/td[5]/input")).click();
             driver.findElement(By.xpath("/html/body/form/table[2]/tbody/tr/td[3]/input[4]")).click();
+            
 
             Alert popup = driver.switchTo().alert();
             popup.accept();
@@ -165,8 +163,8 @@ public class ZyxelControle extends Controle {
         } catch (WebDriverException e) {
             System.out.println("Erro Zyxel Update Reset: " + e.getMessage());
             throw new WebDriverException(e);
-        }catch (InterruptedException ex){
-            
+        } catch (InterruptedException ex) {
+
         }
     }
 

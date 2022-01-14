@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import javax.xml.bind.ValidationException;
 import org.jfree.chart.ChartFactory;
@@ -106,24 +107,25 @@ public class EquipamentoControl {
     public JFreeChart getGrafico(String titulo) {
 
         JFreeChart retorno;
+        GraficoEquipamentos grafico = new GraficoEquipamentos(equipamentoList);
 
         switch (titulo) {
             case "status" -> {
-                retorno = ChartFactory.createPieChart(titulo, new GraficoEquipamentos().graficoStatus(equipamentoList), false, true, false);
+                retorno = ChartFactory.createPieChart(titulo, grafico.graficoStatus(), false, true, false);
             }
 
             case "patrimonio" -> {
-                retorno = ChartFactory.createPieChart(titulo, new GraficoEquipamentos().graficoPatrimonio(equipamentoList), false, true, false);
+                retorno = ChartFactory.createPieChart(titulo, grafico.graficoPatrimonio(), false, true, false);
             }
 
             case "firmware" -> {
-                retorno = ChartFactory.createPieChart(titulo, new GraficoEquipamentos().graficoFirmware(equipamentoList), false, true, false);
-
+                retorno = ChartFactory.createPieChart(titulo, grafico.graficoFirmware(), false, true, false);
             }
+            
             case "contagem" -> {
-                retorno = ChartFactory.createPieChart(titulo, new GraficoEquipamentos().graficoContagem(equipamentoList), false, true, false);
+                retorno = ChartFactory.createPieChart(titulo, grafico.graficoContagem(), true, true, true);
             }
-
+            
             default -> {
                 DefaultCategoryDataset barDataSet = new DefaultCategoryDataset();
                 
@@ -143,7 +145,7 @@ public class EquipamentoControl {
                         //   pieDataSet.setValue(s + "(" + quantidade + ")", quantidade);
                     }
                 }
-                retorno = ChartFactory.createBarChart("Ranking Equipamentos", "Equipamentos", "Quantidade", barDataSet, PlotOrientation.HORIZONTAL, true, false, false);
+               retorno = ChartFactory.createBarChart("Ranking Equipamentos", "Equipamentos", "Quantidade", barDataSet, PlotOrientation.HORIZONTAL, true, false, false);
             }
         }
         return retorno;

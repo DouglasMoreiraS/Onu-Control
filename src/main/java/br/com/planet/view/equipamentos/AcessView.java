@@ -6,14 +6,19 @@ import javax.swing.JOptionPane;
 import br.com.planet.controlers.Controle;
 import br.com.planet.exception.OldFirmwareException;
 import br.com.planet.exception.PatrimonioViolationException;
+import br.com.planet.model.bean.Modelo;
 import br.com.planet.model.tablemodel.RemoteAcessTableModel;
 import javax.swing.JPanel;
 import br.com.planet.src.PainelImagemFundo;
-import br.com.planet.util.ImagesUtil;
 import br.com.planet.util.TrayIconDemo;
-import br.com.planet.util.log.Log;
 import br.com.planet.view.crud.HistoricoView;
-import java.awt.AWTException;
+import java.awt.Color;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 
 public class AcessView extends javax.swing.JFrame {
 
@@ -25,37 +30,33 @@ public class AcessView extends javax.swing.JFrame {
     Controle control;
     int keyConnection;
 
-    Thread chima;
-    Thread chimaPing;
+    Thread ping;
 
     int flagUpdate;
     int flagReset;
-
-    public AcessView(boolean ppoe) {
-        initComponents();
-        btnPpoe.setVisible(ppoe);
-
-        txtObservacao.setLineWrap(true); // para quebrar a linha
-        txtObservacao.setWrapStyleWord(false);
-
-        controlaTela("init");
-        windowListener();
-    }
+    int flagConnect;
 
     public AcessView(Controle control) {
 
         initComponents();
         this.control = control;
-
-        this.getPainelImg().setImg(ImagesUtil.getImgIcon(control.getM().getEquipamento().getModelo().getNome())); //Setando a imagem do modelo.
+        this.flagConnect = 0;
+        this.getPainelImg().setImg(control.getM().getEquipamento().getModelo().getImage()); //Setando a imagem do modelo.
         this.setTitle(control.getM().getEquipamento().getModelo().getNome()); //Setando o nome do modelo no title do jFrame.
-
+        
+        if (control.getM().getEquipamento().getModelo().getTipo() == Modelo.ROUTER){
+            this.lblPon.setVisible(false);
+            this.lblPonStatus.setVisible(false);
+        }
+            
+        
 //         Esses dois comandos são para quebrar a linha do txtObservação
         txtObservacao.setLineWrap(true);
         txtObservacao.setWrapStyleWord(false);
 
         controlaTela("init");
         windowListener();
+        conexãoListener();
     }
 
     @SuppressWarnings("unchecked")
@@ -78,7 +79,7 @@ public class AcessView extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtObservacao = new javax.swing.JTextArea();
-        jLabel5 = new javax.swing.JLabel();
+        lblPonStatus = new javax.swing.JLabel();
         btnPpoe = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         txtPatrimonio = new javax.swing.JTextField();
@@ -88,11 +89,13 @@ public class AcessView extends javax.swing.JFrame {
         lblSn = new javax.swing.JTextField();
         lblPon = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
-        barConnection = new javax.swing.JProgressBar();
         btnConectar = new javax.swing.JButton();
-        cbAutoConfig = new javax.swing.JCheckBox();
         cbNavegador = new javax.swing.JCheckBox();
         painelImagemFundo = new br.com.planet.src.PainelImagemFundo();
+        conexaoIcon = new br.com.planet.src.PainelImagemFundo();
+        cbAutoUpdate = new javax.swing.JCheckBox();
+        cbAutoReset = new javax.swing.JCheckBox();
+        cbAutoConnect = new javax.swing.JCheckBox();
 
         jLabel6.setText("jLabel6");
 
@@ -199,7 +202,7 @@ public class AcessView extends javax.swing.JFrame {
         txtObservacao.setRows(5);
         jScrollPane1.setViewportView(txtObservacao);
 
-        jLabel5.setText("Pon Status:");
+        lblPonStatus.setText("Pon Status:");
 
         btnPpoe.setText("PPOE");
         btnPpoe.addActionListener(new java.awt.event.ActionListener() {
@@ -229,7 +232,7 @@ public class AcessView extends javax.swing.JFrame {
                 .addGroup(panelInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelInformacoesLayout.createSequentialGroup()
                         .addComponent(btnUpdateFirmware, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelInformacoesLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -246,7 +249,7 @@ public class AcessView extends javax.swing.JFrame {
                                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel2)
-                                    .addComponent(jLabel5))
+                                    .addComponent(lblPonStatus))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(panelInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblModelo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -262,7 +265,7 @@ public class AcessView extends javax.swing.JFrame {
                                     .addComponent(txtPatrimonio)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(18, 18, 18)
+                .addGap(30, 30, 30)
                 .addComponent(panelHistorico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -286,7 +289,7 @@ public class AcessView extends javax.swing.JFrame {
                             .addComponent(lblSn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
+                            .addComponent(lblPonStatus)
                             .addComponent(lblPon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -323,8 +326,6 @@ public class AcessView extends javax.swing.JFrame {
             }
         });
 
-        cbAutoConfig.setText("Configurar Automaticamente");
-
         cbNavegador.setText("Navegador");
 
         javax.swing.GroupLayout painelImagemFundoLayout = new javax.swing.GroupLayout(painelImagemFundo);
@@ -338,6 +339,27 @@ public class AcessView extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
+        conexaoIcon.setMaximumSize(new java.awt.Dimension(10, 10));
+        conexaoIcon.setMinimumSize(new java.awt.Dimension(10, 10));
+        conexaoIcon.setPreferredSize(new java.awt.Dimension(10, 10));
+
+        javax.swing.GroupLayout conexaoIconLayout = new javax.swing.GroupLayout(conexaoIcon);
+        conexaoIcon.setLayout(conexaoIconLayout);
+        conexaoIconLayout.setHorizontalGroup(
+            conexaoIconLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 10, Short.MAX_VALUE)
+        );
+        conexaoIconLayout.setVerticalGroup(
+            conexaoIconLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 10, Short.MAX_VALUE)
+        );
+
+        cbAutoUpdate.setText("Atualizar automaticamente (Se disponível)");
+
+        cbAutoReset.setText("Resetar automaticamente");
+
+        cbAutoConnect.setText("Conectar Automaticamente (Beta)");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -345,37 +367,52 @@ public class AcessView extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(barConnection, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cbAutoConfig, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(cbNavegador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cbNavegador, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbAutoReset))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(btnConectar, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(conexaoIcon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(159, 159, 159)
+                                        .addComponent(cbAutoConnect, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(btnConectar, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(86, 86, 86)))
-                        .addComponent(painelImagemFundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(painelImagemFundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(cbAutoUpdate)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(barConnection, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(cbAutoConfig)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbNavegador)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnConectar)
+                        .addComponent(cbAutoUpdate)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(4, 4, 4)
+                                .addComponent(cbAutoReset)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbNavegador)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(conexaoIcon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnConectar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbAutoConnect)))
                         .addContainerGap())
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                        .addGap(0, 26, Short.MAX_VALUE)
                         .addComponent(painelImagemFundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
@@ -397,7 +434,7 @@ public class AcessView extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelInformacoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -421,26 +458,33 @@ public class AcessView extends javax.swing.JFrame {
                 if (conectar()) {
                     preencherCampos();
 
-                    if (cbAutoConfig.isSelected()) {
-
+                    if (cbAutoUpdate.isSelected()) {
                         if (control.needUpdate()) {
                             atualizar();
                         }
-                        resetar();
+                    }
+
+                    if (cbAutoReset.isSelected()) {
+                        control.reset();
                     }
 
                     controlaTela("ready");
+
+                    new TrayIconDemo().displayTray(lblModelo.getText(), "Done", control.getM().getEquipamento().getModelo().getImage().getImage());
                     JOptionPane.showMessageDialog(AcessView.this, "Done", "Done", JOptionPane.INFORMATION_MESSAGE);
                 }
             } catch (OldFirmwareException ex) {
-                controlaBar(AcessView.NO_SIGNAL);
                 JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.WARNING_MESSAGE);
                 control.close();
                 controlaTela("start");
             } catch (Exception e) {
                 e.printStackTrace();
+                int resposta = JOptionPane.showConfirmDialog(this, "Erro na conexão. Tentar novamente?");
 
-                controlaBar(AcessView.NO_SIGNAL);
+                if (resposta == JOptionPane.YES_OPTION) {
+                    flagConnect = 0;
+                }
+
                 JOptionPane.showMessageDialog(this, "Erro de conexão: \n \n", "Erro", JOptionPane.WARNING_MESSAGE);
                 control.close();
                 controlaTela("start");
@@ -462,10 +506,18 @@ public class AcessView extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Salvo com sucesso", "Salvar", JOptionPane.INFORMATION_MESSAGE);
 
                 controlaTela("start");
-                controlaBar(NO_SIGNAL);
                 this.btnSalvar.setText("Salvar");
                 control.close();
 
+                new Thread(new Runnable() {
+                    public void run() {
+                        try {
+                            Thread.sleep(10000);
+                            flagConnect = 0;
+                        } catch (InterruptedException e) {
+                        }
+                    }
+                }).start();
             } catch (PatrimonioViolationException e) {
 
                 JOptionPane.showMessageDialog(this, e.getMessage(), "Erro", JOptionPane.WARNING_MESSAGE);
@@ -476,7 +528,6 @@ public class AcessView extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Erro ao salvar", "Erro", JOptionPane.ERROR_MESSAGE);
 
                 controlaTela("start");
-                controlaBar(NO_SIGNAL);
                 this.btnSalvar.setText("Salvar");
                 control.close();
             }
@@ -490,6 +541,7 @@ public class AcessView extends javax.swing.JFrame {
             try {
                 atualizar();
                 JOptionPane.showMessageDialog(this, "Done", "Done", JOptionPane.INFORMATION_MESSAGE);
+                new TrayIconDemo().displayTray(lblModelo.getText(), "Done", control.getM().getEquipamento().getModelo().getImage().getImage());
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Erro ao atualizar", "Atualização", JOptionPane.ERROR_MESSAGE);
                 control.close();
@@ -504,6 +556,7 @@ public class AcessView extends javax.swing.JFrame {
             try {
                 resetar();
                 JOptionPane.showMessageDialog(this, "Done", "Done", JOptionPane.INFORMATION_MESSAGE);
+                new TrayIconDemo().displayTray(lblModelo.getText(), "Done", control.getM().getEquipamento().getModelo().getImage().getImage());
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Erro ao resetar configurações", "Resetar Configurações", JOptionPane.WARNING_MESSAGE);
             }
@@ -527,7 +580,6 @@ public class AcessView extends javax.swing.JFrame {
             } finally {
                 this.btnPpoe.setText("PPOE");
                 controlaTela("ready");
-                controlaBar(AcessView.CONNECT);
             }
 
         }).start();
@@ -535,7 +587,6 @@ public class AcessView extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JProgressBar barConnection;
     private javax.swing.JButton btnConectar;
     private javax.swing.JButton btnHistorico;
     private javax.swing.JButton btnPpoe;
@@ -543,13 +594,15 @@ public class AcessView extends javax.swing.JFrame {
     private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnUpdateFirmware;
     private javax.swing.JCheckBox cbAtivo;
-    private javax.swing.JCheckBox cbAutoConfig;
+    private javax.swing.JCheckBox cbAutoConnect;
+    private javax.swing.JCheckBox cbAutoReset;
+    private javax.swing.JCheckBox cbAutoUpdate;
     private javax.swing.JCheckBox cbNavegador;
+    private br.com.planet.src.PainelImagemFundo conexaoIcon;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel2;
@@ -559,6 +612,7 @@ public class AcessView extends javax.swing.JFrame {
     private javax.swing.JLabel lblHistoricoInfo;
     private javax.swing.JTextField lblModelo;
     private javax.swing.JTextField lblPon;
+    private javax.swing.JLabel lblPonStatus;
     private javax.swing.JTextField lblSn;
     private br.com.planet.src.PainelImagemFundo painelImagemFundo;
     private javax.swing.JPanel panelHistorico;
@@ -571,7 +625,6 @@ public class AcessView extends javax.swing.JFrame {
     boolean conectar() throws Exception {
         try {
             if (control.start()) {
-                controlaBar(AcessView.CONNECT);
                 return true;
             } else {
                 throw new Exception();
@@ -587,7 +640,9 @@ public class AcessView extends javax.swing.JFrame {
 
             case "wait" -> {
                 cbNavegador.setEnabled(false);
-                cbAutoConfig.setEnabled(false);
+                cbAutoReset.setEnabled(false);
+                cbAutoUpdate.setEnabled(false);
+                cbAutoConnect.setEnabled(false);
                 btnConectar.setEnabled(false);
                 btnUpdateFirmware.setEnabled(false);
                 btnReset.setEnabled(false);
@@ -603,7 +658,9 @@ public class AcessView extends javax.swing.JFrame {
 
             case "ready" -> {
                 cbNavegador.setEnabled(true);
-                cbAutoConfig.setEnabled(true);
+                cbAutoReset.setEnabled(true);
+                cbAutoUpdate.setEnabled(true);
+                cbAutoConnect.setEnabled(true);
                 btnConectar.setEnabled(true);
                 btnUpdateFirmware.setEnabled(control.needUpdate());
                 btnReset.setEnabled(true);
@@ -624,17 +681,13 @@ public class AcessView extends javax.swing.JFrame {
                     this.lblHistoricoInfo.setText(control.getHistorico().size() + " registros desse equipamento");
                 }
 
-                try {
-                    new TrayIconDemo().displayTray(lblModelo.getText(), "Done");
-                } catch (AWTException ex) {
-                    Log.fastWrite("TrayIconDemo erro: " + ex.getMessage());
-                }
-
             }
 
             case "start" -> {
                 cbNavegador.setEnabled(true);
-                cbAutoConfig.setEnabled(true);
+                cbAutoReset.setEnabled(true);
+                cbAutoUpdate.setEnabled(true);
+                cbAutoConnect.setEnabled(true);
                 btnConectar.setText("Conectar");
                 btnConectar.setEnabled(true);
                 this.panelInformacoes.setVisible(false);
@@ -655,9 +708,9 @@ public class AcessView extends javax.swing.JFrame {
             }
 
             case "init" -> {
-                this.barConnection.setStringPainted(true);
-                this.barConnection.setString("No Signal");
-                this.cbAutoConfig.setEnabled(true);
+                cbAutoReset.setEnabled(true);
+                cbAutoUpdate.setEnabled(true);
+                cbAutoConnect.setEnabled(true);
 
                 this.btnConectar.setEnabled(true);
                 this.btnConectar.setText("Conectar");
@@ -683,35 +736,13 @@ public class AcessView extends javax.swing.JFrame {
 
                 this.keyConnection = 0;
             }
+            
+            case "reset" -> {
+                this.controlaTela("wait");
+                this.btnReset.setText("Resetando...");
+            }
+            
         }
-    }
-
-    void controlaBar(int state) {
-
-        switch (state) {
-
-            case 0:
-                this.barConnection.setStringPainted(true);
-                this.barConnection.setString("Sem sinal");
-                this.barConnection.setValue(0);
-                break;
-
-            case 1:
-                this.barConnection.setString("Conectado");
-                this.barConnection.setValue(100);
-                break;
-
-            case 2:
-                this.barConnection.setString("Atualizando...");
-                this.barConnection.setValue(100);
-                break;
-
-            case 3:
-                this.barConnection.setString("Resetando...");
-                this.barConnection.setValue(100);
-                break;
-        }
-
     }
 
     private void carregarTabela() {
@@ -765,7 +796,6 @@ public class AcessView extends javax.swing.JFrame {
 
     private void atualizar() throws Exception {
         if (this.control.needUpdate()) {
-            this.controlaBar(UPDATE);
             this.controlaTela("wait");
             this.flagUpdate = 1;
 
@@ -777,7 +807,6 @@ public class AcessView extends javax.swing.JFrame {
                 throw e;
             } finally {
                 this.btnUpdateFirmware.setText("Atualizar Firmware");
-                this.controlaBar(CONNECT);
                 this.controlaTela("ready");
                 this.flagUpdate = 0;
             }
@@ -785,12 +814,11 @@ public class AcessView extends javax.swing.JFrame {
     }
 
     private void resetar() throws Exception {
+        this.btnReset.setText("Resetando...");
         controlaTela("wait");
-        controlaBar(AcessView.RESET);
         this.flagReset = 1;
 
         try {
-            this.btnReset.setText("Resetando...");
             control.reset();
             this.preencherCampos();
         } catch (Exception e) {
@@ -798,19 +826,18 @@ public class AcessView extends javax.swing.JFrame {
         } finally {
             this.btnReset.setText("Resetar Configurações");
             controlaTela("ready");
-            controlaBar(AcessView.CONNECT);
             flagReset = 0;
         }
     }
-    
-    
+
     /**
-    * Esse windowListener evita 
-    * que resquicios do driver fiquem ativos na memória
-    * (chromedriver.exe e chrome.exe por exemplo)
-    **/ 
+     * Esse windowListener evita que resquicios do driver fiquem ativos na
+     * memória (chromedriver.exe e chrome.exe por exemplo)
+     *
+     */
     void windowListener() {
         this.addWindowListener(new WindowAdapter() {
+            @Override
             public void windowClosing(WindowEvent e) {
 
                 String message = "";
@@ -829,21 +856,54 @@ public class AcessView extends javax.swing.JFrame {
                     }
                 }
 
-                if (chima != null) {
-                    if (chima.isAlive()) {
-                        chima.interrupt();
-                    }
-
-                }
-
                 if (control != null) {
                     control.close();
                 }
+
+                ping.interrupt();
 
                 controlaTela("init");
                 AcessView.this.dispose();
 
             }
         });
+    }
+
+    private void conexãoListener() {
+        ImageIcon connected = new ImageIcon(System.getProperty("user.dir") + "//images//icons//connected.png");
+        ImageIcon noConnected = new ImageIcon(System.getProperty("user.dir") + "//images//icons//noconnected.png");
+        ImageIcon connecting = new ImageIcon(System.getProperty("user.dir") + "//images//icons//connecting.png");
+        try {
+            InetAddress adress = InetAddress.getByName(control.getHost());
+            ping = new Thread(() -> {
+                while (true) {
+
+                    if (Thread.interrupted()) {
+                        System.out.println("Interrompida");
+                        break;
+                    }
+                    try {
+                        if (adress.isReachable(3000)) {
+                            conexaoIcon.setImg(connected);
+
+                            if (cbAutoConnect.isSelected()) {
+                                cbAutoConnect.setSelected(false);
+                                btnConectarActionPerformed(null);
+                            }
+                        } else {
+                            conexaoIcon.setImg(noConnected);
+                        }
+                        conexaoIcon.repaint();
+                    } catch (IOException ex) {
+                        Logger.getLogger(AcessView.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            });
+
+            ping.start();
+
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(AcessView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

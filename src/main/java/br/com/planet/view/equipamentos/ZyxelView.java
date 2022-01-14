@@ -7,21 +7,22 @@ import javax.swing.JOptionPane;
 
 public class ZyxelView extends AcessView {
 
+    String senha;
+
     public ZyxelView() {
         super(new ZyxelControle());
         getPainelImg().setImg(new ImageIcon(getClass().getResource("/images/zyxel.png")));
-        
-    }
+        senha = "";
 
+    }
 
     @Override
     boolean conectar() throws Exception {
         try {
-            if (!((ZyxelControle)control).identificar()) {
-                controlaBar(AcessView.CONNECT);
+            if (!((ZyxelControle) control).identificar()) {
 
                 while (true) {
-                    String senha = JOptionPane.showInputDialog(this, "Senha: ", "Senha");
+                    senha = JOptionPane.showInputDialog(this, "Senha: ", senha);
 
                     if (senha == null) {
                         controlaTela("start");
@@ -38,7 +39,6 @@ public class ZyxelView extends AcessView {
                 }
             }
             if (control.start()) {
-                controlaBar(AcessView.CONNECT);
                 return true;
             } else {
                 throw new Exception();
@@ -49,4 +49,5 @@ public class ZyxelView extends AcessView {
             throw e;
         }
     }
+
 }

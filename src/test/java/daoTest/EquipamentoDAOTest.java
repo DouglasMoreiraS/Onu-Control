@@ -1,11 +1,8 @@
 package daoTest;
 
-import br.com.planet.dao.BackupAndRestore;
 import br.com.planet.dao.EquipamentoDAO;
-import br.com.planet.dao.ModeloDAO;
-import java.util.ArrayList;
-import java.util.List;
-import br.com.planet.model.bean.*;
+import br.com.planet.dao.ManutencaoDAO;
+import br.com.planet.model.bean.Equipamento;
 import br.com.planet.model.bean.Manutencao;
 import org.junit.Test;
 
@@ -13,6 +10,14 @@ public class EquipamentoDAOTest {
 
     public void teste() throws Exception{
         
+        Equipamento e = new EquipamentoDAO().buscar("00-5F-67-5C-AA-0E");
+        
+        Manutencao m = new Manutencao(e);
+        
+        m.setId(3864);
+        m.setData("TESTE");
+        
+        new ManutencaoDAO().salvar(m);
         
        /* List<Manutencao> listM = BackupAndRestore.restore();
         

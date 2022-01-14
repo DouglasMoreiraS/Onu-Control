@@ -12,7 +12,6 @@ public class EasyLinkControle extends Controle {
 
     public EasyLinkControle() {
         super();
-        driver = new ChromeDriver(options);
         this.loadProperties(PropertiesUtil.PROPERTIES_DIRECTORY + "\\easylink.properties");
     }
 

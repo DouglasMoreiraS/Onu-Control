@@ -3,10 +3,14 @@ package br.com.planet.view;
 import br.com.planet.view.equipamentos.*;
 import br.com.planet.control.*;
 import br.com.planet.controlers.ChimaControle;
+import br.com.planet.controlers.Dlink615Controle;
 import br.com.planet.controlers.Dlink841Controle;
+import br.com.planet.controlers.Dlink841TesteControle;
 import br.com.planet.controlers.Dlink842Controle;
+import br.com.planet.controlers.Dlink842TesteControle;
 import br.com.planet.controlers.EasyLinkControle;
 import br.com.planet.controlers.HuaweiControle;
+import br.com.planet.controlers.IntelBrasRF301KControle;
 import br.com.planet.controlers.Mercusys12gControle;
 import br.com.planet.controlers.MercusysMW301RControle;
 import br.com.planet.controlers.NextControle;
@@ -41,12 +45,14 @@ public class View extends javax.swing.JFrame {
     AcessView tpLinkView;
     AcessView tpLinkc20View;
     AcessView easyLinkView;
-    AcessView dlinkView;
+    AcessView dlink842View;
     AcessView dlink841View;
+    AcessView dlink615View;
     AcessView mercusysac12gView;
     AcessView mercusysMW301RView;
     AcessView nokiaView;
     AcessView zte601View;
+    AcessView rf301View;
 
     public View() {
         initComponents();
@@ -79,12 +85,19 @@ public class View extends javax.swing.JFrame {
         jMenuItem34 = new javax.swing.JMenuItem();
         jMenuItem35 = new javax.swing.JMenuItem();
         jMenu24 = new javax.swing.JMenu();
+        jMenu29 = new javax.swing.JMenu();
+        dlink841AcessMenu2 = new javax.swing.JMenuItem();
+        jMenuItem43 = new javax.swing.JMenuItem();
         jMenu26 = new javax.swing.JMenu();
         dlink841AcessMenu = new javax.swing.JMenuItem();
         jMenuItem41 = new javax.swing.JMenuItem();
         jMenu25 = new javax.swing.JMenu();
         jMenuItem38 = new javax.swing.JMenuItem();
         jMenuItem39 = new javax.swing.JMenuItem();
+        jMenu27 = new javax.swing.JMenu();
+        jMenu28 = new javax.swing.JMenu();
+        dlink841AcessMenu1 = new javax.swing.JMenuItem();
+        jMenuItem42 = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
         jMenu13 = new javax.swing.JMenu();
         jMenuItem15 = new javax.swing.JMenuItem();
@@ -120,9 +133,6 @@ public class View extends javax.swing.JFrame {
         menuListarTabela = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem28 = new javax.swing.JMenuItem();
@@ -137,14 +147,14 @@ public class View extends javax.swing.JFrame {
         painelImagemFundo1.setLayout(painelImagemFundo1Layout);
         painelImagemFundo1Layout.setHorizontalGroup(
             painelImagemFundo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1340, Short.MAX_VALUE)
+            .addGap(0, 1370, Short.MAX_VALUE)
         );
         painelImagemFundo1Layout.setVerticalGroup(
             painelImagemFundo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 750, Short.MAX_VALUE)
+            .addGap(0, 780, Short.MAX_VALUE)
         );
 
-        getContentPane().add(painelImagemFundo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1340, 750));
+        getContentPane().add(painelImagemFundo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 780));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -253,6 +263,21 @@ public class View extends javax.swing.JFrame {
 
         jMenu24.setText("Dlink ");
 
+        jMenu29.setText("Dlink DIR-615");
+
+        dlink841AcessMenu2.setText("Acesso Remoto");
+        dlink841AcessMenu2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dlink841AcessMenu2ActionPerformed(evt);
+            }
+        });
+        jMenu29.add(dlink841AcessMenu2);
+
+        jMenuItem43.setText("Historico");
+        jMenu29.add(jMenuItem43);
+
+        jMenu24.add(jMenu29);
+
         jMenu26.setText("Dlink DIR-841");
 
         dlink841AcessMenu.setText("Acesso Remoto");
@@ -289,6 +314,25 @@ public class View extends javax.swing.JFrame {
         jMenu24.add(jMenu25);
 
         jMenu6.add(jMenu24);
+
+        jMenu27.setText("IntelBras");
+
+        jMenu28.setText("RF301K");
+
+        dlink841AcessMenu1.setText("Acesso Remoto");
+        dlink841AcessMenu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dlink841AcessMenu1ActionPerformed(evt);
+            }
+        });
+        jMenu28.add(dlink841AcessMenu1);
+
+        jMenuItem42.setText("Historico");
+        jMenu28.add(jMenuItem42);
+
+        jMenu27.add(jMenu28);
+
+        jMenu6.add(jMenu27);
 
         jMenu5.add(jMenu6);
 
@@ -521,21 +565,6 @@ public class View extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Exportar");
-
-        jMenuItem3.setText("Equipamentos");
-        jMenu2.add(jMenuItem3);
-
-        jMenuItem4.setText("HIstórico");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem4);
-
-        jMenuBar1.add(jMenu2);
-
         jMenu3.setText("Opções");
 
         jMenuItem2.setText("Liberar Memoria");
@@ -586,10 +615,6 @@ public class View extends javax.swing.JFrame {
         eqView.setVisible(true);
 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        ExportaHistoricoExcelControl control = new ExportaHistoricoExcelControl(this);
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         BackupAndRestore.backup();
@@ -691,7 +716,7 @@ public class View extends javax.swing.JFrame {
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
         new HistoricoView(this, false, Modelo.HUAWEI_ECO).setVisible(true);
     }//GEN-LAST:event_jMenuItem14ActionPerformed
-    
+
     private void jMenuItem25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem25ActionPerformed
         if (mercusysac12gView == null) {
             mercusysac12gView = new AcessView(new Mercusys12gControle());
@@ -708,7 +733,7 @@ public class View extends javax.swing.JFrame {
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
 
         int resposta = JOptionPane.showConfirmDialog(null, "Esse processo irá encerrar todas as conexões ativas,"
-                                                        + " verifique se nenhum equipamento está conectado ou em processo de "
+                + " verifique se nenhum equipamento está conectado ou em processo de "
                 + "                                         atualização/reset antes de continuar");
 
         if (resposta == JOptionPane.YES_OPTION) {
@@ -795,7 +820,11 @@ public class View extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem37ActionPerformed
 
     private void jMenuItem38ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem38ActionPerformed
-        // TODO add your handling code here:
+        if (dlink842View == null) {
+            dlink842View = new AcessView(new Dlink842TesteControle());
+        }
+        this.dlink842View.setVisible(false);
+        this.dlink842View.setVisible(true);
     }//GEN-LAST:event_jMenuItem38ActionPerformed
 
     private void jMenuItem39ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem39ActionPerformed
@@ -804,12 +833,29 @@ public class View extends javax.swing.JFrame {
 
     private void dlink841AcessMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlink841AcessMenuActionPerformed
         if (dlink841View == null) {
-            dlink841View = new AcessView(new Dlink841Controle());
+            dlink841View = new AcessView(new Dlink841TesteControle());
         }
         this.dlink841View.setVisible(false);
         this.dlink841View.setVisible(true);
 
     }//GEN-LAST:event_dlink841AcessMenuActionPerformed
+
+    private void dlink841AcessMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlink841AcessMenu1ActionPerformed
+        if (rf301View == null) {
+            rf301View = new AcessView(new IntelBrasRF301KControle());
+        }
+        this.rf301View.setVisible(false);
+        this.rf301View.setVisible(true);
+    }//GEN-LAST:event_dlink841AcessMenu1ActionPerformed
+
+    private void dlink841AcessMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlink841AcessMenu2ActionPerformed
+        if (dlink615View == null) {
+            dlink615View = new AcessView(new Dlink615Controle());
+        }
+        this.dlink615View.setVisible(false);
+        this.dlink615View.setVisible(true);
+    }//GEN-LAST:event_dlink841AcessMenu2ActionPerformed
+
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -831,6 +877,8 @@ public class View extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem dlink841AcessMenu;
+    private javax.swing.JMenuItem dlink841AcessMenu1;
+    private javax.swing.JMenuItem dlink841AcessMenu2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu11;
@@ -842,7 +890,6 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu17;
     private javax.swing.JMenu jMenu18;
     private javax.swing.JMenu jMenu19;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu20;
     private javax.swing.JMenu jMenu21;
     private javax.swing.JMenu jMenu22;
@@ -850,6 +897,9 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu24;
     private javax.swing.JMenu jMenu25;
     private javax.swing.JMenu jMenu26;
+    private javax.swing.JMenu jMenu27;
+    private javax.swing.JMenu jMenu28;
+    private javax.swing.JMenu jMenu29;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
@@ -879,7 +929,6 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem27;
     private javax.swing.JMenuItem jMenuItem28;
     private javax.swing.JMenuItem jMenuItem29;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem30;
     private javax.swing.JMenuItem jMenuItem31;
     private javax.swing.JMenuItem jMenuItem32;
@@ -890,8 +939,9 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem37;
     private javax.swing.JMenuItem jMenuItem38;
     private javax.swing.JMenuItem jMenuItem39;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem41;
+    private javax.swing.JMenuItem jMenuItem42;
+    private javax.swing.JMenuItem jMenuItem43;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem9;

@@ -1,18 +1,15 @@
 package br.com.planet.view.crud;
 
 import br.com.planet.control.EquipamentoControl;
-import br.com.planet.dao.ModeloDAO;
 import br.com.planet.exception.DeleteViolationException;
 import br.com.planet.model.tablemodel.EquipamentoTableModel;
 import br.com.planet.util.ImagesUtil;
-import br.com.planet.util.Utils;
 import java.awt.Frame;
-import javax.swing.ImageIcon;
+import java.awt.Toolkit;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.xml.bind.ValidationException;
-import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
@@ -39,7 +36,7 @@ public class EquipamentoView extends javax.swing.JDialog {
         initComponents();
         initComponents2();
         this.cbModelo.setSelectedItem(modelo);
-        this.atualizaGrafico();
+        this.atualizarGrafico();
 
     }
 
@@ -78,8 +75,12 @@ public class EquipamentoView extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Equipamentos Cadastrados");
+        setMinimumSize(new java.awt.Dimension(1152, 683));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.setMaximumSize(new java.awt.Dimension(1140, 102));
+        jPanel1.setMinimumSize(new java.awt.Dimension(1140, 102));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1140, 102));
 
         btnLimpaFiltro.setText("Limpar Filtro");
         btnLimpaFiltro.addActionListener(new java.awt.event.ActionListener() {
@@ -206,6 +207,8 @@ public class EquipamentoView extends javax.swing.JDialog {
         );
 
         jpanelTitulo.setBorder(javax.swing.BorderFactory.createTitledBorder(this.tblEquipamentos.getModel().getRowCount()+ " equipamentos Registrados"));
+        jpanelTitulo.setMaximumSize(new java.awt.Dimension(1140, 509));
+        jpanelTitulo.setMinimumSize(new java.awt.Dimension(1140, 509));
 
         tblEquipamentos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -234,9 +237,9 @@ public class EquipamentoView extends javax.swing.JDialog {
         jScrollPane1.setViewportView(tblEquipamentos);
 
         panelGrafico.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        panelGrafico.setMaximumSize(new java.awt.Dimension(362, 362));
-        panelGrafico.setMinimumSize(new java.awt.Dimension(362, 362));
+        panelGrafico.setMinimumSize(new java.awt.Dimension(580, 432));
         panelGrafico.setName(""); // NOI18N
+        panelGrafico.setPreferredSize(new java.awt.Dimension(580, 432));
         panelGrafico.setLayout(new java.awt.BorderLayout());
 
         panelBotoesGrafico.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -269,7 +272,7 @@ public class EquipamentoView extends javax.swing.JDialog {
             .addGroup(panelBotoesGraficoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnPatrimonio, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
+                .addGap(130, 130, 130)
                 .addComponent(btnFirmware, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -284,37 +287,6 @@ public class EquipamentoView extends javax.swing.JDialog {
                     .addComponent(btnFirmware)
                     .addComponent(btnStatus))
                 .addContainerGap())
-        );
-
-        javax.swing.GroupLayout jpanelTituloLayout = new javax.swing.GroupLayout(jpanelTitulo);
-        jpanelTitulo.setLayout(jpanelTituloLayout);
-        jpanelTituloLayout.setHorizontalGroup(
-            jpanelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpanelTituloLayout.createSequentialGroup()
-                .addGroup(jpanelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpanelTituloLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jpanelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(panelGrafico, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
-                            .addComponent(panelBotoesGrafico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jpanelTituloLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblRodape, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jpanelTituloLayout.setVerticalGroup(
-            jpanelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpanelTituloLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jpanelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(jpanelTituloLayout.createSequentialGroup()
-                        .addComponent(panelBotoesGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(panelGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblRodape, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -386,6 +358,39 @@ public class EquipamentoView extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        javax.swing.GroupLayout jpanelTituloLayout = new javax.swing.GroupLayout(jpanelTitulo);
+        jpanelTitulo.setLayout(jpanelTituloLayout);
+        jpanelTituloLayout.setHorizontalGroup(
+            jpanelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpanelTituloLayout.createSequentialGroup()
+                .addGroup(jpanelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpanelTituloLayout.createSequentialGroup()
+                        .addGroup(jpanelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblRodape, javax.swing.GroupLayout.DEFAULT_SIZE, 532, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jpanelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(panelBotoesGrafico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(panelGrafico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jpanelTituloLayout.setVerticalGroup(
+            jpanelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpanelTituloLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpanelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelGrafico, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpanelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblRodape, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelBotoesGrafico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -393,8 +398,7 @@ public class EquipamentoView extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jpanelTitulo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -405,33 +409,12 @@ public class EquipamentoView extends javax.swing.JDialog {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jpanelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void tblEquipamentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEquipamentosMouseClicked
-        if (tblEquipamentos.getSelectedRows().length != 0) {
-            this.eqControl.setEquipamentoSelecionado(tblEquipamentos.getSelectedRow());
-            this.painelImagemFundo.setImg(ImagesUtil.getImgIcon(eqControl.getEquipamentoSelecionado().getModelo().getNome()));
-            this.painelImagemFundo.repaint();
-
-            this.btnHistorico.setEnabled(true);
-            this.btnEditar.setEnabled(true);
-            this.btnExportar.setEnabled(true);
-        } else {
-            this.btnHistorico.setEnabled(false);
-            this.btnEditar.setEnabled(false);
-            this.btnExportar.setEnabled(false);
-        }
-    }//GEN-LAST:event_tblEquipamentosMouseClicked
-
-    private void tblEquipamentosFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tblEquipamentosFocusLost
-    }//GEN-LAST:event_tblEquipamentosFocusLost
 
     private void btnHistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistoricoActionPerformed
         this.eqControl.historico(parent);
@@ -449,7 +432,7 @@ public class EquipamentoView extends javax.swing.JDialog {
             btnFirmware.setEnabled(true);
         }
         atualizarTbl();
-        atualizaGrafico();
+        atualizarGrafico();
 
     }//GEN-LAST:event_cbModeloItemStateChanged
 
@@ -459,19 +442,19 @@ public class EquipamentoView extends javax.swing.JDialog {
         this.txtSn.setText("");
         this.txtPatrimonio.setText("");
         atualizarTbl();
-        atualizaGrafico();
+        atualizarGrafico();
     }//GEN-LAST:event_btnLimpaFiltroActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         eqControl.editar(parent);
         this.atualizarTbl();
-        atualizaGrafico();
+        atualizarGrafico();
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnCriarEquipamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarEquipamentoActionPerformed
         eqControl.criar(parent);
         this.atualizarTbl();
-        atualizaGrafico();
+        atualizarGrafico();
     }//GEN-LAST:event_btnCriarEquipamentoActionPerformed
 
     private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
@@ -482,7 +465,7 @@ public class EquipamentoView extends javax.swing.JDialog {
                 eqControl.deletar();
                 JOptionPane.showMessageDialog(this, "Equipamento Deletado", "Deletar", JOptionPane.INFORMATION_MESSAGE);
                 atualizarTbl();
-                atualizaGrafico();
+                atualizarGrafico();
 
             } catch (DeleteViolationException e) {
                 JOptionPane.showMessageDialog(this, "Existem registros desse equipamento, exclua-os primeiro", "Deletar", JOptionPane.INFORMATION_MESSAGE);
@@ -493,51 +476,22 @@ public class EquipamentoView extends javax.swing.JDialog {
 
     private void cbStatusItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbStatusItemStateChanged
         atualizarTbl();
-        atualizaGrafico();
+        atualizarGrafico();
     }//GEN-LAST:event_cbStatusItemStateChanged
-
-    private void tblEquipamentosMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEquipamentosMouseReleased
-
-        if (tblEquipamentos.getSelectedRowCount() <= 1) {
-            lblRodape.setText("Valor Selecionado: " + tblEquipamentos.getValueAt(tblEquipamentos.getSelectedRow(), tblEquipamentos.getSelectedColumn()).toString());
-        } else {
-            lblRodape.setText("Linhas Selecionadas: " + tblEquipamentos.getSelectedRowCount());
-        }
-
-    }//GEN-LAST:event_tblEquipamentosMouseReleased
-
-    private void btnPatrimonioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPatrimonioActionPerformed
-        btnFirmware.setSelected(false);
-        btnStatus.setSelected(false);
-        atualizaGrafico();
-
-    }//GEN-LAST:event_btnPatrimonioActionPerformed
-
-    private void btnFirmwareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirmwareActionPerformed
-        btnPatrimonio.setSelected(false);
-        btnStatus.setSelected(false);
-        atualizaGrafico();
-    }//GEN-LAST:event_btnFirmwareActionPerformed
-
-    private void btnStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStatusActionPerformed
-        btnPatrimonio.setSelected(false);
-        btnFirmware.setSelected(false);
-        atualizaGrafico();
-    }//GEN-LAST:event_btnStatusActionPerformed
 
     private void txtSnKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSnKeyReleased
         atualizarTbl();
-        atualizaGrafico();
+        atualizarGrafico();
     }//GEN-LAST:event_txtSnKeyReleased
 
     private void txtFirmwareKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFirmwareKeyReleased
         atualizarTbl();
-        atualizaGrafico();
+        atualizarGrafico();
     }//GEN-LAST:event_txtFirmwareKeyReleased
 
     private void txtPatrimonioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPatrimonioKeyReleased
         atualizarTbl();
-        atualizaGrafico();
+        atualizarGrafico();
     }//GEN-LAST:event_txtPatrimonioKeyReleased
 
     private void btnExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarActionPerformed
@@ -564,6 +518,53 @@ public class EquipamentoView extends javax.swing.JDialog {
         }
         
     }//GEN-LAST:event_btnExportarActionPerformed
+
+    private void btnStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStatusActionPerformed
+        btnPatrimonio.setSelected(false);
+        btnFirmware.setSelected(false);
+        atualizarGrafico();
+    }//GEN-LAST:event_btnStatusActionPerformed
+
+    private void btnFirmwareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirmwareActionPerformed
+        btnPatrimonio.setSelected(false);
+        btnStatus.setSelected(false);
+        atualizarGrafico();
+    }//GEN-LAST:event_btnFirmwareActionPerformed
+
+    private void btnPatrimonioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPatrimonioActionPerformed
+        btnFirmware.setSelected(false);
+        btnStatus.setSelected(false);
+        atualizarGrafico();
+    }//GEN-LAST:event_btnPatrimonioActionPerformed
+
+    private void tblEquipamentosMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEquipamentosMouseReleased
+
+        if (tblEquipamentos.getSelectedRowCount() <= 1) {
+            lblRodape.setText("Valor Selecionado: " + tblEquipamentos.getValueAt(tblEquipamentos.getSelectedRow(), tblEquipamentos.getSelectedColumn()).toString());
+        } else {
+            lblRodape.setText("Linhas Selecionadas: " + tblEquipamentos.getSelectedRowCount());
+        }
+    }//GEN-LAST:event_tblEquipamentosMouseReleased
+
+    private void tblEquipamentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEquipamentosMouseClicked
+        if (tblEquipamentos.getSelectedRows().length != 0) {
+            this.eqControl.setEquipamentoSelecionado(tblEquipamentos.getSelectedRow());
+            this.painelImagemFundo.setImg(eqControl.getEquipamentoSelecionado().getModelo().getImage());
+            this.painelImagemFundo.repaint();
+
+            this.btnHistorico.setEnabled(true);
+            this.btnEditar.setEnabled(true);
+            this.btnExportar.setEnabled(true);
+        } else {
+            this.btnHistorico.setEnabled(false);
+            this.btnEditar.setEnabled(false);
+            this.btnExportar.setEnabled(false);
+        }
+    }//GEN-LAST:event_tblEquipamentosMouseClicked
+
+    private void tblEquipamentosFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tblEquipamentosFocusLost
+
+    }//GEN-LAST:event_tblEquipamentosFocusLost
 
     public static void main(String args[]) {
         try {
@@ -658,10 +659,10 @@ public class EquipamentoView extends javax.swing.JDialog {
 
         jpanelTitulo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, this.tblEquipamentos.getModel().getRowCount() + " equipamentos Registrados", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
-        atualizaGrafico();
+        atualizarGrafico();
     }
 
-    private void atualizaGrafico() {
+    private void atualizarGrafico() {
         String titulo;
         JFreeChart grafico;
         
@@ -675,7 +676,7 @@ public class EquipamentoView extends javax.swing.JDialog {
                 titulo = titulo.concat(" (Status)");
                 grafico = eqControl.getGrafico("status");
             } else {
-                grafico = eqControl.getGrafico("");
+                grafico = eqControl.getGrafico("contagem");
             }
         } else {
 
@@ -712,8 +713,10 @@ public class EquipamentoView extends javax.swing.JDialog {
         this.tblEquipamentos.setModel(eqControl.getTableModel());
 
         this.alimentarComboBoxes();
-        this.atualizaGrafico();
+        this.atualizarGrafico();
         btnFirmware.setEnabled(false);
+        this.setSize(Toolkit.getDefaultToolkit().getScreenSize());
+        this.pack();
     }
 
 }

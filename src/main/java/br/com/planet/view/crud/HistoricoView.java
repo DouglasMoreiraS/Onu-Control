@@ -315,7 +315,7 @@ public class HistoricoView extends javax.swing.JDialog {
 
     private void tblHistoricoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHistoricoMouseClicked
         this.control.setHistoricoSelecionado(tblHistorico.getSelectedRow());
-        this.painelImagemFundo.setImg(ImagesUtil.getImgIcon(control.getHistoricoSelecionado().getEquipamento().getModelo().getNome()));
+        this.painelImagemFundo.setImg(control.getHistoricoSelecionado().getEquipamento().getModelo().getImage());
         this.painelImagemFundo.repaint();
         this.btnDeletar.setEnabled(true);
     }//GEN-LAST:event_tblHistoricoMouseClicked

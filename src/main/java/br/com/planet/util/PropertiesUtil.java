@@ -37,7 +37,7 @@ public class PropertiesUtil {
         } finally {
             try {
                 fis.close();
-            } catch (IOException ex) {
+            } catch (NullPointerException | IOException ex) {
                 Logger.getLogger(PropertiesUtil.class.getName()).log(Level.SEVERE, null, ex);
             }
         }

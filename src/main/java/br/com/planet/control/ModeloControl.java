@@ -25,7 +25,11 @@ public class ModeloControl {
     }
 
     public void buscar(String busca) {
-        modeloList = dao.buscaEspecifica(busca);
+        if (!busca.equals("")) {
+            modeloList = dao.buscaEspecifica(busca);
+        } else {
+            modeloList = dao.listar();
+        }
     }
 
     public void setModeloSelecionado(int selectedRow) {
@@ -41,22 +45,21 @@ public class ModeloControl {
             Modelo.salvar(modeloSelecionado);
         }
         modeloSelecionado = new Modelo();
-        
+
         this.atualizarLista();
     }
-    
-    public void equipamentoList(Frame parent){
-        new EquipamentoView (parent, true, modeloSelecionado.getNome()).setVisible(true);
+
+    public void equipamentoList(Frame parent) {
+        new EquipamentoView(parent, true, modeloSelecionado.getNome()).setVisible(true);
     }
-    
-    public boolean deletar(){
+
+    public boolean deletar() {
         return true;
     }
-    
-    private void atualizarLista(){
+
+    private void atualizarLista() {
         this.modeloList.clear();
         this.modeloList.addAll(dao.listar());
     }
-    
+
 }
-        

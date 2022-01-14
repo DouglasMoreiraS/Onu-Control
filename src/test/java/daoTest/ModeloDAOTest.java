@@ -6,9 +6,13 @@ import org.junit.Test;
 
 
 public class ModeloDAOTest {
-    public void salvar(){
+    public void salvar() throws Exception{
         
-        new ModeloDAO().salvar(new Modelo("Dlink DIR-841"));
+      // new ModeloDAO().salvar(new Modelo("Dlink DIR-615"));
         
+      Modelo modelo = new ModeloDAO().buscar("D-link DIR-842");
+      modelo.setNome("Dlink DIR-842");
+      Modelo.salvar(modelo);
+      
     }
 }

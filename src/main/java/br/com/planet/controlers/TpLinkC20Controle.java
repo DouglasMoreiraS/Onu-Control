@@ -3,27 +3,17 @@ package br.com.planet.controlers;
 import br.com.planet.util.PropertiesUtil;
 import br.com.planet.util.Utils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 public class TpLinkC20Controle extends Controle {
 
-    private int modelo = 0; 
-    //Existem 2 modelos desse roteador: o BR e o W, o HTML deles são diferentes, então essa chave define qual o modelo conectado
-    //para que o codigo funcione
-    //0 = W
-    //1 = BR
-
-    private String brFirmwarePath;
-    private String wFirmwarePath;
-
     public TpLinkC20Controle() {
         super();
-        timeout = 10;
+        timeout = 3;
         this.loadProperties(PropertiesUtil.PROPERTIES_DIRECTORY + "\\tplinkc20.properties");
-        brFirmwarePath = properties.getProperty("br.firmware.path");
-        wFirmwarePath = properties.getProperty("w.firmware.path");
-        this.m.getEquipamento().setTipo(this.ROUTER_TYPE);
     }
 
     public boolean logar() throws WebDriverException {
@@ -31,47 +21,41 @@ public class TpLinkC20Controle extends Controle {
         try {
             driver.get(url);
 
-            if (Utils.existsElement(driver, "//*[@id=\"pcPassword\"]") || Utils.existsElement(driver, "//*[@id=\"pcPassword\"]")) {
-                modelo = 1;
-                
-                return true;
-            } else {
-                String xpathLogin1 = "//*[@id=\"pc-setPwd-new\"]";
-                String xpathLogin2 = "//*[@id=\"pc-setPwd-confirm\"]";
+            String xpathLogin1 = "//*[@id=\"pc-setPwd-new\"]";
+            String xpathLogin2 = "//*[@id=\"pc-setPwd-confirm\"]";
 
-                String xpathLogin = "//*[@id=\"pc-login-password\"]";
+            String xpathLogin = "//*[@id=\"pc-login-password\"]";
 
-                if (Utils.existsElement(driver, xpathLogin1) && driver.findElement(By.xpath(xpathLogin1)).isDisplayed()) {
-                    driver.findElement(By.xpath(xpathLogin1)).clear();
-                    driver.findElement(By.xpath(xpathLogin1)).sendKeys(senha);
-                    driver.findElement(By.xpath(xpathLogin2)).clear();
-                    driver.findElement(By.xpath(xpathLogin2)).sendKeys(senha);
-                    driver.findElement(By.xpath("//*[@id=\"pc-setPwd-btn\"]")).click();
-                } else if (Utils.existsElement(driver, xpathLogin)) {
-                    driver.findElement(By.xpath(xpathLogin)).clear();
-                    driver.findElement(By.xpath(xpathLogin)).sendKeys(senha);
+            if (Utils.existsElement(driver, xpathLogin1) && driver.findElement(By.xpath(xpathLogin1)).isDisplayed()) {
+                driver.findElement(By.xpath(xpathLogin1)).clear();
+                driver.findElement(By.xpath(xpathLogin1)).sendKeys(senha);
+                driver.findElement(By.xpath(xpathLogin2)).clear();
+                driver.findElement(By.xpath(xpathLogin2)).sendKeys(senha);
+                driver.findElement(By.xpath("//*[@id=\"pc-setPwd-btn\"]")).click();
+            } else if (Utils.existsElement(driver, xpathLogin)) {
+                driver.findElement(By.xpath(xpathLogin)).clear();
+                driver.findElement(By.xpath(xpathLogin)).sendKeys(senha);
 
-                    driver.findElement(By.xpath("//*[@id=\"pc-login-btn\"]")).click();
-                }
+                driver.findElement(By.xpath("//*[@id=\"pc-login-btn\"]")).click();
+            }
 
-                if (Utils.existsElement(driver, "//*[@id=\"confirm-yes\"]")) {
+            if (Utils.existsElement(driver, "//*[@id=\"confirm-yes\"]")) {
 
-                    for (int tries = 2; tries != 0; tries--) {
-                        try {
-                            driver.findElement(By.xpath("//*[@id=\"confirm-yes\"]")).click();
-                        } catch (WebDriverException e) {
+                for (int tries = 2; tries != 0; tries--) {
+                    try {
+                        driver.findElement(By.xpath("//*[@id=\"confirm-yes\"]")).click();
+                    } catch (WebDriverException e) {
 
-                        }
                     }
                 }
+            }
 
-                if (Utils.existsElement(driver, "//*[@id=\"advanced\"]")) {
-                    System.out.println("Existe");
-                    return true;
-                } else {
-                    System.out.println("Nao existe");
-                    return false;
-                }
+            if (Utils.existsElement(driver, "//*[@id=\"advanced\"]")) {
+                System.out.println("Existe");
+                return true;
+            } else {
+                System.out.println("Nao existe");
+                return false;
             }
 
         } catch (WebDriverException e) {
@@ -88,11 +72,9 @@ public class TpLinkC20Controle extends Controle {
         try {
             this.sendMeMainPage();
 
-            driver.findElement(By.xpath("//*[@id=\"menuTree\"]/li[2]/a")).click();
             Thread.sleep(500);
-            driver.findElement(By.xpath("//*[@id=\"menuTree\"]/li[2]/ul/li[2]/a")).click();
 
-            WebElement sn = driver.findElement(By.xpath("//*[@id=\"lanMacAddress\"]"));
+            WebElement sn = driver.findElement(By.xpath("//*[@id=\"macAddrLanV4\"]"));
 
             String serial = sn.getAttribute("value");
 
@@ -100,8 +82,8 @@ public class TpLinkC20Controle extends Controle {
         } catch (WebDriverException e) {
             System.out.println("Erro TPLINK getSn: " + e.getMessage());
             throw e;
-        }catch (InterruptedException ex){
-            
+        } catch (InterruptedException ex) {
+
         }
 
     }
@@ -135,16 +117,69 @@ public class TpLinkC20Controle extends Controle {
     }
 
     private void sendMeMainPage() {
-        try {
+        
+         try {
             driver.get(url);
             if (Utils.existsElement(driver, "//*[@id=\"advanced\"]")) {
-                driver.findElement(By.xpath("//*[@id=\"advanced\"]")).click();
+                for (int tries = 2; tries >= 0; tries--) {
+                    try {
+                        driver.findElement(By.xpath("//*[@id=\"advanced\"]")).click();
+                        break;
+                    } catch (NoSuchElementException e) {
+
+                    }
+                }
             }
         } catch (WebDriverException e) {
             System.out.println("Erro TPLINK Main Page: " + e.getMessage());
+            this.writeLog("sendMeMainPage", e.getMessage());
+            throw e;
+        }
+    }
+
+    public void ppoe() throws WebDriverException {
+
+        try {
+
+            driver.findElement(By.xpath("//*[@id=\"menuTree\"]/li[2]/a")).click();
+            driver.findElement(By.xpath("//*[@id=\"menuTree\"]/li[2]/ul/li[1]/a")).click();
+            driver.findElement(By.xpath("//*[@id=\"wanBody\"]/tr[2]/td[5]/span[1]")).click();
+
+            driver.findElement(By.xpath("//*[@id=\"username\"]")).clear();
+            driver.findElement(By.xpath("//*[@id=\"username\"]")).sendKeys(ppoeUser);
+
+            driver.findElement(By.xpath("//*[@id=\"pwd\"]")).clear();
+            driver.findElement(By.xpath("//*[@id=\"pwd2\"]")).clear();
+
+            driver.findElement(By.xpath("//*[@id=\"pwd\"]")).sendKeys(ppoePass);
+            driver.findElement(By.xpath("//*[@id=\"pwd2\"]")).sendKeys(ppoePass);
+
+            new Actions(driver).moveToElement( driver.findElement(By.xpath("//*[@id=\"saveConnBtn\"]"))).click().perform();
+            
+        } catch (WebDriverException e) {
+            System.out.println("Erro TPLINK InternalLogar: " + e.getMessage());
+            this.writeLog("ppoe", e.getMessage());
             throw e;
         }
 
+    }
+    
+    public void reset () throws WebDriverException {
+        try {
+            sendMeMainPage();
+            driver.findElement(By.xpath("//*[@id=\"menuTree\"]/li[9]/a")).click();
+            driver.findElement(By.xpath("//*[@id=\"menuTree\"]/li[9]/ul/li[4]/a")).click();
+            driver.findElement(By.xpath("//*[@id=\"factoryBtn\"]")).click();
+            driver.findElement(By.xpath("//*[@id=\"alert-container\"]/div/div[4]/div/div[2]/div/div[2]/button")).click();
+            
+            Thread.sleep(30000);
+            
+            this.start();
+            
+        } catch (WebDriverException e) {
+            
+        } catch (InterruptedException ex){
+        }
     }
 
 }

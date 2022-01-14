@@ -36,14 +36,7 @@ public class Equipamento implements Serializable, Comparable<Equipamento>{
     @Column()
     private boolean status;
 
-    @Transient
-    private int tipo;
-
     public Equipamento() {
-    }
-
-    public Equipamento(int tipo) {
-        this.tipo = tipo;
     }
 
     public Equipamento(String modelo) {
@@ -82,14 +75,6 @@ public class Equipamento implements Serializable, Comparable<Equipamento>{
 
     public void setFirmware(String firmware) {
         this.firmware = firmware;
-    }
-
-    public int getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(int tipo) {
-        this.tipo = tipo;
     }
 
     public String getPatrimonio() {

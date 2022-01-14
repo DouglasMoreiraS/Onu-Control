@@ -12,7 +12,6 @@ public class MercusysMW301RControle extends Controle {
         super();
         timeout = 10;
         super.loadProperties(PropertiesUtil.PROPERTIES_DIRECTORY + "\\mercusysmw301r.properties");
-        this.m.getEquipamento().setTipo(Controle.ROUTER_TYPE);
     }
 
     public boolean logar() throws WebDriverException {

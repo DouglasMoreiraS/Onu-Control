@@ -12,7 +12,6 @@ public class ZTEF601Controle extends Controle {
         timeout = 5;
         this.loadProperties(PropertiesUtil.PROPERTIES_DIRECTORY + "\\zte_f601.properties");
 
-        this.m.getEquipamento().setTipo(this.ONU_TYPE);
     }
 
     @Override
@@ -66,7 +65,7 @@ public class ZTEF601Controle extends Controle {
 
         try {
             driver.switchTo().frame("mainFrame");
-            this.m.getEquipamento().setSn(driver.findElement(By.xpath("//*[@id=\"Frm_SerialNumber\"]")).getText());
+            this.m.getEquipamento().setSn(driver.findElement(By.xpath("//*[@id=\"Frm_PonSerialNumber\"]")).getText());
         } catch (WebDriverException e) {
             System.out.println("Erro ZTE F601 getSn:  " + e.getMessage());
             this.writeLog("getSn", e.getMessage());
@@ -78,8 +77,9 @@ public class ZTEF601Controle extends Controle {
     public void getFirmware() throws WebDriverException {
 
         try {
+            driver.navigate().refresh();
             driver.switchTo().frame("mainFrame");
-            this.m.getEquipamento().setFirmware(driver.findElement(By.xpath("By.xpath(//*[@id=\"Frm_SoftwareVer\"]")).getText());
+            this.m.getEquipamento().setFirmware(driver.findElement(By.xpath("//*[@id=\"Frm_SoftwareVer\"]")).getText());
             System.out.println(driver.findElement(By.xpath("By.xpath(//*[@id=\"Frm_SoftwareVer\"]")));
         } catch (WebDriverException e) {
             System.out.println("Erro ZTE F601 getFirmware:  " + e.getMessage());

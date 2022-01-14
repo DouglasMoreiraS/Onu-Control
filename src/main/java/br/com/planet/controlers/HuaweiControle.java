@@ -13,7 +13,6 @@ public class HuaweiControle extends Controle {
         super();
         loadProperties(PropertiesUtil.PROPERTIES_DIRECTORY + "\\huawei.properties");
         timeout = 5;
-        this.m.getEquipamento().setTipo(Controle.ONT_TYPE);
     }
 
     

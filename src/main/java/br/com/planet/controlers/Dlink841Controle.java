@@ -16,7 +16,6 @@ public class Dlink841Controle extends Controle {
         super();
         timeout = 3;
         this.loadProperties(PropertiesUtil.PROPERTIES_DIRECTORY + "\\dlink841.properties");
-        this.m.getEquipamento().setTipo(Controle.ROUTER_TYPE);
     }
 
     @Override
@@ -31,7 +30,7 @@ public class Dlink841Controle extends Controle {
                 primeiraConfiguracao();
 
             }
-
+            //*[@id="loginDialogUsername"]
             if (Utils.existsElement(driver, "/html/body/div[1]/div[4]/div/div/div/form/div/div[1]/span")) {
                 txtLogin = driver.findElement(By.xpath("/html/body/div[1]/div[4]/div/div/div/form/label[1]/div[1]/div/input"));
                 txtSenha = driver.findElement(By.xpath("/html/body/div[1]/div[4]/div/div/div/form/label[2]/div[1]/div/input"));
@@ -62,8 +61,6 @@ public class Dlink841Controle extends Controle {
                 System.out.println("login comum");
             }
 
-            System.out.println(login);
-        //    Thread.sleep(500);
             btnLogin.click();
 
             Thread.sleep(1000);
@@ -77,15 +74,12 @@ public class Dlink841Controle extends Controle {
             }
 
             try {
-                Thread.sleep(1000);
                 txtLogin.sendKeys(login);
-                return false;
-            } catch (InterruptedException ex) {
-                this.writeLog("logar", ex.getMessage());
                 return false;
             } catch (WebDriverException e) {
                 return true;
             }
+            
         } catch (WebDriverException e) {
             System.out.println("Erro DLINK InternalLogar: " + e.getMessage());
             this.writeLog("logar", e.getMessage());
@@ -99,7 +93,6 @@ public class Dlink841Controle extends Controle {
     public void getSn() throws WebDriverException {
         try {
             driver.get(urlSn);
-            WebDriverWait wait = new WebDriverWait(driver, 10);
             WebElement sn = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"mblock\"]/div[2]/div/div/div/div[1]/div[7]/span[2]")));
             m.getEquipamento().setSn(sn.getText());
             System.out.println(m.getEquipamento().getSn());
@@ -115,13 +108,12 @@ public class Dlink841Controle extends Controle {
 
             driver.get(urlFirmware);
 
-            WebDriverWait wait = new WebDriverWait(driver, 10);
-
             try {
                 driver.switchTo().alert().accept();
             } catch (NoAlertPresentException e) {
                 System.out.println(e.getMessage());
             }
+            
             WebElement firmwareElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"mblock\"]/div[2]/div/div/div/div[1]/div[3]/span[2]/a")));
             String firmware = firmwareElement.getText();
 
@@ -143,18 +135,13 @@ public class Dlink841Controle extends Controle {
     public void updateFirmware() throws WebDriverException {
 
         try {
-            if (headless == true) {
-                options.setHeadless(false);
-                this.restart();
-                this.logar();
-            }
 
             driver.get(urlUpdate);
 
-            WebDriverWait wait = new WebDriverWait(driver, 10);
 
             WebElement firmwarePathElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"mblock\"]/div[2]/div/ui-view/div/div/div/div/div[3]/form/label/input")));
             firmwarePathElement.sendKeys(this.firmwarePath);
+            System.out.println(firmwarePath);
 
             WebElement button = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"mblock\"]/div[2]/div/ui-view/div/div/div/div/div[3]/form/div/button")));
 
@@ -166,8 +153,6 @@ public class Dlink841Controle extends Controle {
             }
 
             this.m.setObservacao("Preset Installed");
-
-            System.out.println(m.getObservacao());
 
             this.m.setUpdate(true);
             
@@ -210,7 +195,7 @@ public class Dlink841Controle extends Controle {
     private void primeiraConfiguracao() throws WebDriverException {
         try {
             //botoes
-            Thread.sleep(2000);
+         //   Thread.sleep(2000);
             driver.findElement(By.xpath("/html/body/div[1]/div[3]/div/div/div[2]/a")).click();
             driver.findElement(By.xpath("/html/body/div[1]/div[3]/div/div/div[3]/ul/li[1]/a")).click();
             driver.findElement(By.xpath("/html/body/div[1]/div[3]/div/div/div[3]/div/button[1]")).click();

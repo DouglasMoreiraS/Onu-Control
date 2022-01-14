@@ -11,14 +11,13 @@ public class ChimaControle extends Controle {
         timeout = 5;
         this.loadProperties(PropertiesUtil.PROPERTIES_DIRECTORY + "\\chima.properties");
         
-        this.m.getEquipamento().setTipo(this.ONU_TYPE);
     }
 
     @Override
     public boolean logar() throws WebDriverException {
 
         try {
-            driver.get("http://192.168.0.1/admin/index.html#/home");
+            driver.get(url);
 
             if (driver.getTitle().equals(title)) {
                 return true;
@@ -32,7 +31,7 @@ public class ChimaControle extends Controle {
                 driver.get(url);
                 driver.findElement(By.xpath("/html/body/blockquote[1]/form/center/table/tbody/tr/td/table/tbody/tr[2]/td[3]/font/input")).sendKeys(login);
                 return false;
-            } catch (Exception e) {
+            } catch (WebDriverException e) {
                 return true;
             }
 

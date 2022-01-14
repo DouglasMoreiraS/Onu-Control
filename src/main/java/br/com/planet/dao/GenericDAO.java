@@ -55,7 +55,7 @@ public class GenericDAO<Entidade> {
     }
 
     @SuppressWarnings("unchecked")
-    public Entidade buscar(Long codigo) {
+    public Entidade buscar(int codigo) {
         Session sessao = HibernateUtil.getSessionFactory().openSession();
         try {
             Criteria consulta = sessao.createCriteria(classe);

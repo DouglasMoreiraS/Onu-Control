@@ -311,7 +311,7 @@ public class EditarEquipamentoView extends javax.swing.JDialog {
 
             cbStatus.setSelected(control.getEquipamentoSelecionado().isStatus());
 
-            this.painelImagemFundo.setImg(ImagesUtil.getImgIcon(control.getEquipamentoSelecionado().getModelo().getNome()));
+            this.painelImagemFundo.setImg(control.getEquipamentoSelecionado().getModelo().getImage());
         }
     }
 }

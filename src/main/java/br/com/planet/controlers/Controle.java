@@ -12,10 +12,9 @@ import br.com.planet.model.bean.Manutencao;
 import br.com.planet.util.PropertiesUtil;
 import br.com.planet.util.log.Log;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
+import javax.swing.ImageIcon;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -23,10 +22,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Controle {
 
-    public final static int ONU_TYPE = 0;
-    public final static int ONT_TYPE = 1;
-    public final static int ROUTER_TYPE = 2;
-
+    
     ManutencaoDAO dao;
 
     WebElement txtLogin;
@@ -61,8 +57,6 @@ public class Controle {
     String title;
 
     String name;
-
-    int tipo;
 
     String firmwareAtualVersion;
 
@@ -262,8 +256,8 @@ public class Controle {
     void atualizarInformacoes() throws WebDriverException {
         try {
             this.getSn();
-            this.getPon();
             this.getFirmware();
+            this.getPon();
             this.findHistorico();
             this.getPatrimonio();
             this.getStatus();
@@ -340,8 +334,7 @@ public class Controle {
     }
 
     public boolean isPpoe() {
-        System.out.println(m.getEquipamento().getTipo() + " " + this.ONU_TYPE);
-        return (m.getEquipamento().getTipo() != this.ONU_TYPE);
+        return (m.getEquipamento().getModelo().getTipo()!= 0);
     }
 
     public void writeLog(String method, String description) {
@@ -352,5 +345,9 @@ public class Controle {
         Log.getInstance().write("*******************************************");
         Log.getInstance().close();
 
+    }
+
+    public String getHost() {
+       return url.substring(7);
     }
 }

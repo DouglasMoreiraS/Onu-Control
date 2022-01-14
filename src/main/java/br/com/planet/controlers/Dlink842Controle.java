@@ -1,6 +1,5 @@
 package br.com.planet.controlers;
 
-import br.com.planet.dao.ManutencaoDAO;
 import br.com.planet.util.PropertiesUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -10,7 +9,6 @@ import br.com.planet.util.Utils;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 public class Dlink842Controle extends Controle {
 
@@ -21,13 +19,12 @@ public class Dlink842Controle extends Controle {
         super();
         timeout = 4;
         this.loadProperties(PropertiesUtil.PROPERTIES_DIRECTORY + "\\dlink842.properties");
-        this.m.getEquipamento().setTipo(Controle.ROUTER_TYPE);
+        this.login1 = PropertiesUtil.getProperties(PropertiesUtil.PROPERTIES_DIRECTORY + "\\dlink842.properties").getProperty("p.user1");
     }
 
     public boolean logar() throws WebDriverException {
 
         try {
-            driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 
             driver.get(url);
 
@@ -35,16 +32,6 @@ public class Dlink842Controle extends Controle {
 
                 primeiraConfiguracao();
 
-            }
-            
-            //teste
-            String checkBoxPreset = "//*[@id=\"ngdialog1\"]/div[2]/form/div[1]/div[1]";
-            
-            
-            if (Utils.existsElement(driver, "/html/body/div[8]/div[2]/form/div[1]/div[1]/label/div[1]")) {
-                System.out.println("Its here");
-                this.login = "Admin";
-                this.senha = "@#Pl4n3t#@";
             }
 
             if (Utils.existsElement(driver, "/html/body/div[1]/div[4]/div/div/div/form/div/div[1]/span")) {
@@ -62,10 +49,22 @@ public class Dlink842Controle extends Controle {
                 }
                 btnLogin = driver.findElement(By.xpath("//*[@id=\"ngdialog1\"]/div[2]/form/div[2]/button[1]"));
             }
+
+            //teste
+            String checkBox = "//*[@id=\"ngdialog1\"]/div[2]/form/div[1]/div[1]/label/input";
+
+            if (Utils.existsElement(driver, checkBox)) {
+                this.txtLogin.sendKeys("Admin");
+                this.txtSenha.sendKeys(senha);
+                System.out.println("Login de preset");
+            } else {
+                txtLogin.sendKeys(login);
+                txtSenha.sendKeys(senha);
+                System.out.println("login comum");
+            }
+
             System.out.println(login);
-            txtLogin.sendKeys(login);
-            txtSenha.sendKeys(senha);
-            Thread.sleep(500);
+            //    Thread.sleep(500);
             btnLogin.click();
 
             Thread.sleep(1000);
@@ -119,14 +118,15 @@ public class Dlink842Controle extends Controle {
 
             driver.get(urlFirmware);
 
-            WebDriverWait wait = new WebDriverWait(driver, 999);
+            WebDriverWait wait = new WebDriverWait(driver, 10);
 
             try {
                 driver.switchTo().alert().accept();
             } catch (NoAlertPresentException e) {
                 System.out.println(e.getMessage());
             }
-            WebElement firmwareElement = driver.findElement(By.xpath("/html/body/div[2]/div[2]/div[3]/div[2]/div[2]/div/div/div/div[1]/div[3]/span[2]/a"));
+
+            WebElement firmwareElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"mblock\"]/div[2]/div/div/div/div[1]/div[3]/span[2]/a")));
             String firmware = firmwareElement.getText();
 
             if (firmware.equals("")) {
@@ -147,17 +147,12 @@ public class Dlink842Controle extends Controle {
     public void updateFirmware() throws WebDriverException {
 
         try {
-            if (headless == true) {
-                options.setHeadless(false);
-                this.restart();
-                this.logar();
-            }
 
             driver.get(urlUpdate);
 
-            WebDriverWait wait = new WebDriverWait(driver, 9999);
+            WebDriverWait wait = new WebDriverWait(driver, 10);
 
-            WebElement firmwarePathElement = driver.findElement(By.xpath("//*[@id=\"mblock\"]/div[2]/div/ui-view/div/div/div/div/div[3]/form/label/input"));
+            WebElement firmwarePathElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"mblock\"]/div[2]/div/ui-view/div/div/div/div/div[3]/form/label/input")));
             firmwarePathElement.sendKeys(this.firmwarePath);
 
             WebElement button = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"mblock\"]/div[2]/div/ui-view/div/div/div/div/div[3]/form/div/button")));
@@ -170,18 +165,18 @@ public class Dlink842Controle extends Controle {
             }
 
             this.m.setObservacao("Preset Installed");
-
-
             this.m.setUpdate(true);
             
-            this.driver.get(url);
-            
-            this.login = "Admin";
-            this.senha = "@#Pl4n3t#@";
-            this.logar();
-            System.out.println(m.getObservacao());
+            while (true) {
+                try {
+                    this.logar();
+                    break;
+                } catch (WebDriverException e) {
+
+                }
+            }
+
             this.atualizarInformacoes();
-            System.out.println(m.getObservacao());
 
         } catch (WebDriverException e) {
             System.out.println("Erro DLink updateFirmware: " + e.getMessage());

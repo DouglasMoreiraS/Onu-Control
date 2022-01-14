@@ -8,10 +8,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
+import javax.swing.ImageIcon;
 
 @Entity
 public class Modelo implements Serializable {
-
+    
+    public static final int ONU = 0;
+    public static final int ONT = 1;
+    public static final int ROUTER = 2;
     
     public static final String ZYXEL = "Zyxel";
     public static final String CHIMA = "Chima";
@@ -41,16 +46,22 @@ public class Modelo implements Serializable {
 
         dao.salvar(modelo);
     }
-
+    
+    
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
     @Column(name = "nome", nullable = false, length = 50)
     private String nome;
-
+    
+    @Column(nullable = false)
+    private int tipo; //0 = Onu; 1 = Ont; 2 = Router
+    
+    @Transient
+    private ImageIcon image;
+    
     public Modelo (){
-        
     }
     
     public Modelo (String nome){
@@ -73,5 +84,23 @@ public class Modelo implements Serializable {
         this.nome = nome;
     }
 
-    
+    public int getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
+    }
+
+    public ImageIcon getImage() {
+        if (image == null){
+            image = new ImageIcon(System.getProperty("user.dir") + "//images//" + this.nome + ".png");
+        }
+        return image;
+    }
+
+    public void setImage(ImageIcon Image) {
+        this.image = image;
+        
+    }
 }

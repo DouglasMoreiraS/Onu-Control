@@ -7,20 +7,26 @@ import org.jfree.data.general.DefaultPieDataset;
 
 public class GraficoEquipamentos {
 
-    public DefaultPieDataset graficoFirmware(List<Equipamento> eqList) {
+    List<Equipamento> lista;
+
+    public GraficoEquipamentos(List<Equipamento> lista) {
+        this.lista = lista;
+    }
+
+    public DefaultPieDataset graficoFirmware() {
         DefaultPieDataset pieDataSet = new DefaultPieDataset();
         List<String> firmwares = new ArrayList<>();
 
-        for (Equipamento e : eqList) {
+        for (Equipamento e : lista) {
             String firmwareAtual = e.getFirmware();
 
             if (!firmwares.contains(firmwareAtual)) {
                 firmwares.add(firmwareAtual);
 
                 int contador = 0;
-                for (int i = 0; i < eqList.size(); i++) {
+                for (int i = 0; i < lista.size(); i++) {
 
-                    if (eqList.get(i).getFirmware().equals(firmwareAtual)) {
+                    if (lista.get(i).getFirmware().equals(firmwareAtual)) {
                         contador++;
                     }
                 }
@@ -30,14 +36,14 @@ public class GraficoEquipamentos {
         return pieDataSet;
     }
 
-    public DefaultPieDataset graficoStatus(List<Equipamento> eqList) {
+    public DefaultPieDataset graficoStatus() {
 
         DefaultPieDataset pieDataSet = new DefaultPieDataset();
 
         int contadorPar = 0;
         int contadorImpar = 0;
 
-        for (Equipamento e : eqList) {
+        for (Equipamento e : lista) {
             if (e.isStatus()) {
                 contadorPar++;
             } else {
@@ -51,13 +57,13 @@ public class GraficoEquipamentos {
 
     }
 
-    public DefaultPieDataset graficoPatrimonio(List<Equipamento> eqList) {
+    public DefaultPieDataset graficoPatrimonio() {
         DefaultPieDataset pieDataSet = new DefaultPieDataset();
 
         int contadorPar = 0;
         int contadorImpar = 0;
 
-        for (Equipamento e : eqList) {
+        for (Equipamento e : lista) {
             if (e.getPatrimonio() != null) {
 
                 if (e.getPatrimonio().equals("")) {
@@ -75,10 +81,28 @@ public class GraficoEquipamentos {
         return pieDataSet;
     }
 
-    public DefaultPieDataset graficoContagem(List<Equipamento> equipamentoList) {
-        DefaultPieDataset p = new DefaultPieDataset();
-        p.setValue("Equipamentos\n(" + equipamentoList.size() + ")", equipamentoList.size());
-        return p;
+    public DefaultPieDataset graficoContagem() {
+        DefaultPieDataset pieDataSet = new DefaultPieDataset();
+        List<String> equip = new ArrayList<>();
+
+        for (Equipamento e : lista) {
+            String equipAtual = e.getModelo().getNome();
+
+            if (!equip.contains(equipAtual)) {
+                
+                equip.add(equipAtual);
+
+                int contador = 0;
+                for (int i = 0; i < lista.size(); i++) {
+                    if (lista.get(i).getModelo().getNome().equals(equipAtual)) {
+                        contador++;
+                    }
+                }
+
+                pieDataSet.setValue(equipAtual, contador);
+            }
+        }
+        return pieDataSet;
     }
 
 }
