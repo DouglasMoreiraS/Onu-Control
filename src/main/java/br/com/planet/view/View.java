@@ -1,39 +1,19 @@
 package br.com.planet.view;
 
 import br.com.planet.view.equipamentos.*;
-import br.com.planet.control.*;
-import br.com.planet.controlers.ChimaControle;
-import br.com.planet.controlers.Dlink615Controle;
-import br.com.planet.controlers.Dlink841Controle;
-import br.com.planet.controlers.Dlink841TesteControle;
-import br.com.planet.controlers.Dlink842Controle;
-import br.com.planet.controlers.Dlink842TesteControle;
-import br.com.planet.controlers.EasyLinkControle;
-import br.com.planet.controlers.HuaweiControle;
-import br.com.planet.controlers.IntelBrasRF301KControle;
-import br.com.planet.controlers.Mercusys12gControle;
-import br.com.planet.controlers.MercusysMW301RControle;
-import br.com.planet.controlers.NextControle;
-import br.com.planet.controlers.NokiaControle;
-import br.com.planet.controlers.SumecControle;
-import br.com.planet.controlers.TpLinkC20Controle;
-import br.com.planet.controlers.TpLinkWR840NControle;
-import br.com.planet.controlers.ZTEF601Controle;
-import br.com.planet.controlers.ZyxelControle;
+import br.com.planet.controlers.*;
 import br.com.planet.dao.BackupAndRestore;
-import br.com.planet.model.bean.Equipamento;
 import br.com.planet.model.bean.Modelo;
-import br.com.planet.view.crud.EquipamentoView;
+import br.com.planet.view.crud.EquipamentoViewTest;
 import br.com.planet.view.crud.HistoricoView;
 import br.com.planet.view.crud.ModeloView;
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class View extends javax.swing.JFrame {
 
-    EquipamentoView eqView;
+    EquipamentoViewTest eqView;
     HistoricoView hisView;
     ModeloView modeloView;
 
@@ -609,7 +589,7 @@ public class View extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         if (eqView == null) {
-            eqView = new EquipamentoView(this, false);
+            eqView = new EquipamentoViewTest();
         }
         eqView.setVisible(false);
         eqView.setVisible(true);

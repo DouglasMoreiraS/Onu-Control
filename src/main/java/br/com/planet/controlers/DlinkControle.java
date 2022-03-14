@@ -17,7 +17,7 @@ public class DlinkControle extends Controle {
 
     public DlinkControle(String properties) {
         super();
-        timeout = 4;
+        timeout = 2;
         this.loadProperties(PropertiesUtil.PROPERTIES_DIRECTORY + "\\" + properties);
     }
 
@@ -27,65 +27,58 @@ public class DlinkControle extends Controle {
 
             driver.get(url);
 
-            if (Utils.existsElement(driver, "html/body/div[1]/div[3]/div/div/div[2]/a")) {
-
+            if (driver.findElement(By.xpath("//*[@id=\"mblock\"]/div[2]/div/div/div[1]/h4")).isDisplayed()) { //Já logado
+                return true;
+            } else if (Utils.existsElement(driver, "html/body/div[1]/div[3]/div/div/div[2]/a")) { //Equipamento novo (configuração inicial)
                 primeiraConfiguracao();
+            } else { // Não logado
 
-            }
-
-            if (Utils.existsElement(driver, "/html/body/div[1]/div[4]/div/div/div/form/div/div[1]/span")) {
-                txtLogin = driver.findElement(By.xpath("/html/body/div[1]/div[4]/div/div/div/form/label[1]/div[1]/div/input"));
-                txtSenha = driver.findElement(By.xpath("/html/body/div[1]/div[4]/div/div/div/form/label[2]/div[1]/div/input"));
-                btnLogin = driver.findElement(By.xpath("/html/body/div[1]/div[4]/div/div/div/div/button[1]"));
-            } else {
-
-                txtLogin = driver.findElement(By.xpath("//*[@id=\"ngdialog1\"]/div[2]/form/div[1]/label/div[1]/div/input"));
-
-                if (Utils.existsElement(driver, "//*[@id=\"ngdialog1\"]/div[2]/form/div[1]/div[1]/label/div[1]/div/input")) {
-                    txtSenha = driver.findElement(By.xpath("//*[@id=\"ngdialog1\"]/div[2]/form/div[1]/div[1]/label/div[1]/div/input"));
+                if (Utils.existsElement(driver, "/html/body/div[1]/div[4]/div/div/div/form/div/div[1]/span")) {
+                    txtLogin = driver.findElement(By.xpath("/html/body/div[1]/div[4]/div/div/div/form/label[1]/div[1]/div/input"));
+                    txtSenha = driver.findElement(By.xpath("/html/body/div[1]/div[4]/div/div/div/form/label[2]/div[1]/div/input"));
+                    btnLogin = driver.findElement(By.xpath("/html/body/div[1]/div[4]/div/div/div/div/button[1]"));
                 } else {
-                    txtSenha = driver.findElement(By.xpath("//*[@id=\"ngdialog1\"]/div[2]/form/div[1]/label[2]/div[1]/div/input"));
+
+                    txtLogin = driver.findElement(By.xpath("//*[@id=\"ngdialog1\"]/div[2]/form/div[1]/label/div[1]/div/input"));
+
+                    if (Utils.existsElement(driver, "//*[@id=\"ngdialog1\"]/div[2]/form/div[1]/div[1]/label/div[1]/div/input")) {
+                        txtSenha = driver.findElement(By.xpath("//*[@id=\"ngdialog1\"]/div[2]/form/div[1]/div[1]/label/div[1]/div/input"));
+                    } else {
+                        txtSenha = driver.findElement(By.xpath("//*[@id=\"ngdialog1\"]/div[2]/form/div[1]/label[2]/div[1]/div/input"));
+                    }
+                    btnLogin = driver.findElement(By.xpath("//*[@id=\"ngdialog1\"]/div[2]/form/div[2]/button[1]"));
                 }
-                btnLogin = driver.findElement(By.xpath("//*[@id=\"ngdialog1\"]/div[2]/form/div[2]/button[1]"));
-            }
 
-            //teste
-            String checkBox = "//*[@id=\"ngdialog1\"]/div[2]/form/div[1]/div[1]/label/input";
+                //teste
+                String checkBox = "//*[@id=\"ngdialog1\"]/div[2]/form/div[1]/div[1]/label/input";
 
-            if (Utils.existsElement(driver, checkBox)) {
-                this.txtLogin.sendKeys(login1);
-                this.txtSenha.sendKeys(senha);
-                System.out.println("Login de preset");
-            } else {
-                txtLogin.sendKeys(login);
-                txtSenha.sendKeys(senha);
-                System.out.println("login comum");
-            }
+                if (Utils.existsElement(driver, checkBox)) {
+                    this.txtLogin.sendKeys(login1);
+                    this.txtSenha.sendKeys(senha);
+                    System.out.println("Login de preset");
+                } else {
+                    txtLogin.sendKeys(login);
+                    txtSenha.sendKeys(senha);
+                    System.out.println("login comum");
+                }
 
-            btnLogin.click();
+                btnLogin.click();
 
-            Thread.sleep(1000);
-
-            if (Utils.existsElement(driver, "/html/body/div[1]/div[3]/div/div/div[2]/div[2]/button[1]")) {
-                driver.findElement(By.xpath("/html/body/div[1]/div[3]/div/div/div[2]/div[2]/button[1]")).click();
-            }
-
-            if (Utils.existsElement(driver, "html/body/div[1]/div[3]/div/div/div[2]/a")) {
-                primeiraConfiguracao();
-            }
-
-            driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
-
-            try {
                 Thread.sleep(1000);
-                txtLogin.sendKeys(login);
-                return false;
-            } catch (InterruptedException ex) {
-                this.writeLog("logar", ex.getMessage());
-                return false;
-            } catch (WebDriverException e) {
+
+                if (Utils.existsElement(driver, "/html/body/div[1]/div[3]/div/div/div[2]/div[2]/button[1]")) {
+                    driver.findElement(By.xpath("/html/body/div[1]/div[3]/div/div/div[2]/div[2]/button[1]")).click();
+                }
+                
+                
+                if (Utils.existsElement(driver, "html/body/div[1]/div[3]/div/div/div[2]/a")) {
+                    primeiraConfiguracao();
+                }
+
+                driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
                 return true;
             }
+            return false;
         } catch (WebDriverException e) {
             System.out.println("Erro DLINK InternalLogar: " + e.getMessage());
             this.writeLog("logar", e.getMessage());
@@ -112,7 +105,7 @@ public class DlinkControle extends Controle {
     public void getFirmware() throws WebDriverException {
         try {
 
-            driver.get(urlFirmware);
+            //driver.get(urlFirmware);
 
             WebDriverWait wait = new WebDriverWait(driver, 10);
 

@@ -11,10 +11,14 @@ import br.com.planet.model.bean.Equipamento;
 import br.com.planet.model.bean.Manutencao;
 import br.com.planet.util.PropertiesUtil;
 import br.com.planet.util.log.Log;
-import io.github.bonigarcia.wdm.WebDriverManager;
+import br.com.planet.view.equipamentos.AcessView;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
-import javax.swing.ImageIcon;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -22,7 +26,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Controle {
 
-    
     ManutencaoDAO dao;
 
     WebElement txtLogin;
@@ -44,7 +47,7 @@ public class Controle {
     ChromeOptions options;
     WebDriver driver;
     WebDriverWait wait;
-    
+
     Manutencao m;
     List<Manutencao> historico;
 
@@ -79,13 +82,13 @@ public class Controle {
     String path;
 
     public Controle() {
-        WebDriverManager.chromedriver().setup();
-        options = new ChromeOptions();
+        driverFactory();
+        // WebDriverManager.chromedriver().setup();
+        // options = new ChromeOptions();
 
-       /* Map<String, Object> prefs = new HashMap<String, Object>();
+        /* Map<String, Object> prefs = new HashMap<String, Object>();
         prefs.put("profile.managed_default_content_settings.images", 2);
         options.setExperimentalOption("prefs", prefs);*/
-        
         historico = new ArrayList();
         m = new Manutencao();
         timeout = 10;
@@ -96,23 +99,14 @@ public class Controle {
 
             if (logar()) {
                 atualizarInformacoes();
+                findHistorico();
+                getRegistro();
                 return true;
             }
         } catch (WebDriverException e) {
             throw e;
         }
         return false;
-    }
-
-    public boolean pingar() throws WebDriverException {
-
-        try {
-            driver.get(url);
-            if (driver.getTitle().equals(title));
-            return true;
-        } catch (WebDriverException e) {
-            return false;
-        }
     }
 
     public void getPon() throws WebDriverException {
@@ -172,11 +166,11 @@ public class Controle {
             m = new Manutencao();
             this.headless = !headless;
             options.setHeadless(this.headless);
-            
+
             driver = new ChromeDriver(options);
             driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
             wait = new WebDriverWait(driver, 30);
-            
+
             this.loadProperties(this.path);
         } catch (WebDriverException e) {
             System.out.println("Erro ao abrir: " + e.getMessage());
@@ -186,8 +180,9 @@ public class Controle {
 
     public void close() {
         try {
-            if (driver != null)
+            if (driver != null) {
                 driver.quit();
+            }
         } catch (WebDriverException e) {
             System.out.println("Erro ao fechar: " + e.getMessage());
             this.writeLog("close", e.getMessage());
@@ -199,7 +194,7 @@ public class Controle {
             m.setData(Utils.getAtualDate());
             Equipamento.salvar(m.getEquipamento());
             dao.salvar(m);
-            
+
         } catch (PatrimonioViolationException e) {
             throw e;
         } catch (Exception e) {
@@ -216,7 +211,6 @@ public class Controle {
     public void restart() {
         this.close();
         this.open(!headless);
-
     }
 
     public Manutencao getM() {
@@ -258,9 +252,8 @@ public class Controle {
             this.getSn();
             this.getFirmware();
             this.getPon();
-            this.findHistorico();
-            this.getPatrimonio();
-            this.getStatus();
+            //    this.findHistorico();
+            //  this.getRegistro();
         } catch (WebDriverException e) {
             throw e;
         }
@@ -269,23 +262,17 @@ public class Controle {
     public void ppoe() {
     }
 
-    void getPatrimonio() {
+    private void getRegistro() {
         Equipamento e = new EquipamentoDAO().buscar(m.getEquipamento().getSn());
 
         if (e != null) {
             this.m.getEquipamento().setPatrimonio(e.getPatrimonio());
-            System.out.println("Patrimonio = " + m.getEquipamento().getPatrimonio());
-        }
-
-    }
-
-    public void getStatus() {
-        Equipamento e = new EquipamentoDAO().buscar(m.getEquipamento().getSn());
-        if (e != null) {
             this.m.getEquipamento().setStatus(e.isStatus());
+            this.m.getEquipamento().setObservacao(e.getObservacao());
         } else {
             this.m.getEquipamento().setStatus(true);
         }
+
     }
 
     protected void loadProperties(String path) {
@@ -334,7 +321,7 @@ public class Controle {
     }
 
     public boolean isPpoe() {
-        return (m.getEquipamento().getModelo().getTipo()!= 0);
+        return (m.getEquipamento().getModelo().getTipo() != 0);
     }
 
     public void writeLog(String method, String description) {
@@ -348,6 +335,31 @@ public class Controle {
     }
 
     public String getHost() {
-       return url.substring(7);
+        return url.substring(7);
+    }
+
+    private void driverFactory() {
+        System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "\\data\\chrome\\chromedriver.exe");
+
+        this.options = new ChromeOptions();
+        this.options.setBinary(System.getProperty("user.dir") + "\\data\\chrome\\bin\\chrome.exe"); //Setando path do navegador
+        this.options.addArguments("user-data-dir=" + System.getProperty("user.dir") + "\\data\\chrome\\profile"); //Setando o perfil do chrome pre-criado
+        this.options.addArguments("start-maximized");
+    }
+
+    public boolean pingar() {
+        try {
+            InetAddress adress = InetAddress.getByName(this.getHost());
+            try {
+                if (adress.isReachable(3000)) {
+                    return true;
+                }
+                return false;
+            } catch (IOException ex) {
+                return false;
+            }
+        } catch (UnknownHostException ex) {
+            return false;
+        }
     }
 }

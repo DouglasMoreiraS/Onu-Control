@@ -7,7 +7,7 @@ import br.com.planet.model.bean.Manutencao;
 
 public class ManutencaoTableModel extends AbstractTableModel{
     
-    private String colunas[] = {"Data", "Modelo", "Serial Number", "Observação", "Pon Status", "id"};
+    private String colunas[] = {"Data", "Modelo", "Serial Number", "Observação", "Pon Status"};
     private List<Manutencao> man;
     private final int COLUNA_DATA = 0;
     private final int COLUNA_MODELO = 1;
@@ -44,9 +44,6 @@ public class ManutencaoTableModel extends AbstractTableModel{
         Manutencao m = this.man.get(rowIndex);
         switch (columnIndex){
             
-            case 5 ->{
-                return m.getId();
-            }
             case COLUNA_DATA -> {
                 return m.getData();
             }

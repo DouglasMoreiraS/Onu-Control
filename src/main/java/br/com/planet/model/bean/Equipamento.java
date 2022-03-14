@@ -35,6 +35,9 @@ public class Equipamento implements Serializable, Comparable<Equipamento>{
 
     @Column()
     private boolean status;
+    
+    @Column(nullable = true, length = 250)
+    private String observacao;
 
     public Equipamento() {
     }
@@ -105,6 +108,14 @@ public class Equipamento implements Serializable, Comparable<Equipamento>{
         this.modelo = new ModeloDAO().buscar(m);
     }
 
+    public String getObservacao() {
+        return observacao;
+    }
+
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
+    }
+    
     public static boolean salvar(Equipamento e) throws PatrimonioViolationException, SerialNumberViolationException {
         if (e.getSn().equals("")) {
             throw new SerialNumberViolationException("Serial Number não pode ser nulo");

@@ -15,6 +15,7 @@ br\com\planet\view\View$33.class
 br\com\planet\view\View$1.class
 br\com\planet\src\ping\Ping.class
 br\com\planet\model\tablemodel\RemoteAcessTableModel.class
+br\com\planet\view\equipamentos\AcessView$8.class
 br\com\planet\view\crud\HistoricoView$5.class
 br\com\planet\view\PropertiesView$4.class
 br\com\planet\view\crud\EditarEquipamentoView$2.class

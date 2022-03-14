@@ -1,31 +1,28 @@
 package br.com.planet.control;
 
 import br.com.planet.dao.EquipamentoDAO;
+import br.com.planet.dao.ManutencaoDAO;
 import br.com.planet.excel.ExportToExcel;
 import br.com.planet.exception.DeleteViolationException;
 import br.com.planet.exception.PatrimonioViolationException;
 import br.com.planet.exception.SerialNumberViolationException;
 import br.com.planet.model.bean.Equipamento;
-import br.com.planet.model.bean.Manutencao;
 import br.com.planet.model.bean.Modelo;
 import br.com.planet.model.tablemodel.EquipamentoTableModel;
+import br.com.planet.model.tablemodel.ManutencaoTableModel;
 import br.com.planet.util.GraficoEquipamentos;
 import br.com.planet.view.crud.EditarEquipamentoView;
 import br.com.planet.view.crud.HistoricoView;
 import java.awt.Frame;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import javax.swing.table.TableModel;
 import javax.xml.bind.ValidationException;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.data.general.DefaultPieDataset;
-import org.jfree.data.general.PieDataset;
 
 public class EquipamentoControl {
 
@@ -186,5 +183,9 @@ public class EquipamentoControl {
         } catch (Exception ex) {
             throw ex;
         }
+    }
+
+    public TableModel getHistoricoTableModel() {
+        return new ManutencaoTableModel(new ManutencaoDAO().listarPorEquipamento(equipamentoSelecionado));
     }
 }
