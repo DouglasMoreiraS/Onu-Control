@@ -1,8 +1,16 @@
 package br.com.planet.util;
 
+import br.com.planet.dao.EquipamentoDAO;
+import br.com.planet.dao.ModeloDAO;
 import br.com.planet.model.bean.Equipamento;
+import br.com.planet.model.bean.Modelo;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 
 public class GraficoEquipamentos {
@@ -11,6 +19,10 @@ public class GraficoEquipamentos {
 
     public GraficoEquipamentos(List<Equipamento> lista) {
         this.lista = lista;
+    }
+
+    public GraficoEquipamentos() {
+        this.lista = new EquipamentoDAO().listar();
     }
 
     public DefaultPieDataset graficoFirmware() {
@@ -89,7 +101,7 @@ public class GraficoEquipamentos {
             String equipAtual = e.getModelo().getNome();
 
             if (!equip.contains(equipAtual)) {
-                
+
                 equip.add(equipAtual);
 
                 int contador = 0;
@@ -104,5 +116,4 @@ public class GraficoEquipamentos {
         }
         return pieDataSet;
     }
-
 }

@@ -629,7 +629,7 @@ public class EquipamentoView extends javax.swing.JDialog {
     }
 
     public void alimentarComboBoxes() {
-        String[] modelos = eqControl.getModelos();
+  /*      String[] modelos = eqControl.getModelos();
         cbModelo.addItem("Todos");
 
         for (String s : modelos) {
@@ -638,7 +638,7 @@ public class EquipamentoView extends javax.swing.JDialog {
 
         cbStatus.addItem("Todos");
         cbStatus.addItem("Ativos");
-        cbStatus.addItem("Desativados");
+        cbStatus.addItem("Desativados");*/
 
     }
 

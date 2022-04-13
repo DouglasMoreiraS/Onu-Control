@@ -32,6 +32,7 @@ public class AcessView extends javax.swing.JFrame {
     int flagUpdate;
     int flagReset;
     int flagConnect;
+    int flagPing;
 
     public AcessView(Controle control) {
 
@@ -39,7 +40,6 @@ public class AcessView extends javax.swing.JFrame {
         this.control = control;
         this.flagConnect = 0;
         this.getPainelImg().setImg(control.getM().getEquipamento().getModelo().getImage()); //Setando a imagem do modelo.
-        //this.iconUpdate.setImg(new ImageIcon(System.getProperty("user.dir") + "//images//icons//update.png"));
         this.setTitle(control.getM().getEquipamento().getModelo().getNome()); //Setando o nome do modelo no title do jFrame.
 
         if (control.getM().getEquipamento().getModelo().getTipo() == Modelo.ROUTER) { //Desativando campo PON status para roteadores
@@ -525,21 +525,21 @@ public class AcessView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConectarActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        this.btnSalvar.setText("Salvando...");
+        controlaTela("wait");
+
         new Thread(() -> {
             try {
-                this.btnSalvar.setText("Salvando...");
-                controlaTela("wait");
                 this.control.getM().setObservacao(txtObservacao.getText());
                 this.control.getM().getEquipamento().setPatrimonio(txtPatrimonio.getText());
                 this.control.getM().getEquipamento().setStatus(cbAtivo.isSelected());
                 this.control.getM().getEquipamento().setObservacao(txtEquipamentoObs.getText());
                 control.save();
                 control.close();
-                
-                JOptionPane.showMessageDialog(this, "Salvo com sucesso", "Salvar", JOptionPane.INFORMATION_MESSAGE);
-                controlaTela("start");
+
                 this.btnSalvar.setText("Salvar");
-                
+                controlaTela("start");
+                JOptionPane.showMessageDialog(this, "Salvo com sucesso", "Salvar", JOptionPane.INFORMATION_MESSAGE);
 
             } catch (PatrimonioViolationException e) {
 
@@ -554,7 +554,6 @@ public class AcessView extends javax.swing.JFrame {
                 this.btnSalvar.setText("Salvar");
                 control.close();
             }
-
         }).start();
 
     }//GEN-LAST:event_btnSalvarActionPerformed
@@ -887,7 +886,7 @@ public class AcessView extends javax.swing.JFrame {
                         control.close();
                     }
 
-                    ping.interrupt();
+                    ping.suspend();
 
                     controlaTela("init");
                     AcessView.this.dispose();
@@ -897,6 +896,9 @@ public class AcessView extends javax.swing.JFrame {
     }
 
     private void conexãoListener() {
+
+        flagPing = 1;
+
         ImageIcon connected = new ImageIcon(System.getProperty("user.dir") + "//images//icons//connected.png");
         ImageIcon noConnected = new ImageIcon(System.getProperty("user.dir") + "//images//icons//noconnected.png");
         ImageIcon connecting = new ImageIcon(System.getProperty("user.dir") + "//images//icons//connecting.png");
@@ -904,15 +906,9 @@ public class AcessView extends javax.swing.JFrame {
         conexaoIcon.setImg(connecting);
 
         ping = new Thread(() -> {
-            while (true) {
-
-                if (Thread.interrupted()) {
-                    System.out.println("Interrompida");
-                    break;
-                }
+            while (flagPing == 1) {
                 if (control.pingar()) {
                     conexaoIcon.setImg(connected);
-
                     if (cbAutoConnect.isSelected()) {
                         cbAutoConnect.setSelected(false);
                         btnConectarActionPerformed(null);
@@ -921,10 +917,21 @@ public class AcessView extends javax.swing.JFrame {
                     conexaoIcon.setImg(connecting);
                 }
                 conexaoIcon.repaint();
-                if (ping.isInterrupted()) {
-                    break;
-                }
             }
+            ping.suspend();
         });
     }
+
+    @Override
+    public void setVisible(boolean condition) {
+        if (condition == true) {
+            flagPing = 1;
+            ping.resume();
+        } else {
+            flagPing = 0;
+        }
+        super.setVisible(condition);
+
+    }
+
 }

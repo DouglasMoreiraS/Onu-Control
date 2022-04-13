@@ -4,12 +4,16 @@ import br.com.planet.view.equipamentos.*;
 import br.com.planet.controlers.*;
 import br.com.planet.dao.BackupAndRestore;
 import br.com.planet.model.bean.Modelo;
+import br.com.planet.util.GraficoEquipamentos;
 import br.com.planet.view.crud.EquipamentoViewTest;
 import br.com.planet.view.crud.HistoricoView;
 import br.com.planet.view.crud.ModeloView;
 import java.io.IOException;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
 
 public class View extends javax.swing.JFrame {
 
@@ -33,12 +37,15 @@ public class View extends javax.swing.JFrame {
     AcessView nokiaView;
     AcessView zte601View;
     AcessView rf301View;
+    AcessView ac5View;
+    AcessView ac8View;
 
     public View() {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
         painelImagemFundo1.setImg(new ImageIcon(getClass().getResource("/images/background.png")));
         atualizaRodape();
+        setaGrafico();
     }
 
     @SuppressWarnings("unchecked")
@@ -46,7 +53,7 @@ public class View extends javax.swing.JFrame {
     private void initComponents() {
 
         painelImagemFundo1 = new br.com.planet.src.PainelImagemFundo();
-        jPanel1 = new javax.swing.JPanel();
+        panelGrafico = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu5 = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
@@ -78,6 +85,13 @@ public class View extends javax.swing.JFrame {
         jMenu28 = new javax.swing.JMenu();
         dlink841AcessMenu1 = new javax.swing.JMenuItem();
         jMenuItem42 = new javax.swing.JMenuItem();
+        jMenu30 = new javax.swing.JMenu();
+        jMenu31 = new javax.swing.JMenu();
+        dlink841AcessMenu3 = new javax.swing.JMenuItem();
+        jMenuItem44 = new javax.swing.JMenuItem();
+        jMenu32 = new javax.swing.JMenu();
+        dlink841AcessMenu4 = new javax.swing.JMenuItem();
+        jMenuItem45 = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
         jMenu13 = new javax.swing.JMenu();
         jMenuItem15 = new javax.swing.JMenuItem();
@@ -123,31 +137,35 @@ public class View extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1211, 1021));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        javax.swing.GroupLayout panelGraficoLayout = new javax.swing.GroupLayout(panelGrafico);
+        panelGrafico.setLayout(panelGraficoLayout);
+        panelGraficoLayout.setHorizontalGroup(
+            panelGraficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 917, Short.MAX_VALUE)
+        );
+        panelGraficoLayout.setVerticalGroup(
+            panelGraficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 562, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout painelImagemFundo1Layout = new javax.swing.GroupLayout(painelImagemFundo1);
         painelImagemFundo1.setLayout(painelImagemFundo1Layout);
         painelImagemFundo1Layout.setHorizontalGroup(
             painelImagemFundo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1370, Short.MAX_VALUE)
+            .addGroup(painelImagemFundo1Layout.createSequentialGroup()
+                .addGap(135, 135, 135)
+                .addComponent(panelGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(318, Short.MAX_VALUE))
         );
         painelImagemFundo1Layout.setVerticalGroup(
             painelImagemFundo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 780, Short.MAX_VALUE)
+            .addGroup(painelImagemFundo1Layout.createSequentialGroup()
+                .addGap(86, 86, 86)
+                .addComponent(panelGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(132, Short.MAX_VALUE))
         );
 
         getContentPane().add(painelImagemFundo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, 780));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1370, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 30, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 720, 1370, 30));
 
         jMenu5.setText("Equipamentos");
 
@@ -313,6 +331,40 @@ public class View extends javax.swing.JFrame {
         jMenu27.add(jMenu28);
 
         jMenu6.add(jMenu27);
+
+        jMenu30.setText("Tenda");
+
+        jMenu31.setText("Ac5");
+
+        dlink841AcessMenu3.setText("Acesso Remoto");
+        dlink841AcessMenu3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dlink841AcessMenu3ActionPerformed(evt);
+            }
+        });
+        jMenu31.add(dlink841AcessMenu3);
+
+        jMenuItem44.setText("Historico");
+        jMenu31.add(jMenuItem44);
+
+        jMenu30.add(jMenu31);
+
+        jMenu32.setText("Ac8");
+
+        dlink841AcessMenu4.setText("Acesso Remoto");
+        dlink841AcessMenu4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dlink841AcessMenu4ActionPerformed(evt);
+            }
+        });
+        jMenu32.add(dlink841AcessMenu4);
+
+        jMenuItem45.setText("Historico");
+        jMenu32.add(jMenuItem45);
+
+        jMenu30.add(jMenu32);
+
+        jMenu6.add(jMenu30);
 
         jMenu5.add(jMenu6);
 
@@ -801,7 +853,7 @@ public class View extends javax.swing.JFrame {
 
     private void jMenuItem38ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem38ActionPerformed
         if (dlink842View == null) {
-            dlink842View = new AcessView(new Dlink842TesteControle());
+            dlink842View = new AcessView(new Dlink842Controle());
         }
         this.dlink842View.setVisible(false);
         this.dlink842View.setVisible(true);
@@ -813,7 +865,7 @@ public class View extends javax.swing.JFrame {
 
     private void dlink841AcessMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlink841AcessMenuActionPerformed
         if (dlink841View == null) {
-            dlink841View = new AcessView(new Dlink841TesteControle());
+            dlink841View = new AcessView(new Dlink841Controle());
         }
         this.dlink841View.setVisible(false);
         this.dlink841View.setVisible(true);
@@ -835,6 +887,22 @@ public class View extends javax.swing.JFrame {
         this.dlink615View.setVisible(false);
         this.dlink615View.setVisible(true);
     }//GEN-LAST:event_dlink841AcessMenu2ActionPerformed
+
+    private void dlink841AcessMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlink841AcessMenu3ActionPerformed
+        if (ac5View == null) {
+            ac5View = new AcessView(new TendaAC5Controle());
+        }
+        this.ac5View.setVisible(false);
+        this.ac5View.setVisible(true);
+    }//GEN-LAST:event_dlink841AcessMenu3ActionPerformed
+
+    private void dlink841AcessMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dlink841AcessMenu4ActionPerformed
+        if (ac8View == null) {
+            ac8View = new AcessView(new TendaAC8Controle());
+        }
+        this.ac8View.setVisible(false);
+        this.ac8View.setVisible(true);
+    }//GEN-LAST:event_dlink841AcessMenu4ActionPerformed
 
     public static void main(String args[]) {
         try {
@@ -859,6 +927,8 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JMenuItem dlink841AcessMenu;
     private javax.swing.JMenuItem dlink841AcessMenu1;
     private javax.swing.JMenuItem dlink841AcessMenu2;
+    private javax.swing.JMenuItem dlink841AcessMenu3;
+    private javax.swing.JMenuItem dlink841AcessMenu4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu11;
@@ -881,6 +951,9 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu28;
     private javax.swing.JMenu jMenu29;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu30;
+    private javax.swing.JMenu jMenu31;
+    private javax.swing.JMenu jMenu32;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
@@ -922,15 +995,33 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem41;
     private javax.swing.JMenuItem jMenuItem42;
     private javax.swing.JMenuItem jMenuItem43;
+    private javax.swing.JMenuItem jMenuItem44;
+    private javax.swing.JMenuItem jMenuItem45;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuItem menuListarTabela;
     private br.com.planet.src.PainelImagemFundo painelImagemFundo1;
+    private javax.swing.JPanel panelGrafico;
     // End of variables declaration//GEN-END:variables
 
     private void atualizaRodape() {
+
+    }
+
+    private void setaGrafico() {
+        JFreeChart jfc;
+        GraficoEquipamentos grafico = new GraficoEquipamentos();
+
+        jfc = ChartFactory.createPieChart("Equipamentos", grafico.graficoContagem(), true, true, true);
+
+        ChartPanel myChartPanel = new ChartPanel(jfc, true); //criei o painel de grafico colocando meu grafico previamente gerado
+        myChartPanel.setSize(panelGrafico.getWidth(), panelGrafico.getHeight()); //setei o tamanho do grafico conforme o painel que usarei
+        myChartPanel.setVisible(true);
+        panelGrafico.removeAll(); //removi todos os componentes que podem estar no meu painel
+        panelGrafico.add(myChartPanel);
+        panelGrafico.revalidate(); // revalidei meu painel, para que ele se atualize
+        panelGrafico.repaint();
 
     }
 }

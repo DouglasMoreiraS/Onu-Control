@@ -6,13 +6,22 @@ import org.junit.Test;
 
 
 public class ModeloDAOTest {
+    @Test
     public void salvar() throws Exception{
         
-      // new ModeloDAO().salvar(new Modelo("Dlink DIR-615"));
+      Modelo ac5 = new ModeloDAO().buscar("Tenda AC5");
+      Modelo ac8 = new ModeloDAO().buscar("Tenda AC8");
         
-      Modelo modelo = new ModeloDAO().buscar("D-link DIR-842");
+      ac5.setTipo(Modelo.ROUTER);
+      new ModeloDAO().editar(ac5);
+      
+      ac8.setTipo(Modelo.ROUTER);
+      new ModeloDAO().editar(ac8);
+      
+      
+  /*    Modelo modelo = new ModeloDAO().buscar("D-link DIR-842");
       modelo.setNome("Dlink DIR-842");
       Modelo.salvar(modelo);
-      
+    */  
     }
 }

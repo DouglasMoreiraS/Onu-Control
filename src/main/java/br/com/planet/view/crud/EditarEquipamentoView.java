@@ -296,7 +296,7 @@ public class EditarEquipamentoView extends javax.swing.JDialog {
         //key 0 == criar equipamento
         //key 1 == editar equipamento
 
-        String modelos[] = control.getModelos();
+       /*String modelos[] = control.getModelos();
 
         for (String s : modelos) {
             cbModelo.addItem(s);
@@ -311,7 +311,7 @@ public class EditarEquipamentoView extends javax.swing.JDialog {
 
             cbStatus.setSelected(control.getEquipamentoSelecionado().isStatus());
 
-            this.painelImagemFundo.setImg(control.getEquipamentoSelecionado().getModelo().getImage());
+            this.painelImagemFundo.setImg(control.getEquipamentoSelecionado().getModelo().getImage());*/
         }
-    }
+    
 }

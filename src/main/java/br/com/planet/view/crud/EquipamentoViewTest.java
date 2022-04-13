@@ -41,7 +41,7 @@ public class EquipamentoViewTest extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         txtPesquisaSn = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        cbModelo = new javax.swing.JComboBox<>();
+        cbPesquisaModelo = new javax.swing.JComboBox<>();
         cbStatus = new javax.swing.JComboBox<>();
         btnLimpaFiltro = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
@@ -59,7 +59,6 @@ public class EquipamentoViewTest extends javax.swing.JFrame {
         panelGrafico = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         painelImagemFundo1 = new br.com.planet.src.PainelImagemFundo();
-        txtModelo = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         txtPatrimonio = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -77,6 +76,7 @@ public class EquipamentoViewTest extends javax.swing.JFrame {
         txtObs = new javax.swing.JTextArea();
         jLabel7 = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
+        cbModelo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -94,9 +94,9 @@ public class EquipamentoViewTest extends javax.swing.JFrame {
 
         jLabel8.setText("Modelo:");
 
-        cbModelo.addItemListener(new java.awt.event.ItemListener() {
+        cbPesquisaModelo.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbModeloItemStateChanged(evt);
+                cbPesquisaModeloItemStateChanged(evt);
             }
         });
 
@@ -141,7 +141,7 @@ public class EquipamentoViewTest extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
-                    .addComponent(cbModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbPesquisaModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtPesquisaSn, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -177,7 +177,7 @@ public class EquipamentoViewTest extends javax.swing.JFrame {
                     .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbPesquisaModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPesquisaSn, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPesquisaFirmware, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPesquisaPatrimonio, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -348,6 +348,12 @@ public class EquipamentoViewTest extends javax.swing.JFrame {
             }
         });
 
+        cbModelo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbModeloItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -362,11 +368,11 @@ public class EquipamentoViewTest extends javax.swing.JFrame {
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel1)
-                                    .addComponent(txtPatrimonio, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2))
+                                    .addComponent(txtPatrimonio, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                                    .addComponent(jLabel2)
+                                    .addComponent(cbModelo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(painelImagemFundo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel4Layout.createSequentialGroup()
@@ -398,8 +404,8 @@ public class EquipamentoViewTest extends javax.swing.JFrame {
                         .addGap(7, 7, 7)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtPatrimonio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -427,7 +433,7 @@ public class EquipamentoViewTest extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -506,16 +512,16 @@ public class EquipamentoViewTest extends javax.swing.JFrame {
         atualizarGrafico();
     }//GEN-LAST:event_txtPesquisaSnKeyReleased
 
-    private void cbModeloItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbModeloItemStateChanged
+    private void cbPesquisaModeloItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbPesquisaModeloItemStateChanged
 
-        if (cbModelo.getSelectedItem().toString().equals("Todos")) {
+        if (cbPesquisaModelo.getSelectedItem().toString().equals("Todos")) {
             btnFirmware.setEnabled(false);
         } else {
             btnFirmware.setEnabled(true);
         }
         atualizarTbl();
         atualizarGrafico();
-    }//GEN-LAST:event_cbModeloItemStateChanged
+    }//GEN-LAST:event_cbPesquisaModeloItemStateChanged
 
     private void cbStatusItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbStatusItemStateChanged
         atualizarTbl();
@@ -523,7 +529,7 @@ public class EquipamentoViewTest extends javax.swing.JFrame {
     }//GEN-LAST:event_cbStatusItemStateChanged
 
     private void btnLimpaFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpaFiltroActionPerformed
-        this.cbModelo.setSelectedIndex(0);
+        this.cbPesquisaModelo.setSelectedIndex(0);
         this.txtPesquisaFirmware.setText("");
         this.txtPesquisaSn.setText("");
         this.txtPesquisaPatrimonio.setText("");
@@ -568,6 +574,10 @@ public class EquipamentoViewTest extends javax.swing.JFrame {
         btnEditarState = 0;
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void cbModeloItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbModeloItemStateChanged
+        control.setModelo(cbModelo.getSelectedIndex());
+    }//GEN-LAST:event_cbModeloItemStateChanged
+
     public static void main(String args[]) {
         try {
             UIManager.setLookAndFeel(new FlatDarkLaf());
@@ -604,6 +614,7 @@ public class EquipamentoViewTest extends javax.swing.JFrame {
     private javax.swing.JToggleButton btnPatrimonio;
     private javax.swing.JToggleButton btnStatus;
     private javax.swing.JComboBox<String> cbModelo;
+    private javax.swing.JComboBox<String> cbPesquisaModelo;
     private javax.swing.JComboBox<String> cbStatus;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -631,7 +642,6 @@ public class EquipamentoViewTest extends javax.swing.JFrame {
     private javax.swing.JTable tblEquipamentos;
     private javax.swing.JTable tblHistorico;
     private javax.swing.JTextField txtFirmware;
-    private javax.swing.JTextField txtModelo;
     private javax.swing.JTextArea txtObs;
     private javax.swing.JTextField txtPatrimonio;
     private javax.swing.JTextField txtPesquisaFirmware;
@@ -643,36 +653,37 @@ public class EquipamentoViewTest extends javax.swing.JFrame {
     private void controlaTela(String STATE) {
         switch (STATE) {
             case EquipamentoViewTest.EDIT:
-                cbModelo.setEnabled(false);
-                txtPesquisaFirmware.setEnabled(false);
-                txtPesquisaPatrimonio.setEnabled(false);
-                txtPesquisaSn.setEnabled(false);
+                cbPesquisaModelo.setEnabled(false);
+                txtPesquisaFirmware.setEditable(false);
+                txtPesquisaPatrimonio.setEditable(false);
+                txtPesquisaSn.setEditable(false);
                 cbStatus.setEnabled(false);
                 btnLimpaFiltro.setEnabled(false);
                 tblEquipamentos.setEnabled(false);
-
-                txtPatrimonio.setEnabled(true);
+                
+                cbModelo.setEnabled(true);
+                txtPatrimonio.setEditable(true);
                 rbStatus.setEnabled(true);
-                txtObs.setEnabled(true);
+                txtObs.setEditable(true);
                 btnEditar.setText("Salvar");
                 btnCancelar.setVisible(true);
                 break;
 
             case EquipamentoViewTest.DEFAULT:
-                cbModelo.setEnabled(true);
-                txtPesquisaFirmware.setEnabled(true);
-                txtPesquisaPatrimonio.setEnabled(true);
-                txtPesquisaSn.setEnabled(true);
+                cbPesquisaModelo.setEnabled(true);
+                txtPesquisaFirmware.setEditable(true);
+                txtPesquisaPatrimonio.setEditable(true);
+                txtPesquisaSn.setEditable(true);
                 cbStatus.setEnabled(true);
                 btnLimpaFiltro.setEnabled(true);
                 tblEquipamentos.setEnabled(true);
 
-                txtModelo.setEnabled(false);
-                txtPatrimonio.setEnabled(false);
-                txtSn.setEnabled(false);
-                txtFirmware.setEnabled(false);
+                cbModelo.setEnabled(false);
+                txtPatrimonio.setEditable(false);
+                txtSn.setEditable(false);
+                txtFirmware.setEditable(false);
                 rbStatus.setEnabled(false);
-                txtObs.setEnabled(false);
+                txtObs.setEditable(false);
                 btnEditar.setText("Editar");
                 btnCancelar.setVisible(false);
                 break;
@@ -683,7 +694,7 @@ public class EquipamentoViewTest extends javax.swing.JFrame {
         painelImagemFundo1.setImg(control.getEquipamentoSelecionado().getModelo().getImage());
         painelImagemFundo1.repaint();
 
-        txtModelo.setText(control.getEquipamentoSelecionado().getModelo().getNome());
+        cbModelo.setSelectedItem(control.getEquipamentoSelecionado().getModelo().getNome());
         txtPatrimonio.setText(control.getEquipamentoSelecionado().getPatrimonio());
         txtSn.setText(control.getEquipamentoSelecionado().getSn());
         txtFirmware.setText(control.getEquipamentoSelecionado().getFirmware());
@@ -694,23 +705,23 @@ public class EquipamentoViewTest extends javax.swing.JFrame {
     }
 
     public void alimentarComboBoxes() {
-        String[] modelos = control.getModelos();
-        cbModelo.addItem("Todos");
-
-        for (String s : modelos) {
-            cbModelo.addItem(s);
-        }
-
+        
+        cbPesquisaModelo.addItem("Todos");
+        
+        control.getModelos().forEach(m ->{
+            cbModelo.addItem(m.getNome());
+            cbPesquisaModelo.addItem(m.getNome());
+        });
+        
         cbStatus.addItem("Todos");
         cbStatus.addItem("Ativos");
         cbStatus.addItem("Desativados");
-
     }
 
     private void atualizarTbl() {
         String modelo = "";
-        if (!cbModelo.getSelectedItem().toString().equals("Todos")) {
-            modelo = cbModelo.getItemAt(cbModelo.getSelectedIndex());
+        if (!cbPesquisaModelo.getSelectedItem().toString().equals("Todos")) {
+            modelo = cbPesquisaModelo.getItemAt(cbPesquisaModelo.getSelectedIndex());
         }
 
         String sn = txtPesquisaSn.getText().trim();
@@ -730,7 +741,7 @@ public class EquipamentoViewTest extends javax.swing.JFrame {
         String titulo;
         JFreeChart grafico;
 
-        if (cbModelo.getSelectedItem().toString().equals("Todos")) {
+        if (cbPesquisaModelo.getSelectedItem().toString().equals("Todos")) {
             titulo = "Equipamentos Registrados";
 
             if (btnPatrimonio.isSelected()) {
@@ -744,7 +755,7 @@ public class EquipamentoViewTest extends javax.swing.JFrame {
             }
         } else {
 
-            titulo = cbModelo.getSelectedItem().toString();
+            titulo = cbPesquisaModelo.getSelectedItem().toString();
 
             if (btnStatus.isSelected()) {
                 titulo = titulo.concat(" - Status");

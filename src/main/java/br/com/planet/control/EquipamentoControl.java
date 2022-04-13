@@ -2,6 +2,7 @@ package br.com.planet.control;
 
 import br.com.planet.dao.EquipamentoDAO;
 import br.com.planet.dao.ManutencaoDAO;
+import br.com.planet.dao.ModeloDAO;
 import br.com.planet.excel.ExportToExcel;
 import br.com.planet.exception.DeleteViolationException;
 import br.com.planet.exception.PatrimonioViolationException;
@@ -26,27 +27,34 @@ import org.jfree.data.category.DefaultCategoryDataset;
 
 public class EquipamentoControl {
 
-    private List<Equipamento> equipamentoList;
+    private List<Equipamento> equipamentos;
+    private List<Modelo> modelos;
+
     private Equipamento equipamentoSelecionado;
-    private EquipamentoDAO dao;
+
+    private EquipamentoDAO eqDao;
+    private ModeloDAO mDao;
 
     private EditarEquipamentoView viewEdita;
 
     private Modelo modelo;
 
     public EquipamentoControl() {
-        dao = new EquipamentoDAO();
-        equipamentoList = dao.listar();
-        equipamentoSelecionado = new Equipamento();
+        eqDao = new EquipamentoDAO();
+        mDao = new ModeloDAO();
 
+        equipamentos = eqDao.listar();
+        modelos = mDao.listar();
+
+        equipamentoSelecionado = new Equipamento();
     }
 
     public EquipamentoTableModel getTableModel() {
-        return new EquipamentoTableModel(equipamentoList);
+        return new EquipamentoTableModel(equipamentos);
     }
 
     public void buscar(String[] busca, int status) {
-        equipamentoList = dao.buscaEspecifica(busca, status);
+        equipamentos = eqDao.buscaEspecifica(busca, status);
     }
 
     public void editar(Frame parent) {
@@ -61,7 +69,7 @@ public class EquipamentoControl {
     }
 
     public void setEquipamentoSelecionado(int selectedRow) {
-        equipamentoSelecionado = equipamentoList.get(selectedRow);
+        equipamentoSelecionado = equipamentos.get(selectedRow);
     }
 
     public Equipamento getEquipamentoSelecionado() {
@@ -70,7 +78,7 @@ public class EquipamentoControl {
 
     public void salvar(int key) throws PatrimonioViolationException, SerialNumberViolationException {
         if (key == 0) {
-            if (dao.buscar(equipamentoSelecionado.getSn()) != null) {
+            if (eqDao.buscar(equipamentoSelecionado.getSn()) != null) {
                 throw new SerialNumberViolationException("Patrimonio já cadastrado");
             }
             Equipamento.salvar(equipamentoSelecionado);
@@ -84,8 +92,8 @@ public class EquipamentoControl {
     }
 
     private void atualizarLista() {
-        this.equipamentoList.clear();
-        this.equipamentoList.addAll(dao.listar());
+        this.equipamentos.clear();
+        this.equipamentos.addAll(eqDao.listar());
     }
 
     public void historico(Frame parent) {
@@ -104,7 +112,7 @@ public class EquipamentoControl {
     public JFreeChart getGrafico(String titulo) {
 
         JFreeChart retorno;
-        GraficoEquipamentos grafico = new GraficoEquipamentos(equipamentoList);
+        GraficoEquipamentos grafico = new GraficoEquipamentos(equipamentos);
 
         switch (titulo) {
             case "status" -> {
@@ -118,47 +126,39 @@ public class EquipamentoControl {
             case "firmware" -> {
                 retorno = ChartFactory.createPieChart(titulo, grafico.graficoFirmware(), false, true, false);
             }
-            
+
             case "contagem" -> {
                 retorno = ChartFactory.createPieChart(titulo, grafico.graficoContagem(), true, true, true);
             }
-            
+
             default -> {
                 DefaultCategoryDataset barDataSet = new DefaultCategoryDataset();
-                
-                Collections.sort(equipamentoList);
-                
-                for (String s : this.getModelos()) {
 
+                Collections.sort(equipamentos);
+
+                modelos.forEach(s -> {
                     int quantidade = 0;
 
-                    for (Equipamento e : equipamentoList) {
+                    for (Equipamento e : equipamentos) {
                         if (e.getModelo().getNome().equals(s)) {
                             quantidade++;
                         }
                     }
+
                     if (quantidade > 0) {
-                        barDataSet.setValue(quantidade, "Equipamentos", s);
+                        barDataSet.setValue(quantidade, "Equipamentos", s.getNome());
                         //   pieDataSet.setValue(s + "(" + quantidade + ")", quantidade);
                     }
-                }
-               retorno = ChartFactory.createBarChart("Ranking Equipamentos", "Equipamentos", "Quantidade", barDataSet, PlotOrientation.HORIZONTAL, true, false, false);
+
+                });
+                retorno = ChartFactory.createBarChart("Ranking Equipamentos", "Equipamentos", "Quantidade", barDataSet, PlotOrientation.HORIZONTAL, true, false, false);
             }
         }
         return retorno;
     }
 
-    public String[] getModelos() {
-        String[] retorno;
-
-        List<Modelo> m = Modelo.getListaDeModelos();
-
-        retorno = new String[m.size()];
-
-        for (int i = 0; i < m.size(); i++) {
-            retorno[i] = m.get(i).getNome();
-        }
-        return retorno;
+    public List<Modelo> getModelos() {
+        return modelos;
     }
 
     public void salvarModelo(String m) throws Exception {
@@ -170,7 +170,7 @@ public class EquipamentoControl {
     public void exportarExcel(String path, int rows[]) throws ValidationException, Exception {
         List<Equipamento> export = new ArrayList();
         for (int i : rows) {
-            export.add(equipamentoList.get(i));
+            export.add(equipamentos.get(i));
         }
 
         if (export.isEmpty()) {
@@ -187,5 +187,11 @@ public class EquipamentoControl {
 
     public TableModel getHistoricoTableModel() {
         return new ManutencaoTableModel(new ManutencaoDAO().listarPorEquipamento(equipamentoSelecionado));
+    }
+
+    public void setModelo(int index) {
+        if (index >= 0){
+            equipamentoSelecionado.setModelo(modelos.get(index));
+        }
     }
 }
