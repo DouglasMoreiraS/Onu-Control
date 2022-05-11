@@ -1,0 +1,84 @@
+[17-Dec-20 10:01:34] Warning: No IP Address for DHCP Static Host 00:ff:a4:0e:ef:99 specified
+[17-Dec-20 10:01:34] DHCP Range: 192.168.0.1-192.168.0.254/255.255.255.0
+[17-Dec-20 10:01:34] DHCP Range: 192.168.1.2-192.168.1.254/255.255.255.0
+[17-Dec-20 10:01:34] Logging: Normal
+[17-Dec-20 10:01:34] Open DHCP Server Version 1.64 Windows Build 1041 Starting...
+[17-Dec-20 10:01:34] Server Name: DESKTOP-7V2NHQ4
+[17-Dec-20 10:01:34] Detecting Static Interfaces..
+[17-Dec-20 10:01:34] Lease Status URL: http://127.0.0.1:6789
+[17-Dec-20 10:01:34] Listening On: 192.168.1.6
+[17-Dec-20 10:01:34] Listening On: 192.168.56.1
+[17-Dec-20 10:13:41] Logging: Normal
+[17-Dec-20 10:13:41] Warning: No IP Address for DHCP Static Host 00:ff:a4:0e:ef:99 specified
+[17-Dec-20 10:13:41] Open DHCP Server Version 1.64 Windows Build 1041 Starting...
+[17-Dec-20 10:13:41] DHCP Range: 192.168.0.1-192.168.0.254/255.255.255.0
+[17-Dec-20 10:13:41] DHCP Range: 192.168.1.2-192.168.1.254/255.255.255.0
+[17-Dec-20 10:13:41] Server Name: DESKTOP-7V2NHQ4
+[17-Dec-20 10:13:41] Detecting Static Interfaces..
+[17-Dec-20 10:13:41] Lease Status URL: http://127.0.0.1:6789
+[17-Dec-20 10:13:41] Listening On: 192.168.1.6
+[17-Dec-20 10:13:41] Listening On: 192.168.56.1
+[17-Dec-20 10:14:24] Host c8:3a:35:23:0b:19 (linux-100b23353ac8) allotted 192.168.1.9 for 300 seconds
+[17-Dec-20 10:15:39] Host c8:3a:35:23:0b:09 (linux-000b23353ac8) allotted 192.168.1.10 for 300 seconds
+[17-Dec-20 10:15:41] Host c8:3a:35:23:0b:19 (linux-100b23353ac8) allotted 192.168.1.9 for 300 seconds
+[17-Dec-20 10:15:52] IP Address 192.168.1.9 released by Host c8:3a:35:23:0b:19 ()
+[17-Dec-20 10:15:58] IP Address 192.168.1.10 released by Host c8:3a:35:23:0b:09 ()
+[17-Dec-20 10:16:00] Host c8:3a:35:23:0b:09 (linux-000b23353ac8) allotted 192.168.1.10 for 300 seconds
+[17-Dec-20 10:16:17] IP Address 192.168.1.10 released by Host c8:3a:35:23:0b:09 ()
+[17-Dec-20 10:16:23] Host c8:3a:35:23:0b:09 (linux-000b23353ac8) allotted 192.168.1.10 for 300 seconds
+[17-Dec-20 10:26:00] Open DHCP Server Version 1.64 Windows Build 1041 Starting...
+[17-Dec-20 10:26:00] Logging: Normal
+[17-Dec-20 10:26:00] Warning: No IP Address for DHCP Static Host 00:ff:a4:0e:ef:99 specified
+[17-Dec-20 10:26:00] DHCP Range: 192.168.0.1-192.168.0.254/255.255.255.0
+[17-Dec-20 10:26:00] DHCP Range: 192.168.1.2-192.168.1.254/255.255.255.0
+[17-Dec-20 10:26:00] Server Name: DESKTOP-7V2NHQ4
+[17-Dec-20 10:26:00] Detecting Static Interfaces..
+[17-Dec-20 10:26:00] Lease Status URL: http://127.0.0.1:6789
+[17-Dec-20 10:26:00] Listening On: 192.168.1.6
+[17-Dec-20 10:26:00] Listening On: 192.168.56.1
+[17-Dec-20 10:26:15] Host c8:3a:35:23:0b:19 (linux-100b23353ac8) allotted 192.168.1.9 for 300 seconds
+[17-Dec-20 10:26:20] Host c8:3a:35:23:0b:09 (linux-000b23353ac8) allotted 192.168.1.10 for 300 seconds
+[17-Dec-20 10:27:30] Host c8:3a:35:23:0b:09 (linux-000b23353ac8) allotted 192.168.1.10 for 300 seconds
+[17-Dec-20 10:27:31] Host c8:3a:35:23:0b:19 (linux-100b23353ac8) allotted 192.168.1.9 for 300 seconds
+[17-Dec-20 10:27:42] IP Address 192.168.1.10 released by Host c8:3a:35:23:0b:09 ()
+[17-Dec-20 10:27:45] IP Address 192.168.1.9 released by Host c8:3a:35:23:0b:19 ()
+[17-Dec-20 10:28:49] Host c8:3a:35:23:0b:09 (linux-000b23353ac8) allotted 192.168.1.10 for 300 seconds
+[17-Dec-20 10:28:49] Host c8:3a:35:23:0b:19 (linux-100b23353ac8) allotted 192.168.1.9 for 300 seconds
+[17-Dec-20 11:01:27] Logging: Normal
+[17-Dec-20 11:01:27] Warning: No IP Address for DHCP Static Host 00:ff:a4:0e:ef:99 specified
+[17-Dec-20 11:01:27] Open DHCP Server Version 1.64 Windows Build 1041 Starting...
+[17-Dec-20 11:01:27] DHCP Range: 192.168.0.1-192.168.0.254/255.255.255.0
+[17-Dec-20 11:01:27] Server Name: DESKTOP-7V2NHQ4
+[17-Dec-20 11:01:27] Detecting Static Interfaces..
+[17-Dec-20 11:01:27] Lease Status URL: http://127.0.0.1:6789
+[17-Dec-20 11:01:27] Listening On: 192.168.1.6
+[17-Dec-20 11:01:27] Listening On: 192.168.56.1
+[17-Dec-20 11:01:29] Host c8:3a:35:23:0b:19 (linux-100b23353ac8) allotted 192.168.1.9 for 300 seconds
+[17-Dec-20 11:01:32] Host c8:3a:35:23:0b:09 (linux-000b23353ac8) allotted 192.168.1.10 for 300 seconds
+[17-Dec-20 11:02:56] Host c8:3a:35:23:0b:19 (linux-100b23353ac8) allotted 192.168.1.9 for 300 seconds
+[17-Dec-20 11:02:57] Host c8:3a:35:23:0b:09 (linux-000b23353ac8) allotted 192.168.1.10 for 300 seconds
+[17-Dec-20 11:02:57] IP Address 192.168.1.9 released by Host c8:3a:35:23:0b:19 ()
+[17-Dec-20 11:02:57] IP Address 192.168.1.10 released by Host c8:3a:35:23:0b:09 ()
+[17-Dec-20 11:03:00] Host c8:3a:35:23:0b:09 (linux-000b23353ac8) allotted 192.168.1.10 for 300 seconds
+[17-Dec-20 11:03:01] Host c8:3a:35:23:0b:19 (linux-100b23353ac8) allotted 192.168.1.9 for 300 seconds
+[17-Dec-20 11:03:11] IP Address 192.168.1.9 released by Host c8:3a:35:23:0b:19 ()
+[17-Dec-20 11:08:44] Open DHCP Server Version 1.64 Windows Build 1041 Starting...
+specified
+[17-Dec-20 11:08:44] Logging: Normal
+[17-Dec-20 11:08:44] DHCP Range: 192.168.0.1-192.168.0.254/255.255.255.0
+[17-Dec-20 11:08:44] DHCP Range: 192.168.1.2-192.168.1.254/255.255.255.0
+[17-Dec-20 11:08:44] Server Name: DESKTOP-7V2NHQ4
+[17-Dec-20 11:08:44] Detecting Static Interfaces..
+[17-Dec-20 11:08:44] Lease Status URL: http://127.0.0.1:6789
+[17-Dec-20 11:08:44] Listening On: 192.168.1.6
+[17-Dec-20 11:08:44] Listening On: 192.168.56.1
+[17-Dec-20 11:09:00] Host c8:3a:35:23:0b:09 (linux-000b23353ac8) allotted 192.168.1.10 for 300 seconds
+[17-Dec-20 11:10:08] Host c8:3a:35:23:0b:09 (linux-000b23353ac8) allotted 192.168.1.10 for 300 seconds
+[17-Dec-20 11:10:09] Host c8:3a:35:23:0b:19 (linux-100b23353ac8) allotted 192.168.1.9 for 300 seconds
+[17-Dec-20 11:10:09] IP Address 192.168.1.10 released by Host c8:3a:35:23:0b:09 ()
+[17-Dec-20 11:10:10] IP Address 192.168.1.9 released by Host c8:3a:35:23:0b:19 ()
+[17-Dec-20 11:10:15] Host c8:3a:35:23:0b:19 (linux-100b23353ac8) allotted 192.168.1.9 for 300 seconds
+[17-Dec-20 11:10:15] Network changed, re-detecting Static Interfaces..
+[17-Dec-20 11:10:35] Lease Status URL: http://127.0.0.1:6789
+[17-Dec-20 11:10:35] Listening On: 192.168.56.1
+[17-Dec-20 11:10:35] Network changed, re-detecting Static Interfaces..

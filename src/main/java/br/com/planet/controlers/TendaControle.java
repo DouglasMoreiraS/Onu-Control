@@ -30,6 +30,7 @@ public class TendaControle extends Controle {
 
     }
 
+    @Override
     public boolean logar() throws WebDriverException {
 
         try {
@@ -49,19 +50,16 @@ public class TendaControle extends Controle {
                 driver.findElement(By.xpath(xpathLogin)).sendKeys(senha);
                 driver.findElement(By.xpath("//*[@id=\"save\"]")).click();
                 return true;
-            } else if (Utils.existsElement(driver, xpathBar)) {
-                return true;
-            } else {
-                return false;
-            }
+            } else return Utils.existsElement(driver, xpathBar);
 
         } catch (WebDriverException e) {
             System.out.println("Erro IntelBras logar: " + e.getMessage());
             this.writeLog("logar", e.getMessage());
-            return false;
+            throw e;
         }
     }
 
+    @Override
     public void getPon() {
     }
 
@@ -157,9 +155,14 @@ public class TendaControle extends Controle {
 
             Runtime.getRuntime().exec("cmd /c start " + System.getProperty("user.dir") + "\\data\\tenda\\19216802.lnk");
 
-            while (!logar()) {
+            while (true) {
+                try {
+                    logar();
+                    atualizarInformacoes();
+                    break;
+                } catch (WebDriverException e) {
+                }
             }
-            atualizarInformacoes();
 
         } catch (WebDriverException | IOException e) {
             System.out.println("Erro: Tenda updateFirmware: " + e.getMessage());

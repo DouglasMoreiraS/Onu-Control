@@ -5,7 +5,7 @@ import javax.swing.UIManager;
 import br.com.planet.view.View;
 import br.com.planet.util.hibernate.HibernateUtil;
 import br.com.planet.util.hibernate.HibernateProperties;
-import br.com.planet.view.InitFrame;
+import br.com.planet.view.LoadView;
 import javax.swing.JOptionPane;
 import javax.swing.UnsupportedLookAndFeelException;
 import org.hibernate.HibernateException;
@@ -13,7 +13,7 @@ import org.hibernate.HibernateException;
 public class Main {
 
     public static void main(String[] args) {
-        InitFrame frame = new InitFrame();
+        LoadView frame = new LoadView();
         
         
         frame.setVisible(true);

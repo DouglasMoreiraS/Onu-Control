@@ -1,0 +1,39 @@
+[22-Dec-20 09:58:15] Logging: Normal
+[22-Dec-20 09:58:15] Warning: No IP Address for DHCP Static Host 00:ff:a4:0e:ef:99 specified
+[22-Dec-20 09:58:15] DHCP Range: 192.168.0.1-192.168.0.254/255.255.255.0
+[22-Dec-20 09:58:15] DHCP Range: 192.168.1.2-192.168.1.254/255.255.255.0
+[22-Dec-20 09:58:15] Open DHCP Server Version 1.64 Windows Build 1041 Starting...
+[22-Dec-20 09:58:15] Server Name: DESKTOP-7V2NHQ4
+[22-Dec-20 09:58:15] Detecting Static Interfaces..
+[22-Dec-20 09:58:15] Lease Status URL: http://127.0.0.1:6789
+[22-Dec-20 09:58:15] Listening On: 192.168.1.6
+[22-Dec-20 09:58:15] Listening On: 192.168.56.1
+[22-Dec-20 09:58:24] Host c8:3a:35:23:0b:09 (linux-000b23353ac8) allotted 192.168.1.10 for 300 seconds
+[22-Dec-20 09:58:28] Host c8:3a:35:23:0b:11 (linux-080b23353ac8) allotted 192.168.1.11 for 300 seconds
+[22-Dec-20 10:01:31] Host c8:3a:35:23:0b:11 (linux-080b23353ac8) allotted 192.168.1.11 for 300 seconds
+[22-Dec-20 10:01:32] Host c8:3a:35:23:0b:09 (linux-000b23353ac8) allotted 192.168.1.10 for 300 seconds
+[22-Dec-20 10:01:46] IP Address 192.168.1.11 released by Host c8:3a:35:23:0b:11 ()
+[22-Dec-20 10:01:46] IP Address 192.168.1.10 released by Host c8:3a:35:23:0b:09 ()
+[22-Dec-20 10:02:39] Host c8:3a:35:23:0b:11 (linux-080b23353ac8) allotted 192.168.1.11 for 300 seconds
+[22-Dec-20 10:02:40] Host c8:3a:35:23:0b:09 (linux-000b23353ac8) allotted 192.168.1.10 for 300 seconds
+[22-Dec-20 10:04:20] Network changed, re-detecting Static Interfaces..
+[22-Dec-20 10:16:38] Logging: Normal
+[22-Dec-20 10:16:38] Warning: No IP Address for DHCP Static Host 00:ff:a4:0e:ef:99 specified
+[22-Dec-20 10:16:38] Open DHCP Server Version 1.64 Windows Build 1041 Starting...
+[22-Dec-20 10:16:38] DHCP Range: 192.168.0.1-192.168.0.254/255.255.255.0
+[22-Dec-20 10:16:38] DHCP Range: 192.168.1.2-192.168.1.254/255.255.255.0
+[22-Dec-20 10:16:38] Server Name: DESKTOP-7V2NHQ4
+[22-Dec-20 10:16:38] Detecting Static Interfaces..
+[22-Dec-20 10:16:38] Lease Status URL: http://127.0.0.1:6789
+[22-Dec-20 10:16:38] Listening On: 192.168.1.6
+[22-Dec-20 10:16:38] Listening On: 192.168.56.1
+[22-Dec-20 10:17:13] Host c8:3a:35:23:0b:11 (linux-080b23353ac8) allotted 192.168.1.11 for 300 seconds
+[22-Dec-20 10:17:13] Host c8:3a:35:23:0b:09 (linux-000b23353ac8) allotted 192.168.1.10 for 300 seconds
+[22-Dec-20 10:18:20] Host c8:3a:35:23:0b:11 (linux-080b23353ac8) allotted 192.168.1.11 for 300 seconds
+[22-Dec-20 10:18:21] IP Address 192.168.1.11 released by Host c8:3a:35:23:0b:11 ()
+[22-Dec-20 10:18:21] Host c8:3a:35:23:0b:09 (linux-000b23353ac8) allotted 192.168.1.10 for 300 seconds
+[22-Dec-20 10:18:21] IP Address 192.168.1.10 released by Host c8:3a:35:23:0b:09 ()
+[22-Dec-20 10:18:25] Host c8:3a:35:23:0b:11 (linux-080b23353ac8) allotted 192.168.1.11 for 300 seconds
+[22-Dec-20 10:18:26] Host c8:3a:35:23:0b:09 (linux-000b23353ac8) allotted 192.168.1.10 for 300 seconds
+[22-Dec-20 10:18:35] IP Address 192.168.1.11 released by Host c8:3a:35:23:0b:11 ()
+[22-Dec-20 10:18:36] IP Address 192.168.1.10 released by Host c8:3a:35:23:0b:09 ()

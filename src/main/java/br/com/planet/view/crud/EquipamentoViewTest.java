@@ -77,6 +77,7 @@ public class EquipamentoViewTest extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
         cbModelo = new javax.swing.JComboBox<>();
+        jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -298,6 +299,12 @@ public class EquipamentoViewTest extends javax.swing.JFrame {
 
         jLabel1.setText("Modelo");
 
+        txtPatrimonio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPatrimonioKeyTyped(evt);
+            }
+        });
+
         jLabel2.setText("Patrimonio");
 
         jLabel3.setText("Serial Number");
@@ -354,6 +361,8 @@ public class EquipamentoViewTest extends javax.swing.JFrame {
             }
         });
 
+        jLabel13.setText("p");
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -370,9 +379,12 @@ public class EquipamentoViewTest extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel1)
-                                    .addComponent(txtPatrimonio, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
                                     .addComponent(jLabel2)
-                                    .addComponent(cbModelo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(cbModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addComponent(jLabel13)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtPatrimonio)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(painelImagemFundo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel4Layout.createSequentialGroup()
@@ -408,7 +420,9 @@ public class EquipamentoViewTest extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPatrimonio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtPatrimonio)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -578,6 +592,13 @@ public class EquipamentoViewTest extends javax.swing.JFrame {
         control.setModelo(cbModelo.getSelectedIndex());
     }//GEN-LAST:event_cbModeloItemStateChanged
 
+    private void txtPatrimonioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPatrimonioKeyTyped
+        String numbers = "0123456789";
+        if (!numbers.contains(evt.getKeyChar() + "")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPatrimonioKeyTyped
+
     public static void main(String args[]) {
         try {
             UIManager.setLookAndFeel(new FlatDarkLaf());
@@ -620,6 +641,7 @@ public class EquipamentoViewTest extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -660,7 +682,7 @@ public class EquipamentoViewTest extends javax.swing.JFrame {
                 cbStatus.setEnabled(false);
                 btnLimpaFiltro.setEnabled(false);
                 tblEquipamentos.setEnabled(false);
-                
+
                 cbModelo.setEnabled(true);
                 txtPatrimonio.setEditable(true);
                 rbStatus.setEnabled(true);
@@ -705,14 +727,14 @@ public class EquipamentoViewTest extends javax.swing.JFrame {
     }
 
     public void alimentarComboBoxes() {
-        
+
         cbPesquisaModelo.addItem("Todos");
-        
-        control.getModelos().forEach(m ->{
+
+        control.getModelos().forEach(m -> {
             cbModelo.addItem(m.getNome());
             cbPesquisaModelo.addItem(m.getNome());
         });
-        
+
         cbStatus.addItem("Todos");
         cbStatus.addItem("Ativos");
         cbStatus.addItem("Desativados");

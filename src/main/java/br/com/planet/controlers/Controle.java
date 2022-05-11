@@ -161,6 +161,8 @@ public class Controle {
     public void open(boolean headless) {
         try {
             m = new Manutencao();
+            this.loadProperties(this.path);
+            
             this.headless = !headless;
             options.setHeadless(this.headless);
 
@@ -168,7 +170,7 @@ public class Controle {
             driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
             wait = new WebDriverWait(driver, 30);
 
-            this.loadProperties(this.path);
+            
         } catch (WebDriverException e) {
             System.out.println("Erro ao abrir: " + e.getMessage());
             this.writeLog("open", e.getMessage());

@@ -89,6 +89,7 @@ public class AcessView extends javax.swing.JFrame {
         btnPonRefresh = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtEquipamentoObs = new javax.swing.JTextArea();
+        jLabel8 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btnConectar = new javax.swing.JButton();
         cbNavegador = new javax.swing.JCheckBox();
@@ -228,6 +229,11 @@ public class AcessView extends javax.swing.JFrame {
         txtPatrimonio.setMaximumSize(new java.awt.Dimension(191, 22));
         txtPatrimonio.setMinimumSize(new java.awt.Dimension(191, 22));
         txtPatrimonio.setPreferredSize(new java.awt.Dimension(191, 22));
+        txtPatrimonio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPatrimonioKeyTyped(evt);
+            }
+        });
 
         cbAtivo.setText("Ativo");
 
@@ -259,6 +265,8 @@ public class AcessView extends javax.swing.JFrame {
         txtEquipamentoObs.setToolTipText("");
         jScrollPane3.setViewportView(txtEquipamentoObs);
 
+        jLabel8.setText("p");
+
         javax.swing.GroupLayout panelInformacoesLayout = new javax.swing.GroupLayout(panelInformacoes);
         panelInformacoes.setLayout(panelInformacoesLayout);
         panelInformacoesLayout.setHorizontalGroup(
@@ -273,8 +281,10 @@ public class AcessView extends javax.swing.JFrame {
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblPonStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                        .addComponent(jLabel8)
+                        .addGap(0, 0, 0)
                         .addGroup(panelInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(panelInformacoesLayout.createSequentialGroup()
                                 .addGroup(panelInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -332,7 +342,8 @@ public class AcessView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(txtPatrimonio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtPatrimonio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(panelInformacoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelInformacoesLayout.createSequentialGroup()
                                 .addGap(8, 8, 8)
@@ -501,11 +512,16 @@ public class AcessView extends javax.swing.JFrame {
 
                     new TrayIconDemo().displayTray(lblModelo.getText(), "Done", control.getM().getEquipamento().getModelo().getImage().getImage());
                     JOptionPane.showMessageDialog(AcessView.this, "Done", "Done", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    int resposta = JOptionPane.showConfirmDialog(this, "Erro na conexão. Tentar novamente?");
+
+                    if (resposta == JOptionPane.YES_OPTION) {
+                        this.btnConectarActionPerformed(null);
+                    } else {
+                        control.close();
+                        controlaTela("start");
+                    }
                 }
-            } catch (OldFirmwareException ex) {
-                JOptionPane.showMessageDialog(this, ex.getMessage(), "Erro", JOptionPane.WARNING_MESSAGE);
-                control.close();
-                controlaTela("start");
             } catch (Exception e) {
                 e.printStackTrace();
                 int resposta = JOptionPane.showConfirmDialog(this, "Erro na conexão. Tentar novamente?");
@@ -610,6 +626,13 @@ public class AcessView extends javax.swing.JFrame {
         tPpoe.start();
     }//GEN-LAST:event_btnPpoeActionPerformed
 
+    private void txtPatrimonioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPatrimonioKeyTyped
+        String numbers = "0123456789";
+        if (!numbers.contains(evt.getKeyChar() + "")){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPatrimonioKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConectar;
@@ -632,6 +655,7 @@ public class AcessView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;

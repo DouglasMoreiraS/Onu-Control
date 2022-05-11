@@ -135,6 +135,7 @@ public class Equipamento implements Serializable, Comparable<Equipamento>{
                     throw new PatrimonioViolationException("Esse patrimonio já foi cadastrado");
                 }
             }
+            
             ModeloDAO dao1 = new ModeloDAO();
 
             Modelo mm = dao1.buscar(e.getModelo().getNome());

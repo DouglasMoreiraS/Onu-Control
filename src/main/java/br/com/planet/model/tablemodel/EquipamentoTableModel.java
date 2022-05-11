@@ -48,32 +48,36 @@ public class EquipamentoTableModel extends AbstractTableModel {
             case COLUNA_MODELO -> {
                 return m.getModelo().getNome();
             }
-            case COLUNA_FIRMWARE ->{
+            case COLUNA_FIRMWARE -> {
                 return m.getFirmware();
             }
-            case COLUNA_PATRIMONIO ->{
-                return m.getPatrimonio();
+            case COLUNA_PATRIMONIO -> {
+                String p = "";
+                if (!m.getPatrimonio().isEmpty()) {
+                    p = "p";
+                } 
+                return p + m.getPatrimonio();
             }
             case COLUNA_SN -> {
                 return m.getSn();
             }
-            
-            case COLUNA_STATUS->{
-                if (m.isStatus()){
+
+            case COLUNA_STATUS -> {
+                if (m.isStatus()) {
                     return "Ativo";
                 } else {
                     return "Desativado";
                 }
             }
-            
+
             case COLUNA_REGISTROS -> {
                 return new ManutencaoDAO().listarPorEquipamento(m).size();
             }
         }
         return null;
     }
-    
-    public Object getObjectSelected(int rowIndex){
+
+    public Object getObjectSelected(int rowIndex) {
         return equipamento.get(rowIndex);
     }
 

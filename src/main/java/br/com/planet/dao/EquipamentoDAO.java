@@ -72,7 +72,7 @@ public class EquipamentoDAO extends GenericDAO<Equipamento> {
         Session sessao = HibernateUtil.getSessionFactory().openSession();
         try {
             Criteria consulta = sessao.createCriteria(Equipamento.class);
-            consulta.add(Restrictions.like("patrimonio", patrimonio));
+            consulta.add(Restrictions.eq("patrimonio", patrimonio));
             Equipamento resultado = (Equipamento) consulta.uniqueResult();
             return resultado;
         } catch (RuntimeException erro) {

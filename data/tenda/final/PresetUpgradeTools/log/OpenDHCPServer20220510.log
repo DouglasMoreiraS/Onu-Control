@@ -1,0 +1,23 @@
+[10-May-22 09:09:37] Logging: Normal
+[10-May-22 09:09:37] Open DHCP Server Version 1.64 Windows Build 1041 Starting...
+[10-May-22 09:09:37] Warning: No IP Address for DHCP Static Host 00:ff:a4:0e:ef:99 specified
+[10-May-22 09:09:37] DHCP Range: 192.168.0.1-192.168.0.254/255.255.255.0
+[10-May-22 09:09:37] DHCP Range: 192.168.1.2-192.168.1.254/255.255.255.0
+[10-May-22 09:09:37] Server Name: DESKTOP-OFMOHRL
+[10-May-22 09:09:37] Detecting Static Interfaces..
+[10-May-22 09:09:37] No Static Interface ready, Waiting...
+[10-May-22 09:09:37] Network changed, re-detecting Static Interfaces..
+[10-May-22 09:09:37] Lease Status URL: http://127.0.0.1:6789
+[10-May-22 09:09:37] Listening On: 192.168.1.6
+[10-May-22 09:09:37] Network changed, re-detecting Static Interfaces..
+[10-May-22 09:10:09] Lease Status URL: http://127.0.0.1:6789
+[10-May-22 09:10:09] Listening On: 192.168.1.6
+[10-May-22 09:10:18] Host 04:95:e6:84:5c:20 (Tenda) allotted 192.168.1.12 for 300 seconds
+[10-May-22 09:10:18] Network changed, re-detecting Static Interfaces..
+[10-May-22 09:10:38] No Static Interface ready, Waiting...
+[10-May-22 09:10:38] Network changed, re-detecting Static Interfaces..
+[10-May-22 09:10:38] Lease Status URL: http://127.0.0.1:6789
+[10-May-22 09:10:38] Listening On: 192.168.1.6
+[10-May-22 09:10:38] Network changed, re-detecting Static Interfaces..
+[10-May-22 09:11:05] Lease Status URL: http://127.0.0.1:6789
+[10-May-22 09:11:05] Listening On: 192.168.1.6
